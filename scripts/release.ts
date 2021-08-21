@@ -128,7 +128,6 @@ const options: IGreaseOptions = {
   commitAll: true,
   gitTagFallback: false,
   gitdir: process.env.PROJECT_CWD,
-  path: process.cwd(),
   prerelease: ((): string | undefined => {
     const tag = $version.split('-')[1]
     return !tag ? undefined : tag.includes('.') ? tag.split('.')[0] : tag
