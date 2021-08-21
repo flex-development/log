@@ -41,7 +41,7 @@
     "@flex-development/tutils": "3.1.0",
     "@types/chalk": "2.2.0",
     "chalk": "4.1.2",
-    "figures": "4.0.0"
+    "figures": "3.2.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.14.7",
