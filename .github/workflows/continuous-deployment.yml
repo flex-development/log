@@ -1,0 +1,98 @@
+# Continuous Deployment
+#
+# References:
+#
+# - https://docs.github.com/en/actions/guides/building-and-testing-nodejs
+# - https://jestjs.io/docs/cli#--ci
+# - https://octokit.github.io/rest.js/#pagination
+
+---
+name: Continuous Deployment
+on:
+  pull_request:
+    branches:
+      - release/**
+    types: [closed]
+jobs:
+  continuous-deployment:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    env:
+      PAT_GPR_FLDV: ${{ secrets.PAT_GPR }}
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          always-auth: true
+          cache: 'yarn'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@flex-development'
+      - name: Install dependencies
+        id: dependencies
+        run: yarn
+        env:
+          NODE_AUTH_TOKEN: ${PAT_GPR_FLDV}
+      - name: Run test suites
+        run: TERM=xterm-256color yarn test --ci
+      - name: Close issues with status:merged label
+        uses: bdougie/close-issues-based-on-label@master
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          LABEL: status:merged
+      - name: Add status:released label to closed issues
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const opts = github.issues.listForRepo(context.repo)
+            const issues = await github.paginate(opts)
+
+            await Promise.all(issues.map(issue => {
+              issue.labels && issue.labels.forEach(({ name, number }) => {
+                if (label.name === 'status:merged') {
+                  return await github.issues.addLabels({
+                    ...context.repo,
+                    issue_number: number,
+                    labels: ['status:released']
+                  })
+                }
+
+                return
+              })
+            }))
+      - name: Publish GitHub Release
+        id: release
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const opts = github.repos.listReleases(context.repo)
+            const releases = await github.paginate(opts)
+            const tag = `v${context.ref.split('release/')[1]}`
+            let rtag = (tag.split('-')[1]?.split('.')[0] ?? '') || ''
+
+            let release = releases.find({ title } => title.startsWith(tag))
+
+            if (release.draft) {
+              release = { ...release, draft: false, tag_name: tag }
+              await github.repos.updateRelease(release)
+            }
+
+            core.setOutput('t', tag)
+            core.setOutput('rt', rtag === '' ? rtag : `--tag ${rtag}`)
+      - name: Publish package
+        run: npm publish build ${{ steps.release.outputs.rt }}
+        env:
+          NODE_AUTH_TOKEN: ${PAT_GPR}
+      - name: Update production branch
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          from_branch: next
+          github_token: ${{ github.token }}
+          target_branch: main
+          type: now
+      - name: Delete branch
+        uses: dawidd6/action-delete-branch@v3
+        env:
+          branches: github.event.pull_request.head.ref
+          github_token: ${{ github.token }}

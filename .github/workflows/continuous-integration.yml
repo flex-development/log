@@ -1,0 +1,43 @@
+# Continuous Integration
+#
+# References:
+#
+# - https://docs.github.com/en/actions/guides/building-and-testing-nodejs
+# - https://jestjs.io/docs/cli#--ci
+
+---
+name: Continuous Integration
+on: [pull_request]
+jobs:
+  continuous-integration:
+    runs-on: ubuntu-latest
+    env:
+      PAT_GPR_FLDV: ${{ secrets.PAT_GPR }}
+    strategy:
+      matrix:
+        node: ['15', '16']
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Setup Node ${{ matrix.node }} environment
+        uses: actions/setup-node@v2
+        with:
+          always-auth: true
+          cache: 'yarn'
+          node-version: ${{ matrix.node }}
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@flex-development'
+      - name: Install dependencies
+        run: yarn
+        env:
+          NODE_AUTH_TOKEN: ${PAT_GPR_FLDV}
+      - name: Check code formatting
+        run: yarn check:format
+      - name: Check code style
+        run: yarn check:style --max-warnings 0
+      - name: Build project
+        run: yarn build
+        env:
+          NODE_OPTIONS: -r tsconfig-paths/register
