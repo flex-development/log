@@ -13,3 +13,5 @@ export enum LogLevel {
   SUCCESS = 'success',
   WARN = 'warning'
 }
+
+export type Level = keyof typeof LogLevel
