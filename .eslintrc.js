@@ -179,6 +179,12 @@ module.exports = {
       }
     },
     {
+      files: ['src/utils/__tests__/figure.util.spec.ts'],
+      rules: {
+        'jest/no-conditional-expect': 0
+      }
+    },
+    {
       files: ['**/*.d.ts'],
       rules: {
         '@typescript-eslint/triple-slash-reference': 0

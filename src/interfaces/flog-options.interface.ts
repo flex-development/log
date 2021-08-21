@@ -1,7 +1,8 @@
 import type { NullishString } from '@flex-development/tutils'
 import type { Level } from '@flog/enums/log-level.enum'
-import type { Color } from 'chalk'
 import figures from 'figures'
+import type { FlogOptionsBold } from './flog-options-bold.interface'
+import type { FlogOptionsColor } from './flog-options-color.interface'
 
 /**
  * @file Interfaces - FlogOptions
@@ -15,16 +16,16 @@ export interface FlogOptions {
   /**
    * Bold log arguments **and/or** log data.
    *
-   * @default {args:true,data:false}
+   * @default {args:true}
    */
-  bold?: { args?: boolean; data?: boolean }
+  bold?: FlogOptionsBold
 
   /**
    * Set log data color, and/or override the log figure color set by `level`.
    *
    * @default {data:'white'}
    */
-  color?: { data?: typeof Color; figure?: typeof Color }
+  color?: FlogOptionsColor
 
   /**
    * Override the log figure set by `level`, or omit it altogether.
