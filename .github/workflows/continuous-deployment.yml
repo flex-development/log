@@ -36,10 +36,11 @@ jobs:
             const opts = github.repos.listReleases(context.repo)
             const releases = await github.paginate(opts)
 
-            console.log(context.payload)
-
             let tag = context.payload.inputs.tag
-            if (!tag) tag = context.payload.pull_request.head.ref.split('/')[1]
+
+            if (!tag) {
+              tag = context.payload.pull_request.head.ref.split('release/')[1]
+            }
 
             core.exportVariable('tag', tag)
       - name: Get Publish Command
@@ -49,7 +50,10 @@ jobs:
           script: |
             const { tag } = process.env
 
-            let dtags = (tag.split('-')[1]?.split('.')[0] ?? '') || ''
+            let dtags = tag.split('-')[1] || ''
+
+            if (dtags && dtags.includes('.')) dtags = dtags.split('.')[0]
+
             dtags = `--access public ${dtags}`.trim()
 
             core.exportVariable('publish_command', `npm publish build ${dtags}`)
