@@ -11,7 +11,7 @@ Simple logging utility
 [🚧 Getting Started](#getting-started)  
 [🚧 Installation](#installation)  
 [🚧 Usage](#usage)  
-[🚧 Built With](#built-with)  
+[Built With](#built-with)  
 [Contributing](CONTRIBUTING.md)
 
 ## Getting Started
@@ -28,4 +28,8 @@ Simple logging utility
 
 ## Built With
 
-**TODO**: Update documentation.
+- [`chalk`][1] - Terminal string styling
+- [`shelljs`][2] - Unix shell commands implementation for Node.js
+
+[1]: https://github.com/chalk/chalk
+[2]: https://github.com/shelljs/shelljs
