@@ -12,12 +12,20 @@ name: continuous-deployment
 on:
   pull_request:
     branches:
-      - release/**
+      - next
     types: [closed]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag'
+        required: true
 jobs:
   get-deployment-details:
     name: Get Deployment Details
-    if: github.event.pull_request.merged == true
+    if: |
+      github.event.inputs.tag ||
+      (startsWith(github.event.pull_request.head.ref, 'release/') 
+      && github.event.pull_request.merged == true)
     runs-on: ubuntu-latest
     steps:
       - name: Get Release Details
@@ -25,12 +33,11 @@ jobs:
         uses: actions/github-script@v4
         with:
           script: |
-            const { 1: tag } = context.ref.split('release/')
-
             const opts = github.repos.listReleases(context.repo)
             const releases = await github.paginate(opts)
-             
-            let release = releases.find({ title } => title.startsWith(tag))
+
+            let tag = core.getInput('tag')
+            if (!tag) tag = context.payload.pull_request.head.ref.split('/')[1]
 
             core.exportVariable('tag', tag)
       - name: Get Publish Command
