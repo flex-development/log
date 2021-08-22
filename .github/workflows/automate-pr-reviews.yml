@@ -2,10 +2,11 @@
 #
 # References:
 #
+# - https://github.com/actions/checkout
 # - https://github.com/flex-development/flautoreview
 
 ---
-name: Automate Pull Request Reviews
+name: automate-pr-reviews
 on:
   pull_request:
     types: [review_requested]
@@ -21,4 +22,4 @@ jobs:
           body: lgtm 👍🏾
           reviewers: flexdevelopment
           senders: unicornware
-          token: ${{ secrets.PAT_REPO_ADMIN }}
+          token: ${{ secrets.PAT_REPO_FLDV_ADMIN }}
