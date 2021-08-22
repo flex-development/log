@@ -10,6 +10,13 @@ import type { Color } from 'chalk'
  */
 export interface FlogOptionsColor {
   /**
+   * Set log arguments color.
+   *
+   * @default 'white'
+   */
+  args?: typeof Color
+
+  /**
    * Set log data color.
    *
    * @default 'white'

@@ -21,9 +21,9 @@ export interface FlogOptions {
   bold?: FlogOptionsBold
 
   /**
-   * Set log data color, and/or override the log figure color set by `level`.
+   * Set log color, and/or override the log figure color set by `level`.
    *
-   * @default {data:'white'}
+   * @default {args:'white',data:'white'}
    */
   color?: FlogOptionsColor
 
