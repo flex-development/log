@@ -58,20 +58,20 @@ describe('functional:utils/format', () => {
   describe('functions and objects', () => {
     const cases: CaseCalled[] = [
       {
-        args: [],
-        calledWith: [data_obj, false, null],
-        data: data_obj,
-        expected: 1,
-        options: defaults,
-        result: 'data'
-      },
-      {
         args: [data_obj.fn],
         calledWith: [data_obj.fn, false, null],
         data: 'log data',
         expected: 1,
         options: {},
         result: 'arguments'
+      },
+      {
+        args: [],
+        calledWith: [data_obj, false, null],
+        data: data_obj,
+        expected: 1,
+        options: defaults,
+        result: 'data'
       }
     ]
 

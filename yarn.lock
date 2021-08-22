@@ -668,6 +668,7 @@ __metadata:
     "@flex-development/tutils": 3.1.0
     "@types/chalk": 2.2.0
     "@types/jest": 26.0.23
+    "@types/lodash.merge": 4.6.6
     "@types/mvdan-sh": 0.5.0
     "@types/node": 15.12.5
     "@types/rimraf": 2.0.4
@@ -695,6 +696,7 @@ __metadata:
     jest-github-reporter: 1.0.2
     jest-mock-console: 1.1.0
     lint-staged: 11.0.0
+    lodash.merge: 4.6.2
     npm: 7.19.0
     npm-run-all: 4.1.5
     prettier: 2.3.2
@@ -1652,6 +1654,15 @@ __metadata:
   dependencies:
     "@types/lodash": "*"
   checksum: 988d1ced75fc75efbb0aa93fc6c56287e2bcf63b3efad375dc1cb5373c8a05600dcb4fb047b078d532d176ccf180f581aead425e349e80e1fb43ad98b88b6cef
+  languageName: node
+  linkType: hard
+
+"@types/lodash.merge@npm:4.6.6":
+  version: 4.6.6
+  resolution: "@types/lodash.merge@npm:4.6.6"
+  dependencies:
+    "@types/lodash": "*"
+  checksum: 62ec56f14b3077f7174497856e9b277db811943cd11b1d67d2a8e51a1803bd49319e8aaf62e745c696af972354a575dbb8a85d3aecf4ae774caf062dc31ac46e
   languageName: node
   linkType: hard
 
@@ -7183,7 +7194,7 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"lodash.merge@npm:^4.6.2":
+"lodash.merge@npm:4.6.2, lodash.merge@npm:^4.6.2":
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
   checksum: ad580b4bdbb7ca1f7abf7e1bce63a9a0b98e370cf40194b03380a46b4ed799c9573029599caebc1b14e3f24b111aef72b96674a56cfa105e0f5ac70546cdc005

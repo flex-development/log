@@ -226,6 +226,12 @@ module.exports = {
       rules: {
         'tree-shaking/no-side-effects-in-initialization': 0
       }
+    },
+    {
+      files: ['src/flog.ts'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 0
+      }
     }
   ],
   root: true,
