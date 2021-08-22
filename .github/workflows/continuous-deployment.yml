@@ -36,7 +36,9 @@ jobs:
             const opts = github.repos.listReleases(context.repo)
             const releases = await github.paginate(opts)
 
-            let tag = core.getInput('tag')
+            console.log(context.payload)
+
+            let tag = context.payload.inputs.tag
             if (!tag) tag = context.payload.pull_request.head.ref.split('/')[1]
 
             core.exportVariable('tag', tag)
