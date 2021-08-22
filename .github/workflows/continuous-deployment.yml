@@ -67,9 +67,12 @@ jobs:
         with:
           script: |
             const opts = github.repos.listReleases(context.repo)
+            const releases = await github.paginate(opts)
 
-            const release = (await github.paginate(opts)).find(({ name }) => {
-              return name.startsWith(process.env.tag)
+            const release = releases.find(release => {
+              console.log(process.env.tag, release)
+
+              return release.name.startsWith(process.env.tag)
             })
 
             if (release && release.draft) {
