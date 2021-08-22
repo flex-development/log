@@ -20,22 +20,17 @@ on:
         description: 'Release tag'
         required: true
 jobs:
-  get-deployment-details:
-    name: Get Deployment Details
+  continuous-deployment:
     if: |
       github.event.inputs.tag ||
       (startsWith(github.event.pull_request.head.ref, 'release/') 
       && github.event.pull_request.merged == true)
     runs-on: ubuntu-latest
     steps:
-      - name: Get Release Details
-        id: release-details
+      - id: get-release-details
         uses: actions/github-script@v4
         with:
           script: |
-            const opts = github.repos.listReleases(context.repo)
-            const releases = await github.paginate(opts)
-
             let tag = context.payload.inputs.tag
 
             if (!tag) {
@@ -43,8 +38,7 @@ jobs:
             }
 
             core.exportVariable('tag', tag)
-      - name: Get Publish Command
-        id: publish-command
+      - id: get-publish-command
         uses: actions/github-script@v4
         with:
           script: |
@@ -57,14 +51,10 @@ jobs:
             dtags = `--access public ${dtags}`.trim()
 
             core.exportVariable('publish_command', `npm publish build ${dtags}`)
-  publish-release:
-    name: Publish GitHub Release
-    needs: get-deployment-details
-    runs-on: ubuntu-latest
-    steps:
-      - id: publish
+      - id: publish-release
         uses: actions/github-script@v4
         with:
+          github-token: ${{ secrets.PAT_REPO_FLDV_ADMIN }}
           script: |
             const opts = github.repos.listReleases(context.repo)
             const releases = await github.paginate(opts)
@@ -83,60 +73,40 @@ jobs:
                 tag_name: process.env.tag 
               })
             }
-  publish-package:
-    name: Publish package to GPR & NPM
-    needs: [get-deployment-details, publish-release]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Setup .npmrc file [GPR]
+      - id: setup-npmrc-gpr
         uses: actions/setup-node@v2
         with:
           cache: 'yarn'
           node-version: '16.x'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@flex-development'
-      - name: Publish ${tag} [GPR]
+      - id: publish-to-gpr
         run: ${publish_command}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PAT_GPR_FLDV }}
-      - name: Setup .npmrc file [NPM]
+      - id: setup-npmrc-npm
         uses: actions/setup-node@v2
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
           scope: '@flex-development'
-      - name: Publish ${tag} [NPM]
+      - id: publish-to-npm
         run: ${publish_command}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_FLDV }}
-  update-production-branch:
-    name: Update production branch
-    needs: publish-package
-    runs-on: ubuntu-latest
-    steps:
-      - id: merge
+      - id: update-production-branch
         uses: devmasx/merge-branch@v1.3.1
         with:
           from_branch: next
           github_token: ${{ github.token }}
           target_branch: main
           type: now
-  close-merged-issues:
-    name: Close issues with status:merged label
-    needs: update-production-branch
-    runs-on: ubuntu-latest
-    steps:
-      - id: close
+      - id: close-merged-issues
         uses: bdougie/close-issues-based-on-label@master
         env:
           GITHUB_TOKEN: ${{ github.token }}
           LABEL: status:merged
-  add-status-released-label:
-    name: Add status:released label to closed issues
-    needs: close-merged-issues
-    runs-on: ubuntu-latest
-    steps:
-      - id: add
+      - id: add-status-released-label
         uses: actions/github-script@v4
         with:
           script: |
