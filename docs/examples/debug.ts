@@ -1,8 +1,8 @@
-import flog from '@flex-development/flog'
+import log from '@flex-development/log'
 
 /**
  * @file Examples - debug log
- * @module flog/docs/examples/debug
+ * @module log/docs/examples/debug
  */
 
-flog('debug log')
+log('debug log')

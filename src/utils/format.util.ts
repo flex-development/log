@@ -1,12 +1,12 @@
 import type { NullishString } from '@flex-development/tutils'
-import defaults from '@flog/config/defaults.config'
-import { LogColor } from '@flog/enums/log-color.enum'
-import type { Level } from '@flog/enums/log-level.enum'
+import defaults from '@log/config/defaults.config'
+import { LogColor } from '@log/enums/log-color.enum'
+import type { Level } from '@log/enums/log-level.enum'
 import type {
-  FlogOptions,
-  FlogOptionsBold,
-  FlogOptionsColor
-} from '@flog/interfaces'
+  LogOptions,
+  LogOptionsBold,
+  LogOptionsColor
+} from '@log/interfaces'
 import type { Color } from 'chalk'
 import ch from 'chalk'
 import figs from 'figures'
@@ -15,7 +15,7 @@ import figure from './figure.util'
 
 /**
  * @file Utility - format
- * @module flog/utils/format
+ * @module log/utils/format
  */
 
 /**
@@ -23,12 +23,12 @@ import figure from './figure.util'
  *
  * @param {any} data - Log data
  *
- * @param {FlogOptions} [options=defaults] - `flog` options
+ * @param {LogOptions} [options=defaults] - `log` options
  * @param {any[]} [options.args=[]] - Log arguments
- * @param {FlogOptionsBold} [options.bold={args:true}] - Bold logs
+ * @param {LogOptionsBold} [options.bold={args:true}] - Bold logs
  * @param {boolean} [options.bold.args=true] - Bold log arguments
  * @param {boolean} [options.bold.data] - Bold log data
- * @param {FlogOptionsColor} [options.color={args:'white'}] - Override colors
+ * @param {LogOptionsColor} [options.color={args:'white'}] - Override colors
  * @param {typeof Color} [options.color.args='white'] - Set log arguments color
  * @param {typeof Color} [options.color.data] - Set log data color
  * @param {typeof Color} [options.color.figure] - Set log figure color
@@ -36,7 +36,7 @@ import figure from './figure.util'
  * @param {Level} [options.level='DEBUG'] - Log level
  * @return {string} Log data and arguments as string
  */
-const format = (data: any, options: FlogOptions = defaults): string => {
+const format = (data: any, options: LogOptions = defaults): string => {
   /**
    * Returns true if `value` is a function or object.
    *

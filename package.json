@@ -1,5 +1,5 @@
 {
-  "name": "@flex-development/flog",
+  "name": "@flex-development/log",
   "description": "Style logs for the console or terminal",
   "version": "1.0.0",
   "keywords": [
@@ -8,10 +8,10 @@
     "logging",
     "typescript"
   ],
-  "homepage": "https://github.com/flex-development/flog",
-  "repository": "git://github.com/flex-development/flog.git",
+  "homepage": "https://github.com/flex-development/log",
+  "repository": "git://github.com/flex-development/log.git",
   "bugs": {
-    "url": "https://github.com/flex-development/flog/issues"
+    "url": "https://github.com/flex-development/log/issues"
   },
   "license": "BSD-3-Clause",
   "author": {

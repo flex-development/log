@@ -1,4 +1,4 @@
-import type { FlogOptions } from '@flog/interfaces'
+import type { LogOptions } from '@log/interfaces'
 
 /**
  * @file Configuration - Default Options
@@ -10,4 +10,4 @@ export default Object.freeze({
   bold: { args: true, data: false },
   color: {},
   level: 'DEBUG'
-}) as Readonly<Required<Pick<FlogOptions, 'args' | 'bold' | 'color' | 'level'>>>
+}) as Readonly<Required<Pick<LogOptions, 'args' | 'bold' | 'color' | 'level'>>>

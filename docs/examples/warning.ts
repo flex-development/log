@@ -1,8 +1,8 @@
-import flog from '@flex-development/flog'
+import log from '@flex-development/log'
 
 /**
  * @file Examples - warning log
- * @module flog/docs/examples/warning
+ * @module log/docs/examples/warning
  */
 
-flog('warning log', { level: 'WARN' })
+log('warning log', { level: 'WARN' })

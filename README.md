@@ -1,4 +1,4 @@
-# :keyboard: flog
+# :keyboard: log
 
 Simple logging utility
 
@@ -20,7 +20,7 @@ Style logs for the console or [terminal][3].
 ## Installation
 
 ```zsh
-yarn add @flex-development/flog # or npm i @flex-development/flog
+yarn add @flex-development/log # or npm i @flex-development/log
 ```
 
 ## Usage
@@ -38,14 +38,14 @@ Create a log entry using a `Level` preset.
 Create a log entry in gray.
 
 ```typescript
-import flog from '@flex-development/flog'
+import log from '@flex-development/log'
 
 /**
  * @file Examples - debug log
- * @module flog/docs/examples/debug
+ * @module log/docs/examples/debug
  */
 
-flog('debug log')
+log('debug log')
 ```
 
 #### Error
@@ -53,14 +53,14 @@ flog('debug log')
 Create a log entry with a red cross.
 
 ```typescript
-import flog from '@flex-development/flog'
+import log from '@flex-development/log'
 
 /**
  * @file Examples - error log
- * @module flog/docs/examples/error
+ * @module log/docs/examples/error
  */
 
-flog('error log', { level: 'ERROR' })
+log('error log', { level: 'ERROR' })
 ```
 
 #### Info
@@ -68,14 +68,14 @@ flog('error log', { level: 'ERROR' })
 Create a log entry with a blue info symbol.
 
 ```typescript
-import flog from '@flex-development/flog'
+import log from '@flex-development/log'
 
 /**
  * @file Examples - info log
- * @module flog/docs/examples/info
+ * @module log/docs/examples/info
  */
 
-flog('info log', { level: 'INFO' })
+log('info log', { level: 'INFO' })
 ```
 
 #### Success
@@ -83,14 +83,14 @@ flog('info log', { level: 'INFO' })
 Create a log entry with a green tick mark.
 
 ```typescript
-import flog from '@flex-development/flog'
+import log from '@flex-development/log'
 
 /**
  * @file Examples - success log
- * @module flog/docs/examples/success
+ * @module log/docs/examples/success
  */
 
-flog('success log', { level: 'SUCCESS' })
+log('success log', { level: 'SUCCESS' })
 ```
 
 #### Warning
@@ -98,20 +98,20 @@ flog('success log', { level: 'SUCCESS' })
 Create a log entry with a yellow exclamation point.
 
 ```typescript
-import flog from '@flex-development/flog'
+import log from '@flex-development/log'
 
 /**
  * @file Examples - warning log
- * @module flog/docs/examples/warning
+ * @module log/docs/examples/warning
  */
 
-flog('warning log', { level: 'WARN' })
+log('warning log', { level: 'WARN' })
 ```
 
 ### Options
 
 ```typescript
-export interface FlogOptions {
+export interface LogOptions {
   /**
    * Log arguments.
    *
@@ -124,14 +124,14 @@ export interface FlogOptions {
    *
    * @default {args:true}
    */
-  bold?: FlogOptionsBold
+  bold?: LogOptionsBold
 
   /**
    * Set log color, and/or override the log figure color set by `level`.
    *
    * @default {args:'white',data:'white'}
    */
-  color?: FlogOptionsColor
+  color?: LogOptionsColor
 
   /**
    * Override the log figure set by `level`, or omit it altogether.

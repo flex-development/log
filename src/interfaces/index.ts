@@ -1,8 +1,8 @@
 /**
  * @file Entry Point - Interfaces
- * @module flog/interfaces
+ * @module log/interfaces
  */
 
-export type { FlogOptionsBold } from './flog-options-bold.interface'
-export type { FlogOptionsColor } from './flog-options-color.interface'
-export type { FlogOptions } from './flog-options.interface'
+export type { LogOptionsBold } from './log-options-bold.interface'
+export type { LogOptionsColor } from './log-options-color.interface'
+export type { LogOptions } from './log-options.interface'

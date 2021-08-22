@@ -1,21 +1,21 @@
-import defaults from '@flog/config/defaults.config'
-import { LogColor } from '@flog/enums/log-color.enum'
-import { LogFigure } from '@flog/enums/log-figure.enum'
-import type { FlogOptions } from '@flog/interfaces'
+import defaults from '@log/config/defaults.config'
+import { LogColor } from '@log/enums/log-color.enum'
+import { LogFigure } from '@log/enums/log-figure.enum'
+import type { LogOptions } from '@log/interfaces'
 import type { Testcase } from '@tests/utils/types'
 import ch from 'chalk'
 import testSubject from '../figure.util'
 
 /**
  * @file Unit Tests - figure
- * @module flog/utils/figure
+ * @module log/utils/figure
  */
 
 const mockCH = ch as jest.Mocked<typeof ch>
 
 describe('unit:utils/figure', () => {
   type Case = Testcase<string> & {
-    options: FlogOptions
+    options: LogOptions
     state: string
     result: `return ${'empty string' | `string matching ${string}`}`
   }

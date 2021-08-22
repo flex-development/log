@@ -1,6 +1,6 @@
 /**
  * @file Enums - LogLevel
- * @module flog/enums/LogLevel
+ * @module log/enums/LogLevel
  */
 
 /**

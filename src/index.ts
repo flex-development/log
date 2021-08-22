@@ -1,8 +1,8 @@
-import flog from './flog'
+import log from './log'
 
 /**
  * @file Package Entry Point
- * @module flog
+ * @module log
  */
 
-export default flog
+export default log

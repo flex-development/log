@@ -1,24 +1,24 @@
-import defaults from '@flog/config/defaults.config'
-import type { FlogOptions } from '@flog/interfaces'
-import format from '@flog/utils/format.util'
+import defaults from '@log/config/defaults.config'
+import type { LogOptions } from '@log/interfaces'
+import format from '@log/utils/format.util'
 import type { RestoreConsole } from 'jest-mock-console'
 import mockConsole from 'jest-mock-console'
 import merge from 'lodash.merge'
 import sh from 'shelljs'
-import testSubject from '../flog'
+import testSubject from '../log'
 
 /**
- * @file Functional Tests - flog
- * @module flog/tests/functional/flog
+ * @file Functional Tests - log
+ * @module log/tests/functional/log
  */
 
-jest.mock('@flog/utils/format.util')
+jest.mock('@log/utils/format.util')
 
 const mockSH = sh as jest.Mocked<typeof sh>
 const mockFormat = format as jest.MockedFunction<typeof format>
 const mockMerge = merge as jest.MockedFunction<typeof merge>
 
-describe('functional:flog', () => {
+describe('functional:log', () => {
   const restoreConsole: RestoreConsole = mockConsole(['log'])
   const spy_console_log = jest.spyOn(console, 'log')
 
@@ -26,7 +26,7 @@ describe('functional:flog', () => {
 
   it('should merge options with defaults', () => {
     // Arrange
-    const options: FlogOptions = { level: 'ERROR' }
+    const options: LogOptions = { level: 'ERROR' }
 
     // Act
     testSubject('', options)

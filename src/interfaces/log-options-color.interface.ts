@@ -1,14 +1,14 @@
 import type { Color } from 'chalk'
 
 /**
- * @file Interfaces - FlogOptionsColor
- * @module flog/interfaces/FlogOptionsColor
+ * @file Interfaces - LogOptionsColor
+ * @module log/interfaces/LogOptionsColor
  */
 
 /**
- * `flog` color options.
+ * `log` color options.
  */
-export interface FlogOptionsColor {
+export interface LogOptionsColor {
   /**
    * Set log arguments color.
    *
@@ -24,7 +24,7 @@ export interface FlogOptionsColor {
   data?: typeof Color
 
   /**
-   * Override the log figure color set by `FlogOptions.level`/
+   * Override the log figure color set by `LogOptions.level`/
    */
   figure?: typeof Color
 }

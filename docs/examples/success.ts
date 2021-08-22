@@ -1,8 +1,8 @@
-import flog from '@flex-development/flog'
+import log from '@flex-development/log'
 
 /**
  * @file Examples - success log
- * @module flog/docs/examples/success
+ * @module log/docs/examples/success
  */
 
-flog('success log', { level: 'SUCCESS' })
+log('success log', { level: 'SUCCESS' })

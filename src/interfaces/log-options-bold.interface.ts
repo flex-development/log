@@ -1,12 +1,12 @@
 /**
- * @file Interfaces - FlogOptionsBold
- * @module flog/interfaces/FlogOptionsBold
+ * @file Interfaces - LogOptionsBold
+ * @module log/interfaces/LogOptionsBold
  */
 
 /**
- * `flog` bold options.
+ * `log` bold options.
  */
-export interface FlogOptionsBold {
+export interface LogOptionsBold {
   /**
    * Bold log arguments.
    *

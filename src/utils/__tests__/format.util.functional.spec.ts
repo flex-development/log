@@ -1,6 +1,6 @@
-import defaults from '@flog/config/defaults.config'
-import type { FlogOptions } from '@flog/interfaces'
-import figure from '@flog/utils/figure.util'
+import defaults from '@log/config/defaults.config'
+import type { LogOptions } from '@log/interfaces'
+import figure from '@log/utils/figure.util'
 import type { TestcaseCalled } from '@tests/utils/types'
 import type { Color } from 'chalk'
 import ch from 'chalk'
@@ -9,10 +9,10 @@ import testSubject from '../format.util'
 
 /**
  * @file Functional Tests - format
- * @module flog/utils/tests/format
+ * @module log/utils/tests/format
  */
 
-jest.mock('@flog/utils/figure.util')
+jest.mock('@log/utils/figure.util')
 
 const mockCH = ch as jest.Mocked<typeof ch>
 const mockFigure = figure as jest.MockedFunction<typeof figure>
@@ -21,7 +21,7 @@ describe('functional:utils/format', () => {
   type CaseCalled = Omit<TestcaseCalled, 'call'> & {
     calledWith: any
     data: any
-    options: FlogOptions
+    options: LogOptions
     result: string
   }
 

@@ -21,7 +21,7 @@ project. This includes, but is not limited to:
 
 ### Terminology
 
-People interacting with the `flog` project are grouped into 4 categories:
+People interacting with the `log` project are grouped into 4 categories:
 
 - **owner**: `flex-development` organization owners with full admin rights
 - **maintainer**: owners and people added to the organization who actively
@@ -73,8 +73,8 @@ add the `PAT_GPR` variable to your shell:
 ### Clone & Install
 
 ```zsh
-git clone https://github.com/flex-development/flog
-cd flog
+git clone https://github.com/flex-development/log
+cd log
 yarn
 ```
 
@@ -297,7 +297,7 @@ Every opened PR should:
 ### Pull Request URL Format
 
 ```zsh
-https://github.com/flex-development/flog/compare/next...<branch>
+https://github.com/flex-development/log/compare/next...<branch>
 ```
 
 where `<branch>` is the name of the branch you'd like to merge into `next`.
@@ -358,7 +358,7 @@ Before cutting a new release, the following steps must be completed:
    - a new release will be drafted
 4. Open a new pull request from `release/*` into `next`
    - title the PR `release: <package.json#name-no-scope><package.json#version>`
-     - e.g: `release: flog@1.0.0`
+     - e.g: `release: log@1.0.0`
    - once the PR is merged, the continuous deployment workflow will be triggered
 
 If the Continous Deployment workflow completes successfully, it will:

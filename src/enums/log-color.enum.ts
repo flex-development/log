@@ -1,6 +1,6 @@
 /**
  * @file Enums - LogColor
- * @module flog/enums/LogColor
+ * @module log/enums/LogColor
  */
 
 /**

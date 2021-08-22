@@ -1,18 +1,18 @@
 import type { NullishString } from '@flex-development/tutils'
-import type { Level } from '@flog/enums/log-level.enum'
+import type { Level } from '@log/enums/log-level.enum'
 import figures from 'figures'
-import type { FlogOptionsBold } from './flog-options-bold.interface'
-import type { FlogOptionsColor } from './flog-options-color.interface'
+import type { LogOptionsBold } from './log-options-bold.interface'
+import type { LogOptionsColor } from './log-options-color.interface'
 
 /**
- * @file Interfaces - FlogOptions
- * @module flog/interfaces/FlogOptions
+ * @file Interfaces - LogOptions
+ * @module log/interfaces/LogOptions
  */
 
 /**
- * `flog` options.
+ * `log` options.
  */
-export interface FlogOptions {
+export interface LogOptions {
   /**
    * Log arguments.
    *
@@ -25,14 +25,14 @@ export interface FlogOptions {
    *
    * @default {args:true}
    */
-  bold?: FlogOptionsBold
+  bold?: LogOptionsBold
 
   /**
    * Set log color, and/or override the log figure color set by `level`.
    *
    * @default {args:'white'}
    */
-  color?: FlogOptionsColor
+  color?: LogOptionsColor
 
   /**
    * Override the log figure set by `level`, or omit it altogether.

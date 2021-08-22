@@ -228,7 +228,7 @@ module.exports = {
       }
     },
     {
-      files: ['src/flog.ts'],
+      files: ['src/log.ts'],
       rules: {
         '@typescript-eslint/no-var-requires': 0
       }

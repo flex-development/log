@@ -1,11 +1,11 @@
 import type { NullishString } from '@flex-development/tutils'
-import defaults from '@flog/config/defaults.config'
-import type { Level } from '@flog/enums/log-level.enum'
+import defaults from '@log/config/defaults.config'
+import type { Level } from '@log/enums/log-level.enum'
 import type {
-  FlogOptions,
-  FlogOptionsBold,
-  FlogOptionsColor
-} from '@flog/interfaces'
+  LogOptions,
+  LogOptionsBold,
+  LogOptionsColor
+} from '@log/interfaces'
 import type { Color } from 'chalk'
 import figs from 'figures'
 import merge from 'lodash.merge'
@@ -13,7 +13,7 @@ import format from './utils/format.util'
 
 /**
  * @file Log Method
- * @module flog/flog
+ * @module log/log
  */
 
 /**
@@ -24,12 +24,12 @@ import format from './utils/format.util'
  * [2]: https://github.com/shelljs/shelljs#echooptions-string--string-
  *
  * @param {any} data - Log data
- * @param {FlogOptions} [options=defaults] - `flog` options
+ * @param {LogOptions} [options=defaults] - `log` options
  * @param {any[]} [options.args=[]] - Log arguments
- * @param {FlogOptionsBold} [options.bold={args:true}] - Bold logs
+ * @param {LogOptionsBold} [options.bold={args:true}] - Bold logs
  * @param {boolean} [options.bold.args=true] - Bold log arguments
  * @param {boolean} [options.bold.data] - Bold log data
- * @param {FlogOptionsColor} [options.color={args:'white'}] - Override colors
+ * @param {LogOptionsColor} [options.color={args:'white'}] - Override colors
  * @param {typeof Color} [options.color.args='white'] - Set log arguments color
  * @param {typeof Color} [options.color.data] - Set log data color
  * @param {typeof Color} [options.color.figure] - Set log figure color
@@ -39,7 +39,7 @@ import format from './utils/format.util'
  * @param {boolean} [options.silent] - Do not log any output
  * @return {string} Formatted log entry
  */
-const flog = (data: any, options: FlogOptions = defaults): string => {
+const log = (data: any, options: LogOptions = defaults): string => {
   // Merge options with defaults
   const $options = merge({}, defaults, options)
 
@@ -54,4 +54,4 @@ const flog = (data: any, options: FlogOptions = defaults): string => {
   return entry
 }
 
-export default flog
+export default log

@@ -3,7 +3,7 @@ import type { Level } from './log-level.enum'
 
 /**
  * @file Enums - LogFigure
- * @module flog/enums/LogFigure
+ * @module log/enums/LogFigure
  */
 
 /**

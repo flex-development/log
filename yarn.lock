@@ -656,9 +656,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flex-development/flog@workspace:.":
+"@flex-development/grease@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@flex-development/grease@npm:1.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fgrease%2F1.0.0%2F8dc0bb6dff4a7fb48a89dd5a01c6d4769c68d67351203d9439eac0c6411e4e71"
+  dependencies:
+    "@flex-development/exceptions": 2.0.1
+    "@flex-development/tutils": 3.1.0
+    "@types/git-semver-tags": 4.1.1
+    "@types/lodash": 4.14.172
+    "@types/semver": 7.3.8
+    "@types/shelljs": 0.8.9
+    "@types/standard-version": 7.0.1
+    anymatch: 3.1.2
+    chalk: 4.1.2
+    class-transformer: 0.4.0
+    class-transformer-validator: 0.9.1
+    class-validator: 0.13.1
+    git-semver-tags: 4.1.1
+    isomorphic-git: 1.9.2
+    lodash: 4.17.21
+    lodash-es: 4.17.21
+    reflect-metadata: 0.1.13
+    shelljs: 0.8.4
+    standard-version: 9.3.1
+    typedi: 0.10.0
+  peerDependencies:
+    "@types/node": ">=15.0.0"
+  checksum: 1b11829f7a77917a730c9b53a24021a69388e1c44d39b9835bddb6702de2b1434ab3b6d24e8aa19bed3d812ac717eb43f71cc74594e40757eae7026a8994d131
+  languageName: node
+  linkType: hard
+
+"@flex-development/log@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@flex-development/flog@workspace:."
+  resolution: "@flex-development/log@workspace:."
   dependencies:
     "@babel/eslint-parser": 7.14.7
     "@commitlint/cli": 13.0.0
@@ -719,36 +749,6 @@ __metadata:
       optional: true
   languageName: unknown
   linkType: soft
-
-"@flex-development/grease@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@flex-development/grease@npm:1.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fgrease%2F1.0.0%2F8dc0bb6dff4a7fb48a89dd5a01c6d4769c68d67351203d9439eac0c6411e4e71"
-  dependencies:
-    "@flex-development/exceptions": 2.0.1
-    "@flex-development/tutils": 3.1.0
-    "@types/git-semver-tags": 4.1.1
-    "@types/lodash": 4.14.172
-    "@types/semver": 7.3.8
-    "@types/shelljs": 0.8.9
-    "@types/standard-version": 7.0.1
-    anymatch: 3.1.2
-    chalk: 4.1.2
-    class-transformer: 0.4.0
-    class-transformer-validator: 0.9.1
-    class-validator: 0.13.1
-    git-semver-tags: 4.1.1
-    isomorphic-git: 1.9.2
-    lodash: 4.17.21
-    lodash-es: 4.17.21
-    reflect-metadata: 0.1.13
-    shelljs: 0.8.4
-    standard-version: 9.3.1
-    typedi: 0.10.0
-  peerDependencies:
-    "@types/node": ">=15.0.0"
-  checksum: 1b11829f7a77917a730c9b53a24021a69388e1c44d39b9835bddb6702de2b1434ab3b6d24e8aa19bed3d812ac717eb43f71cc74594e40757eae7026a8994d131
-  languageName: node
-  linkType: hard
 
 "@flex-development/tutils@npm:3.1.0":
   version: 3.1.0

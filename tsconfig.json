@@ -20,16 +20,16 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "paths": {
-      "@flex-development/flog": ["src/index.ts"],
-      "@flex-development/flog/*": ["src/*"],
       "@flex-development/grease": [
         "node_modules/@flex-development/grease/cjs/index"
       ],
       "@flex-development/grease/*": [
         "node_modules/@flex-development/grease/cjs/*"
       ],
-      "@flog": ["src/index.ts"],
-      "@flog/*": ["src/*"],
+      "@flex-development/log": ["src/index.ts"],
+      "@flex-development/log/*": ["src/*"],
+      "@log": ["src/index.ts"],
+      "@log/*": ["src/*"],
       "@tests/fixtures/*": ["__tests__/__fixtures__/*"],
       "@tests/*": ["__tests__/*"]
     },
