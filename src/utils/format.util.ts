@@ -1,10 +1,11 @@
 import type { NullishString } from '@flex-development/tutils'
 import defaults from '@flog/config/defaults.config'
+import { LogColor } from '@flog/enums/log-color.enum'
 import type { Level } from '@flog/enums/log-level.enum'
 import type {
   FlogOptions,
-  FlogOptionsBold as OBold,
-  FlogOptionsColor as OColor
+  FlogOptionsBold,
+  FlogOptionsColor
 } from '@flog/interfaces'
 import type { Color } from 'chalk'
 import ch from 'chalk'
@@ -21,24 +22,21 @@ import figure from './figure.util'
  * Formats log data and arguments.
  *
  * @param {any} data - Log data
- * @param {any[]} [args=[]] - Log arguments
+ *
  * @param {FlogOptions} [options=defaults] - `flog` options
- * @param {OBold} [options.bold={args:true}] - Bold logs
+ * @param {any[]} [options.args=[]] - Log arguments
+ * @param {FlogOptionsBold} [options.bold={args:true}] - Bold logs
  * @param {boolean} [options.bold.args=true] - Bold log arguments
  * @param {boolean} [options.bold.data] - Bold log data
- * @param {OColor} [options.color={args:'white',data:'white'}] - Override colors
+ * @param {FlogOptionsColor} [options.color={args:'white'}] - Override colors
  * @param {typeof Color} [options.color.args='white'] - Set log arguments color
- * @param {typeof Color} [options.color.data='white'] - Set log data color
+ * @param {typeof Color} [options.color.data] - Set log data color
  * @param {typeof Color} [options.color.figure] - Set log figure color
  * @param {keyof typeof figs | NullishString} [options.figure] - Override figure
  * @param {Level} [options.level='DEBUG'] - Log level
  * @return {string} Log data and arguments as string
  */
-const format = (
-  data: any,
-  args: any[] = [],
-  options: FlogOptions = defaults
-): string => {
+const format = (data: any, options: FlogOptions = defaults): string => {
   /**
    * Returns true if `value` is a function or object.
    *
@@ -53,18 +51,22 @@ const format = (
   if (isFunctionOrObject(data)) data = util.inspect(data, false, null)
 
   // Add log color
-  if (options.color?.data) data = ch[options.color.data](data)
+  if (options.level === 'DEBUG') {
+    data = ch[options.color?.data ?? LogColor[options.level]](data)
+  } else if (options.color?.data) data = ch[options.color?.data](data)
 
   // Bold log
   if (options.bold?.data) data = ch.bold(data)
 
   // Stringify arguments
-  args = args.map(arg => {
+  const args = (options.args as any[]).map(arg => {
     // Inspect log argument if argument is function or object
     if (isFunctionOrObject(arg)) arg = util.inspect(arg, false, null)
 
     // Add log argument color
-    if (options.color?.args) arg = ch[options.color.args](arg)
+    if (options.level === 'DEBUG') {
+      arg = ch[options.color?.args ?? LogColor[options.level]](arg)
+    } else if (options.color?.args) arg = ch[options.color?.args](arg)
 
     // Bold log argument
     if (options.bold?.args) arg = ch.bold(arg)

@@ -14,6 +14,13 @@ import type { FlogOptionsColor } from './flog-options-color.interface'
  */
 export interface FlogOptions {
   /**
+   * Log arguments.
+   *
+   * @default []
+   */
+  args?: any[]
+
+  /**
    * Bold log arguments **and/or** log data.
    *
    * @default {args:true}
@@ -23,7 +30,7 @@ export interface FlogOptions {
   /**
    * Set log color, and/or override the log figure color set by `level`.
    *
-   * @default {args:'white',data:'white'}
+   * @default {args:'white'}
    */
   color?: FlogOptionsColor
 
