@@ -9,7 +9,7 @@ Simple logging utility
 ## Overview
 
 [🚧 Getting Started](#getting-started)  
-[🚧 Installation](#installation)  
+[Installation](#installation)  
 [🚧 Usage](#usage)  
 [Built With](#built-with)  
 [Contributing](CONTRIBUTING.md)
@@ -20,7 +20,9 @@ Simple logging utility
 
 ## Installation
 
-**TODO**: Update documentation.
+```zsh
+yarn add @flex-development/flog # or npm i @flex-development/flog
+```
 
 ## Usage
 
