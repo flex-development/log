@@ -2,47 +2,125 @@
 #
 # References:
 #
-# - https://docs.github.com/en/actions/guides/building-and-testing-nodejs
-# - https://jestjs.io/docs/cli#--ci
-# - https://octokit.github.io/rest.js/#pagination
+# - https://github.com/actions/github-script
+# - https://github.com/actions/setup-node
+# - https://github.com/devmasx/merge-branch
+# - https://github.com/bdougie/close-issues-based-on-label
 
 ---
-name: Continuous Deployment
+name: continuous-deployment
 on:
   pull_request:
     branches:
       - release/**
     types: [closed]
 jobs:
-  continuous-deployment:
+  get-deployment-details:
+    name: Get Deployment Details
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    env:
-      PAT_GPR_FLDV: ${{ secrets.PAT_GPR }}
     steps:
-      - name: Checkout branch
-        uses: actions/checkout@v2
-      - name: Setup Node.js environment
+      - name: Get Release Details
+        id: release-details
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const { 1: tag } = context.ref.split('release/')
+
+            const opts = github.repos.listReleases(context.repo)
+            const releases = await github.paginate(opts)
+             
+            let release = releases.find({ title } => title.startsWith(tag))
+
+            core.exportVariable('tag', tag)
+      - name: Get Publish Command
+        id: publish-command
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const { tag } = process.env
+
+            let dtags = (tag.split('-')[1]?.split('.')[0] ?? '') || ''
+            dtags = `--access public ${dtags}`.trim()
+
+            core.exportVariable('publish_command', `npm publish build ${dtags}`)
+  publish-release:
+    name: Publish GitHub Release
+    needs: get-deployment-details
+    runs-on: ubuntu-latest
+    steps:
+      - id: publish
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const opts = github.repos.listReleases(context.repo)
+
+            const release = (await github.paginate(opts)).find(({ title }) => {
+              return title.startsWith(process.env.tag)
+            })
+
+            if (release && release.draft) {
+              await github.repos.updateRelease({
+                ...context.repo,
+                draft: false, 
+                release_id: release.id, 
+                tag_name: process.env.tag 
+              })
+            }
+  publish-package:
+    name: Publish package to GPR & NPM
+    needs: [get-deployment-details, publish-release]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup .npmrc file [GPR]
         uses: actions/setup-node@v2
         with:
-          always-auth: true
           cache: 'yarn'
           node-version: '16.x'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@flex-development'
-      - name: Install dependencies
-        id: dependencies
-        run: yarn
+      - name: Publish ${tag} [GPR]
+        run: ${publish_command}
         env:
-          NODE_AUTH_TOKEN: ${PAT_GPR_FLDV}
-      - name: Run test suites
-        run: TERM=xterm-256color yarn test --ci
-      - name: Close issues with status:merged label
+          NODE_AUTH_TOKEN: ${{ secrets.PAT_GPR_FLDV }}
+      - name: Setup .npmrc file [NPM]
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@flex-development'
+      - name: Publish ${tag} [NPM]
+        run: ${publish_command}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_FLDV }}
+  update-production-branch:
+    name: Update production branch
+    needs: publish-package
+    runs-on: ubuntu-latest
+    steps:
+      - id: merge
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          from_branch: next
+          github_token: ${{ github.token }}
+          target_branch: main
+          type: now
+  close-merged-issues:
+    name: Close issues with status:merged label
+    needs: update-production-branch
+    runs-on: ubuntu-latest
+    steps:
+      - id: close
         uses: bdougie/close-issues-based-on-label@master
         env:
           GITHUB_TOKEN: ${{ github.token }}
           LABEL: status:merged
-      - name: Add status:released label to closed issues
+  add-status-released-label:
+    name: Add status:released label to closed issues
+    needs: close-merged-issues
+    runs-on: ubuntu-latest
+    steps:
+      - id: add
         uses: actions/github-script@v4
         with:
           script: |
@@ -62,48 +140,3 @@ jobs:
                 return
               })
             }))
-      - name: Publish GitHub Release
-        id: release
-        uses: actions/github-script@v4
-        with:
-          script: |
-            const opts = github.repos.listReleases(context.repo)
-            const releases = await github.paginate(opts)
-            const tag = `v${context.ref.split('release/')[1]}`
-            let rtag = (tag.split('-')[1]?.split('.')[0] ?? '') || ''
-
-            let release = releases.find({ title } => title.startsWith(tag))
-
-            if (release.draft) {
-              release = { ...release, draft: false, tag_name: tag }
-              await github.repos.updateRelease(release)
-            }
-
-            core.setOutput('t', tag)
-            core.setOutput('rt', rtag === '' ? rtag : `--tag ${rtag}`)
-      - name: Publish package [GPR]
-        run: npm publish build ${{ steps.release.outputs.rt }}
-        env:
-          NODE_AUTH_TOKEN: ${PAT_GPR_FLDV}
-      - name: Setup Node.js environment [NPM]
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16.x'
-          registry-url: 'https://registry.npmjs.org'
-          scope: '@flex-development'
-      - name: Publish package [NPM]
-        run: npm publish build --access public ${{ steps.release.outputs.rt }}
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_FLDV }}
-      - name: Update production branch
-        uses: devmasx/merge-branch@v1.3.1
-        with:
-          from_branch: next
-          github_token: ${{ github.token }}
-          target_branch: main
-          type: now
-      - name: Delete branch
-        uses: dawidd6/action-delete-branch@v3
-        env:
-          branches: github.event.pull_request.head.ref
-          github_token: ${{ github.token }}

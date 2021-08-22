@@ -333,42 +333,45 @@ e.g: `merge: P011-1 (#1)`
 
 ## Releasing
 
-This repository is configured to release a new version for a workspace when a
-`release/*` branch is merged into `next`.
+This repository is configured to publish packages and releases when a
+`release/*` branch is merged.
 
 > Note: Publishing is executed via the
 > [Continuous Deployment](./.github/workflows/continous-deployment.yml)
-> workflow. This is so invalid or malicious versions cannot be released by any
-> maintainer without merging those changes into `next` first.
+> workflow. This is so invalid or malicious versions cannot be release without
+> merging those changes into `next` first.
 
-Before cutting a new release, the following steps must be completed:
+Before releasing, the following steps must be completed:
 
 1. Schedule a code freeze
 2. Create a new `release/*` branch
-   - where `*` is `<package.json#version>`, e.g: `release/1.0.0`
-   - branch naming conventions **must be followed exactly**. the continuous
-     deployment workflow uses the branch name to publish releases and create
-     release tags
+   - where `*` is `v<package.json#version>`
+     - e.g: `v1.1.0`
+   - branch naming conventions **must be followed exactly**. the branch name is
+     used to create distribution tags, locate drafted releases, and generate the
+     correct workspace publish command
 3. Decide what version bump the release needs (major, minor, patch)
    - versioning
      - `yarn release` (determines [bumps based on commits][15])
+     - `yarn release --first-release`
      - `yarn release --release-as major`
      - `yarn release --release-as minor`
      - `yarn release --release-as patch`
    - a new release will be drafted
 4. Open a new pull request from `release/*` into `next`
-   - title the PR `release: <package.json#name-no-scope><package.json#version>`
-     - e.g: `release: log@1.0.0`
-   - once the PR is merged, the continuous deployment workflow will be triggered
-
-If the Continous Deployment workflow completes successfully, it will:
-
-- publish the workspace project to the [GitHub Package Registry][16]
-- publish the drafted release
-- close issues with the `status:merged` label
-- add the `status:released` label to newly closed issues
-- merge branch `next` into `main`
-- delete the `release/*` branch
+   - title the PR `release: *`
+     - e.g: `release: v1.1.0`
+   - after review, merge the PR with a merge commit
+     - merge commit name: `merge: release *`
+       - e.g: `merge: release v1.1.0`
+   - once the PR is merged, the deployment workflow will be triggered
+   - the maintainer who is approved the PR should check to make sure the
+     workflow completes all jobs as expected. if successful, the workflow will:
+     - publish the drafted release
+     - publish package to the [GitHub Package Registry][16] and [NPM][17]
+     - update the production branch (merge branch `next` into `main`)
+     - close issues with the `status:merged` label
+     - add the `status:released` label to newly closed issues
 
 [1]: https://www.atlassian.com/software/jira
 [2]: https://yarnpkg.com/getting-started/migration
@@ -386,3 +389,4 @@ If the Continous Deployment workflow completes successfully, it will:
 [14]: https://jestjs.io/docs/api#testskipname-fn
 [15]: https://www.conventionalcommits.org/en/v1.0.0
 [16]: https://github.com/features/packages
+[17]: https://www.npmjs.com
