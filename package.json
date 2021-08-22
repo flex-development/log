@@ -1,9 +1,10 @@
 {
   "name": "@flex-development/flog",
-  "description": "Simple logging utility",
+  "description": "Style logs for the console or terminal",
   "version": "1.0.0",
   "keywords": [
     "log",
+    "log-util",
     "logging",
     "typescript"
   ],

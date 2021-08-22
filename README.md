@@ -8,15 +8,14 @@ Simple logging utility
 
 ## Overview
 
-[🚧 Getting Started](#getting-started)  
-[Installation](#installation)  
+[Getting Started](#getting-started)  
 [🚧 Usage](#usage)  
 [Built With](#built-with)  
 [Contributing](CONTRIBUTING.md)
 
 ## Getting Started
 
-**TODO**: Update documentation.
+Style logs for the console or [terminal][3].
 
 ## Installation
 
@@ -35,3 +34,4 @@ yarn add @flex-development/flog # or npm i @flex-development/flog
 
 [1]: https://github.com/chalk/chalk
 [2]: https://github.com/shelljs/shelljs
+[3]: https://github.com/shelljs/shelljs#echooptions-string--string-
