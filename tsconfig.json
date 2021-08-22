@@ -20,12 +20,15 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "paths": {
+      "@flex-development/flog": ["src/index.ts"],
+      "@flex-development/flog/*": ["src/*"],
       "@flex-development/grease": [
         "node_modules/@flex-development/grease/cjs/index"
       ],
       "@flex-development/grease/*": [
         "node_modules/@flex-development/grease/cjs/*"
       ],
+      "@flog": ["src/index.ts"],
       "@flog/*": ["src/*"],
       "@tests/fixtures/*": ["__tests__/__fixtures__/*"],
       "@tests/*": ["__tests__/*"]
@@ -45,6 +48,7 @@
   "include": [
     "__tests__",
     "__mocks__",
+    "docs",
     "scripts",
     "src",
     "typings",
