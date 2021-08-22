@@ -6,7 +6,8 @@ import type { FlogOptions } from '@flog/interfaces'
  */
 
 export default Object.freeze({
+  args: [],
   bold: { args: true, data: false },
-  color: { data: 'white' },
+  color: {},
   level: 'DEBUG'
-}) as Readonly<Required<Pick<FlogOptions, 'bold' | 'color' | 'level'>>>
+}) as Readonly<Required<Pick<FlogOptions, 'args' | 'bold' | 'color' | 'level'>>>

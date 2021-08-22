@@ -19,7 +19,6 @@ const mockFigure = figure as jest.MockedFunction<typeof figure>
 
 describe('functional:utils/format', () => {
   type CaseCalled = Omit<TestcaseCalled, 'call'> & {
-    args: any[]
     calledWith: any
     data: any
     options: FlogOptions
@@ -58,15 +57,13 @@ describe('functional:utils/format', () => {
   describe('functions and objects', () => {
     const cases: CaseCalled[] = [
       {
-        args: [data_obj.fn],
         calledWith: [data_obj.fn, false, null],
         data: 'log data',
         expected: 1,
-        options: {},
+        options: { args: [data_obj.fn] },
         result: 'arguments'
       },
       {
-        args: [],
         calledWith: [data_obj, false, null],
         data: data_obj,
         expected: 1,
@@ -77,10 +74,10 @@ describe('functional:utils/format', () => {
 
     it.each<CaseCalled>(cases)('should inspect log $result', testcase => {
       // Arrange
-      const { args, calledWith, data, expected, options } = testcase
+      const { calledWith, data, expected, options } = testcase
 
       // Act
-      testSubject(data, args, options)
+      testSubject(data, options)
 
       // Expect
       expect(spy_util_inspect).toBeCalledTimes(expected)
@@ -92,19 +89,17 @@ describe('functional:utils/format', () => {
     describe('options.bold', () => {
       const cases: CaseCalled[] = [
         {
-          args: [data_obj.deep.log],
-          calledWith: data_obj.deep.log,
+          calledWith: mockCH.gray(data_obj.deep.log),
           data: 'log data with args',
           expected: 1,
-          options: defaults,
+          options: { ...defaults, args: [data_obj.deep.log] },
           result: 'bold log arguments'
         },
         {
-          args: [],
           calledWith: data_obj.data,
           data: data_obj.data,
           expected: 1,
-          options: { bold: { data: true } },
+          options: { args: [], bold: { data: true } },
           result: 'bold log data'
         }
       ]
@@ -112,10 +107,10 @@ describe('functional:utils/format', () => {
       it.each<CaseCalled>(cases)('should $result', testcase => {
         // Arrange
         const spy_ch_bold = jest.spyOn(mockCH, 'bold')
-        const { args, calledWith, data, expected, options } = testcase
+        const { calledWith, data, expected, options } = testcase
 
         // Act
-        testSubject(data, args, options)
+        testSubject(data, options)
 
         // Expect
         expect(spy_ch_bold).toBeCalledTimes(expected)
@@ -128,32 +123,30 @@ describe('functional:utils/format', () => {
 
       const cases: Case[] = [
         {
-          args: [data_obj.data],
           calledWith: data_obj.data,
           color: 'magenta',
           data: 'log arguments with custom color',
           expected: 1,
-          options: { color: { args: 'magenta' } },
+          options: { args: [data_obj.data], color: { args: 'magenta' } },
           result: 'set custom log arguments color'
         },
         {
-          args: [],
           calledWith: data_obj.data,
           color: 'yellowBright',
           data: data_obj.data,
           expected: 1,
-          options: { color: { data: 'yellowBright' } },
+          options: { args: [], color: { data: 'yellowBright' } },
           result: 'set custom log data color'
         }
       ]
 
       it.each<Case>(cases)('should $result', testcase => {
         // Arrange
-        const { args, calledWith, color, data, expected, options } = testcase
+        const { calledWith, color, data, expected, options } = testcase
         const spy_ch_color = jest.spyOn(mockCH, color)
 
         // Act
-        testSubject(data, args, options)
+        testSubject(data, options)
 
         // Expect
         expect(spy_ch_color).toBeCalledTimes(expected)

@@ -29,7 +29,7 @@ describe('functional:flog', () => {
     const options: FlogOptions = { level: 'ERROR' }
 
     // Act
-    testSubject('', [], options)
+    testSubject('', options)
 
     // Expect
     expect(mockMerge).toBeCalledTimes(1)
@@ -39,15 +39,15 @@ describe('functional:flog', () => {
 
   it('should format log entry', () => {
     // Arrange
-    const args = ['log argument']
+    const options = { ...defaults, args: ['log argument'] }
     const data = 'log message'
 
     // Act
-    testSubject(data, args)
+    testSubject(data, options)
 
     // Expect
     expect(mockFormat).toBeCalledTimes(1)
-    expect(mockFormat).toBeCalledWith(data, args, defaults)
+    expect(mockFormat).toBeCalledWith(data, options)
   })
 
   describe('options', () => {
@@ -68,7 +68,7 @@ describe('functional:flog', () => {
         const data = 'terminal message'
 
         // Act
-        testSubject(data, [], { shell: true })
+        testSubject(data, { shell: true })
 
         // Expect
         expect(mockSH.echo).toBeCalledTimes(1)
@@ -78,7 +78,7 @@ describe('functional:flog', () => {
     describe('options.silent', () => {
       it('should not log if options.silent === true', () => {
         // Act
-        testSubject('silent console', [], { silent: true })
+        testSubject('silent console', { silent: true })
 
         // Expect
         expect(spy_console_log).toBeCalledTimes(0)
@@ -86,7 +86,7 @@ describe('functional:flog', () => {
 
       it('should not log if options.shell && options.silent', () => {
         // Act
-        testSubject('silent terminal', [], { shell: true, silent: true })
+        testSubject('silent terminal', { shell: true, silent: true })
 
         // Expect
         expect(mockSH.echo).toBeCalledTimes(0)

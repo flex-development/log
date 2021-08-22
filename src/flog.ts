@@ -3,8 +3,8 @@ import defaults from '@flog/config/defaults.config'
 import type { Level } from '@flog/enums/log-level.enum'
 import type {
   FlogOptions,
-  FlogOptionsBold as OBold,
-  FlogOptionsColor as OColor
+  FlogOptionsBold,
+  FlogOptionsColor
 } from '@flog/interfaces'
 import type { Color } from 'chalk'
 import figs from 'figures'
@@ -24,14 +24,14 @@ import format from './utils/format.util'
  * [2]: https://github.com/shelljs/shelljs#echooptions-string--string-
  *
  * @param {any} data - Log data
- * @param {any[]} [args=[]] - Log arguments
  * @param {FlogOptions} [options=defaults] - `flog` options
- * @param {OBold} [options.bold={args:true}] - Bold logs
+ * @param {any[]} [options.args=[]] - Log arguments
+ * @param {FlogOptionsBold} [options.bold={args:true}] - Bold logs
  * @param {boolean} [options.bold.args=true] - Bold log arguments
  * @param {boolean} [options.bold.data] - Bold log data
- * @param {OColor} [options.color={args:'white',data:'white'}] - Override colors
+ * @param {FlogOptionsColor} [options.color={args:'white'}] - Override colors
  * @param {typeof Color} [options.color.args='white'] - Set log arguments color
- * @param {typeof Color} [options.color.data='white'] - Set log data color
+ * @param {typeof Color} [options.color.data] - Set log data color
  * @param {typeof Color} [options.color.figure] - Set log figure color
  * @param {keyof typeof figs | NullishString} [options.figure] - Override figure
  * @param {Level} [options.level='DEBUG'] - Log level
@@ -39,16 +39,12 @@ import format from './utils/format.util'
  * @param {boolean} [options.silent] - Do not log any output
  * @return {string} Formatted log entry
  */
-const flog = (
-  data: any,
-  args: any[] = [],
-  options: FlogOptions = defaults
-): string => {
+const flog = (data: any, options: FlogOptions = defaults): string => {
   // Merge options with defaults
   const $options = merge({}, defaults, options)
 
   // Create formatted log entry
-  const entry = format(data, args, $options)
+  const entry = format(data, $options)
 
   // Log entry
   if (!options.silent) {
