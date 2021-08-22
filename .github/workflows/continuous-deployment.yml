@@ -27,6 +27,7 @@ jobs:
         with:
           always-auth: true
           cache: 'yarn'
+          node-version: '16.x'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@flex-development'
       - name: Install dependencies
@@ -80,10 +81,20 @@ jobs:
 
             core.setOutput('t', tag)
             core.setOutput('rt', rtag === '' ? rtag : `--tag ${rtag}`)
-      - name: Publish package
+      - name: Publish package [GPR]
         run: npm publish build ${{ steps.release.outputs.rt }}
         env:
-          NODE_AUTH_TOKEN: ${PAT_GPR}
+          NODE_AUTH_TOKEN: ${PAT_GPR_FLDV}
+      - name: Setup Node.js environment [NPM]
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@flex-development'
+      - name: Publish package [NPM]
+        run: npm publish build --access public ${{ steps.release.outputs.rt }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_FLDV }}
       - name: Update production branch
         uses: devmasx/merge-branch@v1.3.1
         with:

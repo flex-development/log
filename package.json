@@ -116,6 +116,7 @@
       "DEBUG_COLORS"
     ],
     "required": [
+      "NPM_TOKEN_FLDV",
       "PAT_GPR_FLDV"
     ]
   }

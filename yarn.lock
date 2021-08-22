@@ -3433,15 +3433,15 @@ __metadata:
   linkType: hard
 
 "cosmiconfig@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "cosmiconfig@npm:7.0.0"
+  version: 7.0.1
+  resolution: "cosmiconfig@npm:7.0.1"
   dependencies:
     "@types/parse-json": ^4.0.0
     import-fresh: ^3.2.1
     parse-json: ^5.0.0
     path-type: ^4.0.0
     yaml: ^1.10.0
-  checksum: 6801feaa0249e9b9fdde5b3d70dc33b4f9c69095bec94d67e3fe08b66eac24dc7e2099f053597cfbc94b743de269aa5d2cfa7da3fde765433423b06bd122941a
+  checksum: 4be63e7117955fd88333d7460e4c466a90f556df6ef34efd59034d2463484e339666c41f02b523d574a797ec61f4a91918c5b89a316db2ea2f834e0d2d09465b
   languageName: node
   linkType: hard
 
@@ -7024,9 +7024,9 @@ fsevents@^2.3.2:
   linkType: hard
 
 "libphonenumber-js@npm:^1.9.7":
-  version: 1.9.23
-  resolution: "libphonenumber-js@npm:1.9.23"
-  checksum: e26f1881c8e3a1c314880762aef0c7e165d147604c1c6defd3d1940e5d9031389a0875c29ce2eb9b6e85f2edd31276a28ec50d611be905cb820367a77187cbcc
+  version: 1.9.24
+  resolution: "libphonenumber-js@npm:1.9.24"
+  checksum: 37996ca831436f2a051ca4c62801730459b0f6bbd2cde582f6a3b22feee208efe5522cc621721d1ea31ca008601cc42bea8a5fd8bf13f6af3fa588f1a78efa35
   languageName: node
   linkType: hard
 
