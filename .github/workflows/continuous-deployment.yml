@@ -56,8 +56,8 @@ jobs:
         with:
           github-token: ${{ secrets.PAT_REPO_FLDV_ADMIN }}
           script: |
-            const opts = github.repos.listReleases(context.repo)
-            const releases = await github.paginate(opts)
+            const endpoint = 'GET /repos/{owner}/{repo}/releases'
+            const releases = await github.paginate(endpoint, context.repo)
 
             const release = releases.find(release => {
               console.log(process.env.tag, release)
