@@ -36,9 +36,10 @@ jobs:
         uses: actions/github-script@v4
         with:
           script: |
-            let tag = context.payload.inputs.tag
-
-            if (!tag) {
+            let tag
+             
+            if (context.payload.inputs) tag = context.payload.inputs.tag
+            if (context.payload.pull_request) {
               tag = context.payload.pull_request.head.ref.split('release/')[1]
             }
 
