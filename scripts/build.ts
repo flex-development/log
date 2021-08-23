@@ -1,9 +1,13 @@
 #!/usr/bin/env node
 
 import log from '@flex-development/grease/utils/log.util'
+import { existsSync, writeFileSync } from 'fs-extra'
+import { join } from 'path'
+import { sync as readPackage } from 'read-pkg'
 import { hideBin } from 'yargs/helpers'
 import yargs from 'yargs/yargs'
 import fixNodeModulePaths from './fix-node-module-paths'
+import echo from './utils/echo'
 import exec from './utils/exec'
 import { $name } from './utils/pkg-get'
 
@@ -17,7 +21,27 @@ export type BuildPackageOptions = {
    * See the commands that running `build` would run.
    */
   dryRun?: boolean
+
+  /**
+   * Specify module build formats.
+   */
+  formats?: ('cjs' | 'esm')[]
 }
+
+/**
+ * @property {string} BUILD_DIR - Build directory
+ */
+const BUILD_DIR: string = 'build'
+
+/**
+ * @property {string[]} BUILD_FILES - Distribution files
+ */
+const BUILD_FILES: string[] = ['CHANGELOG.md', 'LICENSE.md', 'README.md']
+
+/**
+ * @property {string[]} BUILD_FORMATS - Module build formats
+ */
+const BUILD_FORMATS: BuildPackageOptions['formats'] = ['cjs', 'esm']
 
 /**
  * @property {yargs.Argv} args - Command line arguments parser
@@ -31,6 +55,13 @@ const args = yargs(hideBin(process.argv))
     default: false,
     describe: 'see the commands that running build would run',
     type: 'boolean'
+  })
+  .option('formats', {
+    alias: 'f',
+    array: true,
+    choices: BUILD_FORMATS,
+    default: BUILD_FORMATS,
+    description: 'specify module build format(s)'
   })
   .alias('version', 'v')
   .alias('help', 'h')
@@ -46,16 +77,63 @@ const argv: BuildPackageOptions = args.argv as BuildPackageOptions
 log(argv, `starting build workflow`, [$name, `[dry=${argv.dryRun}]`], 'info')
 
 // Remove stale build directory
-exec('rimraf build', argv.dryRun)
-log(argv, 'remove stale build directory')
+exec(`rimraf ${BUILD_DIR}`, argv.dryRun)
+log(argv, `remove stale ${BUILD_DIR} directory`)
 
 // Build project with ttypescript - https://github.com/cevek/ttypescript
-if (exec('ttsc -p tsconfig.prod.json', argv.dryRun) || argv.dryRun) {
-  log(argv, 'build project')
-}
+argv.formats?.forEach(format => {
+  // Get tsconfig config file
+  const tsconfig: string = `tsconfig.prod.${format}.json`
+
+  // Run build command
+  if (exec(`ttsc -p ${tsconfig}`, argv.dryRun) || argv.dryRun) {
+    log(argv, `create ${BUILD_DIR}/${format}`)
+  }
+})
 
 // Fix node module import paths
 fixNodeModulePaths()
+
+// Create package.json in $BUILD_DIR
+if (!argv.dryRun) {
+  // Get copy of package.json
+  const pkgjson = readPackage({ cwd: process.cwd(), normalize: false })
+
+  // Reset `publishConfig#directory`
+  if (!pkgjson.publishConfig) pkgjson.publishConfig = {}
+  pkgjson.publishConfig.directory = './'
+
+  // Reset `main`, `module`, and `types`
+  pkgjson.main = pkgjson.main?.replace(`${BUILD_DIR}/`, '')
+  pkgjson.module = pkgjson.module?.replace(`${BUILD_DIR}/`, '')
+  pkgjson.types = pkgjson.types?.replace(`${BUILD_DIR}/`, '')
+
+  // Remove `devDependencies` `files`, and `scripts` from package.json
+  Reflect.deleteProperty(pkgjson, 'devDependencies')
+  Reflect.deleteProperty(pkgjson, 'files')
+  Reflect.deleteProperty(pkgjson, 'scripts')
+
+  // Add `_id` field
+  pkgjson._id = `${pkgjson.name}@${pkgjson.version}`
+
+  // Create package.json file
+  writeFileSync(
+    join(process.cwd(), BUILD_DIR, 'package.json'),
+    JSON.stringify(pkgjson, null, 2)
+  )
+}
+
+log(argv, `create ${BUILD_DIR}/package.json`)
+
+// Copy distribution files
+BUILD_FILES.forEach(file => {
+  if (existsSync(join(process.cwd(), file))) {
+    exec(`copyfiles ${file} ${BUILD_DIR}`, argv.dryRun)
+    echo(`create ${BUILD_DIR}/${file}`)
+  } else {
+    log(argv, `skipped ${file} -> ${BUILD_DIR}/${file}`, [], 'warning')
+  }
+})
 
 // Log workflow end
 log(argv, `build workflow complete`, [$name], 'info')

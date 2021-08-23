@@ -114,9 +114,12 @@ const RULES = {
       skipWords: [
         'argv',
         'chp',
+        'cjs',
         'commitlint',
+        'copyfiles',
         'dto',
         'dtos',
+        'esm',
         'enum',
         'enums',
         'formatter',
