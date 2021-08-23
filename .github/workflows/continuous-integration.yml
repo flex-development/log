@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           always-auth: true
-          cache: 'yarn'
+          cache: yarn
           node-version: ${{ matrix.node }}
           registry-url: 'https://npm.pkg.github.com'
           scope: '@flex-development'

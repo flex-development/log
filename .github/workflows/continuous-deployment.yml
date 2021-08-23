@@ -28,6 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: get-release-details
+        name: Get release details
         uses: actions/github-script@v4
         with:
           script: |
@@ -39,6 +40,7 @@ jobs:
 
             core.exportVariable('tag', tag)
       - id: get-publish-command
+        name: Get publish command
         uses: actions/github-script@v4
         with:
           script: |
@@ -52,6 +54,7 @@ jobs:
 
             core.exportVariable('publish_command', `npm publish build ${dtags}`)
       - id: publish-release
+        name: Publish GitHub release
         uses: actions/github-script@v4
         with:
           github-token: ${{ secrets.PAT_REPO_FLDV_ADMIN }}
@@ -74,27 +77,30 @@ jobs:
               })
             }
       - id: setup-npmrc-gpr
+        name: Setup .npmrc file [GPR]
         uses: actions/setup-node@v2
         with:
-          cache: 'yarn'
-          node-version: '16.x'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@flex-development'
       - id: publish-to-gpr
+        name: Publish package [GPR]
         run: ${publish_command}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PAT_GPR_FLDV }}
       - id: setup-npmrc-npm
+        name: Setup .npmrc file [NPM]
         uses: actions/setup-node@v2
         with:
-          node-version: '16.x'
+          node-version: '14.x'
           registry-url: 'https://registry.npmjs.org'
           scope: '@flex-development'
       - id: publish-to-npm
+        name: Publish package [NPM]
         run: ${publish_command}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_FLDV }}
       - id: update-production-branch
+        name: Update production branch
         uses: devmasx/merge-branch@v1.3.1
         with:
           from_branch: next
@@ -102,11 +108,13 @@ jobs:
           target_branch: main
           type: now
       - id: close-merged-issues
+        name: Close issues with status:merged label
         uses: bdougie/close-issues-based-on-label@master
         env:
           GITHUB_TOKEN: ${{ github.token }}
           LABEL: status:merged
       - id: add-status-released-label
+        name: Add status:released label to merged issues
         uses: actions/github-script@v4
         with:
           script: |
