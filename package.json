@@ -22,7 +22,6 @@
     "access": "public",
     "directory": "./build"
   },
-  "files": [],
   "main": "./build/esm/index.js",
   "module": "./build/cjs/index.js",
   "types": "./build/esm/index.d.ts",

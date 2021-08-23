@@ -4,7 +4,7 @@
 #
 # - https://github.com/actions/github-script
 # - https://github.com/actions/setup-node
-# - https://github.com/devmasx/merge-branch
+# - https://github.com/actions-registry/github-repo-sync-upstream
 # - https://github.com/bdougie/close-issues-based-on-label
 
 ---
@@ -17,17 +17,21 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Release tag'
+        description: release tag
         required: true
 jobs:
-  continuous-deployment:
+  get-deployment-details:
+    name: Get deployment details
     if: |
       github.event.inputs.tag ||
       (startsWith(github.event.pull_request.head.ref, 'release/') 
       && github.event.pull_request.merged == true)
     runs-on: ubuntu-latest
+    outputs:
+      publish_command: ${{ steps.publish_command.outputs.command }}
+      tag: ${{ steps.release.outputs.tag }}
     steps:
-      - id: get-release-details
+      - id: release
         name: Get release details
         uses: actions/github-script@v4
         with:
@@ -39,7 +43,8 @@ jobs:
             }
 
             core.exportVariable('tag', tag)
-      - id: get-publish-command
+            core.setOutput('tag', tag)
+      - id: publish_command
         name: Get publish command
         uses: actions/github-script@v4
         with:
@@ -52,20 +57,22 @@ jobs:
 
             dtags = `--access public ${dtags}`.trim()
 
-            core.exportVariable('publish_command', `npm publish build ${dtags}`)
-      - id: publish-release
+            core.setOutput('command', `npm publish ./build ${dtags}`)
+  publish-release:
+    name: Publish GitHub Release
+    needs: get-deployment-details
+    runs-on: ubuntu-latest
+    steps:
+      - id: publish
         name: Publish GitHub release
         uses: actions/github-script@v4
         with:
-          github-token: ${{ secrets.PAT_REPO_FLDV_ADMIN }}
           script: |
             const endpoint = 'GET /repos/{owner}/{repo}/releases'
             const releases = await github.paginate(endpoint, context.repo)
 
-            const release = releases.find(release => {
-              console.log(process.env.tag, release)
-
-              return release.name.startsWith(process.env.tag)
+            const release = releases.find(({ name }) => {
+              return name.startsWith(process.env.tag)
             })
 
             if (release && release.draft) {
@@ -76,44 +83,88 @@ jobs:
                 tag_name: process.env.tag 
               })
             }
+  publish-package:
+    name: Publish package to GPR & NPM
+    needs: [get-deployment-details, publish-release]
+    runs-on: ubuntu-latest
+    env:
+      NPM_TOKEN_FLDV: ${{ secrets.NPM_TOKEN_FLDV }}
+      PAT_GPR_FLDV: ${{ secrets.PAT_GPR_FLDV }}
+    steps:
+      - id: checkout
+        name: Checkout branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
       - id: setup-npmrc-gpr
         name: Setup .npmrc file [GPR]
         uses: actions/setup-node@v2
         with:
+          always-auth: true
+          cache: yarn
+          node-version: 16
           registry-url: 'https://npm.pkg.github.com'
           scope: '@flex-development'
+      - id: dependencies
+        name: Install dependencies
+        run: yarn --immutable
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PAT_GPR_FLDV }}
+      - id: build
+        name: Build project
+        run: yarn build
+        env:
+          NODE_OPTIONS: -r tsconfig-paths/register
       - id: publish-to-gpr
         name: Publish package [GPR]
-        run: ${publish_command}
+        run: ${{ needs.get-deployment-details.outputs.publish_command }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PAT_GPR_FLDV }}
       - id: setup-npmrc-npm
         name: Setup .npmrc file [NPM]
         uses: actions/setup-node@v2
         with:
-          node-version: '14.x'
+          cache: yarn
+          node-version: 16
           registry-url: 'https://registry.npmjs.org'
           scope: '@flex-development'
       - id: publish-to-npm
         name: Publish package [NPM]
-        run: ${publish_command}
+        run: ${{ needs.get-deployment-details.outputs.publish_command }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_FLDV }}
-      - id: update-production-branch
-        name: Update production branch
-        uses: devmasx/merge-branch@v1.3.1
+  update-production-branch:
+    name: Update production branch
+    needs: publish-package
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        name: Checkout main branch
+        uses: actions/checkout@v2
         with:
-          from_branch: next
-          github_token: ${{ github.token }}
-          target_branch: main
-          type: now
-      - id: close-merged-issues
-        name: Close issues with status:merged label
+          ref: main
+      - id: update
+        uses: actions-registry/github-repo-sync-upstream@v0.0.2
+        with:
+          destination_branch: main
+          source_branch: next
+          source_repo: ${{ github.repository }}
+  close-merged-issues:
+    name: Close issues with status:merged label
+    needs: update-production-branch
+    runs-on: ubuntu-latest
+    steps:
+      - id: close
         uses: bdougie/close-issues-based-on-label@master
         env:
           GITHUB_TOKEN: ${{ github.token }}
           LABEL: status:merged
-      - id: add-status-released-label
+  add-status-released-label:
+    name: Add status:released label to closed issues
+    needs: close-merged-issues
+    runs-on: ubuntu-latest
+    steps:
+      - id: add
         name: Add status:released label to merged issues
         uses: actions/github-script@v4
         with:
@@ -121,16 +172,19 @@ jobs:
             const opts = github.issues.listForRepo(context.repo)
             const issues = await github.paginate(opts)
 
-            await Promise.all(issues.map(issue => {
-              issue.labels && issue.labels.forEach(({ name, number }) => {
-                if (label.name === 'status:merged') {
+            Promise.all(issues.map(async issue => {
+              if (issue.labels) {
+                const names = issue.labels.map(label => label.name)
+
+                const label_add = 'status:released'
+                const label_check = 'status:merged'
+
+                if (!name.includes(label_add) && names.includes(label_check)) {
                   return await github.issues.addLabels({
                     ...context.repo,
-                    issue_number: number,
-                    labels: ['status:released']
+                    issue_number: issue.number,
+                    labels: [label_add]
                   })
                 }
-
-                return
-              })
+              }
             }))
