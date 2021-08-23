@@ -59,34 +59,9 @@ jobs:
             dtags = `--access public ${dtags}`.trim()
 
             core.setOutput('command', `npm publish ./build ${dtags}`)
-  publish-release:
-    name: Publish GitHub Release
-    needs: get-deployment-details
-    runs-on: ubuntu-latest
-    steps:
-      - id: publish
-        name: Publish GitHub release
-        uses: actions/github-script@v4
-        with:
-          script: |
-            const endpoint = 'GET /repos/{owner}/{repo}/releases'
-            const releases = await github.paginate(endpoint, context.repo)
-
-            const release = releases.find(({ name }) => {
-              return name.startsWith(process.env.tag)
-            })
-
-            if (release && release.draft) {
-              await github.repos.updateRelease({
-                ...context.repo,
-                draft: false, 
-                release_id: release.id, 
-                tag_name: process.env.tag 
-              })
-            }
   publish-package:
     name: Publish package to GPR & NPM
-    needs: [get-deployment-details, publish-release]
+    needs: get-deployment-details
     runs-on: ubuntu-latest
     env:
       NPM_TOKEN_FLDV: ${{ secrets.NPM_TOKEN_FLDV }}
@@ -150,6 +125,31 @@ jobs:
           destination_branch: main
           source_branch: next
           source_repo: ${{ github.repository }}
+  publish-release:
+    name: Publish GitHub Release
+    needs: [get-deployment-details, update-production-branch]
+    runs-on: ubuntu-latest
+    steps:
+      - id: publish
+        name: Publish GitHub release
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const endpoint = 'GET /repos/{owner}/{repo}/releases'
+            const releases = await github.paginate(endpoint, context.repo)
+
+            const release = releases.find(({ name }) => {
+              return name.startsWith(process.env.tag)
+            })
+
+            if (release && release.draft) {
+              await github.repos.updateRelease({
+                ...context.repo,
+                draft: false, 
+                release_id: release.id, 
+                tag_name: process.env.tag 
+              })
+            }
   close-merged-issues:
     name: Close issues with status:merged label
     needs: update-production-branch
