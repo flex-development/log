@@ -85,7 +85,7 @@
     "replace-in-file": "6.2.0",
     "rimraf": "3.0.2",
     "shelljs": "0.8.4",
-    "ts-jest": "27.0.4",
+    "ts-jest": "27.0.5",
     "ts-node": "10.2.1",
     "tsconfig-paths": "3.11.0",
     "ttypescript": "1.5.12",
