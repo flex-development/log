@@ -722,7 +722,6 @@ __metadata:
     "@types/shelljs": 0.8.9
     "@typescript-eslint/eslint-plugin": 4.28.0
     "@typescript-eslint/parser": 4.28.0
-    "@vercel/ncc": 0.29.2
     "@zerollup/ts-transform-paths": 1.7.18
     chalk: 4.1.2
     copyfiles: 2.4.1
@@ -2079,17 +2078,6 @@ __metadata:
     "@typescript-eslint/types": 4.29.2
     eslint-visitor-keys: ^2.0.0
   checksum: 34185d8c6466340aba746d69b36d357da2d06577d73f58358648c142bd0f181d7fae01ca1138188a665ef074ea7e1bc6306ef9d50f29914c8bcea4e9ea1f82f2
-  languageName: node
-  linkType: hard
-
-"@vercel/ncc@npm:0.29.2":
-  version: 0.29.2
-  resolution: "@vercel/ncc@npm:0.29.2"
-  dependencies:
-    node-gyp: latest
-  bin:
-    ncc: dist/ncc/cli.js
-  checksum: 08491dbaffab4cd9d486220f33995a52ecf719754027f14abc1a002c63dbab28c16fc3e52a310727c4d3a9b64286177b98501511944d27e2501396c28ad89b71
   languageName: node
   linkType: hard
 
