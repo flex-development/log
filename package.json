@@ -57,14 +57,27 @@
     "lodash.merge": "4.6.2"
   },
   "devDependencies": {
+    "@babel/core": "7.15.4",
     "@babel/eslint-parser": "7.15.4",
     "@commitlint/cli": "13.1.0",
     "@commitlint/config-conventional": "13.1.0",
     "@commitlint/format": "13.1.0",
+    "@flex-development/exceptions": "2.0.1",
     "@flex-development/grease": "1.1.0",
+    "@jest/types": "27.1.1",
+    "@log/config": "link:src/config",
+    "@log/enums": "link:src/enums",
+    "@log/interfaces": "link:src/interfaces",
+    "@log/types": "link:src/types",
+    "@log/utils": "link:src/utils",
+    "@tests/fixtures": "link:__tests__/__fixtures__",
+    "@tests/utils": "link:__tests__/utils",
     "@types/fs-extra": "9.0.12",
     "@types/jest": "27.0.1",
+    "@types/lodash.join": "4.0.6",
     "@types/lodash.merge": "4.6.6",
+    "@types/lodash.omit": "4.5.6",
+    "@types/lodash.pick": "4.4.6",
     "@types/mvdan-sh": "0.5.0",
     "@types/node": "16.9.1",
     "@types/rimraf": "3.0.2",
@@ -72,6 +85,7 @@
     "@typescript-eslint/eslint-plugin": "4.30.0",
     "@typescript-eslint/parser": "4.30.0",
     "@zerollup/ts-transform-paths": "1.7.18",
+    "ansi-styles": "4.3.0",
     "concurrently": "6.2.1",
     "copyfiles": "2.4.1",
     "dotenv-cli": "4.0.0",
@@ -93,9 +107,14 @@
     "jest-github-reporter": "1.0.2",
     "jest-mock-console": "1.1.0",
     "lint-staged": "11.1.2",
+    "lodash.join": "4.0.1",
+    "lodash.merge": "4.6.2",
+    "lodash.omit": "4.5.0",
+    "lodash.pick": "4.4.0",
     "pinst": "2.1.6",
     "prettier": "2.4.0",
     "prettier-plugin-sh": "0.7.1",
+    "read-pkg": "5.2.0",
     "replace-in-file": "6.2.0",
     "rimraf": "3.0.2",
     "shelljs": "0.8.4",
@@ -103,11 +122,13 @@
     "ts-node": "10.2.1",
     "tsconfig-paths": "3.11.0",
     "ttypescript": "1.5.12",
-    "typescript": "4.4.2"
+    "typescript": "4.4.2",
+    "yargs": "17.1.1"
   },
   "peerDependencies": {
     "@types/shelljs": ">=0.8.9",
-    "shelljs": ">=0.8.4"
+    "shelljs": ">=0.8.4",
+    "typescript": ">=2.7"
   },
   "peerDependenciesMeta": {
     "@types/shelljs": {
@@ -115,10 +136,10 @@
     },
     "shelljs": {
       "optional": true
+    },
+    "typescript": {
+      "optional": true
     }
-  },
-  "resolutions": {
-    "read-pkg": "5.2.0"
   },
   "engines": {
     "node": ">=15.0.0",

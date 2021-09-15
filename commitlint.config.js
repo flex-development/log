@@ -1,6 +1,3 @@
-const { Rule } = require('@commitlint/types')
-const { Record } = require('typescript')
-
 /**
  * @file Commitlint Configuration
  * @see https://commitlint.js.org/#/guides-local-setup
@@ -9,30 +6,29 @@ const { Record } = require('typescript')
 
 module.exports = {
   /**
-   * @property {boolean} defaultIgnores - If true, enable default ignore rules
+   * Enable default ignore rules.
    */
   defaultIgnores: true,
 
   /**
-   * @property {Array<string>} extends - IDs of commitlint configurations
+   * IDs of commitlint configurations.
    */
   extends: ['@commitlint/config-conventional'],
 
   /**
-   * @property {string} formatter - Name of formatter package
+   * Name of formatter package.
    */
   formatter: '@commitlint/format',
 
   /**
    * Functions that return true if commitlint should ignore the given message.
-   *
-   * @param {string} commit - The commit message
-   * @return {boolean} `true` if commitlint should ignore message
    */
   ignores: [],
 
   /**
-   * @property {Record<string, Rule>} rules - Rules to test commits against
+   * Rules to test commits against.
+   *
+   * @see https://commitlint.js.org/#/reference-rules
    */
   rules: {
     /**

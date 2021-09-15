@@ -1,6 +1,7 @@
 import type { Config } from '@jest/types'
 import { jsWithTsESM as preset } from 'ts-jest/presets'
 import { pathsToModuleNameMapper } from 'ts-jest/utils'
+import NODE_MODULES from './scripts/nm-string'
 import { compilerOptions } from './tsconfig.json'
 
 /**
@@ -20,10 +21,10 @@ const config: Config.InitialOptions = {
       tsconfig: '<rootDir>/tsconfig.test.json'
     }
   },
-  moduleDirectories: ['node_modules'],
+  moduleDirectories: [NODE_MODULES],
   moduleFileExtensions: ['node', 'js', 'json', 'ts'],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix }),
-  prettierPath: '<rootDir>/node_modules/prettier',
+  prettierPath: `<rootDir>/${NODE_MODULES}/prettier`,
   reporters: ['default', 'jest-github-reporter'],
   roots: ['<rootDir>/__mocks__', '<rootDir>/src'],
   setupFiles: ['<rootDir>/__tests__/config/setup.ts'],
