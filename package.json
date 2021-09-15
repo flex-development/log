@@ -46,9 +46,9 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.14.7",
-    "@commitlint/cli": "13.0.0",
-    "@commitlint/config-conventional": "13.0.0",
-    "@commitlint/format": "13.0.0",
+    "@commitlint/cli": "13.1.0",
+    "@commitlint/config-conventional": "13.1.0",
+    "@commitlint/format": "13.1.0",
     "@flex-development/grease": "1.0.0",
     "@types/jest": "27.0.1",
     "@types/lodash.merge": "4.6.6",
