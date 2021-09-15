@@ -46,12 +46,14 @@ module.exports = {
         'deploy',
         'deps',
         'deps-dev',
+        'deps-peer',
         'log',
         'release',
         'scripts',
         'tests',
         'typescript',
-        'workflows'
+        'workflows',
+        'yarn'
       ]
     ],
 
