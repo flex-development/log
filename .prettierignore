@@ -3,8 +3,11 @@
 
 .yarn/
 build/
+cjs/
 coverage/
+esm/
 node_modules/
+types/
 
 **/CHANGELOG.md
 .env.*

@@ -136,10 +136,10 @@ const options: IGreaseOptions = {
   releaseBranchWhitelist: ['release/*'],
   releaseCommitMessageFormat: `release: ${$name}@{{currentTag}}`,
   scripts: {
-    postchangelog: `yarn pack -o %s-%v.tgz${argv.dryRun ? ' -n' : ''}`,
-    postgreaser: 'rimraf ./*.tgz',
-    postrelease: 'git pnv',
-    prerelease: 'git rebase origin/next; yarn test --no-cache; git pnv'
+    postchangelog: `npm pack ${argv.dryRun ? '--dry-run' : ''}`.trim(),
+    postcommit: 'git pnv',
+    postgreaser: 'yarn clean:build && rimraf ./*.tgz',
+    prerelease: 'yarn test --no-cache'
   },
   // `continuous-deployment` workflow will create new tag
   skip: { tag: true },
@@ -164,7 +164,7 @@ const options: IGreaseOptions = {
 }
 
 // Log workflow start
-log(argv, `starting release workflow`, [$name, `[dry=${argv.dryRun}]`], 'info')
+log(argv, 'starting release workflow', [$name, `[dry=${argv.dryRun}]`], 'info')
 
 // Run release workflow
 grease(merge({}, options, argv)).catch(error => {

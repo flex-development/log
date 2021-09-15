@@ -117,6 +117,7 @@ const RULES = {
         'cjs',
         'commitlint',
         'copyfiles',
+        'dotenv',
         'dto',
         'dtos',
         'esm',

@@ -10,7 +10,7 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["dom", "es2021"],
+    "lib": ["dom", "es2018"],
     "module": "commonjs",
     "moduleResolution": "node",
     "noEmit": true,
@@ -41,7 +41,7 @@
     "strictPropertyInitialization": false,
     "suppressImplicitAnyIndexErrors": true,
     "strict": true,
-    "target": "es2021"
+    "target": "es2018"
   },
   "exclude": ["**/build", "**/node_modules"],
   "files": ["typings/jest.d.ts"],

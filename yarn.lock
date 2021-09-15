@@ -714,6 +714,7 @@ __metadata:
     "@flex-development/grease": 1.1.0
     "@flex-development/tutils": 3.1.7
     "@types/chalk": 2.2.0
+    "@types/fs-extra": 9.0.12
     "@types/jest": 27.0.1
     "@types/lodash.merge": 4.6.6
     "@types/mvdan-sh": 0.5.0
@@ -737,6 +738,7 @@ __metadata:
     eslint-plugin-spellcheck: 0.0.19
     eslint-plugin-tree-shaking: 1.9.2
     figures: 3.2.0
+    fs-extra: 10.0.0
     husky: 4.3.8
     is-ci: 3.0.0
     jest: 27.2.0
@@ -1664,6 +1666,15 @@ __metadata:
   dependencies:
     "@types/json-schema": "*"
   checksum: 7b79cf4fb12d6be4e07aeb1fb002a89ac5f4cd8f04b3c174f8322313e783f725fbf5dfd76ea10d05f94e1d9a74dd229be7e4237c54581609a178312db99d6845
+  languageName: node
+  linkType: hard
+
+"@types/fs-extra@npm:9.0.12":
+  version: 9.0.12
+  resolution: "@types/fs-extra@npm:9.0.12"
+  dependencies:
+    "@types/node": "*"
+  checksum: c63834f0be8d0993c55abcc0b2c90f3c095cf3aa9e827973472167bd93687df9da546bd5e0823ddc9e83e1651c9cfb09bbac99fa57a15ab28fd21280426e472c
   languageName: node
   linkType: hard
 
@@ -4922,7 +4933,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-extra@npm:^10.0.0":
+"fs-extra@npm:10.0.0, fs-extra@npm:^10.0.0":
   version: 10.0.0
   resolution: "fs-extra@npm:10.0.0"
   dependencies:

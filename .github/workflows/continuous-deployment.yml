@@ -20,7 +20,7 @@ on:
         description: release tag
         required: true
 jobs:
-  get-deployment-details:
+  deployment-info:
     name: Get deployment details
     if: |
       github.event.inputs.tag ||
@@ -28,7 +28,7 @@ jobs:
       && github.event.pull_request.merged == true)
     runs-on: ubuntu-latest
     outputs:
-      publish_command: ${{ steps.publish_command.outputs.command }}
+      publish_args: ${{ steps.publish_args.outputs.args }}
       tag: ${{ steps.release.outputs.tag }}
     steps:
       - id: release
@@ -45,23 +45,19 @@ jobs:
 
             core.exportVariable('tag', tag)
             core.setOutput('tag', tag)
-      - id: publish_command
-        name: Get publish command
+      - id: publish_args
+        name: Get publish arguments
         uses: actions/github-script@v4
         with:
           script: |
-            const { tag } = process.env
+            const dtag = require('@flex-development/dtag')
 
-            let dtags = tag.split('-')[1] || ''
+            const version = process.env.tag.slice(1)
 
-            if (dtags && dtags.includes('.')) dtags = dtags.split('.')[0]
-
-            dtags = `--access public ${dtags}`.trim()
-
-            core.setOutput('command', `npm publish ./build ${dtags}`)
+            core.setOutput('args', `--tag ${dtag({ version }) || ''}`.trim())
   publish-package:
     name: Publish package to GPR & NPM
-    needs: get-deployment-details
+    needs: deployment-info
     runs-on: ubuntu-latest
     env:
       NPM_TOKEN_FLDV: ${{ secrets.NPM_TOKEN_FLDV }}
@@ -80,22 +76,18 @@ jobs:
           cache: yarn
           node-version: 16
           registry-url: 'https://npm.pkg.github.com'
-          scope: '@flex-development'
+          scope: '@${{ github.repository_owner }}'
       - id: dependencies
         name: Install dependencies
         run: yarn --immutable
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PAT_GPR_FLDV }}
-      - id: build
-        name: Build project
-        run: yarn build
-        env:
-          NODE_OPTIONS: -r tsconfig-paths/register
       - id: publish-to-gpr
         name: Publish package [GPR]
-        run: ${{ needs.get-deployment-details.outputs.publish_command }}
+        run: npm publish ${{ needs.deployment-info.outputs.publish_args }}
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.PAT_GPR_FLDV }}
+          NODE_AUTH_TOKEN: ${{ secrets.PAT_GPR_FLDV_ADMIN }}
+          NODE_OPTIONS: -r tsconfig-paths/register
       - id: setup-npmrc-npm
         name: Setup .npmrc file [NPM]
         uses: actions/setup-node@v2
@@ -103,12 +95,13 @@ jobs:
           cache: yarn
           node-version: 16
           registry-url: 'https://registry.npmjs.org'
-          scope: '@flex-development'
+          scope: '@${{ github.repository_owner }}'
       - id: publish-to-npm
         name: Publish package [NPM]
-        run: ${{ needs.get-deployment-details.outputs.publish_command }}
+        run: npm publish ${{ needs.deployment-info.outputs.publish_args }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_FLDV }}
+          NODE_OPTIONS: -r tsconfig-paths/register
   update-production-branch:
     name: Update production branch
     needs: publish-package
@@ -127,12 +120,14 @@ jobs:
           source_repo: ${{ github.repository }}
   publish-release:
     name: Publish GitHub Release
-    needs: [get-deployment-details, update-production-branch]
+    needs: [deployment-info, update-production-branch]
     runs-on: ubuntu-latest
     steps:
       - id: publish
         name: Publish GitHub release
         uses: actions/github-script@v4
+        env:
+          tag: ${{ needs.deployment-info.outputs.tag }}
         with:
           script: |
             const endpoint = 'GET /repos/{owner}/{repo}/releases'
@@ -173,19 +168,14 @@ jobs:
             const opts = github.issues.listForRepo(context.repo)
             const issues = await github.paginate(opts)
 
-            Promise.all(issues.map(async issue => {
-              if (issue.labels) {
-                const names = issue.labels.map(label => label.name)
-
-                const label_add = 'status:released'
-                const label_check = 'status:merged'
-
-                if (!name.includes(label_add) && names.includes(label_check)) {
+            Promise.all(issues.map(async ({ labels, number }) => {
+              return labels && labels.map(({ name }) => {
+                if (name === 'status:merged') {
                   return await github.issues.addLabels({
                     ...context.repo,
-                    issue_number: issue.number,
-                    labels: [label_add]
+                    issue_number: number,
+                    labels: ['status:released']
                   })
                 }
-              }
+              })
             }))

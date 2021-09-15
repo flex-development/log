@@ -82,5 +82,7 @@ coverage/
 
 # Builds & Distributions
 build/
-dist/
+cjs/
+esm/
+types/
 *.zip

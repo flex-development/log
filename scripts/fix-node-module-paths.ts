@@ -1,6 +1,6 @@
+import log from '@flex-development/grease/utils/log.util'
 import type { ReplaceInFileConfig, ReplaceResult } from 'replace-in-file'
 import replace from 'replace-in-file'
-import echo from './utils/echo'
 
 /**
  * @file Scripts - Fix Node Module Import Paths
@@ -14,7 +14,7 @@ import echo from './utils/echo'
  * @property {ReplaceInFileConfig} OPTIONS - Replacement options
  */
 const OPTIONS: ReplaceInFileConfig = {
-  files: 'build/**/*',
+  files: ['./cjs/**/*', './esm/**/*', './types/**/*'],
   from: new RegExp('(../.*)?(node_modules/)', 'g'),
   to: ''
 }
@@ -36,10 +36,10 @@ const fixNodeModulePaths = (): ReplaceResult[] => {
   try {
     results = replace.sync(OPTIONS)
   } catch (error) {
-    echo(error.message, true, 'red', 'cross')
+    log({}, (error as Error).message, [], 'error')
   }
 
-  echo('fix import paths')
+  log({}, 'fix import paths')
   return results
 }
 
