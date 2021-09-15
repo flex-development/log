@@ -34,7 +34,9 @@
   "types": "./types/index.d.ts",
   "scripts": {
     "clean:build": "rimraf ./(cjs|esm|types)",
-    "clean": "rimraf node_modules",
+    "clean:modules": "rimraf ./node_modules",
+    "clean:yarn": "rimraf .yarn/cache .yarn/*.gz",
+    "clean": "concurrently \"yarn:clean:*\"",
     "postinstall": "is-ci || husky-run install",
     "check:format": "prettier --check .",
     "check:style": "eslint . --ext md,js,ts",
