@@ -695,7 +695,7 @@ __metadata:
     "@commitlint/config-conventional": 13.0.0
     "@commitlint/format": 13.0.0
     "@flex-development/grease": 1.0.0
-    "@flex-development/tutils": 3.1.0
+    "@flex-development/tutils": 3.1.7
     "@types/chalk": 2.2.0
     "@types/jest": 26.0.23
     "@types/lodash.merge": 4.6.6
@@ -757,6 +757,15 @@ __metadata:
   peerDependencies:
     typescript: 4.2.4
   checksum: a915f3b46567646a179cab185827ef8c93563089ac1dbf1ef55ca8191efbfd54c0513c37d0e6d2e6f48d9f0b72561d38456bcf878a3137f9359b825c74a9e086
+  languageName: node
+  linkType: hard
+
+"@flex-development/tutils@npm:3.1.7":
+  version: 3.1.7
+  resolution: "@flex-development/tutils@npm:3.1.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ftutils%2F3.1.7%2F196c3e6fc5affae835629a3fa7efad6800fa00af29efa7ad29c71dab5efaf691"
+  peerDependencies:
+    typescript: ">=2.7"
+  checksum: d4ebf259d3072d946d407b254a9ce6a8a53ad2adc8e1e4e7a73aa00970d6ef6cc27a1df0c5c0dff20ea71c6789428ceaec497912e3f0825f902138a1ecfb4479
   languageName: node
   linkType: hard
 
@@ -10500,11 +10509,11 @@ typescript@4.3.4:
 
 "typescript@patch:typescript@4.3.4#~builtin<compat/typescript>":
   version: 4.3.4
-  resolution: "typescript@patch:typescript@npm%3A4.3.4#~builtin<compat/typescript>::version=4.3.4&hash=d8b4e7"
+  resolution: "typescript@patch:typescript@npm%3A4.3.4#~builtin<compat/typescript>::version=4.3.4&hash=32657b"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: a6b1a3674b60971691b89fa8187a4905e132cb8061724b4bd485e5d5441caa61166fe3bcf2b47aa679a6d860cae823022ca51db713cc3446296274c005dd02e5
+  checksum: 6013dd3cb5e67d17e7813361e0ef6f856cf4a0c54b5f4cbc13c3fa9dc5fcfce4b53e8f5db1cb513ecfc655583e8c3321116149a0865bf07bd0f1906fef59f6a3
   languageName: node
   linkType: hard
 
