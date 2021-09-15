@@ -650,6 +650,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@flex-development/dtag@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@flex-development/dtag@npm:1.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fdtag%2F1.0.0%2F2dadc14814c6a35919c867b60089e6dca7d3124e8608416a8a3258b93fa3be9f"
+  dependencies:
+    "@flex-development/tutils": 3.1.0
+    lodash.merge: 4.6.2
+  checksum: c3e84188a9173775b77b87f1d9871ea0b9f11cd3865228360d35d7ad1bf4352d1a5d6d5042a93e629232fe822061fffd3cae960e610893e6163b6bf3bcda4e3f
+  languageName: node
+  linkType: hard
+
 "@flex-development/exceptions@npm:2.0.1":
   version: 2.0.1
   resolution: "@flex-development/exceptions@npm:2.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fexceptions%2F2.0.1%2F008a7848fd33bf966cbc98c45188e78a74274140aa6d71460cd770be213a47ae"
@@ -662,10 +672,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flex-development/grease@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@flex-development/grease@npm:1.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fgrease%2F1.0.0%2F8dc0bb6dff4a7fb48a89dd5a01c6d4769c68d67351203d9439eac0c6411e4e71"
+"@flex-development/grease@npm:1.1.0":
+  version: 1.1.0
+  resolution: "@flex-development/grease@npm:1.1.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fgrease%2F1.1.0%2F8f30d4366a2ac38de11495702c188b61f5a4ba6328ac33e592154be74faf807e"
   dependencies:
+    "@flex-development/dtag": 1.0.0
     "@flex-development/exceptions": 2.0.1
     "@flex-development/tutils": 3.1.0
     "@types/git-semver-tags": 4.1.1
@@ -688,7 +699,7 @@ __metadata:
     typedi: 0.10.0
   peerDependencies:
     "@types/node": ">=15.0.0"
-  checksum: 1b11829f7a77917a730c9b53a24021a69388e1c44d39b9835bddb6702de2b1434ab3b6d24e8aa19bed3d812ac717eb43f71cc74594e40757eae7026a8994d131
+  checksum: d9585a42da13f421a96556efc6b4b08fe97774a3bafc6a0d15f81f70ccf62c58db36c4a94baf268a119988e7c5f0521f2c6b4066c3dbdbbe260a43d36f9b70cd
   languageName: node
   linkType: hard
 
@@ -700,7 +711,7 @@ __metadata:
     "@commitlint/cli": 13.1.0
     "@commitlint/config-conventional": 13.1.0
     "@commitlint/format": 13.1.0
-    "@flex-development/grease": 1.0.0
+    "@flex-development/grease": 1.1.0
     "@flex-development/tutils": 3.1.7
     "@types/chalk": 2.2.0
     "@types/jest": 27.0.1
