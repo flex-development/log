@@ -1,8 +1,8 @@
-import log from '@flex-development/log'
+import log, { LogLevel } from '@flex-development/log'
 
 /**
  * @file Examples - info log
  * @module log/docs/examples/info
  */
 
-log('info log', { level: 'INFO' })
+log('info log', { level: LogLevel.INFO })

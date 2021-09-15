@@ -1,8 +1,8 @@
-import log from '@flex-development/log'
+import log, { LogLevel } from '@flex-development/log'
 
 /**
  * @file Examples - error log
  * @module log/docs/examples/error
  */
 
-log('error log', { level: 'ERROR' })
+log('error log', { level: LogLevel.ERROR })

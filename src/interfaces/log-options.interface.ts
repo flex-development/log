@@ -1,5 +1,5 @@
 import type { NullishString } from '@flex-development/tutils'
-import type { Level } from '@log/enums/log-level.enum'
+import type { Level } from '@log/types'
 import figures from 'figures'
 import type { LogOptionsBold } from './log-options-bold.interface'
 import type { LogOptionsColor } from './log-options-color.interface'
@@ -42,7 +42,7 @@ export interface LogOptions {
   /**
    * Log level.
    *
-   * @default 'DEBUG'
+   * @default LogLevel.DEBUG
    */
   level?: Level
 

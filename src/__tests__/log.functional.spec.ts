@@ -1,9 +1,9 @@
 import defaults from '@log/config/defaults.config'
 import type { LogOptions } from '@log/interfaces'
 import format from '@log/utils/format.util'
+import normalizeOptions from '@log/utils/normalize-options.util'
 import type { RestoreConsole } from 'jest-mock-console'
 import mockConsole from 'jest-mock-console'
-import merge from 'lodash.merge'
 import sh from 'shelljs'
 import testSubject from '../log'
 
@@ -13,10 +13,13 @@ import testSubject from '../log'
  */
 
 jest.mock('@log/utils/format.util')
+jest.mock('@log/utils/normalize-options.util')
 
 const mockSH = sh as jest.Mocked<typeof sh>
 const mockFormat = format as jest.MockedFunction<typeof format>
-const mockMerge = merge as jest.MockedFunction<typeof merge>
+const mockNormalizeOptions = normalizeOptions as jest.MockedFunction<
+  typeof normalizeOptions
+>
 
 describe('functional:log', () => {
   const restoreConsole: RestoreConsole = mockConsole(['log'])
@@ -24,7 +27,7 @@ describe('functional:log', () => {
 
   afterAll(() => restoreConsole())
 
-  it('should merge options with defaults', () => {
+  it('should normalize options', () => {
     // Arrange
     const options: LogOptions = { level: 'ERROR' }
 
@@ -32,9 +35,7 @@ describe('functional:log', () => {
     testSubject('', options)
 
     // Expect
-    expect(mockMerge).toBeCalledTimes(1)
-    expect(mockMerge.mock.calls[0][1]).toStrictEqual(defaults)
-    expect(mockMerge.mock.calls[0][2]).toStrictEqual(options)
+    expect(mockNormalizeOptions.mock.calls[0][0]).toMatchObject(options)
   })
 
   it('should format log entry', () => {
@@ -47,7 +48,7 @@ describe('functional:log', () => {
 
     // Expect
     expect(mockFormat).toBeCalledTimes(1)
-    expect(mockFormat).toBeCalledWith(data, options)
+    expect(mockFormat).toBeCalledWith(data, mockNormalizeOptions(options))
   })
 
   describe('options', () => {

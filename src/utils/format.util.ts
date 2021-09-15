@@ -1,17 +1,18 @@
 import type { NullishString } from '@flex-development/tutils'
 import defaults from '@log/config/defaults.config'
 import { LogColor } from '@log/enums/log-color.enum'
-import type { Level } from '@log/enums/log-level.enum'
 import type {
   LogOptions,
   LogOptionsBold,
   LogOptionsColor
 } from '@log/interfaces'
+import type { Level } from '@log/types'
 import type { Color } from 'chalk'
 import ch from 'chalk'
 import figs from 'figures'
 import util from 'util'
 import figure from './figure.util'
+import normalizeOptions from './normalize-options.util'
 
 /**
  * @file Utility - format
@@ -33,10 +34,13 @@ import figure from './figure.util'
  * @param {typeof Color} [options.color.data] - Set log data color
  * @param {typeof Color} [options.color.figure] - Set log figure color
  * @param {keyof typeof figs | NullishString} [options.figure] - Override figure
- * @param {Level} [options.level='DEBUG'] - Log level
+ * @param {Level} [options.level=LogLevel.DEBUG] - Log level
  * @return {string} Log data and arguments as string
  */
 const format = (data: any, options: LogOptions = defaults): string => {
+  // Normalize options
+  options = normalizeOptions(options)
+
   /**
    * Returns true if `value` is a function or object.
    *

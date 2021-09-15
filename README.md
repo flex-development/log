@@ -53,14 +53,14 @@ log('debug log')
 Create a log entry with a red cross.
 
 ```typescript
-import log from '@flex-development/log'
+import log, { LogLevel } from '@flex-development/log'
 
 /**
  * @file Examples - error log
  * @module log/docs/examples/error
  */
 
-log('error log', { level: 'ERROR' })
+log('error log', { level: LogLevel.ERROR })
 ```
 
 #### Info
@@ -68,14 +68,14 @@ log('error log', { level: 'ERROR' })
 Create a log entry with a blue info symbol.
 
 ```typescript
-import log from '@flex-development/log'
+import log, { LogLevel } from '@flex-development/log'
 
 /**
  * @file Examples - info log
  * @module log/docs/examples/info
  */
 
-log('info log', { level: 'INFO' })
+log('info log', { level: LogLevel.INFO })
 ```
 
 #### Success
@@ -83,14 +83,14 @@ log('info log', { level: 'INFO' })
 Create a log entry with a green tick mark.
 
 ```typescript
-import log from '@flex-development/log'
+import log, { LogLevel } from '@flex-development/log'
 
 /**
  * @file Examples - success log
  * @module log/docs/examples/success
  */
 
-log('success log', { level: 'SUCCESS' })
+log('success log', { level: LogLevel.SUCCESS })
 ```
 
 #### Warning
@@ -98,20 +98,20 @@ log('success log', { level: 'SUCCESS' })
 Create a log entry with a yellow exclamation point.
 
 ```typescript
-import log from '@flex-development/log'
+import log, { LogLevel } from '@flex-development/log'
 
 /**
  * @file Examples - warning log
  * @module log/docs/examples/warning
  */
 
-log('warning log', { level: 'WARN' })
+log('warning log', { level: LogLevel.WARN })
 ```
 
 ### Options
 
 ```typescript
-export interface LogOptions {
+interface LogOptions {
   /**
    * Log arguments.
    *
@@ -159,7 +159,15 @@ export interface LogOptions {
   silent?: boolean
 }
 
-type Level = 'DEBUG' | 'ERROR' | 'INFO' | 'SUCCESS' | 'WARN'
+enum LogLevel {
+  DEBUG = 'debug',
+  ERROR = 'error',
+  INFO = 'info',
+  SUCCESS = 'success',
+  WARN = 'warn'
+}
+
+export type Level = keyof typeof LogLevel | LogLevel
 ```
 
 ## Built With

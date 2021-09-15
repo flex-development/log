@@ -1,6 +1,9 @@
 import defaults from '@log/config/defaults.config'
+import { LogLevel } from '@log/enums/log-level.enum'
 import type { LogOptions } from '@log/interfaces'
+import type { Level } from '@log/types'
 import figure from '@log/utils/figure.util'
+import normalizeOptions from '@log/utils/normalize-options.util'
 import type { TestcaseCalled } from '@tests/utils/types'
 import type { Color } from 'chalk'
 import ch from 'chalk'
@@ -9,13 +12,17 @@ import testSubject from '../format.util'
 
 /**
  * @file Functional Tests - format
- * @module log/utils/tests/format
+ * @module log/utils/tests/functional/format
  */
 
 jest.mock('@log/utils/figure.util')
+jest.mock('@log/utils/normalize-options.util')
 
 const mockCH = ch as jest.Mocked<typeof ch>
 const mockFigure = figure as jest.MockedFunction<typeof figure>
+const mockNormalizeOptions = normalizeOptions as jest.MockedFunction<
+  typeof normalizeOptions
+>
 
 describe('functional:utils/format', () => {
   type CaseCalled = Omit<TestcaseCalled, 'call'> & {
@@ -41,7 +48,7 @@ describe('functional:utils/format', () => {
 
     it('should add log figure', () => {
       expect(mockFigure).toBeCalledTimes(1)
-      expect(mockFigure).toBeCalledWith(defaults)
+      expect(mockFigure).toBeCalledWith(mockNormalizeOptions(defaults))
     })
 
     it('should format log arguments', () => {
@@ -86,6 +93,17 @@ describe('functional:utils/format', () => {
   })
 
   describe('options', () => {
+    it('should normalize options', () => {
+      // Arrange
+      const options = { level: LogLevel.INFO as Level }
+
+      // Act
+      testSubject(`${options.level} message`, options)
+
+      // Expect
+      expect(mockNormalizeOptions.mock.calls[0][0]).toMatchObject(options)
+    })
+
     describe('options.bold', () => {
       const cases: CaseCalled[] = [
         {
@@ -96,7 +114,7 @@ describe('functional:utils/format', () => {
           result: 'bold log arguments'
         },
         {
-          calledWith: data_obj.data,
+          calledWith: mockCH.gray(data_obj.data),
           data: data_obj.data,
           expected: 1,
           options: { args: [], bold: { data: true } },

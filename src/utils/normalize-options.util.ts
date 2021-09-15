@@ -8,23 +8,17 @@ import type {
 import type { Level } from '@log/types'
 import type { Color } from 'chalk'
 import figs from 'figures'
-import format from './utils/format.util'
-import normalizeOptions from './utils/normalize-options.util'
+import merge from 'lodash.merge'
 
 /**
- * @file Log Method
- * @module log/log
+ * @file Utility - normalizeOptions
+ * @module log/utils/normalizeOptions
  */
 
 /**
- * Console and terminal logger. To log to the terminal, install [`shelljs`][1]
- * and set `options.shell` to `true`.
+ * Merges default options and normalizes resulting options.
  *
- * [1]: https://github.com/shelljs/shelljs
- * [2]: https://github.com/shelljs/shelljs#echooptions-string--string-
- *
- * @param {any} data - Log data
- * @param {LogOptions} [options=defaults] - `log` options
+ * @param {LogOptions} [options={}] - `log` options
  * @param {any[]} [options.args=[]] - Log arguments
  * @param {LogOptionsBold} [options.bold={args:true}] - Bold logs
  * @param {boolean} [options.bold.args=true] - Bold log arguments
@@ -37,21 +31,17 @@ import normalizeOptions from './utils/normalize-options.util'
  * @param {Level} [options.level=LogLevel.DEBUG] - Log level
  * @param {boolean} [options.shell] - Use [`echo`][2] instead of `console.log`
  * @param {boolean} [options.silent] - Do not log any output
- * @return {string} Formatted log entry
+ * @return {LogOptions} Normalized log level
  */
-const log = (data: any, options: LogOptions = defaults): string => {
+const normalizeOptions = (options: LogOptions = {}): LogOptions => {
   // Merge options with defaults
-  const $options = normalizeOptions(options)
+  const opts: LogOptions = merge({}, defaults, options)
 
-  // Create formatted log entry
-  const entry = format(data, $options)
+  // Normalize options.level
+  if (opts.level) opts.level = opts.level?.toUpperCase() as LogOptions['level']
 
-  // Log entry
-  if (!options.silent) {
-    options.shell ? require('shelljs').default.echo(entry) : console.log(entry)
-  }
-
-  return entry
+  // Return normalized options
+  return opts
 }
 
-export default log
+export default normalizeOptions
