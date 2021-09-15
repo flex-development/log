@@ -718,7 +718,7 @@ __metadata:
     "@types/lodash.merge": 4.6.6
     "@types/mvdan-sh": 0.5.0
     "@types/node": 16.9.1
-    "@types/rimraf": 2.0.4
+    "@types/rimraf": 3.0.2
     "@types/shelljs": 0.8.9
     "@typescript-eslint/eslint-plugin": 4.28.0
     "@typescript-eslint/parser": 4.28.0
@@ -1832,13 +1832,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/rimraf@npm:2.0.4":
-  version: 2.0.4
-  resolution: "@types/rimraf@npm:2.0.4"
+"@types/rimraf@npm:3.0.2":
+  version: 3.0.2
+  resolution: "@types/rimraf@npm:3.0.2"
   dependencies:
     "@types/glob": "*"
     "@types/node": "*"
-  checksum: 8304d3d98f654f6c7b6256f368832436dc1d807bb899007fa823702052642166da25f37e849f0bc4ba4ec312e5a8f81e7a4d4a81de9c68f305d28f7822464c0c
+  checksum: b47fa302f46434cba704d20465861ad250df79467d3d289f9d6490d3aeeb41e8cb32dd80bd1a8fd833d1e185ac719fbf9be12e05ad9ce9be094d8ee8f1405347
   languageName: node
   linkType: hard
 
