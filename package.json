@@ -27,7 +27,7 @@
   "types": "./build/esm/index.d.ts",
   "scripts": {
     "clean": "rimraf node_modules",
-    "postinstall": "husky-run install",
+    "postinstall": "is-ci || husky-run install",
     "check:format": "prettier --check .",
     "check:style": "eslint . --ext md,js,ts",
     "fix:format": "prettier --write .",
