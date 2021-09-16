@@ -1,7 +1,7 @@
 {
   "name": "@flex-development/log",
   "description": "Style logs for the console or terminal",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "keywords": [
     "log",
     "log-util",
