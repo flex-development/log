@@ -38,6 +38,7 @@
     "clean:yarn": "rimraf .yarn/cache .yarn/*.gz",
     "clean": "concurrently \"yarn:clean:*\"",
     "postinstall": "is-ci || husky-run install",
+    "check:dedupe": "yarn dedupe --check",
     "check:format": "prettier --check .",
     "check:install": "yarn dlx @yarnpkg/doctor .",
     "check:style": "eslint . --ext md,js,ts",
