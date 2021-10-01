@@ -42,6 +42,7 @@
     "check:format": "prettier --check .",
     "check:install": "yarn dlx @yarnpkg/doctor .",
     "check:style": "eslint . --ext md,js,ts",
+    "check:upgrades": "yarn upgrade-interactive",
     "fix:format": "prettier --write .",
     "fix:style": "yarn check:style --fix --cache",
     "test": "bash ./scripts/jest.sh",
