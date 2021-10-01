@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import Exception from '@flex-development/exceptions/exceptions/base.exception'
 import logger from '@flex-development/grease/utils/logger.util'
 import LogLevel from '@log/enums/log-level.enum'
 import type { PackageJson } from 'read-pkg'
@@ -243,10 +242,10 @@ try {
     disable_prepack && logger(argv, 'renable prepack script')
   }
 } catch (error) {
-  const exception = error as Exception
+  const exception = error as Error
 
   logger(argv, exception.message, [], LogLevel.ERROR)
-  sh.exit((exception.data?.code as number) ?? 1)
+  sh.exit((exception as any).code || 1)
 }
 
 // Log workflow end

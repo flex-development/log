@@ -1,5 +1,3 @@
-import { ExceptionCode } from '@flex-development/exceptions/enums'
-import Exception from '@flex-development/exceptions/exceptions/base.exception'
 import logger from '@flex-development/grease/utils/logger.util'
 import LogLevel from '@log/enums/log-level.enum'
 import type { ChildProcess } from 'child_process'
@@ -17,7 +15,7 @@ import sh from 'shelljs'
  * @param {boolean} [dryRun=false] - Log command that would be run
  * @param {sh.ExecOptions} [options={silent:true}] - `sh.exec` options
  * @return {string | void} Command output, command, or nothing
- * @throws {Exception}
+ * @throws {Error}
  */
 const exec = (
   command: string,
@@ -33,18 +31,16 @@ const exec = (
   // Command output
   let stdout: ChildProcess | sh.ShellString | null = null
 
-  // Log command during dry runs, otherwise execute command
+  // Log command during dry runs, execute command otherwise
   if (dryRun) logger({}, command, [], LogLevel.WARN)
   else stdout = sh.exec(command, options) as sh.ShellString | null
 
   // Throw Exception if error executing command
   if (stdout && stdout.code !== 0) {
-    const code = ExceptionCode.INTERNAL_SERVER_ERROR
+    const error = new Error((stdout.stderr || stdout.stdout).toString())
+    ;(error as any).code = stdout.code
 
-    throw new Exception(code, undefined, {
-      code: stdout.code,
-      message: (stdout.stderr || stdout.stdout).toString()
-    })
+    throw error
   }
 
   // Format command output

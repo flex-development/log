@@ -687,21 +687,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flex-development/exceptions@npm:4.0.1":
-  version: 4.0.1
-  resolution: "@flex-development/exceptions@npm:4.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fexceptions%2F4.0.1%2F5fdb4489434900032db26b77954c368a7004e4d5ccd65f2c1ca47f74cf1cc940"
-  dependencies:
-    "@flex-development/tutils": 3.1.7
-    lodash.isplainobject: 4.0.6
-    lodash.omit: 4.5.0
-    lodash.pick: 4.4.0
-  peerDependencies:
-    "@types/node": ">=15.0.0"
-    typescript: ">=4.4.0"
-  checksum: 958def591da3796b05adcbe4f1ee0b4408f38e2b45dc49aaca12658d970ad97f88aba4d0e8d91461efb6626a36fe87bdfb9e94215b01ec04d26049d48aff3309
-  languageName: node
-  linkType: hard
-
 "@flex-development/grease@npm:2.0.0":
   version: 2.0.0
   resolution: "@flex-development/grease@npm:2.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fgrease%2F2.0.0%2Ff3bbdcf239a05230780afca81cf899acdcfda77319806c9f788b2392dd0ee9d4"
@@ -753,7 +738,6 @@ __metadata:
     "@commitlint/config-conventional": 13.2.0
     "@commitlint/format": 13.2.0
     "@commitlint/types": 13.2.0
-    "@flex-development/exceptions": 4.0.1
     "@flex-development/grease": 2.0.0
     "@flex-development/tutils": 3.1.7
     "@jest/types": 27.2.4

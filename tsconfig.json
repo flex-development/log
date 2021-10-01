@@ -20,12 +20,6 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "paths": {
-      "@flex-development/exceptions": [
-        "node_modules/@flex-development/exceptions/cjs/index"
-      ],
-      "@flex-development/exceptions/*": [
-        "node_modules/@flex-development/exceptions/cjs/*"
-      ],
       "@flex-development/grease": [
         "node_modules/@flex-development/grease/cjs/index"
       ],
