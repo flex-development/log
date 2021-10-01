@@ -24,7 +24,6 @@
   },
   "files": [
     "cjs",
-    "docs",
     "esm",
     "types",
     "CHANGELOG.md"
@@ -46,10 +45,9 @@
     "fix:format": "prettier --write .",
     "fix:style": "yarn check:style --fix --cache",
     "test": "bash ./tools/scripts/jest.sh",
-    "build": "dotenv -c production -- ts-node ./tools/cli/build",
-    "prepack": "pinst -d && yarn build",
-    "postpack": "pinst -e",
-    "release": "dotenv -c production -- ts-node ./tools/cli/release"
+    "build": "ts-node ./tools/cli/build",
+    "prepack": "yarn build",
+    "release": "ts-node ./tools/cli/release"
   },
   "dependencies": {
     "@flex-development/tutils": "3.1.7",
@@ -87,10 +85,10 @@
     "@types/shelljs": "0.8.9",
     "@typescript-eslint/eslint-plugin": "4.32.0",
     "@typescript-eslint/parser": "4.32.0",
+    "@vates/toggle-scripts": "1.0.0",
     "@zerollup/ts-transform-paths": "1.7.18",
     "ansi-styles": "4.3.0",
     "concurrently": "6.2.2",
-    "copyfiles": "2.4.1",
     "dotenv-cli": "4.0.0",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
@@ -117,7 +115,6 @@
     "lodash.merge": "4.6.2",
     "lodash.omit": "4.5.0",
     "lodash.pick": "4.4.0",
-    "pinst": "2.1.6",
     "prettier": "2.4.1",
     "prettier-plugin-sh": "0.7.1",
     "read-pkg": "5.2.0",
