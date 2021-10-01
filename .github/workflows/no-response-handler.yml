@@ -1,4 +1,4 @@
-# No Response
+# No Response Handler
 #
 # Closes issues that don't have enough information to be actionable.
 #
@@ -7,7 +7,7 @@
 # - https://github.com/lee-dohm/no-response
 
 ---
-name: no-response
+name: no-response-handler
 on:
   issue_comment:
     types: [created]
@@ -15,11 +15,12 @@ on:
     # Schedule for five minutes after the hour, every hour
     - cron: '5 * * * *'
 jobs:
-  no-response:
-    name: Close issues after 7 days
+  close-issues:
     runs-on: ubuntu-latest
     steps:
-      - uses: lee-dohm/no-response@9bb0a4b5e6a45046f00353d5de7d90fb8bd773bb
+      - id: close
+        name: Close issues after 7 days
+        uses: lee-dohm/no-response@9bb0a4b5e6a45046f00353d5de7d90fb8bd773bb
         with:
           closeComment: >
             This issue has been automatically closed because there has been no
