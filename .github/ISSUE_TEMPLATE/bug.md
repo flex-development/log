@@ -29,18 +29,22 @@ assignees: ''
 
 ## Environment
 
-<!-- If applicable, add screenshots to help explain your problem. -->
+<!-- Environment details. Put "N/A" where details are not necessary -->
 
-- `grease` version(s): [e.g. `v6.0.0`, `v8.0.0`, `master`]
-- Node / package manager version: [e.g. Node 15 / yarn `1.22.10`]
-- OS: [e.g. `iOS`, `OSX 10.13.4`, `Windows 10`]
+- Node Version (e.g `v16.6.0`): ``
+- OS (e.g `iOS 14.7.1`, `macOS v11.3.1`): ``
+- Package Manager (e.g `yarn@3.0.2`): ``
+- Package version(s) (e.g `<=v1.1.0`): ``
+- Browser (e.g `Firefox Developer Edition 93.0b7`): ``
 
 ## Possible solution
 
-<!--
-A clear and concise description of what you think may solve the problem.
--->
+<!-- A clear and concise description of what you think may solve the problem. -->
 
 ## Additional context
 
 <!-- Add any other details about the problem here. -->
+
+-
+-
+-
