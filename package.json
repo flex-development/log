@@ -113,7 +113,6 @@
     "jest-mock-console": "1.2.3",
     "lint-staged": "11.1.2",
     "lodash.join": "4.0.1",
-    "lodash.merge": "4.6.2",
     "lodash.omit": "4.5.0",
     "lodash.pick": "4.4.0",
     "prettier": "2.4.1",
