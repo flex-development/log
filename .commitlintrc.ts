@@ -53,6 +53,7 @@ const config: UserConfig = {
         'github',
         'log',
         'release',
+        'scripts',
         'tests',
         'tools',
         'typescript',
