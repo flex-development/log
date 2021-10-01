@@ -117,7 +117,9 @@ describe('unit:utils/figure', () => {
 
     // Expect
     expect(result).toMatch(expected)
+    // eslint-disable-next-line jest/no-conditional-expect
     expected && expect(spy_ch_bold).toBeCalledTimes(1)
+    // eslint-disable-next-line jest/no-conditional-expect
     expected && expect(spy_ch_bold).toBeCalledWith(figure || LogFigure[level])
   })
 })

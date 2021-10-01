@@ -3,7 +3,6 @@ import Exception from '@flex-development/exceptions/exceptions/base.exception'
 import logger from '@flex-development/grease/utils/logger.util'
 import { LogLevel } from '@log/enums/log-level.enum'
 import type { ChildProcess } from 'child_process'
-import type { ShellString } from 'shelljs'
 import sh from 'shelljs'
 
 /**
@@ -23,15 +22,22 @@ import sh from 'shelljs'
 const exec = (
   command: string,
   dryRun: boolean = false,
-  options: sh.ExecOptions = { silent: true }
-): string | void => {
-  let stdout: ChildProcess | ShellString | null = null
-
+  options: sh.ExecOptions = {}
+): string => {
+  // Format command
   command = command.trim()
 
-  if (dryRun) logger({}, command, [], LogLevel.WARN)
-  else stdout = sh.exec(command, options) as ShellString | null
+  // Set default options
+  if (options.silent === undefined) options.silent = true
 
+  // Command output
+  let stdout: ChildProcess | sh.ShellString | null = null
+
+  // Log command during dry runs, otherwise execute command
+  if (dryRun) logger({}, command, [], LogLevel.WARN)
+  else stdout = sh.exec(command, options) as sh.ShellString | null
+
+  // Throw Exception if error executing command
   if (stdout && stdout.code !== 0) {
     const code = ExceptionCode.INTERNAL_SERVER_ERROR
 
@@ -41,7 +47,8 @@ const exec = (
     })
   }
 
-  if (stdout && stdout.length) return stdout.toString().replaceAll('\n', '')
+  // Format command output
+  if (stdout && stdout.length > 0) return stdout.toString().replaceAll('\n', '')
 
   return command
 }

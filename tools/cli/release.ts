@@ -8,7 +8,7 @@ import ch from 'chalk'
 import merge from 'lodash.merge'
 import pick from 'lodash.pick'
 import sh from 'shelljs'
-import util from 'util'
+import { inspect } from 'util'
 import { hideBin } from 'yargs/helpers'
 import yargs from 'yargs/yargs'
 import { $name, $version } from '../helpers/pkg-get'
@@ -174,5 +174,5 @@ logger(
 
 // Run release workflow
 grease(merge({}, options, argv)).catch(error => {
-  sh.echo(ch.bold.red(util.inspect(error, false, null)))
+  sh.echo(ch.bold.red(inspect(error, false, null)))
 })

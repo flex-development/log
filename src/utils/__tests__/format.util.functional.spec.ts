@@ -61,7 +61,7 @@ describe('functional:utils/format', () => {
     })
   })
 
-  describe('functions and objects', () => {
+  describe('functions and object types', () => {
     const cases: CaseCalled[] = [
       {
         calledWith: [data_obj.fn, false, null],

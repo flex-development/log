@@ -7,9 +7,9 @@
 
 module.exports = {
   arrowParens: 'avoid',
+  bracketSameLine: false,
   bracketSpacing: true,
   htmlWhitespaceSensitivity: 'css',
-  jsxBracketSameLine: false,
   jsxSingleQuote: true,
   quoteProps: 'as-needed',
   printWidth: 80,

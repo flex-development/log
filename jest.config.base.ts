@@ -30,7 +30,7 @@ const config: Config.InitialOptions = {
   setupFiles: ['<rootDir>/__tests__/config/setup.ts'],
   setupFilesAfterEnv: [
     'jest-mock-console/dist/setupTestFramework.js',
-    '<rootDir>/__tests__/config/setupAfterEnv.ts'
+    '<rootDir>/__tests__/config/setup-after-env.ts'
   ],
   testRegex: `(/__tests__/)(spec/(${TYPE}))?(.*)(${TYPE})?.spec.ts$`,
   testRunner: 'jest-jasmine2',

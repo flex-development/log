@@ -12,6 +12,7 @@ import ch from 'chalk'
 import figs from 'figures'
 import util from 'util'
 import figure from './figure.util'
+import inspectable from './inspectable.util'
 import normalizeOptions from './normalize-options.util'
 
 /**
@@ -41,18 +42,8 @@ const format = (data: any, options: LogOptions = defaults): string => {
   // Normalize options
   options = normalizeOptions(options)
 
-  /**
-   * Returns true if `value` is a function or object.
-   *
-   * @param {any} value - Value to check
-   * @return {boolean} true if `value` is a function or object
-   */
-  const isFunctionOrObject = (value: any): boolean => {
-    return typeof value === 'function' || typeof value === 'object'
-  }
-
   // Inspect log data if data is function or object
-  if (isFunctionOrObject(data)) data = util.inspect(data, false, null)
+  if (inspectable(data)) data = util.inspect(data, false, null)
 
   // Add log color
   if (options.level === 'DEBUG') {
@@ -65,7 +56,7 @@ const format = (data: any, options: LogOptions = defaults): string => {
   // Stringify arguments
   const args = (options.args as any[]).map(arg => {
     // Inspect log argument if argument is function or object
-    if (isFunctionOrObject(arg)) arg = util.inspect(arg, false, null)
+    if (inspectable(arg)) arg = util.inspect(arg, false, null)
 
     // Add log argument color
     if (options.level === 'DEBUG') {
