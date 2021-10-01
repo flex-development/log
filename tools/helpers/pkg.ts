@@ -3,7 +3,7 @@ import read from 'read-pkg'
 
 /**
  * @file Helpers - Get Package Data
- * @module tools/helpers/pkg-get
+ * @module tools/helpers/pkg
  */
 
 /**
@@ -19,18 +19,18 @@ const pkg = (cwd: string = process.cwd()): PackageJson => {
 }
 
 /**
- * @property {string} $name - Name of NPM package
+ * @property {string} $version - Package version
  */
-export const $name: string = pkg().name as string
+export const $version: string = pkg().version as string
+
+/**
+ * @property {string} $workspace - Name of NPM package
+ */
+export const $workspace: string = process.env.npm_package_name as string
 
 /**
  * @property {string} name_no_scope - Package name without scope
  */
-export const $name_no_scope: string = $name.split('/')[1]
-
-/**
- * @property {string} $version - Package version
- */
-export const $version: string = pkg().version as string
+export const $workspace_no_scope: string = $workspace.split('/')[1]
 
 export default pkg

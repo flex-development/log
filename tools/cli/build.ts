@@ -8,7 +8,7 @@ import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import exec from '../helpers/exec'
 import fixNodeModulePaths from '../helpers/fix-node-module-paths'
-import pkg, { $name } from '../helpers/pkg-get'
+import pkg, { $workspace } from '../helpers/pkg'
 
 /**
  * @file CLI - Build Workflow
@@ -176,7 +176,7 @@ const argv: BuildOptions = args.argv as BuildOptions
 logger(
   argv,
   'starting build workflow',
-  [$name, `[dry=${argv.dryRun}]`],
+  [$workspace, `[dry=${argv.dryRun}]`],
   LogLevel.INFO
 )
 
@@ -249,4 +249,4 @@ try {
 }
 
 // Log workflow end
-logger(argv, 'build workflow complete', [$name], LogLevel.INFO)
+logger(argv, 'build workflow complete', [$workspace], LogLevel.INFO)

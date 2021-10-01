@@ -11,7 +11,7 @@ import sh from 'shelljs'
 import { inspect } from 'util'
 import { hideBin } from 'yargs/helpers'
 import yargs from 'yargs/yargs'
-import { $name, $name_no_scope } from '../helpers/pkg-get'
+import { $workspace, $workspace_no_scope } from '../helpers/pkg'
 
 /**
  * @file CLI - Release Workflow
@@ -164,10 +164,10 @@ const options: IGreaseOptions = {
   commitAll: true,
   gitTagFallback: false,
   gitdir: process.env.PROJECT_CWD,
-  lernaPackage: $name_no_scope,
+  lernaPackage: $workspace_no_scope,
   releaseAssets: ['./*.tgz'],
   releaseBranchWhitelist: ['release/*'],
-  releaseCommitMessageFormat: `release: ${$name}@{{currentTag}}`,
+  releaseCommitMessageFormat: `release: ${$workspace}@{{currentTag}}`,
   scripts: {
     postchangelog: `yarn pack -o %s-%v.tgz ${(argv.d && '-n') || ''}`.trim(),
     postcommit: 'git pnv',
@@ -177,7 +177,7 @@ const options: IGreaseOptions = {
   // `continuous-deployment` workflow will create new tag
   skip: { tag: true },
   skipUnstable: false,
-  tagPrefix: `${$name_no_scope}@`,
+  tagPrefix: `${$workspace_no_scope}@`,
   types: [
     /* eslint-disable sort-keys */
     { type: 'feat', section: ':sparkles: Features' },
@@ -201,7 +201,7 @@ const options: IGreaseOptions = {
 logger(
   argv,
   'starting release workflow',
-  [$name, `[dry=${argv.dryRun}]`],
+  [$workspace, `[dry=${argv.dryRun}]`],
   LogLevel.INFO
 )
 
