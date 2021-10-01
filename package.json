@@ -148,36 +148,8 @@
     "yarn": "3.0.2"
   },
   "env": {
-    "development": {
-      "optional": [
-        "DEBUG",
-        "DEBUG_COLORS",
-        "NODE_ENV",
-        "TS_NODE_PROJECT"
-      ],
-      "required": [
-        "NODE_OPTIONS",
-        "NPM_TOKEN_FLDV",
-        "PAT_GPR_FLDV",
-        "PROJECT_CWD",
-        "PWD"
-      ]
-    },
-    "test": {
-      "optional": [
-        "DEBUG",
-        "DEBUG_COLORS",
-        "NODE_ENV",
-        "TS_NODE_PROJECT"
-      ],
-      "required": [
-        "NODE_OPTIONS"
-      ]
-    },
-    "production": {
-      "optional": [],
-      "required": []
-    }
+    "optional": [],
+    "required": []
   },
   "packageManager": "yarn@3.0.2"
 }

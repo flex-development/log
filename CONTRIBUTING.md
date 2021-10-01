@@ -35,11 +35,51 @@ People interacting with the `log` project are grouped into 4 categories:
 
 - **contribution**:
   - new features
+  - fixing documentation
+  - filing bug reports with reproducible steps
   - engaging in discussions for new feature requests
-  - documentation **fixes**
-  - bug reports with reproducible steps
   - answering questions
 - **ticket**: [JIRA][1] issue
+
+## Environment
+
+### `.profile`
+
+A local `.profile` is used set [`NODE_OPTIONS`](#environment-variables) as well
+as apply additional environment settings without running into dependency
+installation errors. You'll need to `source` the local profile to keep your
+environment up to date:
+
+1. Open a shell startup file
+
+   - e.g: `~/.bash_profile` `~/.bashrc`, `~/.profile`, `~/.zprofile`,
+     `~/.zshenv`, `~/.zshrc`
+
+2. Update your chosen startup file
+
+   ```zsh
+   [[ -f "$PWD/.profile" ]] && source "$PWD/.profile"
+   ```
+
+3. Reload shell
+
+### Environment Variables
+
+Project environment variables are listed below.
+
+| name                  | required | development        | test               | production | build, release, and deployment (local & ci) |
+| --------------------- | -------- | ------------------ | ------------------ | ---------- | ------------------------------------------- |
+| `NODE_ENV`            | `false`  | :x:                | :x:                | :x:        | :white_check_mark:                          |
+| `NODE_OPTIONS`        | `true`   | :white_check_mark: | :x:                | :x:        | :white_check_mark:                          |
+| `NPM_TOKEN_FLDV`      | `true`   | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
+| `PAT_GPR_FLDV`        | `true`   | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
+| `PROJECT_CWD`**\*\*** | `true`   | :x:                | :x:                | :x:        | :white_check_mark:                          |
+| `PWD`**\*\*\***       | `true`   | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
+| `TS_NODE_PROJECT`     | `false`  | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
+
+**\*** Environment variable set by package user  
+**\*\*** Environment variable [specific to Yarn 2][2]  
+**\*\*\*** Environment variable defined by local machine
 
 ### Git Configuration
 
@@ -50,25 +90,19 @@ fully, as well as begin extending your own workflow.
 
 ### Yarn
 
-This project uses Yarn 2 (`v3.0.0-rc.2`). The Yarn configuration for this
-project can be found in [`.yarnrc.yml`](.yarnrc.yml). If you're already using
-Yarn globally, see the [Yarn 2 Migration docs][2].
+This project uses Yarn 2. The Yarn configuration for this project can be found
+in [`.yarnrc.yml`](.yarnrc.yml). If you're already using Yarn globally, see the
+[Yarn 2 Migration docs][3].
 
 ### GitHub Packages
 
 Some workspaces depend on scoped packages (e.g: `@flex-development`). Some of
-those packages are published to the [GitHub Package Registry][3], but **_not to
-NPM_**. A GitHub Personal Access Token is required for [installation][4].
+those packages are published to the [GitHub Package Registry][4], but **_not to
+NPM_**. A [Personal Access Token with at least the `read:packages` scope][5]
+attached is required for installation.
 
 Scopes, their registry servers, and required environment variables are defined
 in [`.yarnrc.yml`](.yarnrc.yml) under the `npmScopes` field.
-
-Before [cloning and installing the project](#clone-&-install), you'll need to
-add the `PAT_GPR` variable to your shell:
-
-1. Retrieve `PAT_GPR` from a project maintainer
-2. Open `~/.bash_profile`, `~/.zprofile`, `~/.zshenv`, **or** `~/.zshrc`
-3. Save file and re-launch shell
 
 ### Clone & Install
 
@@ -83,46 +117,9 @@ variables set), an error will be displayed in the terminal if any settings
 conflict with the project's Yarn configuration, or the Yarn 2 API. An error will
 also be displayed if you're missing any environment variables.
 
-### Environment Variables
-
-All environment variables are documented in [`package.json`](./package.json)
-under the `env` field.
-
-#### `NODE_OPTIONS`
-
-The `NODE_OPTIONS` environment variable is required when running any script that
-includes [TypeScript path aliases](./tsconfig.json) (e.g: scripts in the
-[`scripts`](./scripts) directory).
-
-##### Conditionally require `tsconfig-paths/register`
-
-1. Open `~/.bash_profile`, `~/.zprofile`, **or** `~/.zshrc`
-
-2. Conditionally append `-r <path/to/import>`
-
-   ```zsh
-   if [ -f "$PWD/node_modules/tsconfig-paths/register.js" ]; then
-     export NODE_OPTIONS="$NODE_OPTIONS -r tsconfig-paths/register"
-   fi
-   ```
-
-3. Restart your shell
-
-4. Run your script:
-
-   ```zsh
-   yarn build
-   ```
-
-   _instead of_
-
-   ```zsh
-   NODE_OPTIONS='-r tsconfig-paths/register' yarn build
-   ```
-
 ## Contributing Code
 
-[Husky][5] is used to run Git hooks that locally enforce coding and commit
+[Husky][6] is used to run Git hooks that locally enforce coding and commit
 message standards, as well run tests associated with any files changed since the
 last commit.
 
@@ -156,14 +153,14 @@ When creating a new branch, the name should match the following format:
 For example:
 
 ```zsh
-git feat P011-1-repository-setup
+git chbf PROJ-4-authentication
 ```
 
-will create a new branch titled `feat/P011-1-repository-setup`.
+will create a new branch titled `feat/PROJ-4-authentication`.
 
 ### Commit Messages
 
-This project follows [Conventional Commit][6] standards and uses [commitlint][7]
+This project follows [Conventional Commit][7] standards and uses [commitlint][8]
 to enforce those standards.
 
 This means every commit must conform to the following format:
@@ -197,27 +194,17 @@ This means every commit must conform to the following format:
 - `test`: Adding missing tests or correcting existing tests
 - `wip`: Working on changes, but you need to go to bed :wink:
 
-For example:
+e.g:
 
-```zsh
-git chore "add eslint configuration"
-```
-
-will produce the following commit: `chore: add eslint configuration`
-
-To include an inline code snippet in your commit message, be sure to escape your
-backticks:
-
-```zsh
-git ac "chore(scripts): add \`release\` workflow script"
-```
+- `git docs 'update contributing guide'` -> `docs: update contributing guide`
+- `git ac 'refactor(api)!: user queries'` -> `refactor(api)!: user queries`
 
 See [`commitlint.config.js`](commitlint.config.js) for an exhasutive list of
 valid commit scopes and types.
 
 ### Code Style
 
-[Prettier][8] is used to format code, and [ESLint][9] to lint files.
+[Prettier][9] is used to format code, and [ESLint][10] to lint files.
 
 **Prettier Configuration**
 
@@ -238,18 +225,18 @@ along with an accompanying `@module` annotation.
 
 ### Documentation
 
-- JavaScript & TypeScript: [JSDoc][10], linted with [`eslint-plugin-jsdoc`][11]
+- JavaScript & TypeScript: [JSDoc][11], linted with [`eslint-plugin-jsdoc`][12]
 
 Before making a pull request, be sure your code is well documented, as it will
 be part of your code review.
 
 ### Testing
 
-This project uses [Jest][12] as its test runner. To run _all_ the tests in this
+This project uses [Jest][13] as its test runner. To run _all_ the tests in this
 project, run `yarn test` from the project root.
 
-Husky is configured to run tests before every push. Use [`describe.skip`][13] or
-[`it.skip`][14] if you need to create a new issue regarding the test, or need to
+Husky is configured to run tests before every push. Use [`describe.skip`][14] or
+[`it.skip`][15] if you need to create a new issue regarding the test, or need to
 make a `wip` commit.
 
 ### Getting Help
@@ -313,7 +300,7 @@ and `main`. During code reviews, code-style and documentation will be reviewed.
 If any changes are requested, those changes will need to be implemented and
 approved before the pull request is merged.
 
-### Merge Strategies
+## Merge Strategies
 
 In every repository, the `create a merge commit` and `squash and merge` options
 are enabled.
@@ -325,14 +312,21 @@ are enabled.
 When merging, please make sure to use the following commit message format:
 
 ```txt
-merge: <TICKET-ID> (#pull-request-n)
-        │            │
-        │            └─⫸ check your pull request
-        │
-        └─⫸ check jira issue
+<type>[optional scope]: <pull-request-title> (#pull-request-n)
+ │     │                │
+ │     │                └─⫸ check your pull request
+ │     │
+ │     └─⫸ see commitlint.config.js
+ │
+ └─⫸ build|ci|chore|docs|feat|fix|merge|perf|refactor|release|revert|style|test
 ```
 
-e.g: `merge: P011-1 (#1)`
+e.g:
+
+- `refactor(api): github oauth flow #52`
+- `merge: update contributing guides and tsconfigs #39`
+- `perf(web): decrease page loading time #26`
+- `release: @flex-development/log@1.0.0 #13`
 
 ## Releasing
 
@@ -355,41 +349,45 @@ Before releasing, the following steps must be completed:
      correct workspace publish command
 3. Decide what version bump the release needs (major, minor, patch)
    - versioning
-     - `yarn release` (determines [bumps based on commits][15])
+     - `yarn release` (determines [bumps based on commits][16])
      - `yarn release --first-release`
      - `yarn release --release-as major`
      - `yarn release --release-as minor`
      - `yarn release --release-as patch`
    - a new release will be drafted
 4. Open a new pull request from `release/*` into `next`
-   - title the PR `release: *`
-     - e.g: `release: v1.1.0`
-   - after review, merge the PR with a merge commit
-     - merge commit name: `merge: release *`
-       - e.g: `merge: release v1.1.0`
+   - title the PR `release: <package.json#name>@<package.json#version>`
+     - e.g: `release: @flex-development/log@1.1.0`
+   - link all issues being released
+   - after review, `squash and merge` the PR:
+     `release: @flex-development/log@1.1.0 (#pull-request-n)`
+     - e.g: `release: @flex-development/log@1.1.0 (#3)`
    - once the PR is merged, the deployment workflow will be triggered
-   - the maintainer who is approved the PR should check to make sure the
-     workflow completes all jobs as expected. if successful, the workflow will:
-     - publish the drafted release
-     - publish package to the [GitHub Package Registry][16] and [NPM][17]
+   - the maintainer who approved the PR should check to make sure the workflow
+     completes all jobs as expected. if successful, the workflow will:
+     - publish package to the [GitHub Package Registry][17] and
      - update the production branch (merge branch `next` into `main`)
-     - close issues with the `status:merged` label
-     - add the `status:released` label to newly closed issues
+     - publish the drafted release
+   - the maintainer who approved the PR should go through the PR's linked issues
+     and:
+     - make sure all issues are closed and have the label `status:merged`
+     - add the `status:released` label to all issues
 
 [1]: https://www.atlassian.com/software/jira
-[2]: https://yarnpkg.com/getting-started/migration
-[3]: https://github.com/features/packages
-[4]: https://docs.github.com/packages/learn-github-packages/installing-a-package
-[5]: https://github.com/typicode/husky
-[6]: https://www.conventionalcommits.org
-[7]: https://github.com/conventional-changelog/commitlint
-[8]: https://prettier.io
-[9]: https://eslint.org
-[10]: https://jsdoc.app
-[11]: https://github.com/gajus/eslint-plugin-jsdoc
-[12]: https://jestjs.io
-[13]: https://jestjs.io/docs/api#describeskipname-fn
-[14]: https://jestjs.io/docs/api#testskipname-fn
-[15]: https://www.conventionalcommits.org/en/v1.0.0
-[16]: https://github.com/features/packages
-[17]: https://www.npmjs.com
+[2]: https://yarnpkg.com/advanced/lifecycle-scripts#environment-variables
+[3]: https://yarnpkg.com/getting-started/migration
+[4]: https://github.com/features/packages
+[5]:
+  https://docs.github.com/en/packages/learn-github-packages/about-permissions-for-github-packages#about-scopes-and-permissions-for-package-registries
+[6]: https://github.com/typicode/husky
+[7]: https://www.conventionalcommits.org
+[8]: https://github.com/conventional-changelog/commitlint
+[9]: https://prettier.io
+[10]: https://eslint.org
+[12]: https://jsdoc.app
+[13]: https://github.com/gajus/eslint-plugin-jsdoc
+[14]: https://jestjs.io
+[15]: https://jestjs.io/docs/api#describeskipname-fn
+[16]: https://jestjs.io/docs/api#testskipname-fn
+[16]: https://www.conventionalcommits.org/en/v1.0.0
+[17]: https://github.com/features/packages
