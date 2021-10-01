@@ -48,6 +48,7 @@ const config: UserConfig = {
         'deploy',
         'deps',
         'deps-dev',
+        'deps-opt',
         'deps-peer',
         'github',
         'log',

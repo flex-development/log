@@ -128,18 +128,14 @@
     "typescript": "4.4.3",
     "yargs": "17.2.1"
   },
+  "optionalDependencies": {
+    "@types/shelljs": "0.8.9",
+    "shelljs": "0.8.4"
+  },
   "peerDependencies": {
-    "@types/shelljs": ">=0.8.9",
-    "shelljs": ">=0.8.4",
     "typescript": ">=2.7"
   },
   "peerDependenciesMeta": {
-    "@types/shelljs": {
-      "optional": true
-    },
-    "shelljs": {
-      "optional": true
-    },
     "typescript": {
       "optional": true
     }
