@@ -1,5 +1,5 @@
 import logger from '@flex-development/grease/utils/logger.util'
-import { LogLevel } from '@log/enums/log-level.enum'
+import LogLevel from '@log/enums/log-level.enum'
 import type { ReplaceInFileConfig, ReplaceResult } from 'replace-in-file'
 import replace from 'replace-in-file'
 import NODE_MODULES from './nm-string'

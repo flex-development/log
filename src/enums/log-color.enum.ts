@@ -6,10 +6,12 @@
 /**
  * Log levels mapped to colors.
  */
-export enum LogColor {
+enum LogColor {
   DEBUG = 'gray',
   ERROR = 'red',
   INFO = 'blue',
   SUCCESS = 'green',
   WARN = 'yellow'
 }
+
+export default LogColor

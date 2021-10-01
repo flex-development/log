@@ -1,7 +1,7 @@
 import { ExceptionCode } from '@flex-development/exceptions/enums'
 import Exception from '@flex-development/exceptions/exceptions/base.exception'
 import logger from '@flex-development/grease/utils/logger.util'
-import { LogLevel } from '@log/enums/log-level.enum'
+import LogLevel from '@log/enums/log-level.enum'
 import type { ChildProcess } from 'child_process'
 import sh from 'shelljs'
 

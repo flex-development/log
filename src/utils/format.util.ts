@@ -1,6 +1,6 @@
 import type { NullishString } from '@flex-development/tutils'
 import defaults from '@log/config/defaults.config'
-import { LogColor } from '@log/enums/log-color.enum'
+import LogColor from '@log/enums/log-color.enum'
 import type {
   LogOptions,
   LogOptionsBold,

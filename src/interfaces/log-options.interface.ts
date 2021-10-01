@@ -1,6 +1,6 @@
 import type { NullishString } from '@flex-development/tutils'
 import type { Level } from '@log/types'
-import figures from 'figures'
+import type figures from 'figures'
 import type { LogOptionsBold } from './log-options-bold.interface'
 import type { LogOptionsColor } from './log-options-color.interface'
 

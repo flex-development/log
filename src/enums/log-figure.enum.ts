@@ -1,5 +1,5 @@
 import figures from 'figures'
-import type { LogLevel } from './log-level.enum'
+import type Level from './log-level.enum'
 
 /**
  * @file Enums - LogFigure
@@ -11,14 +11,14 @@ import type { LogLevel } from './log-level.enum'
  *
  * [1]: https://github.com/sindresorhus/figures
  *
- * @readonly
  * @enum {string}
  */
-export const LogFigure: Readonly<Record<keyof typeof LogLevel, string>> =
-  Object.freeze({
-    DEBUG: '',
-    ERROR: figures.cross,
-    INFO: figures.info,
-    SUCCESS: figures.tick,
-    WARN: '!'
-  })
+const LogFigure: Readonly<Record<keyof typeof Level, string>> = Object.freeze({
+  DEBUG: '',
+  ERROR: figures.cross,
+  INFO: figures.info,
+  SUCCESS: figures.tick,
+  WARN: '!'
+})
+
+export default LogFigure

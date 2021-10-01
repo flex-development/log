@@ -5,11 +5,15 @@
 
 /**
  * Log levels.
+ *
+ * @enum {string}
  */
-export enum LogLevel {
+enum LogLevel {
   DEBUG = 'debug',
   ERROR = 'error',
   INFO = 'info',
   SUCCESS = 'success',
   WARN = 'warn'
 }
+
+export default LogLevel

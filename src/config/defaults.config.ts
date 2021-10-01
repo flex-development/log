@@ -1,4 +1,4 @@
-import { LogLevel } from '@log/enums/log-level.enum'
+import LogLevel from '@log/enums/log-level.enum'
 import type { LogOptions } from '@log/interfaces'
 
 /**

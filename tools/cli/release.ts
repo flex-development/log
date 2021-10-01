@@ -3,7 +3,7 @@
 import grease from '@flex-development/grease'
 import type { IGreaseOptions } from '@flex-development/grease/interfaces'
 import logger from '@flex-development/grease/utils/logger.util'
-import { LogLevel } from '@log/enums/log-level.enum'
+import LogLevel from '@log/enums/log-level.enum'
 import ch from 'chalk'
 import merge from 'lodash.merge'
 import pick from 'lodash.pick'

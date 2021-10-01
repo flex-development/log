@@ -1,8 +1,8 @@
 import type { NullishString } from '@flex-development/tutils'
 import defaults from '@log/config/defaults.config'
-import { LogColor } from '@log/enums/log-color.enum'
-import { LogFigure } from '@log/enums/log-figure.enum'
-import { LogLevel as LL } from '@log/enums/log-level.enum'
+import LogColor from '@log/enums/log-color.enum'
+import LogFigure from '@log/enums/log-figure.enum'
+import LogLevel from '@log/enums/log-level.enum'
 import type { LogOptions, LogOptionsColor } from '@log/interfaces'
 import type { Level } from '@log/types'
 import ch from 'chalk'
@@ -39,7 +39,7 @@ const figure = (options: LogOptions = defaults): string => {
   } = normalizeOptions(options)
 
   // Omit if in in debug mode
-  if (level.toLowerCase() === LL.DEBUG && !fig) return ''
+  if (level.toLowerCase() === LogLevel.DEBUG && !fig) return ''
 
   // Omit if figure is null or an empty string
   if (fig === null || fig === '' || (fig && fig.trim() === '')) return ''

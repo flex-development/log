@@ -2,7 +2,7 @@
 
 import Exception from '@flex-development/exceptions/exceptions/base.exception'
 import logger from '@flex-development/grease/utils/logger.util'
-import { LogLevel } from '@log/enums/log-level.enum'
+import LogLevel from '@log/enums/log-level.enum'
 import { copyFileSync, existsSync } from 'fs-extra'
 import path from 'path'
 import sh from 'shelljs'
@@ -141,7 +141,7 @@ try {
   const exception = error as Exception
 
   logger(argv, exception.message, [], LogLevel.ERROR)
-  sh.exit(exception.data.code)
+  sh.exit((exception.data?.code as number) ?? 1)
 }
 
 // Log workflow end

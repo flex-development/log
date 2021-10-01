@@ -1,5 +1,5 @@
 import defaults from '@log/config/defaults.config'
-import { LogLevel } from '@log/enums/log-level.enum'
+import LogLevel from '@log/enums/log-level.enum'
 import type { LogOptions } from '@log/interfaces'
 import type { Level } from '@log/types'
 import figure from '@log/utils/figure.util'

@@ -1,4 +1,4 @@
-import type { LogLevel } from '@log/enums/log-level.enum'
+import type LogLevel from '@log/enums/log-level.enum'
 
 /**
  * @file Type Definitions - Level
