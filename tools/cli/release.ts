@@ -41,7 +41,11 @@ export type ReleaseOptions = {
   firstRelease?: IGreaseOptions['firstRelease']
 
   /**
-   * Create a prerelease with optional tag id (e.g: `alpha`,`beta`, `dev`).
+   * Only populate commits made under this path.
+   *
+   * @default process.cwd()
+   */
+  path?: IGreaseOptions['path']
    */
   prerelease?: IGreaseOptions['prerelease']
 
@@ -88,6 +92,12 @@ const args = yargs(hideBin(process.argv))
     describe: 'is this the first release?',
     type: 'boolean'
   })
+  .option('path', {
+    alias: 'p',
+    default: process.cwd(),
+    describe: 'only populate commits made under this path',
+    type: 'string'
+  })
   .option('release-as', {
     alias: 'r',
     describe: 'specify release type (like npm version <major|minor|patch>)',
@@ -115,6 +125,7 @@ const argv: IGreaseOptions & ReleaseOptions = pick(
     'commitAll',
     'dryRun',
     'firstRelease',
+    'path',
     'prerelease',
     'releaseAs',
     'releaseDraft',
