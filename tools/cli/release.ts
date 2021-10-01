@@ -11,7 +11,7 @@ import sh from 'shelljs'
 import { inspect } from 'util'
 import { hideBin } from 'yargs/helpers'
 import yargs from 'yargs/yargs'
-import { $name, $version } from '../helpers/pkg-get'
+import { $name } from '../helpers/pkg-get'
 
 /**
  * @file CLI - Release Workflow
@@ -98,6 +98,11 @@ const args = yargs(hideBin(process.argv))
     describe: 'only populate commits made under this path',
     type: 'string'
   })
+  .option('prerelease', {
+    describe: 'create prerelease with optional tag id',
+    requiresArg: true,
+    type: 'string'
+  })
   .option('release-as', {
     alias: 'r',
     describe: 'specify release type (like npm version <major|minor|patch>)',
@@ -140,10 +145,6 @@ const options: IGreaseOptions = {
   commitAll: true,
   gitTagFallback: false,
   gitdir: process.env.PROJECT_CWD,
-  prerelease: ((): string | undefined => {
-    const tag = $version.split('-')[1]
-    return !tag ? undefined : tag.includes('.') ? tag.split('.')[0] : tag
-  })(),
   releaseAssets: ['./*.tgz'],
   releaseBranchWhitelist: ['release/*'],
   releaseCommitMessageFormat: `release: ${$name}@{{currentTag}}`,
