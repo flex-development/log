@@ -46,10 +46,11 @@
     "fix:style": "yarn check:style --fix --cache",
     "test": "bash ./tools/scripts/jest.sh",
     "build": "ts-node ./tools/cli/build",
-    "prepack": "yarn build",
+    "prepack": "toggle-scripts -postinstall && yarn build",
+    "postpack": "toggle-scripts +postinstall",
     "release": "ts-node ./tools/cli/release",
-    "prepublishOnly": "toggle-scripts -postinstall && toggle-scripts -prepack",
-    "postpublish": "toggle-scripts +postinstall && toggle-scripts +prepack"
+    "prepublishOnly": "toggle-scripts -prepack",
+    "postpublish": "toggle-scripts +prepack"
   },
   "dependencies": {
     "@flex-development/tutils": "3.1.7",
