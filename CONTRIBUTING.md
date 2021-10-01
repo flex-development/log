@@ -71,7 +71,9 @@ Project environment variables are listed below.
 | --------------------- | -------- | ------------------ | ------------------ | ---------- | ------------------------------------------- |
 | `NODE_ENV`            | `false`  | :x:                | :x:                | :x:        | :white_check_mark:                          |
 | `NODE_OPTIONS`        | `true`   | :white_check_mark: | :x:                | :x:        | :white_check_mark:                          |
+| `NPM_TOKEN`           | `true`   | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
 | `NPM_TOKEN_FLDV`      | `true`   | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
+| `PAT_GPR`             | `true`   | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
 | `PAT_GPR_FLDV`        | `true`   | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
 | `PROJECT_CWD`**\*\*** | `true`   | :x:                | :x:                | :x:        | :white_check_mark:                          |
 | `PWD`**\*\*\***       | `true`   | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
