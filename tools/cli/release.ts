@@ -168,7 +168,7 @@ const options: IGreaseOptions = {
   releaseBranchWhitelist: ['release/*'],
   releaseCommitMessageFormat: `release: ${$name}@{{currentTag}}`,
   scripts: {
-    postchangelog: `npm pack ${argv.dryRun ? '--dry-run' : ''}`.trim(),
+    postchangelog: `yarn pack -o %s-%v.tgz ${(argv.d && '-n') || ''}`.trim(),
     postcommit: 'git pnv',
     postgreaser: 'yarn clean:build && rimraf ./*.tgz',
     prerelease: 'yarn test --no-cache'
@@ -205,5 +205,6 @@ logger(
 
 // Run release workflow
 grease(merge({}, options, argv)).catch(error => {
-  sh.echo(ch.bold.red(inspect(error, false, null)))
+  if (error.stderr) return
+  else sh.echo(ch.bold.red(inspect(error, false, null)))
 })
