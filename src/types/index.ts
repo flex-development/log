@@ -3,4 +3,4 @@
  * @module log/types
  */
 
-export type { Level } from './Level'
+export type { Level } from './level.type'

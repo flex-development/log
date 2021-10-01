@@ -86,3 +86,5 @@ cjs/
 esm/
 types/
 *.zip
+
+!src/types

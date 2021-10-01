@@ -8,3 +8,5 @@ coverage/
 esm/
 node_modules/
 types/
+
+!src/types
