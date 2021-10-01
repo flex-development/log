@@ -1,4 +1,4 @@
-const prettierConfig = require('./.prettierrc')
+const prettierConfig = require('./.prettierrc.cjs')
 
 /**
  * @file ESLint Configuration
@@ -25,6 +25,7 @@ module.exports = {
     ecmaFeatures: {
       impliedStrict: true
     },
+    extraFileExtensions: ['cjs'],
     project: ['./tsconfig.json'],
     sourceType: 'module',
     tsconfigRootDir: __dirname,
@@ -220,11 +221,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['**/*.md'],
-      processor: 'markdown/markdown'
-    },
-    {
-      files: ['**/*.js', '**/*.md/*.js'],
+      files: ['*.cjs', '**/*.js', '**/*.md/*.js'],
       parser: `${__dirname}/node_modules/@babel/eslint-parser/lib/index.cjs`,
       parserOptions: {
         requireConfigFile: false
@@ -235,10 +232,14 @@ module.exports = {
       }
     },
     {
-      files: ['*.js'],
+      files: ['*.cjs', '*.js'],
       rules: {
         'unicorn/prefer-module': 0
       }
+    },
+    {
+      files: ['**/*.md'],
+      processor: 'markdown/markdown'
     },
     {
       files: ['**/*.md/*.ts'],

@@ -12,5 +12,5 @@ module.exports = {
   /**
    * Linting command rules.
    */
-  [`*.{js,md,ts}`]: ['yarn fix:style', 'git add -A']
+  [`*.{cjs,js,md,ts}`]: ['yarn fix:style', 'git add -A']
 }

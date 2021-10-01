@@ -53,10 +53,10 @@
     "__tests__",
     "__mocks__",
     "docs",
-    "scripts",
     "src",
     "tools",
     "typings",
+    "*.cjs",
     "*.js",
     "*.ts"
   ]
