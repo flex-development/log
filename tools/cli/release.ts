@@ -11,7 +11,7 @@ import sh from 'shelljs'
 import { inspect } from 'util'
 import { hideBin } from 'yargs/helpers'
 import yargs from 'yargs/yargs'
-import { $name } from '../helpers/pkg-get'
+import { $name, $name_no_scope } from '../helpers/pkg-get'
 
 /**
  * @file CLI - Release Workflow
@@ -164,6 +164,7 @@ const options: IGreaseOptions = {
   commitAll: true,
   gitTagFallback: false,
   gitdir: process.env.PROJECT_CWD,
+  lernaPackage: $name_no_scope,
   releaseAssets: ['./*.tgz'],
   releaseBranchWhitelist: ['release/*'],
   releaseCommitMessageFormat: `release: ${$name}@{{currentTag}}`,
@@ -176,6 +177,7 @@ const options: IGreaseOptions = {
   // `continuous-deployment` workflow will create new tag
   skip: { tag: true },
   skipUnstable: false,
+  tagPrefix: `${$name_no_scope}@`,
   types: [
     /* eslint-disable sort-keys */
     { type: 'feat', section: ':sparkles: Features' },
