@@ -11,7 +11,7 @@ import sh from 'shelljs'
 import util from 'util'
 import { hideBin } from 'yargs/helpers'
 import yargs from 'yargs/yargs'
-import { $name, $version } from './utils/pkg-get'
+import { $name, $version } from '../helpers/pkg-get'
 
 /**
  * @file Scripts - Release Workflow

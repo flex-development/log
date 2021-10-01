@@ -55,6 +55,7 @@
     "docs",
     "scripts",
     "src",
+    "tools",
     "typings",
     "*.js",
     "*.ts"

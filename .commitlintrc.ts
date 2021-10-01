@@ -51,8 +51,8 @@ const config: UserConfig = {
         'deps-peer',
         'log',
         'release',
-        'scripts',
         'tests',
+        'tools',
         'typescript',
         'workflows',
         'yarn'

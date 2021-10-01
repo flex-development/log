@@ -8,9 +8,9 @@ import { join } from 'path'
 import sh from 'shelljs'
 import { hideBin } from 'yargs/helpers'
 import yargs from 'yargs/yargs'
-import fixNodeModulePaths from './fix-node-module-paths'
-import exec from './utils/exec'
-import { $name } from './utils/pkg-get'
+import exec from '../helpers/exec'
+import fixNodeModulePaths from '../helpers/fix-node-module-paths'
+import { $name } from '../helpers/pkg-get'
 
 /**
  * @file Scripts - Build Workflow

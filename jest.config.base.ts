@@ -1,7 +1,7 @@
 import type { Config } from '@jest/types'
 import { jsWithTsESM as preset } from 'ts-jest/presets'
 import { pathsToModuleNameMapper } from 'ts-jest/utils'
-import NODE_MODULES from './scripts/nm-string'
+import NODE_MODULES from './tools/helpers/nm-string'
 import { compilerOptions } from './tsconfig.json'
 
 /**
