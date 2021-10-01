@@ -1,4 +1,4 @@
-import log, { LogLevel } from '@flex-development/log'
+import log, { LogLevel } from '@log'
 
 /**
  * @file Examples - error log

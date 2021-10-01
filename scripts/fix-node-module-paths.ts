@@ -1,4 +1,5 @@
-import log from '@flex-development/grease/utils/log.util'
+import logger from '@flex-development/grease/utils/logger.util'
+import { LogLevel } from '@log/enums/log-level.enum'
 import type { ReplaceInFileConfig, ReplaceResult } from 'replace-in-file'
 import replace from 'replace-in-file'
 import NODE_MODULES from './nm-string'
@@ -37,10 +38,10 @@ const fixNodeModulePaths = (): ReplaceResult[] => {
   try {
     results = replace.sync(OPTIONS)
   } catch (error) {
-    log({}, (error as Error).message, [], 'error')
+    logger({}, (error as Error).message, [], LogLevel.ERROR)
   }
 
-  log({}, 'fix import paths')
+  logger({}, 'fix import paths')
   return results
 }
 

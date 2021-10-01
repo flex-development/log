@@ -1,4 +1,4 @@
-import log from '@flex-development/log'
+import log from '@log'
 
 /**
  * @file Examples - debug log

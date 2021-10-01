@@ -4,7 +4,7 @@
     "allowUnreachableCode": false,
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
-    "checkJs": true,
+    "checkJs": false,
     "downlevelIteration": true,
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
@@ -20,14 +20,18 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "paths": {
+      "@flex-development/exceptions": [
+        "node_modules/@flex-development/exceptions/cjs/index"
+      ],
+      "@flex-development/exceptions/*": [
+        "node_modules/@flex-development/exceptions/cjs/*"
+      ],
       "@flex-development/grease": [
         "node_modules/@flex-development/grease/cjs/index"
       ],
       "@flex-development/grease/*": [
         "node_modules/@flex-development/grease/cjs/*"
       ],
-      "@flex-development/log": ["src/index.ts"],
-      "@flex-development/log/*": ["src/*"],
       "@log": ["src/index.ts"],
       "@log/*": ["src/*"],
       "@tests/fixtures/*": ["__tests__/__fixtures__/*"],
@@ -43,7 +47,7 @@
     "strict": true,
     "target": "es2018"
   },
-  "exclude": ["**/build", "**/node_modules"],
+  "exclude": ["**/node_modules", "./build", "./cjs", "./esm", "./types"],
   "files": ["typings/jest.d.ts"],
   "include": [
     "__tests__",

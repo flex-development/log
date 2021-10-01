@@ -1,6 +1,7 @@
-import { ExceptionStatusCode } from '@flex-development/exceptions/enums'
+import { ExceptionCode } from '@flex-development/exceptions/enums'
 import Exception from '@flex-development/exceptions/exceptions/base.exception'
-import log from '@flex-development/grease/utils/log.util'
+import logger from '@flex-development/grease/utils/logger.util'
+import { LogLevel } from '@log/enums/log-level.enum'
 import type { ChildProcess } from 'child_process'
 import type { ShellString } from 'shelljs'
 import sh from 'shelljs'
@@ -28,11 +29,11 @@ const exec = (
 
   command = command.trim()
 
-  if (dryRun) log({}, command, [], 'warning')
+  if (dryRun) logger({}, command, [], LogLevel.WARN)
   else stdout = sh.exec(command, options) as ShellString | null
 
   if (stdout && stdout.code !== 0) {
-    const code = ExceptionStatusCode.INTERNAL_SERVER_ERROR
+    const code = ExceptionCode.INTERNAL_SERVER_ERROR
 
     throw new Exception(code, undefined, {
       code: stdout.code,

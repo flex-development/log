@@ -12,15 +12,17 @@
     ],
     "removeComments": false,
     "rootDir": "./src",
+    "skipLibCheck": true,
     "sourceMap": true
   },
   "exclude": [
     "**/__mocks__",
     "**/__tests__",
-    "build",
-    "cjs",
-    "esm",
-    "node_modules"
+    "**/node_modules",
+    "./build",
+    "./cjs",
+    "./esm",
+    "./types"
   ],
   "extends": "./tsconfig.json",
   "files": [],
