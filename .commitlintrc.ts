@@ -1,17 +1,19 @@
+import type { UserConfig } from '@commitlint/types'
+
 /**
  * @file Commitlint Configuration
  * @see https://commitlint.js.org/#/guides-local-setup
  * @see https://commitlint.js.org/#/reference-configuration
  */
 
-module.exports = {
+const config: UserConfig = {
   /**
    * Enable default ignore rules.
    */
   defaultIgnores: true,
 
   /**
-   * IDs of commitlint configurations.
+   * IDs of commitlint configurations to extend.
    */
   extends: ['@commitlint/config-conventional'],
 
@@ -37,7 +39,7 @@ module.exports = {
     'scope-case': [2, 'always', 'kebab-case'],
 
     /**
-     * Rules for valid commit scopes.
+     * Commit scopes.
      */
     'scope-enum': [
       2,
@@ -84,3 +86,5 @@ module.exports = {
     ]
   }
 }
+
+export default config
