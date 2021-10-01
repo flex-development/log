@@ -6,8 +6,8 @@ import type { ChildProcess } from 'child_process'
 import sh from 'shelljs'
 
 /**
- * @file Script Utility - Shell Command Executor
- * @module scripts/utils/exec
+ * @file Helpers - Shell Command Executor
+ * @module tools/helpers/exec
  */
 
 /**

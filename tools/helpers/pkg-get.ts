@@ -2,8 +2,8 @@ import type { PackageJson } from 'read-pkg'
 import read from 'read-pkg'
 
 /**
- * @file Script Utility - Get Package Data
- * @module scripts/utils/pkg-get
+ * @file Helpers - Get Package Data
+ * @module tools/helpers/pkg-get
  */
 
 /**

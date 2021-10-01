@@ -13,8 +13,8 @@ import fixNodeModulePaths from '../helpers/fix-node-module-paths'
 import { $name } from '../helpers/pkg-get'
 
 /**
- * @file Scripts - Build Workflow
- * @module scripts/build
+ * @file CLI - Build Workflow
+ * @module tools/cli/build
  */
 
 export type BuildOptions = {

@@ -1,8 +1,8 @@
 import join from 'lodash.join'
 
 /**
- * @file Scripts - 'node_modules'
- * @module scripts/nm-string
+ * @file Helpers - 'node_modules'
+ * @module tools/helpers/nm-string
  */
 
 /**

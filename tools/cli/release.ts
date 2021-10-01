@@ -14,8 +14,8 @@ import yargs from 'yargs/yargs'
 import { $name, $version } from '../helpers/pkg-get'
 
 /**
- * @file Scripts - Release Workflow
- * @module scripts/release
+ * @file CLI - Release Workflow
+ * @module tools/cli/release
  */
 
 export type ReleaseOptions = {

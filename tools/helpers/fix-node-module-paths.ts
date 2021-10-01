@@ -5,8 +5,8 @@ import replace from 'replace-in-file'
 import NODE_MODULES from './nm-string'
 
 /**
- * @file Scripts - Fix Node Module Import Paths
- * @module scripts/fix-node-module-paths
+ * @file Helpers - Fix Node Module Import Paths
+ * @module tools/helpers/fix-node-module-paths
  * @see https://github.com/adamreisnz/replace-in-file
  */
 
