@@ -26,12 +26,18 @@ export type ReleaseOptions = {
    */
   commitAll?: IGreaseOptions['commitAll']
 
+  /** @see ReleaseOptions.commitAll */
+  a?: ReleaseOptions['commitAll']
+
   /**
    * See the commands that running release would run.
    *
    * @default false
    */
   dryRun?: IGreaseOptions['dryRun']
+
+  /** @see ReleaseOptions.dryRun */
+  d?: ReleaseOptions['dryRun']
 
   /**
    * Is this the first release?
@@ -40,12 +46,21 @@ export type ReleaseOptions = {
    */
   firstRelease?: IGreaseOptions['firstRelease']
 
+  /** @see ReleaseOptions.firstRelease */
+  f?: ReleaseOptions['firstRelease']
+
   /**
    * Only populate commits made under this path.
    *
    * @default process.cwd()
    */
   path?: IGreaseOptions['path']
+
+  /** @see ReleaseOptions.path */
+  p?: ReleaseOptions['path']
+
+  /**
+   * Create prerelease with optional tag id (e.g: `alpha`,`beta`, `dev`).
    */
   prerelease?: IGreaseOptions['prerelease']
 
@@ -53,6 +68,9 @@ export type ReleaseOptions = {
    * Specify release type (like `npm version <major|minor|patch>`).
    */
   releaseAs?: IGreaseOptions['releaseAs']
+
+  /** @see ReleaseOptions.releaseAs */
+  r?: ReleaseOptions['releaseAs']
 
   /**
    * Save GitHub release as a draft instead of publishing it.
@@ -82,6 +100,7 @@ const args = yargs(hideBin(process.argv))
     type: 'boolean'
   })
   .option('dry-run', {
+    alias: 'd',
     default: false,
     describe: 'see the commands that running release would run',
     type: 'boolean'
@@ -107,7 +126,7 @@ const args = yargs(hideBin(process.argv))
     alias: 'r',
     describe: 'specify release type (like npm version <major|minor|patch>)',
     requiresArg: true,
-    string: true
+    type: 'string'
   })
   .option('release-draft', {
     default: true,
