@@ -344,8 +344,8 @@ Before releasing, the following steps must be completed:
 
 1. Schedule a code freeze
 2. Create a new `release/*` branch
-   - where `*` is `v<package.json#version>`
-     - e.g: `v1.1.0`
+   - where `*` is `<package.json#name-no-scope>@<package.json#version>`
+     - e.g: `log@1.1.0`
    - branch naming conventions **must be followed exactly**. the branch name is
      used to create distribution tags, locate drafted releases, and generate the
      correct workspace publish command
