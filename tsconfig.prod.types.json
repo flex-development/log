@@ -3,5 +3,5 @@
     "emitDeclarationOnly": true,
     "outDir": "types"
   },
-  "extends": "./tsconfig.prod.esm.json"
+  "extends": "./tsconfig.prod.json"
 }
