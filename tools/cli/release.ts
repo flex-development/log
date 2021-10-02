@@ -6,9 +6,9 @@ import logger from '@flex-development/grease/utils/logger.util'
 import LogLevel from '@log/enums/log-level.enum'
 import ch from 'chalk'
 import merge from 'lodash.merge'
-import pick from 'lodash.pick'
 import sh from 'shelljs'
 import { inspect } from 'util'
+import type { Argv } from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import yargs from 'yargs/yargs'
 import { $workspace, $workspace_no_scope } from '../helpers/pkg'
@@ -87,25 +87,22 @@ export type ReleaseOptions = {
   skip?: IGreaseOptions['skip']
 }
 
-/**
- * @property {yargs.Argv} args - Command line arguments parser
- * @see https://github.com/yargs/yargs
- */
+/** @property {Argv<IGreaseOptions>} args - CLI arguments parser */
 const args = yargs(hideBin(process.argv))
   .usage('$0 [options]')
-  .option('commit-all', {
+  .option('commitAll', {
     alias: 'a',
     default: true,
     describe: 'commit all staged changes, not just release files',
     type: 'boolean'
   })
-  .option('dry-run', {
+  .option('dryRun', {
     alias: 'd',
     default: false,
     describe: 'see the commands that running release would run',
     type: 'boolean'
   })
-  .option('first-release', {
+  .option('firstRelease', {
     alias: 'f',
     default: false,
     describe: 'is this the first release?',
@@ -122,44 +119,29 @@ const args = yargs(hideBin(process.argv))
     requiresArg: true,
     type: 'string'
   })
-  .option('release-as', {
+  .option('releaseAs', {
     alias: 'r',
     describe: 'specify release type (like npm version <major|minor|patch>)',
     requiresArg: true,
     type: 'string'
   })
-  .option('release-draft', {
+  .option('releaseDraft', {
     default: true,
     describe: 'release as a draft instead of publishing it',
     type: 'boolean'
   })
   .option('skip', {
-    describe: 'map of steps in the release process that should be skipped'
+    describe: 'map of steps in the release process that should be skipped',
+    type: 'array'
   })
   .alias('help', 'h')
   .pkgConf('release')
-  .wrap(98)
+  .wrap(98) as Argv<IGreaseOptions>
 
-/**
- * @property {IGreaseOptions & ReleaseOptions} argv - Command line arguments
- */
-const argv: IGreaseOptions & ReleaseOptions = pick(
-  args.argv as IGreaseOptions & ReleaseOptions,
-  [
-    'commitAll',
-    'dryRun',
-    'firstRelease',
-    'path',
-    'prerelease',
-    'releaseAs',
-    'releaseDraft',
-    'skip'
-  ]
-)
+/** @property {ReleaseOptions} argv - CLI arguments object */
+const argv: ReleaseOptions = args.argv
 
-/**
- * @property {IGreaseOptions} options - `grease` options
- */
+/** @property {IGreaseOptions} options - `grease` options */
 const options: IGreaseOptions = {
   commitAll: true,
   gitTagFallback: false,

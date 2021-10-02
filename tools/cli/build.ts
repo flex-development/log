@@ -4,6 +4,7 @@ import logger from '@flex-development/grease/utils/logger.util'
 import LogLevel from '@log/enums/log-level.enum'
 import type { PackageJson } from 'read-pkg'
 import sh from 'shelljs'
+import type { Argv } from 'yargs'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import exec from '../helpers/exec'
@@ -51,10 +52,10 @@ export type BuildOptions = {
    *
    * @default false
    */
-  packInstall?: boolean
+  install?: boolean
 
-  /** @see BuildOptions.packInstall */
-  i?: BuildOptions['packInstall']
+  /** @see BuildOptions.install */
+  i?: BuildOptions['install']
 
   /**
    * Create tarball at specified path.
@@ -87,30 +88,19 @@ export type BuildOptions = {
   t?: BuildOptions['tarball']
 }
 
-/**
- * @property {string[]} BUILD_FORMATS - Module build formats
- */
+/** @property {string[]} BUILD_FORMATS - Module build formats */
 const BUILD_FORMATS: BuildOptions['formats'] = ['cjs', 'esm', 'types']
 
-/**
- * @property {string} COMMAND_PACK - Base pack command
- */
+/** @property {string} COMMAND_PACK - Base pack command */
 const COMMAND_PACK: string = 'yarn pack'
 
-/**
- * @property {string[]} ENV_CHOICES - Build environment options
- */
+/** @property {string[]} ENV_CHOICES - Build environment options */
 const ENV_CHOICES: BuildOptions['env'][] = ['production', 'test', 'development']
 
-/**
- * @property {PackageJson} PACKAGE - package.json data
- */
+/** @property {PackageJson} PACKAGE - package.json data */
 const PACKAGE: PackageJson = pkg()
 
-/**
- * @property {yargs.Argv} args - Command line arguments parser
- * @see https://github.com/yargs/yargs
- */
+/** @property {Argv<BuildOptions>} args - CLI arguments parser */
 const args = yargs(hideBin(process.argv))
   .usage('$0 [options]')
   .option('env', {
@@ -119,58 +109,53 @@ const args = yargs(hideBin(process.argv))
     default: 'production',
     describe: 'name of build environment',
     requiresArg: true,
-    string: true,
     type: 'string'
   })
-  .option('dry-run', {
+  .option('dryRun', {
     alias: 'd',
-    boolean: true,
     default: false,
     describe: 'see the commands that running `build` would run',
     type: 'boolean'
   })
   .option('formats', {
     alias: 'f',
-    array: true,
     choices: BUILD_FORMATS,
     default: BUILD_FORMATS,
-    description: 'specify module build format(s)'
+    description: 'specify module build format(s)',
+    type: 'array'
+  })
+  .option('install', {
+    alias: 'i',
+    default: false,
+    description: 'run `yarn install` if package contains build scripts',
+    type: 'boolean'
   })
   .option('out', {
     alias: 'o',
     default: '%s-%v.tgz',
     description: 'create tarball at specified path',
     requiresArg: true,
-    string: true,
     type: 'string'
-  })
-  .option('pack-install', {
-    alias: 'i',
-    boolean: true,
-    default: false,
-    description: 'run `yarn install` if package contains build scripts'
   })
   .option('prepack', {
     alias: 'p',
-    boolean: true,
     default: false,
-    description: 'run `prepack` script'
+    description: 'run `prepack` script',
+    type: 'boolean'
   })
   .option('tarball', {
     alias: 't',
-    boolean: true,
     default: false,
-    description: 'pack the project once build is complete'
+    description: 'pack the project once build is complete',
+    type: 'boolean'
   })
   .alias('version', 'v')
   .alias('help', 'h')
   .pkgConf('build')
-  .wrap(98)
+  .wrap(98) as Argv<BuildOptions>
 
-/**
- * @property {BuildOptions} argv - Command line arguments
- */
-const argv: BuildOptions = args.argv as BuildOptions
+/** @property {BuildOptions} argv - CLI arguments object */
+const argv: BuildOptions = args.argv
 
 // Log workflow start
 logger(
@@ -205,13 +190,13 @@ try {
 
   // Pack project
   if (argv.tarball) {
-    const { dryRun, out: outFile, packInstall, prepack } = argv
+    const { dryRun, out: outFile, install, prepack } = argv
 
     // Pack command flags
     const flags = [
       `${dryRun ? '--dry-run' : ''}`,
       `--out ${outFile}`,
-      `${packInstall ? '--install-if-needed' : ''}`
+      `${install ? '--install-if-needed' : ''}`
     ]
 
     // Check if package has postinstall and prepack scripts
