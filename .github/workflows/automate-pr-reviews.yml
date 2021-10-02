@@ -14,9 +14,11 @@ jobs:
   flautoreview:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout branch
+      - id: checkout
+        name: Checkout branch
         uses: actions/checkout@v2
-      - name: Automate reviews
+      - id: automate-review
+        name: Automate reviews
         uses: flex-development/flautoreview@v1.0.1
         with:
           body: lgtm 👍🏾
