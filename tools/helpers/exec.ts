@@ -43,10 +43,8 @@ const exec = (
     throw error
   }
 
-  // Format command output
-  if (stdout && stdout.length > 0) return stdout.toString().replaceAll('\n', '')
-
-  return command
+  // Format command output or return original command
+  return stdout && stdout.length > 0 ? stdout.toString() : command
 }
 
 export default exec
