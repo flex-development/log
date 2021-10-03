@@ -8,7 +8,7 @@ const prettierConfig = require('./.prettierrc.cjs')
 
 module.exports = {
   env: {
-    es2017: true,
+    es2020: true,
     node: true
   },
   extends: [
@@ -114,35 +114,42 @@ module.exports = {
         skipIfMatch: [],
         skipWordIfMatch: [],
         skipWords: [
+          'ansi',
           'argv',
-          'chp',
+          'basedir',
           'cjs',
           'commitlint',
-          'copyfiles',
+          'commonjs',
           'dotenv',
           'dto',
           'dtos',
           'esm',
           'enum',
           'enums',
+          'extensionless',
           'formatter',
           'inspectable',
           'keyof',
+          'loadenv',
+          'nullable',
           'nullish',
           'perf',
+          'pkgfile',
           'pnv',
           'postinstall',
           'prepack',
-          'readonly',
-          'rebase',
+          'prerelease',
           'rimraf',
-          'stringified',
           'tgz',
           'tsconfig',
           'ttsc',
           'typeof',
+          'unicode',
           'usr',
-          'wip'
+          'wasm',
+          'wip',
+          'workspace',
+          'yargs'
         ],
         strings: true
       }
@@ -221,7 +228,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['*.cjs', '**/*.js', '**/*.md/*.js'],
+      files: ['*.cjs', '*.js', '**/*.md/*.js'],
       parser: `${__dirname}/node_modules/@babel/eslint-parser/lib/index.cjs`,
       parserOptions: {
         requireConfigFile: false
@@ -232,7 +239,7 @@ module.exports = {
       }
     },
     {
-      files: ['*.cjs', '*.js'],
+      files: ['*.cjs'],
       rules: {
         'unicorn/prefer-module': 0
       }
@@ -268,7 +275,13 @@ module.exports = {
       }
     },
     {
-      files: ['**/__mocks__/**', '**/__tests__/**', '**/tools/**', '*.js'],
+      files: [
+        '**/__mocks__/**',
+        '**/__tests__/**',
+        '**/tools/**',
+        '*.cjs',
+        'jest.config.*'
+      ],
       rules: {
         'tree-shaking/no-side-effects-in-initialization': 0
       }
@@ -301,6 +314,13 @@ module.exports = {
       }
     },
     {
+      files: ['src/log.ts'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 0,
+        'unicorn/prefer-module': 0
+      }
+    },
+    {
       files: ['src/utils/__tests__/format.util.functional.spec.ts'],
       rules: {
         'unicorn/import-style': [
@@ -314,10 +334,9 @@ module.exports = {
       }
     },
     {
-      files: ['src/log.ts'],
+      files: ['tools/loaders/env.cjs'],
       rules: {
-        '@typescript-eslint/no-var-requires': 0,
-        'unicorn/prefer-module': 0
+        'unicorn/no-array-reduce': 0
       }
     }
   ],

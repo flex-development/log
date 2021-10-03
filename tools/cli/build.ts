@@ -10,6 +10,7 @@ import { hideBin } from 'yargs/helpers'
 import exec from '../helpers/exec'
 import fixNodeModulePaths from '../helpers/fix-node-module-paths'
 import pkg, { $workspace } from '../helpers/pkg'
+import useDualExports from '../helpers/use-dual-exports'
 
 /**
  * @file CLI - Build Workflow
@@ -167,7 +168,7 @@ logger(
 
 try {
   // Set environment variables
-  exec(`dotenv -c ${argv.env} -- true`, argv.dryRun)
+  exec(`loadenv -c ${argv.env}`, argv.dryRun)
   logger(argv, `set ${argv.env} environment variables`)
 
   // Build project with ttypescript - https://github.com/cevek/ttypescript
@@ -181,6 +182,8 @@ try {
 
     // Run build command
     if (exec(`ttsc -p ${tsconfig}`, argv.dryRun) || argv.dryRun) {
+      // ! Add ESM-compatible export statement to `exports.default` statements
+      if (format === 'cjs') useDualExports(`./${format}/**`)
       logger(argv, `build ${format}`)
     }
   }

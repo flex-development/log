@@ -1,0 +1,10 @@
+{
+  "eslint.options": {
+    "configFile": "./.eslintrc.cjs"
+  },
+  "files.associations": {
+    ".env": "shellscript",
+    ".env.*": "shellscript"
+  },
+  "prettier.configPath": "./.prettierrc.cjs"
+}

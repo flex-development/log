@@ -9,8 +9,8 @@ import merge from 'lodash.merge'
 import sh from 'shelljs'
 import { inspect } from 'util'
 import type { Argv } from 'yargs'
+import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-import yargs from 'yargs/yargs'
 import { $workspace, $workspace_no_scope } from '../helpers/pkg'
 
 /**

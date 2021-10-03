@@ -1,5 +1,4 @@
 import type { Config } from '@jest/types'
-import omit from 'lodash.omit'
 import baseConfig from './jest.config.base'
 import pkg from './package.json'
 
@@ -9,7 +8,7 @@ import pkg from './package.json'
  */
 
 const config: Config.InitialOptions = {
-  ...omit(baseConfig, ['rootDir']),
+  ...baseConfig,
   displayName: pkg.name.split('/')[1]
 }
 

@@ -41,29 +41,9 @@ People interacting with the `log` project are grouped into 4 categories:
   - answering questions
 - **ticket**: [JIRA][1] issue
 
-## Environment
+### Environment
 
-### `.profile`
-
-A local `.profile` is used set [`NODE_OPTIONS`](#environment-variables) as well
-as apply additional environment settings without running into dependency
-installation errors. You'll need to `source` the local profile to keep your
-environment up to date:
-
-1. Open a shell startup file
-
-   - e.g: `~/.bash_profile` `~/.bashrc`, `~/.profile`, `~/.zprofile`,
-     `~/.zshenv`, `~/.zshrc`
-
-2. Update your chosen startup file
-
-   ```zsh
-   [[ -f "$PWD/.profile" ]] && source "$PWD/.profile"
-   ```
-
-3. Reload shell
-
-### Environment Variables
+#### Environment Variables
 
 Project environment variables are listed below.
 
@@ -71,17 +51,19 @@ Project environment variables are listed below.
 | --------------------- | -------- | ------------------ | ------------------ | ---------- | ------------------------------------------- |
 | `NODE_ENV`            | `false`  | :x:                | :x:                | :x:        | :white_check_mark:                          |
 | `NODE_OPTIONS`        | `true`   | :white_check_mark: | :x:                | :x:        | :white_check_mark:                          |
+| `NODE_MODULES`        | `true`   | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
 | `NPM_TOKEN`           | `true`   | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
 | `NPM_TOKEN_FLDV`      | `true`   | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
 | `PAT_GPR`             | `true`   | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
 | `PAT_GPR_FLDV`        | `true`   | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
 | `PROJECT_CWD`**\*\*** | `true`   | :x:                | :x:                | :x:        | :white_check_mark:                          |
-| `PWD`**\*\*\***       | `true`   | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
-| `TS_NODE_PROJECT`     | `false`  | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
 
 **\*** Environment variable set by package user  
-**\*\*** Environment variable [specific to Yarn 2][2]  
-**\*\*\*** Environment variable defined by local machine
+**\*\*** Environment variable [specific to Yarn 2][2]
+
+If you're using [ZSH][3], you can use the [`dotenv`][4] plugin to autosource the
+project [`.env`](.env) file. Otherwise, following the instructions in the
+[Clone & Install](#clone--install) section to setup your environment.
 
 ### Git Configuration
 
@@ -94,13 +76,13 @@ fully, as well as begin extending your own workflow.
 
 This project uses Yarn 2. The Yarn configuration for this project can be found
 in [`.yarnrc.yml`](.yarnrc.yml). If you're already using Yarn globally, see the
-[Yarn 2 Migration docs][3].
+[Yarn 2 Migration docs][5].
 
 ### GitHub Packages
 
 Some workspaces depend on scoped packages (e.g: `@flex-development`). Some of
-those packages are published to the [GitHub Package Registry][4], but **_not to
-NPM_**. A [Personal Access Token with at least the `read:packages` scope][5]
+those packages are published to the [GitHub Package Registry][6], but **_not to
+NPM_**. A [Personal Access Token with at least the `read:packages` scope][7]
 attached is required for installation.
 
 Scopes, their registry servers, and required environment variables are defined
@@ -110,7 +92,7 @@ in [`.yarnrc.yml`](.yarnrc.yml) under the `npmScopes` field.
 
 ```zsh
 git clone https://github.com/flex-development/log
-cd log
+cd log && source .env
 yarn
 ```
 
@@ -121,7 +103,7 @@ also be displayed if you're missing any environment variables.
 
 ## Contributing Code
 
-[Husky][6] is used to run Git hooks that locally enforce coding and commit
+[Husky][8] is used to run Git hooks that locally enforce coding and commit
 message standards, as well run tests associated with any files changed since the
 last commit.
 
@@ -162,8 +144,8 @@ will create a new branch titled `feat/PROJ-4-authentication`.
 
 ### Commit Messages
 
-This project follows [Conventional Commit][7] standards and uses [commitlint][8]
-to enforce those standards.
+This project follows [Conventional Commit][9] standards and uses
+[commitlint][10] to enforce those standards.
 
 This means every commit must conform to the following format:
 
@@ -201,12 +183,12 @@ e.g:
 - `git docs 'update contributing guide'` -> `docs: update contributing guide`
 - `git ac 'refactor(api)!: user queries'` -> `refactor(api)!: user queries`
 
-See [`commitlint.config.js`](commitlint.config.js) for an exhasutive list of
-valid commit scopes and types.
+See [`.commitlintrc.ts`](.commitlintrc.ts) for an exhasutive list of valid
+commit scopes and types.
 
 ### Code Style
 
-[Prettier][9] is used to format code, and [ESLint][10] to lint files.
+[Prettier][11] is used to format code, and [ESLint][12] to lint files.
 
 **Prettier Configuration**
 
@@ -227,18 +209,18 @@ along with an accompanying `@module` annotation.
 
 ### Documentation
 
-- JavaScript & TypeScript: [JSDoc][11], linted with [`eslint-plugin-jsdoc`][12]
+- JavaScript & TypeScript: [JSDoc][13], linted with [`eslint-plugin-jsdoc`][14]
 
 Before making a pull request, be sure your code is well documented, as it will
 be part of your code review.
 
 ### Testing
 
-This project uses [Jest][13] as its test runner. To run _all_ the tests in this
+This project uses [Jest][15] as its test runner. To run _all_ the tests in this
 project, run `yarn test` from the project root.
 
-Husky is configured to run tests before every push. Use [`describe.skip`][14] or
-[`it.skip`][15] if you need to create a new issue regarding the test, or need to
+Husky is configured to run tests before every push. Use [`describe.skip`][16] or
+[`it.skip`][17] if you need to create a new issue regarding the test, or need to
 make a `wip` commit.
 
 ### Getting Help
@@ -351,7 +333,7 @@ Before releasing, the following steps must be completed:
      correct workspace publish command
 3. Decide what version bump the release needs (major, minor, patch)
    - versioning
-     - `yarn release` (determines [bumps based on commits][16])
+     - `yarn release` (determines [bumps based on commits][18])
      - `yarn release --first-release`
      - `yarn release --release-as major`
      - `yarn release --release-as minor`
@@ -367,7 +349,7 @@ Before releasing, the following steps must be completed:
    - once the PR is merged, the deployment workflow will be triggered
    - the maintainer who approved the PR should check to make sure the workflow
      completes all jobs as expected. if successful, the workflow will:
-     - publish package to the [GitHub Package Registry][17] and
+     - publish package to the [GitHub Package Registry][19] and
      - update the production branch (merge branch `next` into `main`)
      - publish the drafted release
    - the maintainer who approved the PR should go through the PR's linked issues
@@ -377,19 +359,21 @@ Before releasing, the following steps must be completed:
 
 [1]: https://www.atlassian.com/software/jira
 [2]: https://yarnpkg.com/advanced/lifecycle-scripts#environment-variables
-[3]: https://yarnpkg.com/getting-started/migration
-[4]: https://github.com/features/packages
-[5]:
+[3]: https://github.com/ohmyzsh/ohmyzsh
+[4]: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/dotenv
+[5]: https://yarnpkg.com/getting-started/migration
+[6]: https://github.com/features/packages
+[7]:
   https://docs.github.com/en/packages/learn-github-packages/about-permissions-for-github-packages#about-scopes-and-permissions-for-package-registries
-[6]: https://github.com/typicode/husky
-[7]: https://www.conventionalcommits.org
-[8]: https://github.com/conventional-changelog/commitlint
-[9]: https://prettier.io
-[10]: https://eslint.org
-[12]: https://jsdoc.app
-[13]: https://github.com/gajus/eslint-plugin-jsdoc
-[14]: https://jestjs.io
-[15]: https://jestjs.io/docs/api#describeskipname-fn
-[16]: https://jestjs.io/docs/api#testskipname-fn
-[16]: https://www.conventionalcommits.org/en/v1.0.0
-[17]: https://github.com/features/packages
+[8]: https://github.com/typicode/husky
+[9]: https://www.conventionalcommits.org
+[10]: https://github.com/conventional-changelog/commitlint
+[11]: https://prettier.io
+[12]: https://eslint.org
+[13]: https://jsdoc.app
+[14]: https://github.com/gajus/eslint-plugin-jsdoc
+[15]: https://jestjs.io
+[16]: https://jestjs.io/docs/api#describeskipname-fn
+[17]: https://jestjs.io/docs/api#testskipname-fn
+[18]: https://www.conventionalcommits.org/en/v1.0.0
+[19]: https://github.com/features/packages

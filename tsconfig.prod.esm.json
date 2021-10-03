@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "esnext"],
-    "module": "esnext",
-    "outDir": "esm",
-    "target": "esnext"
+    "outDir": "./esm"
   },
   "extends": "./tsconfig.prod.json"
 }

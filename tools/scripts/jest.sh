@@ -4,11 +4,12 @@
 #
 # Refernces:
 #
-# - https://github.com/entropitor/dotenv-cli#cascading-env-variables
 # - https://jestjs.io/docs/next/cli
 # - https://github.com/hipstersmoothie/jest-github-reporter
 
 # 1. Clear terminal
-# 2. Set test environment variabls and run Jest
+# 2. Source environment variables
+# 3. Run Jest
 clear
-dotenv -c test -- jest --passWithNoTests --testLocationInResults $@
+loadenv -c test
+jest -i --passWithNoTests --testLocationInResults $@

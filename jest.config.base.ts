@@ -1,8 +1,7 @@
 import type { Config } from '@jest/types'
-import { jsWithTsESM as preset } from 'ts-jest/presets'
+import { parse } from 'comment-json'
+import fs from 'fs-extra'
 import { pathsToModuleNameMapper } from 'ts-jest/utils'
-import NODE_MODULES from './tools/helpers/nm-string'
-import { compilerOptions } from './tsconfig.json'
 
 /**
  * @file Jest Configuration - Base
@@ -10,22 +9,26 @@ import { compilerOptions } from './tsconfig.json'
  * @see https://orlandobayo.com/blog/monorepo-testing-using-jest
  */
 
+const { compilerOptions } = parse(fs.readFileSync('./tsconfig.json').toString())
+
+const NODE_MODULES = process.env.NODE_MODULES as string
 const TYPE = 'e2e|functional|integration'
 const prefix = '<rootDir>'
 
 const config: Config.InitialOptions = {
-  ...preset,
   clearMocks: true,
   globals: {
     'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.test.json'
+      tsconfig: '<rootDir>/tsconfig.test.json',
+      useESM: true
     }
   },
-  moduleDirectories: [NODE_MODULES],
   moduleFileExtensions: ['node', 'js', 'json', 'ts'],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix }),
+  preset: 'ts-jest/presets/js-with-ts-esm',
   prettierPath: `<rootDir>/${NODE_MODULES}/prettier`,
   reporters: ['default', 'jest-github-reporter'],
+  resolver: '<rootDir>/tools/loaders/package-resolver.cjs',
   roots: ['<rootDir>/__mocks__', '<rootDir>/src'],
   setupFiles: ['<rootDir>/__tests__/config/setup.ts'],
   setupFilesAfterEnv: [
@@ -34,6 +37,9 @@ const config: Config.InitialOptions = {
   ],
   testRegex: `(/__tests__/)(spec/(${TYPE}))?(.*)(${TYPE})?.spec.ts$`,
   testRunner: 'jest-jasmine2',
+  transformIgnorePatterns: [
+    `${NODE_MODULES}/(?!(ansi-styles|escape-string-regexp|figures|is-unicode-supported)/)`
+  ],
   verbose: true
 }
 
