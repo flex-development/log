@@ -87,7 +87,7 @@ jobs:
       PAT_GPR: ${{ secrets.PAT_GPR_ADMIN }}
     strategy:
       matrix:
-        node: [16]
+        node: [12]
     steps:
       - id: checkout
         name: Checkout branch
@@ -108,14 +108,17 @@ jobs:
         run: yarn --immutable
         env:
           NODE_AUTH_TOKEN: ${{ env.PAT_GPR }}
+      - id: env
+        name: Source environment variables
+        working-directory: ${{ needs.deployment-info.outputs.directory }}
+        run: source .env.production .env
       - id: build
         name: Build project
         working-directory: ${{ needs.deployment-info.outputs.directory }}
         run: yarn build --tarball
         env:
-          NODE_ENV: production
-          NODE_OPTIONS: -r tsconfig-paths/register
-          TS_NODE_PROJECT: ${{ github.workspace }}/tsconfig.prod.json
+          NODE_ENV: ${{ env.NODE_ENV }}
+          NODE_OPTIONS: ${{ env.NODE_OPTIONS }}
       - id: publish-to-gpr
         name: Publish package [GPR]
         working-directory: ${{ needs.deployment-info.outputs.directory }}

@@ -1,3 +1,5 @@
+import { jest } from '@jest/globals'
+
 /**
  * @file Test Configuration - Setup
  * @module tests/config/setup

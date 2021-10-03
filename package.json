@@ -22,12 +22,62 @@
     "access": "public",
     "directory": "./"
   },
+  "type": "module",
   "files": [
     "cjs",
     "esm",
     "types",
     "CHANGELOG.md"
   ],
+  "exports": {
+    ".": {
+      "import": "./esm/index.js",
+      "require": "./cjs/index.js"
+    },
+    "./config/*": {
+      "import": "./esm/config/*.js",
+      "require": "./cjs/config/*.js"
+    },
+    "./cjs/*": "./cjs/*.js",
+    "./enums": {
+      "import": "./esm/enums/index.js",
+      "require": "./cjs/enums/index.js"
+    },
+    "./enums/*": {
+      "import": "./esm/enums/*.js",
+      "require": "./cjs/enums/*.js"
+    },
+    "./esm/*": "./esm/*.js",
+    "./interfaces": {
+      "import": "./esm/interfaces/index.js",
+      "require": "./cjs/interfaces/index.js"
+    },
+    "./interfaces/*": {
+      "import": "./esm/interfaces/*.js",
+      "require": "./cjs/interfaces/*.js"
+    },
+    "./log": {
+      "import": "./esm/log.js",
+      "require": "./cjs/log.js"
+    },
+    "./package.json": "./package.json",
+    "./types": {
+      "import": "./esm/types/index.js",
+      "require": "./cjs/types/index.js"
+    },
+    "./types/*": {
+      "import": "./esm/types/*.js",
+      "require": "./cjs/types/*.js"
+    },
+    "./utils": {
+      "import": "./esm/utils/index.js",
+      "require": "./cjs/utils/index.js"
+    },
+    "./utils/*": {
+      "import": "./esm/utils/*.js",
+      "require": "./cjs/utils/*.js"
+    }
+  },
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
   "types": "./types/index.d.ts",
@@ -45,10 +95,10 @@
     "fix:format": "prettier --write .",
     "fix:style": "yarn check:style --fix --cache",
     "test": "bash ./tools/scripts/jest.sh",
-    "build": "ts-node ./tools/cli/build",
+    "build": "node ./tools/cli/build.ts",
     "prepack": "toggle-scripts -postinstall && yarn build",
     "postpack": "toggle-scripts +postinstall",
-    "release": "ts-node ./tools/cli/release",
+    "release": "node ./tools/cli/release.ts",
     "prepublishOnly": "toggle-scripts -prepack",
     "postpublish": "toggle-scripts +prepack"
   },
@@ -56,7 +106,7 @@
     "@flex-development/tutils": "3.1.7",
     "@types/chalk": "2.2.0",
     "chalk": "4.1.2",
-    "figures": "3.2.0",
+    "figures": "4.0.0",
     "lodash.merge": "4.6.2"
   },
   "devDependencies": {
@@ -67,6 +117,7 @@
     "@commitlint/format": "13.2.0",
     "@commitlint/types": "13.2.0",
     "@flex-development/grease": "2.0.0",
+    "@jest/globals": "27.2.4",
     "@jest/types": "27.2.4",
     "@log/config": "link:src/config",
     "@log/enums": "link:src/enums",
@@ -83,14 +134,16 @@
     "@types/lodash.pick": "4.4.6",
     "@types/mvdan-sh": "0.5.1",
     "@types/node": "16.10.2",
+    "@types/resolve": "1.20.1",
     "@types/rimraf": "3.0.2",
     "@types/shelljs": "0.8.9",
     "@typescript-eslint/eslint-plugin": "4.32.0",
     "@typescript-eslint/parser": "4.32.0",
     "@vates/toggle-scripts": "1.0.0",
     "@zerollup/ts-transform-paths": "1.7.18",
-    "ansi-styles": "4.3.0",
-    "concurrently": "6.2.2",
+    "ansi-styles": "6.1.0",
+    "comment-json": "4.1.1",
+    "concurrently": "6.3.0",
     "dotenv-cli": "4.0.0",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
@@ -112,13 +165,13 @@
     "jest-extended": "0.11.5",
     "jest-github-reporter": "1.0.2",
     "jest-mock-console": "1.2.3",
-    "lint-staged": "11.1.2",
+    "lint-staged": "11.1.4",
     "lodash.join": "4.0.1",
     "lodash.omit": "4.5.0",
     "lodash.pick": "4.4.0",
     "prettier": "2.4.1",
     "prettier-plugin-sh": "0.7.1",
-    "read-pkg": "5.2.0",
+    "read-pkg": "7.0.0",
     "replace-in-file": "6.2.0",
     "rimraf": "3.0.2",
     "shelljs": "0.8.4",
@@ -142,7 +195,7 @@
     }
   },
   "engines": {
-    "node": ">=15.0.0",
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0",
     "yarn": "3.0.2"
   },
   "env": {

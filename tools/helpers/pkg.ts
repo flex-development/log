@@ -1,5 +1,5 @@
 import type { PackageJson } from 'read-pkg'
-import read from 'read-pkg'
+import { readPackageSync } from 'read-pkg'
 
 /**
  * @file Helpers - Get Package Data
@@ -13,9 +13,8 @@ import read from 'read-pkg'
  * @return {PackageJson} `package.json` data
  */
 const pkg = (cwd: string = process.cwd()): PackageJson => {
-  const data = read.sync({ cwd, normalize: false })
-
-  return { ...data, _id: `${data.name}@${data.version}` }
+  const data = readPackageSync({ cwd, normalize: false })
+  return { ...data, _id: `${data.name}@${data.version}` } as PackageJson
 }
 
 /**

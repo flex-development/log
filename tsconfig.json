@@ -6,8 +6,8 @@
     "checkJs": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["dom", "es2018"],
-    "module": "commonjs",
+    "lib": ["es2019", "es2020.bigint", "es2020.promise", "es2020.string"],
+    "module": "es2020",
     "moduleResolution": "node",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
@@ -29,10 +29,13 @@
     },
     "preserveConstEnums": true,
     "pretty": true,
+    // Should work with NODE_OPTIONS='--experimental-json-modules' flag
+    // See: https://nodejs.org/api/esm.html#esm_json_modules
     "resolveJsonModule": true,
     "rootDir": "./",
     "strict": true,
-    "target": "es2018"
+    // Node.js 12
+    "target": "es2019"
   },
   "exclude": ["**/node_modules", "./build", "./cjs", "./esm", "./types"],
   "files": ["typings/jest.d.ts"],
@@ -45,5 +48,13 @@
     "*.cjs",
     "*.js",
     "*.ts"
-  ]
+  ],
+  "ts-node": {
+    "moduleTypes": {
+      ".commitlintrc.ts": "cjs",
+      "jest.config.base.ts": "cjs",
+      "jest.config.ts": "cjs"
+    },
+    "transpileOnly": true
+  }
 }

@@ -10,6 +10,7 @@ import { hideBin } from 'yargs/helpers'
 import exec from '../helpers/exec'
 import fixNodeModulePaths from '../helpers/fix-node-module-paths'
 import pkg, { $workspace } from '../helpers/pkg'
+import useDualExports from '../helpers/use-dual-exports'
 
 /**
  * @file CLI - Build Workflow
@@ -181,6 +182,8 @@ try {
 
     // Run build command
     if (exec(`ttsc -p ${tsconfig}`, argv.dryRun) || argv.dryRun) {
+      // Force `module.exports` use in `cjs` files
+      if (format === 'cjs') useDualExports(`./${format}/**`)
       logger(argv, `build ${format}`)
     }
   }

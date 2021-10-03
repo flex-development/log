@@ -2,7 +2,6 @@ import logger from '@flex-development/grease/utils/logger.util'
 import LogLevel from '@log/enums/log-level.enum'
 import type { ReplaceInFileConfig, ReplaceResult } from 'replace-in-file'
 import replace from 'replace-in-file'
-import NODE_MODULES from './nm-string'
 
 /**
  * @file Helpers - Fix Node Module Import Paths
@@ -17,7 +16,7 @@ import NODE_MODULES from './nm-string'
  */
 const OPTIONS: ReplaceInFileConfig = {
   files: ['./cjs/**/*', './esm/**/*'],
-  from: new RegExp(`(../.*)?(${NODE_MODULES}/)`, 'g'),
+  from: new RegExp(`(../.*)?(${process.env.NODE_MODULES}/)`, 'g'),
   to: ''
 }
 
