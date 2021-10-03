@@ -116,6 +116,10 @@ jobs:
         name: Build project
         working-directory: ${{ needs.deployment-info.outputs.directory }}
         run: yarn build --tarball
+      - id: unset-node-options
+        name: Unset NODE_OPTIONS
+        working-directory: ${{ needs.deployment-info.outputs.directory }}
+        run: echo "NODE_OPTIONS=''" >> $GITHUB_ENV
       - id: publish-to-gpr
         name: Publish package [GPR]
         working-directory: ${{ needs.deployment-info.outputs.directory }}
@@ -137,10 +141,6 @@ jobs:
         run: npm publish ${{ needs.deployment-info.outputs.publish_args }}
         env:
           NODE_AUTH_TOKEN: ${{ env.NPM_TOKEN }}
-      - id: env-post
-        name: Post Set environment variables
-        working-directory: ${{ needs.deployment-info.outputs.directory }}
-        run: echo "NODE_OPTIONS=''" >> $GITHUB_ENV
   update-production-branch:
     name: Update production branch
     needs: publish-package
