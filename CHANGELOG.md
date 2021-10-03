@@ -2,6 +2,72 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0-dev.0](https://github.com/flex-development/log/compare/log@2.0.0...log@3.0.0-dev.0) (2021-10-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* use esm
+* fix enum exports parsing
+* kebab case filenames for `src` files
+
+### :nail_care: Formatting & Structure
+
+* kebab case filenames for `src` files ([c59be49](https://github.com/flex-development/log/commit/c59be49eed4642cc9ea39565f2ca791c48751367))
+
+
+### :book: Documentation
+
+* fix module annotations in `tools` directory ([48f732b](https://github.com/flex-development/log/commit/48f732b62246de6fafd3f6277403baf124dd08b3))
+* remove `docs/examples` directory ([c60e611](https://github.com/flex-development/log/commit/c60e611f3824716bfa2b6f45de1dc031854c5f22))
+* update `release/*` naming conventions ([8c2b0e2](https://github.com/flex-development/log/commit/8c2b0e223d3dc55882200f60df5d50b71a9f9941))
+* update environment setup, merge strategies, and release docs ([46de44f](https://github.com/flex-development/log/commit/46de44f0ef9aa0471aa91229329e95c22a100b14))
+
+
+### :pencil2: Housekeeping
+
+* add `eslint-plugin-unicorn` ([66ae749](https://github.com/flex-development/log/commit/66ae749ccc6af9a7162ad7d8749c9b6f222d74fb))
+* add `github` commit scope ([34a50f5](https://github.com/flex-development/log/commit/34a50f562dab1c4970bf3aa3bc7ef59e99edaef2))
+* **github:** reorganize labels ([5a3c380](https://github.com/flex-development/log/commit/5a3c380be18c3f5bde9a103dcc068e32e30ddc72))
+* re-add `scripts` commit scope ([82293a8](https://github.com/flex-development/log/commit/82293a863a97cf46bc566052a68641ca0aad9472))
+* **release:** set package version to `3.0.0-dev.0` ([dedc655](https://github.com/flex-development/log/commit/dedc655788eb84b0ea8fe6d8755e5e0dfebc1b29))
+* **scripts:** add `check:upgrades` script ([ae4209e](https://github.com/flex-development/log/commit/ae4209ed667a0a6db99f8ac36826555c27036b10))
+* **scripts:** disable `postinstall` during git installs ([c39b762](https://github.com/flex-development/log/commit/c39b762b349c85b16d759803eb577f63b612681e))
+* **tools:** add `prerelease` option to `release` cli ([9c10682](https://github.com/flex-development/log/commit/9c10682235190e606495fa5d9cd386e279c78446))
+* **tools:** add `ReleaseOptions.path` ([b7841d8](https://github.com/flex-development/log/commit/b7841d8578e0b092f28a152afaf083b8e0e73fc1))
+* **tools:** add option aliases to `ReleaseOptions` ([34e2a18](https://github.com/flex-development/log/commit/34e2a18c9458b9d3b062e62dc2127fcf6e568315))
+* **tools:** create tarballs from `build` script ([214afcc](https://github.com/flex-development/log/commit/214afcc99b51f3cd06e57862e2996419636615e0))
+* **tools:** move scripts to `tools` directory ([c5522e6](https://github.com/flex-development/log/commit/c5522e6fbbb5265365471e492aca00194dd3dcdc))
+* **tools:** rename package data helper ([ae8238c](https://github.com/flex-development/log/commit/ae8238c6921e7da38895ef2155a5052db19532bd))
+* **tools:** update `build` and `release` cli options ([1930db5](https://github.com/flex-development/log/commit/1930db5b851c400686c31fe95636ffcf26ecc8ad))
+* **tools:** update `exec` return value ([c763f8e](https://github.com/flex-development/log/commit/c763f8e13cd7ee1ece4e37911fec62fe5ea126e2))
+* **tools:** update release tag prefixing ([c4d189b](https://github.com/flex-development/log/commit/c4d189b52c907db00efdcc871c9d8c56ff0c11ef))
+* **tools:** use `yarn pack` in `postchangelog` script ([6b3ab68](https://github.com/flex-development/log/commit/6b3ab68609ca4a730c89a652a063e11c6978be83))
+* **typescript:** cleanup tsconfigs before esm migration ([0cd74d7](https://github.com/flex-development/log/commit/0cd74d7e5177a951fe0ffeb4cd048f47caabfb5e))
+* update bug report issue template ([0a52651](https://github.com/flex-development/log/commit/0a52651e58d72ce23deeb42d58f3d66c01ce6393))
+* use `cjs` extensions ([abaabd1](https://github.com/flex-development/log/commit/abaabd10648e9bc61cbe75f49aa6ea3ff76dc911))
+* use typescript `commitlint` config ([e6c7aa2](https://github.com/flex-development/log/commit/e6c7aa2567b06c28b6fbcfa363037320354c1445))
+* **yarn:** update `.yarnrc.yml` env var names ([57ad692](https://github.com/flex-development/log/commit/57ad69236639cfd51fd590f53ca2355e8d599921))
+
+
+### :truck: Continuous Integration & Deployment
+
+* **workflows:** add ids to `automate-pr-reviews` steps ([e39878c](https://github.com/flex-development/log/commit/e39878c9eb8f258b5ca9466a4f8dbae8b6d0aed6))
+* **workflows:** support new tag prefix in `continuous-deployment` workflow ([9188fcc](https://github.com/flex-development/log/commit/9188fcc3b2af0b0e526506bf5bd293569a0abc95))
+* **workflows:** update environment variables and workflow syntax ([0078377](https://github.com/flex-development/log/commit/0078377d10c40563c430c3983ba806609774a400))
+
+
+### :hammer: Build
+
+* **deps-dev:** drop `@flex-development/exceptions@4.0.1` ([e03aa28](https://github.com/flex-development/log/commit/e03aa28f553985b6b236feec8176f315cbc8546f))
+* **deps-dev:** drop `lodash.merge@4.6.2` ([afbd4fa](https://github.com/flex-development/log/commit/afbd4fafc05a16ab56dd83cefe598f18d49ea159))
+* **deps-dev:** interactively upgrade dependencies ([9112437](https://github.com/flex-development/log/commit/9112437145b257009a9c30c8b0085d1ad66cd2b9))
+* **deps-opt:** make `shelljs` deps optional ([f0df520](https://github.com/flex-development/log/commit/f0df5203d276cf1d939bd2ea39722e695327aed2))
+* **deps-peer:** require `typescript>=4.4.0` ([65614ec](https://github.com/flex-development/log/commit/65614ec7e92de710a2e8d43e6a5a1b9ec734b2cb))
+* fix enum exports parsing ([1661ebd](https://github.com/flex-development/log/commit/1661ebda146544cccda140dd573ba2d3191a72d3))
+* use esm ([4487c15](https://github.com/flex-development/log/commit/4487c15fb8f8aeaa2b57f2a63ea0191f9012931d))
+* **yarn:** deduplicate dependencies ([01b3adf](https://github.com/flex-development/log/commit/01b3adfff5f4ad4644070607525be48c96c109a5))
+
 ## [2.0.0](https://github.com/flex-development/log/compare/v1.0.1...v2.0.0) (2021-09-16)
 
 
