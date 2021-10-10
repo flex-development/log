@@ -5,11 +5,11 @@ import normalizeOptions from '@log/utils/normalize-options.util'
 import type { RestoreConsole } from 'jest-mock-console'
 import mockConsole from 'jest-mock-console'
 import sh from 'shelljs'
-import testSubject from '../log'
+import testSubject from '../main'
 
 /**
- * @file Functional Tests - log
- * @module log/tests/functional/log
+ * @file Functional Tests - main
+ * @module log/tests/functional/main
  */
 
 jest.mock('@log/utils/format.util')
@@ -21,7 +21,7 @@ const mockNormalizeOptions = normalizeOptions as jest.MockedFunction<
   typeof normalizeOptions
 >
 
-describe('functional:log', () => {
+describe('functional:main', () => {
   const restoreConsole: RestoreConsole = mockConsole(['log'])
   const spy_console_log = jest.spyOn(console, 'log')
 

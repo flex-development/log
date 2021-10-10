@@ -12,8 +12,8 @@ import format from './utils/format.util'
 import normalizeOptions from './utils/normalize-options.util'
 
 /**
- * @file Log Method
- * @module log/log
+ * @file Main Method
+ * @module log/main
  */
 
 /**

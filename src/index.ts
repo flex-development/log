@@ -1,4 +1,4 @@
-import log from './log'
+import log from './main'
 
 /**
  * @file Package Entry Point
