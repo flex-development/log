@@ -45,17 +45,22 @@ const config: UserConfig = {
       2,
       'always',
       [
+        'cjs',
+        'config',
         'deploy',
         'deps',
         'deps-dev',
         'deps-opt',
         'deps-peer',
+        'esm',
         'github',
+        'hybrid',
         'release',
         'scripts',
         'tests',
         'tools',
         'typescript',
+        'utils',
         'workflows',
         'yarn'
       ]
