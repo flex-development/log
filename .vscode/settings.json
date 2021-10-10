@@ -10,5 +10,6 @@
     "pre-commit": "shellscript",
     "pre-push": "shellscript"
   },
-  "prettier.configPath": "./.prettierrc.cjs"
+  "prettier.configPath": "./.prettierrc.cjs",
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
