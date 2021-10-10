@@ -20,10 +20,15 @@ module.exports = {
   trailingComma: 'none',
   overrides: [
     {
-      files: '*.sh',
+      files: [
+        '*.sh',
+        '.husky/commit-msg',
+        '.husky/pre-commit',
+        '.husky/pre-push'
+      ],
       options: {
         functionNextLine: true,
-        indent: 4,
+        indent: 2,
         keepComments: true,
         keepPadding: false,
         parser: 'sh',
