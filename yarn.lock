@@ -769,10 +769,7 @@ __metadata:
     "@types/chalk": 2.2.0
     "@types/fs-extra": 9.0.13
     "@types/jest": 27.0.2
-    "@types/lodash.join": 4.0.6
     "@types/lodash.merge": 4.6.6
-    "@types/lodash.omit": 4.5.6
-    "@types/lodash.pick": 4.4.6
     "@types/mvdan-sh": 0.5.1
     "@types/node": 16.10.2
     "@types/resolve": 1.20.1
@@ -810,10 +807,7 @@ __metadata:
     jest-github-reporter: 1.0.2
     jest-mock-console: 1.2.3
     lint-staged: 11.1.4
-    lodash.join: 4.0.1
     lodash.merge: 4.6.2
-    lodash.omit: 4.5.0
-    lodash.pick: 4.4.0
     prettier: 2.4.1
     prettier-plugin-sh: 0.7.1
     read-pkg: 7.0.0
@@ -1662,15 +1656,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash.join@npm:4.0.6":
-  version: 4.0.6
-  resolution: "@types/lodash.join@npm:4.0.6"
-  dependencies:
-    "@types/lodash": "*"
-  checksum: 839d9ed766b71d880580e82c00b6458bd893b49a7900a2e102951180a68a8602199018e369a504ffbc51c3163520f8e22d2d6595990b037a46900141984e706c
-  languageName: node
-  linkType: hard
-
 "@types/lodash.merge@npm:4.6.6":
   version: 4.6.6
   resolution: "@types/lodash.merge@npm:4.6.6"
@@ -1680,21 +1665,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash.omit@npm:4.5.6, @types/lodash.omit@npm:latest":
+"@types/lodash.omit@npm:latest":
   version: 4.5.6
   resolution: "@types/lodash.omit@npm:4.5.6"
   dependencies:
     "@types/lodash": "*"
   checksum: ad28ecad31cb08cbdd52a24d3557150bc935da3b0b164a36393330e0fb5dbd09485fb85a3d5ea74ee3f91671d88dd55663887cfad88c5b83ce0f9ca16ed9fc11
-  languageName: node
-  linkType: hard
-
-"@types/lodash.pick@npm:4.4.6":
-  version: 4.4.6
-  resolution: "@types/lodash.pick@npm:4.4.6"
-  dependencies:
-    "@types/lodash": "*"
-  checksum: c53b5efc8bf69583aecd823ecb23ee489d44cc741246f69b0add0756dde2a53f94c86139bf77a95222ccdc992eee63dfb1be41f4f03ab18266fbb085d7ba30de
   languageName: node
   linkType: hard
 
