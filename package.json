@@ -29,9 +29,6 @@
     "types",
     "CHANGELOG.md"
   ],
-  "bin": {
-    "loadenv": "./tools/cli/loadenv.cjs"
-  },
   "exports": {
     ".": {
       "import": "./esm/index.js",

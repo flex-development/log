@@ -836,8 +836,6 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  bin:
-    loadenv: ./tools/cli/loadenv.cjs
   languageName: unknown
   linkType: soft
 
