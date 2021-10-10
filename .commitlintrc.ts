@@ -51,7 +51,6 @@ const config: UserConfig = {
         'deps-opt',
         'deps-peer',
         'github',
-        'log',
         'release',
         'scripts',
         'tests',
