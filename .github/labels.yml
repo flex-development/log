@@ -32,6 +32,10 @@
 # Scope labels
 # Project-specific groups for issues, pull requests, and discussions.
 
+- name: scope:ci
+  description: CI/CD
+  color: 74cefc
+
 - name: scope:console
   description: Console-specific features
   color: 74cefc
@@ -60,12 +64,20 @@
   description: Testing
   color: 74cefc
 
+- name: scope:tools
+  description: Project tools (CLIs, helpers, and scripts)
+  color: 74cefc
+
 - name: scope:typescript
   description: TypeScript support (enums, interfaces, types)
   color: 74cefc
 
 - name: scope:utils
   description: Utilities
+  color: 74cefc
+
+- name: scope:yarn
+  description: Yarn updates
   color: 74cefc
 
 # Status labels
