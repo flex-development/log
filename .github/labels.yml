@@ -49,7 +49,7 @@
   color: 74cefc
 
 - name: scope:scripts
-  description: Project scripts (not source code)
+  description: Package scripts
   color: 74cefc
 
 - name: scope:shell
