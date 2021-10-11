@@ -1,8 +1,8 @@
-import { lstatSync } from 'fs'
+import fs from 'fs-extra'
 import path from 'path'
 import { getFormat as getFormatTs, resolve as resolveTs } from 'ts-node/esm'
 import { createMatchPath, loadConfig } from 'tsconfig-paths'
-import useDualExports from '../helpers/use-dual-exports'
+import useDualExports from '../helpers/use-dual-exports.mjs'
 
 /**
  * @file Helpers - Custom ESM Loader
@@ -40,6 +40,10 @@ export const getFormat = async (url, ctx, defaultGetFormat) => {
   // Support extensionless files in `bin` scripts
   if (/^file:\/\/\/.*\/bin\//.test(url) && !ext) return { format: 'commonjs' }
 
+  // ! Fixes `TypeError [ERR_INVALID_MODULE_SPECIFIER]: Invalid module
+  // ! "file:///$HOME/node_modules/typescript-esm/dist/tsc-esm"`
+  if (url.includes('typescript-esm/dist/tsc-esm')) return { format: 'commonjs' }
+
   // Load TypeScript files as ESM
   // See `tsconfig.json#ts-node.moduleTypes` for file-specific overrides
   if (ext === '.ts') return { format: 'module' }
@@ -70,7 +74,7 @@ export const resolve = async (specifier, ctx, defaultResolve) => {
   // Update specifier if match was found
   if (match) {
     try {
-      const directory = lstatSync(match).isDirectory()
+      const directory = fs.lstatSync(match).isDirectory()
       specifier = `${match}${directory ? '/index.js' : '.js'}`
     } catch {
       specifier = `${match}.js`

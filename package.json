@@ -31,56 +31,54 @@
   ],
   "exports": {
     ".": {
-      "import": "./esm/index.js",
-      "require": "./cjs/index.js"
+      "import": "./esm/log.mjs",
+      "require": "./cjs/log.cjs"
     },
+    "./*": {
+      "import": "./esm/*.mjs",
+      "require": "./cjs/*.cjs"
+    },
+    "./cjs": "./cjs/index.cjs",
+    "./cjs/*": "./cjs/*.cjs",
     "./config/*": {
-      "import": "./esm/config/*.js",
-      "require": "./cjs/config/*.js"
+      "import": "./esm/config/*.mjs",
+      "require": "./cjs/config/*.cjs"
     },
-    "./cjs/*": "./cjs/*.js",
-    "./enums": {
-      "import": "./esm/enums/index.js",
-      "require": "./cjs/enums/index.js"
-    },
-    "./enums/*": {
-      "import": "./esm/enums/*.js",
-      "require": "./cjs/enums/*.js"
-    },
-    "./esm/*": "./esm/*.js",
+    "./esm": "./esm/index.mjs",
+    "./esm/*": "./esm/*.mjs",
     "./interfaces": {
-      "import": "./esm/interfaces/index.js",
-      "require": "./cjs/interfaces/index.js"
+      "import": "./esm/interfaces/index.mjs",
+      "require": "./cjs/interfaces/index.cjs"
     },
     "./interfaces/*": {
-      "import": "./esm/interfaces/*.js",
-      "require": "./cjs/interfaces/*.js"
+      "import": "./esm/interfaces/*.mjs",
+      "require": "./cjs/interfaces/*.cjs"
     },
     "./log": {
-      "import": "./esm/log.js",
-      "require": "./cjs/log.js"
+      "import": "./esm/log.mjs",
+      "require": "./cjs/log.cjs"
+    },
+    "./main": {
+      "import": "./esm/main.mjs",
+      "require": "./cjs/main.cjs"
     },
     "./package.json": "./package.json",
     "./types": {
-      "import": "./esm/types/index.js",
-      "require": "./cjs/types/index.js"
+      "import": "./esm/types/index.mjs",
+      "require": "./cjs/types/index.cjs"
     },
     "./types/*": {
-      "import": "./esm/types/*.js",
-      "require": "./cjs/types/*.js"
-    },
-    "./utils": {
-      "import": "./esm/utils/index.js",
-      "require": "./cjs/utils/index.js"
+      "import": "./esm/types/*.mjs",
+      "require": "./cjs/types/*.cjs"
     },
     "./utils/*": {
-      "import": "./esm/utils/*.js",
-      "require": "./cjs/utils/*.js"
+      "import": "./esm/utils/*.mjs",
+      "require": "./cjs/utils/*.cjs"
     }
   },
-  "main": "./cjs/index.js",
-  "module": "./esm/index.js",
-  "types": "./types/index.d.ts",
+  "main": "./cjs/log.min.cjs",
+  "module": "./esm/log.min.mjs",
+  "typings": "./types/index.d.ts",
   "scripts": {
     "clean:build": "rimraf ./(cjs|esm|types)",
     "clean:modules": "rimraf ./node_modules",
@@ -117,6 +115,7 @@
     "@commitlint/format": "13.2.0",
     "@commitlint/types": "13.2.0",
     "@flex-development/grease": "2.0.0",
+    "@flex-development/trext": "1.0.0",
     "@jest/globals": "27.2.5",
     "@jest/types": "27.2.5",
     "@log/config": "link:src/config",
@@ -130,13 +129,14 @@
     "@types/jest": "27.0.2",
     "@types/lodash.merge": "4.6.6",
     "@types/mvdan-sh": "0.5.1",
-    "@types/node": "16.10.2",
+    "@types/node": "16.0.0",
     "@types/resolve": "1.20.1",
     "@types/rimraf": "3.0.2",
     "@types/shelljs": "0.8.9",
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
     "@vates/toggle-scripts": "1.0.0",
+    "@vercel/ncc": "0.31.1",
     "@zerollup/ts-transform-paths": "1.7.18",
     "ansi-styles": "6.1.0",
     "comment-json": "4.1.1",
@@ -191,7 +191,7 @@
     }
   },
   "engines": {
-    "node": "^12.20.0 || ^14.13.1 || >=16.0.0",
+    "node": ">=12.20.0",
     "yarn": "3.0.2"
   },
   "env": {

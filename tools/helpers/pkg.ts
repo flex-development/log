@@ -17,19 +17,16 @@ const pkg = (cwd: string = process.cwd()): PackageJson => {
   return { ...data, _id: `${data.name}@${data.version}` } as PackageJson
 }
 
-/**
- * @property {string} $version - Package version
- */
-export const $version: string = pkg().version as string
+/** @property {PackageJson} PACKAGE - package.json data */
+export const $PACKAGE: PackageJson = pkg()
 
-/**
- * @property {string} $workspace - Name of NPM package
- */
-export const $workspace: string = process.env.npm_package_name as string
+/** @property {string} $VERSION - Package version */
+export const $VERSION: string = $PACKAGE.version as string
 
-/**
- * @property {string} name_no_scope - Package name without scope
- */
-export const $workspace_no_scope: string = $workspace.split('/')[1]
+/** @property {string} $WORKSPACE - Name of NPM package */
+export const $WORKSPACE: string = process.env.npm_package_name as string
+
+/** @property {string} name_no_scope - Package name without scope */
+export const $WORKSPACE_NO_SCOPE: string = $WORKSPACE.split('/')[1]
 
 export default pkg

@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
     "declaration": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
     "noEmit": false,
     "noEmitOnError": true,
-    "outDir": "build",
+    "outDir": "./build",
     "plugins": [
       {
         "afterDeclarations": true,
@@ -12,9 +14,9 @@
       }
     ],
     "removeComments": false,
+    "resolveJsonModule": false,
     "rootDir": "./src",
-    "skipLibCheck": true,
-    "sourceMap": true
+    "skipLibCheck": true
   },
   "exclude": [
     "**/__mocks__",

@@ -11,7 +11,7 @@ import { inspect } from 'util'
 import type { Argv } from 'yargs'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-import { $workspace, $workspace_no_scope } from '../helpers/pkg'
+import { $WORKSPACE, $WORKSPACE_NO_SCOPE } from '../helpers/pkg'
 
 /**
  * @file CLI - Release Workflow
@@ -139,17 +139,17 @@ const args = yargs(hideBin(process.argv))
   .wrap(98) as Argv<IGreaseOptions>
 
 /** @property {ReleaseOptions} argv - CLI arguments object */
-const argv: ReleaseOptions = args.argv
+const argv = args.argv as ReleaseOptions
 
 /** @property {IGreaseOptions} options - `grease` options */
 const options: IGreaseOptions = {
   commitAll: true,
   gitTagFallback: false,
   gitdir: process.env.PROJECT_CWD,
-  lernaPackage: $workspace_no_scope,
+  lernaPackage: $WORKSPACE_NO_SCOPE,
   releaseAssets: ['./*.tgz'],
   releaseBranchWhitelist: ['release/*'],
-  releaseCommitMessageFormat: `release: ${$workspace}@{{currentTag}}`,
+  releaseCommitMessageFormat: `release: ${$WORKSPACE}@{{currentTag}}`,
   scripts: {
     postchangelog: `yarn pack -o %s-%v.tgz ${(argv.d && '-n') || ''}`.trim(),
     postcommit: 'git pnv',
@@ -159,7 +159,7 @@ const options: IGreaseOptions = {
   // `continuous-deployment` workflow will create new tag
   skip: { tag: true },
   skipUnstable: false,
-  tagPrefix: `${$workspace_no_scope}@`,
+  tagPrefix: `${$WORKSPACE_NO_SCOPE}@`,
   types: [
     /* eslint-disable sort-keys */
     { type: 'feat', section: ':sparkles: Features' },
@@ -183,7 +183,7 @@ const options: IGreaseOptions = {
 logger(
   argv,
   'starting release workflow',
-  [$workspace, `[dry=${argv.dryRun}]`],
+  [$WORKSPACE, `[dry=${argv.dryRun}]`],
   LogLevel.INFO
 )
 

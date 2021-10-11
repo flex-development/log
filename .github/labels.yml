@@ -36,6 +36,10 @@
   description: CI/CD
   color: 74cefc
 
+- name: scope:cjs
+  description: CommonJS
+  color: 74cefc
+
 - name: scope:console
   description: Console-specific features
   color: 74cefc
@@ -46,6 +50,10 @@
 
 - name: scope:deps
   description: Dependency updates
+  color: 74cefc
+
+- name: scope:esm
+  description: ES modules
   color: 74cefc
 
 - name: scope:log

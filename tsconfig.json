@@ -39,16 +39,7 @@
   },
   "exclude": ["**/node_modules", "./build", "./cjs", "./esm", "./types"],
   "files": ["typings/jest.d.ts"],
-  "include": [
-    "__tests__",
-    "__mocks__",
-    "src",
-    "tools",
-    "typings",
-    "*.cjs",
-    "*.js",
-    "*.ts"
-  ],
+  "include": ["**/*.cjs", "**/.*.cjs", "**/*.mjs", "**/*.ts", "**/.*.ts"],
   "ts-node": {
     "moduleTypes": {
       ".commitlintrc.ts": "cjs",
