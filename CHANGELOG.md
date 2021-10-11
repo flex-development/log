@@ -2,6 +2,51 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-dev.0](https://github.com/flex-development/log/compare/log@3.0.0-dev.0...log@4.0.0-dev.0) (2021-10-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* target `node>=14.18.0`
+* use `.cjs` and `.mjs` extensions, drop `.js`
+* `log.ts` -> `main.ts`
+
+### :bug: Fixes
+
+* `Error: Cannot find module ../loaders/env.cjs` ([512eb0f](https://github.com/flex-development/log/commit/512eb0f8acc2785ada7a58b9f3a12c611e2599a3))
+
+
+### :recycle: Code Improvements
+
+* `log.ts` -> `main.ts` ([b4f9756](https://github.com/flex-development/log/commit/b4f9756dc2c2c7ba4a8bdedd5d93118ed58a5a5c))
+
+
+### :hammer: Build
+
+* **deps-dev:** add `eslint-plugin-markdownlint@0.2.2` ([55c6e3c](https://github.com/flex-development/log/commit/55c6e3c5dbb22ea4a2e891b2791b649de8159d68))
+* **deps-dev:** interactive upgrades ([7ad9d8e](https://github.com/flex-development/log/commit/7ad9d8e03c838102cb240dd389a6debbc7dd06d1))
+* **deps-dev:** remove unused lodash deps ([07919bf](https://github.com/flex-development/log/commit/07919bf32c71437929ad5d1450b39133d315868a))
+* target `node>=14.18.0` ([eaafd89](https://github.com/flex-development/log/commit/eaafd89ff09b96b2fc631ba9e16e4d94deb20f65))
+* use `.cjs` and `.mjs` extensions, drop `.js` ([8bc6191](https://github.com/flex-development/log/commit/8bc61917dfea8b763af03c1c4e887aff35848f9a))
+
+
+### :pencil2: Housekeeping
+
+* add `.eslintrc.base.cjs` ([3ca17b7](https://github.com/flex-development/log/commit/3ca17b76b8f14a93acc8ee164dca8cba06da0be6))
+* add husky hooks to prettier overrides ([0bd2783](https://github.com/flex-development/log/commit/0bd2783ccf0d1730bb501c0b098e17cd337cae62))
+* **github:** add commit scopes - `cjs`, `config`, `esm`, `hybrid`, `utils` ([8212043](https://github.com/flex-development/log/commit/8212043c82760772be5c4176691577d2e0abe9b6))
+* **github:** add labels - `scope:ci`, `scope:tools`, `scope:yarn` ([5ea181c](https://github.com/flex-development/log/commit/5ea181ce7c411a8b8af5fb076c4f86caffb43e60))
+* **github:** drop `log` commit scope ([92abec0](https://github.com/flex-development/log/commit/92abec08d41516f639285d5023ba62f9c066a880))
+* **github:** update `scope:scripts` label description ([c994243](https://github.com/flex-development/log/commit/c9942430ce80ac177d29be522bee48eca354c079))
+* **release:** set package version ([b5260d9](https://github.com/flex-development/log/commit/b5260d94fdfccad168816a5af21e41e6e008afe3))
+* set `typescript.tsdk` ([80e35b6](https://github.com/flex-development/log/commit/80e35b62ffc7dc49a4f5bc0e91e318a41ad8089c))
+* toggle `--experimental-json-modules` flag usage ([84543f7](https://github.com/flex-development/log/commit/84543f7d24b2210de5227c880389bac4a61708b3))
+* **tools:** fix typo in jest script ([218f4ba](https://github.com/flex-development/log/commit/218f4ba9bd74117e19be5a4156eb14b4e75fb0f3))
+* **tools:** update `loadenv` invocations ([7afab48](https://github.com/flex-development/log/commit/7afab4827120bc250da31e8085358f753319daf5))
+* update eslint + prettier ignore patterns ([fe7f9d4](https://github.com/flex-development/log/commit/fe7f9d4d735bbba1f229b7cf1bfe87587c4a8e29))
+* update eslint extensions ([f3dae34](https://github.com/flex-development/log/commit/f3dae349797d42b42fcaf7c359b6b39a77880c98))
+* use husky v7 ([f660aa1](https://github.com/flex-development/log/commit/f660aa156cef73863cd52d14b23714d1b19dfce1))
+
 ## [3.0.0-dev.0](https://github.com/flex-development/log/compare/log@2.0.0...log@3.0.0-dev.0) (2021-10-03)
 
 
