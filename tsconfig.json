@@ -23,7 +23,9 @@
       "@flex-development/grease/*": [
         "node_modules/@flex-development/grease/cjs/*"
       ],
-      "@log": ["src/index.ts"],
+      "@flex-development/log": ["src/index"],
+      "@flex-development/log/*": ["src/*"],
+      "@log": ["src/index"],
       "@log/*": ["src/*"],
       "@tests/fixtures/*": ["__tests__/__fixtures__/*"],
       "@tests/*": ["__tests__/*"]
@@ -40,7 +42,7 @@
   },
   "exclude": ["**/node_modules", "./build", "./cjs", "./esm", "./types"],
   "files": ["typings/jest.d.ts"],
-  "include": ["**/*.cjs", "**/.*.cjs", "**/*.mjs", "**/*.ts", "**/.*.ts"],
+  "include": ["**/*.cjs", "**/*.mjs", "**/*.ts", "**/.*.cjs", "**/.*.ts"],
   "ts-node": {
     "moduleTypes": {
       ".commitlintrc.ts": "cjs",

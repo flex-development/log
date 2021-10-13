@@ -3,7 +3,7 @@
 import grease from '@flex-development/grease'
 import type { IGreaseOptions } from '@flex-development/grease/interfaces'
 import logger from '@flex-development/grease/utils/logger.util'
-import LogLevel from '@log/enums/log-level.enum'
+import LogLevel from '@flex-development/log/enums/log-level.enum'
 import ch from 'chalk'
 import merge from 'lodash.merge'
 import sh from 'shelljs'
@@ -11,7 +11,7 @@ import { inspect } from 'util'
 import type { Argv } from 'yargs'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-import { $WORKSPACE, $WORKSPACE_NO_SCOPE } from '../helpers/pkg'
+import { $WNS, $WORKSPACE } from '../helpers/pkg'
 
 /**
  * @file CLI - Release Workflow
@@ -146,7 +146,7 @@ const options: IGreaseOptions = {
   commitAll: true,
   gitTagFallback: false,
   gitdir: process.env.PROJECT_CWD,
-  lernaPackage: $WORKSPACE_NO_SCOPE,
+  lernaPackage: $WNS,
   releaseAssets: ['./*.tgz'],
   releaseBranchWhitelist: ['release/*'],
   releaseCommitMessageFormat: `release: ${$WORKSPACE}@{{currentTag}}`,
@@ -154,12 +154,12 @@ const options: IGreaseOptions = {
     postchangelog: `yarn pack -o %s-%v.tgz ${(argv.d && '-n') || ''}`.trim(),
     postcommit: 'git pnv',
     postgreaser: 'yarn clean:build && rimraf ./*.tgz',
-    prerelease: 'yarn test --no-cache'
+    prerelease: 'yarn test'
   },
   // `continuous-deployment` workflow will create new tag
   skip: { tag: true },
   skipUnstable: false,
-  tagPrefix: `${$WORKSPACE_NO_SCOPE}@`,
+  tagPrefix: `${$WNS}@`,
   types: [
     /* eslint-disable sort-keys */
     { type: 'feat', section: ':sparkles: Features' },
