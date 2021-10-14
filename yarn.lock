@@ -758,7 +758,7 @@ __metadata:
     "@commitlint/types": 13.2.0
     "@flex-development/grease": 2.0.0
     "@flex-development/trext": 1.0.2
-    "@flex-development/tutils": 3.1.7
+    "@flex-development/tutils": 4.0.3
     "@jest/globals": 27.2.5
     "@jest/types": 27.2.5
     "@log/config": "link:src/config"
@@ -875,6 +875,16 @@ __metadata:
   peerDependencies:
     typescript: ">=2.7"
   checksum: d4ebf259d3072d946d407b254a9ce6a8a53ad2adc8e1e4e7a73aa00970d6ef6cc27a1df0c5c0dff20ea71c6789428ceaec497912e3f0825f902138a1ecfb4479
+  languageName: node
+  linkType: hard
+
+"@flex-development/tutils@npm:4.0.3":
+  version: 4.0.3
+  resolution: "@flex-development/tutils@npm:4.0.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ftutils%2F4.0.3%2Fbf0676c22abc4e0e8a080cdba7ab2fdd13901ab9954ed6c4a392c405e11802cd"
+  peerDependencies:
+    "@types/node": ">=14.0.0"
+    typescript: 4.5.0-beta
+  checksum: c2ca6abb4edc09cf239fc726d885353824d79e5322cecd8d5fa79efd027e8bb0c04c6e5d5506013bea5fa3ca1e39ca910cfc1bc30cf40d0d8ef897410a2b11bc
   languageName: node
   linkType: hard
 
