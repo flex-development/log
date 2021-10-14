@@ -2,6 +2,47 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.1-dev.0](https://github.com/flex-development/log/compare/log@4.0.0-dev.0...log@4.0.1-dev.0) (2021-10-14)
+
+
+### :bug: Fixes
+
+* **cjs:** directory index specifiers ([a5745a9](https://github.com/flex-development/log/commit/a5745a9a3c626703c964d18b5daca6674f52e7f3))
+
+
+### :truck: Continuous Integration & Deployment
+
+* **workflows:** update `continuous-integration` triggers ([bc104d3](https://github.com/flex-development/log/commit/bc104d39c82a1ea1c440ab2d8c1f02d67e988ca6))
+* **workflows:** update `integrity` triggers ([5b1d5c4](https://github.com/flex-development/log/commit/5b1d5c466efa3895da0174f418a8e21f2de73277))
+
+
+### :hammer: Build
+
+* add `.d.ts` file source maps to build output ([6430673](https://github.com/flex-development/log/commit/6430673db2bcb2894d239d2a54e1a484f871af2b))
+* **cjs:** enable downleveling ([310d995](https://github.com/flex-development/log/commit/310d9958a6e47c0c123b75807065cd9d84fae0e8))
+* **typescript:** upgrade to `typescript@4.5.0-beta` ([40db490](https://github.com/flex-development/log/commit/40db490cdd451d8f51e488af6cbd2809e5723711))
+
+
+### :robot: Testing
+
+* **typescript:** disable `noImplicitAny` and `noUncheckedIndexedAccess` ([3dc96ee](https://github.com/flex-development/log/commit/3dc96ee5aac711f6d38bef8d0759645be598e30c))
+
+
+### :pencil2: Housekeeping
+
+* **release:** set package version ([b67a86f](https://github.com/flex-development/log/commit/b67a86f5cec28734ccf4310cbd5a877d767f40c6))
+* **tools:** add `ts-patch`, drop `ttypescript` ([b3c3924](https://github.com/flex-development/log/commit/b3c3924cba2e94fab8f4da12db1c903591ac0264))
+* **tools:** add `tsc-prog` to build workflow ([3b91e90](https://github.com/flex-development/log/commit/3b91e90da1e06ca47d83be04e63abd0c407d5a02))
+* **tools:** enable type checking during build workflow ([59956e3](https://github.com/flex-development/log/commit/59956e3987ec17eb9c47e3f01c84c70e6109bab8))
+* **tools:** update build workflow error handling ([9f85f93](https://github.com/flex-development/log/commit/9f85f930c6af30781b81a151723dae7a4e9651a6))
+* **typescript:** add note about disabling `noUnusedLocals` ([810eb2b](https://github.com/flex-development/log/commit/810eb2b90d1c0f10789fb84954e3283111db523d))
+* **typescript:** enable `exactOptionalPropertyTypes` ([fc668c8](https://github.com/flex-development/log/commit/fc668c896684c64eaf39f2053af0dcad4701270b))
+* **typescript:** enable `noErrorTruncation` ([bec35fc](https://github.com/flex-development/log/commit/bec35fc1f5de33641e8c89039aadafba3669b3cd))
+* **typescript:** enable `noImplicitAny` ([337ab9c](https://github.com/flex-development/log/commit/337ab9ccfdfc4513177312bc405bc128fd18b52c))
+* **typescript:** enable `noPropertyAccessFromIndexSignature` ([9909b4c](https://github.com/flex-development/log/commit/9909b4c3a9cc44a03aba8556477797aac87790b3))
+* **typescript:** enable `noUncheckedIndexedAccess` ([96647ff](https://github.com/flex-development/log/commit/96647ff35b7043990eccc3973e7200f93566f4d1))
+* **typescript:** enable `noUnusedParameters` ([acb9d3e](https://github.com/flex-development/log/commit/acb9d3e462201548fdcaae3d953de256d7a85ded))
+
 ## [4.0.0-dev.0](https://github.com/flex-development/log/compare/log@3.0.0-dev.0...log@4.0.0-dev.0) (2021-10-11)
 
 
