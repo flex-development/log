@@ -80,7 +80,7 @@
   "module": "./esm/log.min.mjs",
   "typings": "./types/index.d.ts",
   "scripts": {
-    "clean:build": "rimraf ./(cjs|esm|types)",
+    "clean:build": "rimraf ./(cjs|esm|types|*.tgz)",
     "clean:modules": "rimraf ./node_modules",
     "clean:yarn": "rimraf .yarn/cache .yarn/*.gz",
     "clean": "concurrently \"yarn:clean:*\"",
