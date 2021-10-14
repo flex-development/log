@@ -3,12 +3,13 @@
   "compilerOptions": {
     "allowJs": true,
     "allowUnreachableCode": false,
+    "alwaysStrict": true,
     "baseUrl": "./",
     "checkJs": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["es2020"],
-    "module": "es2020",
+    "lib": ["esnext"],
+    "module": "es2022",
     "moduleResolution": "node",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
@@ -41,8 +42,19 @@
     "target": "es2020"
   },
   "exclude": ["**/node_modules", "./build", "./cjs", "./esm", "./types"],
-  "files": ["typings/jest.d.ts"],
-  "include": ["**/*.cjs", "**/*.mjs", "**/*.ts", "**/.*.cjs", "**/.*.ts"],
+  "files": [
+    "typings/jest.d.ts",
+    "typings/tools/helpers/use-dual-exports.d.mts"
+  ],
+  "include": [
+    "**/*.cjs",
+    "**/*.cts",
+    "**/*.mjs",
+    "**/*.mts",
+    "**/*.ts",
+    "**/.*.cjs",
+    "**/.*.ts"
+  ],
   "ts-node": {
     "moduleTypes": {
       ".commitlintrc.ts": "cjs",

@@ -22,7 +22,7 @@ module.exports = {
     ecmaFeatures: {
       impliedStrict: true
     },
-    extraFileExtensions: ['.cjs', '.mjs'],
+    extraFileExtensions: ['.cjs', '.cts', '.mjs', '.mts'],
     project: ['./tsconfig.json'],
     sourceType: 'module',
     tsconfigRootDir: __dirname,
@@ -121,6 +121,7 @@ module.exports = {
           'keyof',
           'loadenv',
           'mjs',
+          'ncc',
           'perf',
           'pkgfile',
           'pnv',
@@ -131,12 +132,14 @@ module.exports = {
           'tgz',
           'tsc',
           'tsconfig',
+          'tscpaths',
           'ttsc',
           'typeof',
           'usr',
           'utf',
           'wasm',
           'wip',
+          'vercel',
           'yargs'
         ],
         strings: true
@@ -215,7 +218,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['*.cjs', '**/*.md/*.js'],
+      files: ['**/*.cjs', '**/*.cts', '**/*.md/*.js'],
       parser: `${__dirname}/node_modules/@babel/eslint-parser/lib/index.cjs`,
       parserOptions: {
         requireConfigFile: false
@@ -226,9 +229,15 @@ module.exports = {
       }
     },
     {
-      files: ['*.cjs'],
+      files: ['**/*.cjs', '**/*.cts'],
       rules: {
         'unicorn/prefer-module': 0
+      }
+    },
+    {
+      files: ['**/*.d.cts', '**/*.d.mts'],
+      rules: {
+        'prettier/prettier': 0
       }
     },
     {
@@ -291,11 +300,18 @@ module.exports = {
   root: true,
   settings: {
     'import/parsers': {
-      [require.resolve('@typescript-eslint/parser')]: ['.d.ts', '.ts']
+      [require.resolve('@typescript-eslint/parser')]: [
+        '.cts',
+        '.d.cts',
+        '.d.mts',
+        '.d.ts',
+        '.mts',
+        '.ts'
+      ]
     },
     'import/resolver': {
       [require.resolve('eslint-import-resolver-node')]: {
-        extensions: ['.ts']
+        extensions: ['.cts', '.mts', '.ts']
       },
       [require.resolve('eslint-import-resolver-typescript')]: {
         alwaysTryTypes: true

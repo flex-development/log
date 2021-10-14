@@ -20,6 +20,12 @@ module.exports = {
   trailingComma: 'none',
   overrides: [
     {
+      files: ['*.cts', '*.mts'],
+      options: {
+        parser: 'typescript'
+      }
+    },
+    {
       files: [
         '*.sh',
         '.husky/commit-msg',

@@ -5,21 +5,23 @@ import LogLevel from '@flex-development/log/enums/log-level.enum'
 import type { TrextOptions } from '@flex-development/trext'
 import { trext } from '@flex-development/trext'
 import ncc from '@vercel/ncc'
+import ch from 'chalk'
 import fs from 'fs-extra'
 import path from 'path'
 import replace from 'replace-in-file'
 import sh from 'shelljs'
+import type { ReplaceTscAliasPathsOptions } from 'tsc-alias'
+import { replaceTscAliasPaths as tsTransformPaths } from 'tsc-alias'
 import type { BuildOptions as TsBuildOptions, TsConfig } from 'tsc-prog'
 import tsc from 'tsc-prog'
 import { loadSync as tsconfigLoad } from 'tsconfig/dist/tsconfig'
+import { inspect } from 'util'
 import type { Argv } from 'yargs'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import exec from '../helpers/exec'
-import fixImportPaths from '../helpers/fix-import-paths'
 import { $PACKAGE, $WNS, $WORKSPACE } from '../helpers/pkg'
 import tsconfigCascade from '../helpers/tsconfig-cascade'
-// @ts-expect-error ts(2307)
 import useDualExports from '../helpers/use-dual-exports.mjs'
 
 /**
@@ -28,16 +30,6 @@ import useDualExports from '../helpers/use-dual-exports.mjs'
  */
 
 export type BuildOptions = {
-  /**
-   * Remove stale build directories.
-   *
-   * @default true
-   */
-  clean?: boolean
-
-  /** @see BuildOptions.clean */
-  c?: BuildOptions['clean']
-
   /**
    * See the commands that running `build` would run.
    *
@@ -109,6 +101,12 @@ export type BuildOptions = {
   t?: BuildOptions['tarball']
 }
 
+export type BuildModuleFormatOptions = {
+  alias: ReplaceTscAliasPathsOptions
+  build: TsBuildOptions
+  trext: TrextOptions<'js', 'cjs' | 'mjs'>
+}
+
 /** @property {string[]} BUILD_FORMATS - Module build formats */
 const BUILD_FORMATS: BuildOptions['formats'] = ['cjs', 'esm', 'types']
 
@@ -121,12 +119,6 @@ const CWD: string = process.cwd()
 /** @property {Argv<BuildOptions>} args - CLI arguments parser */
 const args = yargs(hideBin(process.argv))
   .usage('$0 [options]')
-  .option('clean', {
-    alias: 'c',
-    default: true,
-    describe: 'remove stale build directories',
-    type: 'boolean'
-  })
   .option('dryRun', {
     alias: 'd',
     default: false,
@@ -203,51 +195,60 @@ async function build(): Promise<void> {
     exec(`node ./tools/cli/loadenv.cjs -c ${argv.env}`, argv.dryRun)
     logger(argv, `set ${argv.env} environment variables`)
 
+    // Type check source code
+    exec('yarn check:types', argv.dryRun)
+    logger(argv, 'type check source code')
+
     // Build project, convert output extensions, create bundles
     for (const format of formats) {
-      // Get build options
+      // Get module format build options
+      // See: https://github.com/justkey007/tsc-alias#usage
       // See: https://github.com/jeremyben/tsc-prog
-      const options: TsBuildOptions = {
-        ...((): TsConfig => {
-          const { compilerOptions, exclude } = tsconfigCascade([
-            [CWD, 'json'],
-            [CWD, 'prod.json'],
-            [CWD, `prod.${format}.json`]
-          ])
+      // See: https://github.com/flex-development/trext
+      const options: BuildModuleFormatOptions = {
+        alias: {
+          configFile: `tsconfig.prod.${format}.json`,
+          outDir: `./${format}`,
+          silent: true
+        },
+        build: {
+          ...((): TsConfig => {
+            const { compilerOptions, exclude } = tsconfigCascade([
+              [CWD, 'json'],
+              [CWD, 'prod.json'],
+              [CWD, `prod.${format}.json`]
+            ])
 
-          return {
-            compilerOptions,
-            exclude,
-            include: tsconfigLoad(CWD, 'tsconfig.prod.json').config.include
-          }
-        })(),
-        basePath: CWD,
-        clean: { outDir: argv.clean || undefined }
-      }
-
-      // Build project (type checking not available)
-      !dryRun && tsc.build(options)
-      !dryRun && format === 'cjs' && useDualExports(`./${format}/**`)
-      dryRun && logger(argv, `build ${format}`)
-
-      // Fix node module import paths
-      fixImportPaths()
-
-      if (format !== 'types') {
-        // Get extension transformation options
-        // See: https://github.com/flex-development/trext
-        const trext_opts: TrextOptions<'js', 'cjs' | 'mjs'> = {
+            return {
+              compilerOptions,
+              exclude,
+              include: tsconfigLoad(CWD, 'tsconfig.prod.json').config.include
+            }
+          })(),
+          basePath: CWD,
+          clean: { outDir: true }
+        },
+        trext: {
           babel: { sourceMaps: 'inline' as const },
           from: 'js',
           pattern: /.js$/,
           to: `${format === 'cjs' ? 'c' : 'm'}js`
         }
+      }
 
-        // Create bundles (type checking enabled)
+      // Build project
+      !dryRun && tsc.build(options.build)
+      !dryRun && format === 'cjs' && useDualExports(`./${format}/**`)
+
+      // Transform paths
+      !dryRun && tsTransformPaths(options.alias)
+      dryRun && logger(argv, `build ${format}`)
+
+      if (format !== 'types') {
+        // Create bundles
         // See: https://github.com/vercel/ncc
         const BUNDLES = [$WNS, `${$WNS}.min`].map(async name => {
-          const bundle = `${format}/${name}.${trext_opts.to}`
-          // ! Bundle source code to enable type checking
+          const bundle = `${format}/${name}.${options.trext.to}`
           const filename = 'src/index.ts'
 
           if (!dryRun) {
@@ -258,7 +259,9 @@ async function build(): Promise<void> {
               minify: path.extname(name) === '.min',
               production: env === 'production',
               quiet: true,
-              target: options.compilerOptions?.target
+              target: options.build.compilerOptions?.target,
+              // ! @vercel/ncc not compatible with typescript@4.5.0-beta
+              transpileOnly: true
             })
 
             await fs.writeFile(bundle, code, { flag: 'wx+' })
@@ -277,8 +280,8 @@ async function build(): Promise<void> {
         logger(argv, `bundle ${format}`, await Promise.all(BUNDLES))
 
         // Convert TypeScript output to .cjs or .mjs
-        !dryRun && (await trext<'js', 'cjs' | 'mjs'>(`${format}/`, trext_opts))
-        logger(argv, `use .${trext_opts.to} extensions`)
+        !dryRun && (await trext<'js', 'cjs' | 'mjs'>(format, options.trext))
+        logger(argv, `use .${options.trext.to} extensions`)
       }
     }
 
@@ -320,9 +323,12 @@ async function build(): Promise<void> {
       disable_prepack && exec('toggle-scripts +prepack', dryRun)
       disable_prepack && logger(argv, 'renable prepack script')
     }
-  } catch (error) {
-    logger(argv, (error as Error).message, [], LogLevel.ERROR)
-    sh.exit((error as any).code || 1)
+  } catch (err) {
+    const error = err as Error & { code?: number }
+
+    logger(argv, error.message, [], LogLevel.ERROR)
+    sh.echo(ch.red(inspect(error, false, null)))
+    sh.exit(error?.code ?? 1)
   }
 
   // Log workflow end

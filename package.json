@@ -89,6 +89,7 @@
     "check:format": "prettier --check .",
     "check:install": "yarn dlx @yarnpkg/doctor .",
     "check:style": "eslint . --ext cjs,md,mjs,ts",
+    "check:types": "tsc -p tsconfig.prod.json --noEmit",
     "check:upgrades": "yarn upgrade-interactive",
     "fix:format": "prettier --write .",
     "fix:style": "yarn check:style --fix --cache",
@@ -137,7 +138,6 @@
     "@typescript-eslint/parser": "4.33.0",
     "@vates/toggle-scripts": "1.0.0",
     "@vercel/ncc": "0.31.1",
-    "@zerollup/ts-transform-paths": "1.7.18",
     "ansi-styles": "6.1.0",
     "comment-json": "4.1.1",
     "concurrently": "6.3.0",
@@ -173,11 +173,11 @@
     "shelljs": "0.8.4",
     "ts-jest": "27.0.5",
     "ts-node": "10.2.1",
-    "ts-patch": "1.4.4",
+    "tsc-alias": "1.3.10",
     "tsc-prog": "2.2.1",
     "tsconfig": "7.0.0",
     "tsconfig-paths": "3.11.0",
-    "typescript": "4.4.3",
+    "typescript": "4.5.0-beta",
     "yargs": "17.2.1"
   },
   "optionalDependencies": {
@@ -185,7 +185,7 @@
     "shelljs": "0.8.4"
   },
   "peerDependencies": {
-    "typescript": ">=4.4.0"
+    "typescript": "4.5.0-beta"
   },
   "peerDependenciesMeta": {
     "typescript": {
