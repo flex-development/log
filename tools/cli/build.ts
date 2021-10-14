@@ -324,10 +324,10 @@ async function build(): Promise<void> {
       disable_prepack && logger(argv, 'renable prepack script')
     }
   } catch (err) {
-    const error = err as Error & { code?: number }
+    const error = err as Error & { code?: number; stderr?: string }
 
-    logger(argv, error.message, [], LogLevel.ERROR)
-    sh.echo(ch.red(inspect(error, false, null)))
+    if (!error.stderr) logger(argv, error.message, [], LogLevel.ERROR)
+    sh.echo(error.stderr || ch.red(inspect(error, false, null)))
     sh.exit(error?.code ?? 1)
   }
 

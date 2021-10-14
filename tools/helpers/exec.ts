@@ -39,6 +39,7 @@ const exec = (
   if (stdout && stdout.code !== 0) {
     const error = new Error((stdout.stderr || stdout.stdout).toString())
     ;(error as any).code = stdout.code
+    ;(error as any).stderr = error.message
 
     throw error
   }
