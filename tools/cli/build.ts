@@ -4,6 +4,7 @@ import logger from '@flex-development/grease/utils/logger.util'
 import LogLevel from '@flex-development/log/enums/log-level.enum'
 import type { TrextOptions } from '@flex-development/trext'
 import { trext } from '@flex-development/trext'
+// @ts-expect-error ts(7016)
 import ncc from '@vercel/ncc'
 import ch from 'chalk'
 import fs from 'fs-extra'
@@ -213,7 +214,7 @@ async function build(): Promise<void> {
         },
         build: {
           ...((): TsConfig => {
-            const { compilerOptions, exclude } = tsconfigCascade([
+            const { compilerOptions = {}, exclude = [] } = tsconfigCascade([
               [CWD, 'json'],
               [CWD, 'prod.json'],
               [CWD, `prod.${format}.json`]

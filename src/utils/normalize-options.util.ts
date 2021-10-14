@@ -38,7 +38,7 @@ const normalizeOptions = (options: LogOptions = {}): LogOptions => {
   const opts: LogOptions = merge({}, defaults, options)
 
   // Normalize options.level
-  if (opts.level) opts.level = opts.level?.toUpperCase() as LogOptions['level']
+  if (opts.level) opts.level = opts.level.toUpperCase() as Level
 
   // Return normalized options
   return opts
