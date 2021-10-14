@@ -44,7 +44,13 @@ const figure = (options: LogOptions = defaults): string => {
   // Omit if figure is null or an empty string
   if (fig === null || fig === '' || (fig && fig.trim() === '')) return ''
 
-  return ch.bold[color?.figure ?? LogColor[level]](fig || LogFigure[level])
+  // Cast log level (normalizeOptions converts `level` to uppercase)
+  const LEVEL = level as Uppercase<Level>
+
+  // Get log color
+  const COLOR: typeof ch.Color = color?.figure ?? LogColor[LEVEL]
+
+  return ch.bold[COLOR](fig || LogFigure[LEVEL])
 }
 
 export default figure
