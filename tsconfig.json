@@ -13,6 +13,7 @@
     "module": "es2022",
     "moduleResolution": "node",
     "noEmit": true,
+    "noErrorTruncation": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
