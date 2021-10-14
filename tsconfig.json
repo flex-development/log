@@ -20,7 +20,7 @@
     "noUncheckedIndexedAccess": true,
     // Must be disabled to use type-only imports
     "noUnusedLocals": false,
-    "noUnusedParameters": false,
+    "noUnusedParameters": true,
     "paths": {
       "@flex-development/grease": [
         "node_modules/@flex-development/grease/cjs/index"
