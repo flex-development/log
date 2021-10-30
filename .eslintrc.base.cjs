@@ -121,14 +121,20 @@ module.exports = {
           'argv',
           'basedir',
           'cjs',
+          'commitlint',
           'commonjs',
+          'cts',
           'ctx',
+          'dedupe',
           'dotenv',
           'esm',
           'extensionless',
+          'formatter',
           'keyof',
           'loadenv',
           'mjs',
+          'msg',
+          'mts',
           'ncc',
           'perf',
           'pkgfile',
@@ -150,6 +156,7 @@ module.exports = {
           'wasm',
           'wip',
           'vercel',
+          'vscode',
           'yargs'
         ],
         strings: true
@@ -267,8 +274,13 @@ module.exports = {
     {
       files: ['**/.eslintrc.*'],
       rules: {
-        'sort-keys': 0,
         'spellcheck/spell-checker': 0
+      }
+    },
+    {
+      files: ['**/.eslintrc.*', '**/.prettierrc.*'],
+      rules: {
+        'sort-keys': 0
       }
     },
     {
