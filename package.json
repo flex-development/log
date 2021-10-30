@@ -103,7 +103,7 @@
     "postpublish": "toggle-scripts +prepack"
   },
   "dependencies": {
-    "@flex-development/tutils": "4.0.3",
+    "@flex-development/tutils": "4.2.1",
     "@types/chalk": "2.2.0",
     "chalk": "4.1.2",
     "figures": "3.2.0",
