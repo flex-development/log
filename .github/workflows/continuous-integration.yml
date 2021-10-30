@@ -23,7 +23,7 @@ jobs:
       PAT_GPR: ${{ secrets.PAT_GPR_ADMIN }}
     strategy:
       matrix:
-        node: [14.x, 16.x]
+        node: [14.x, 16.0.0]
     steps:
       - id: checkout
         name: Checkout branch
@@ -49,10 +49,7 @@ jobs:
         run: yarn check:format
       - id: check-style
         name: Check code style
-        run: yarn check:style --max-warnings 0
-      - id: check-types
-        name: Check types
-        run: yarn check:types
+        run: yarn check:style
       - id: env
         name: Set build environment variables
         run: node ./tools/cli/loadenv.cjs -gc=test
