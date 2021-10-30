@@ -2,6 +2,44 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.1-dev.1](https://github.com/flex-development/log/compare/log@4.0.1-dev.0...log@4.0.1-dev.1) (2021-10-30)
+
+
+### :truck: Continuous Integration & Deployment
+
+* **workflows:** add `delete-release-branch` job ([d153326](https://github.com/flex-development/log/commit/d1533263558b490baa57f731bf75eb7f4336a148))
+* **workflows:** push to protected branch 'main' ([b7d97ed](https://github.com/flex-development/log/commit/b7d97edf0b16a0f9691b22aedf5dfe22d543eec2))
+* **workflows:** temporarily skip dependency graph check ([35fb2e0](https://github.com/flex-development/log/commit/35fb2e0e4b704fc6d3606a8aac360cbbcc9a3e99))
+* **workflows:** update `integrity` triggers ([18078ee](https://github.com/flex-development/log/commit/18078ee9e40a13553241ed56ae1727162a36171f))
+
+
+### :bug: Fixes
+
+* **cjs:** `Must use import to load ES Module: figures/index.js` ([c811df7](https://github.com/flex-development/log/commit/c811df78e0b90ef929610f7cd26d5bc444b4ba80))
+* **cjs:** missing named exports ([a34228b](https://github.com/flex-development/log/commit/a34228bef713c2e7044cdc66bb1feb938779e682))
+
+
+### :pencil2: Housekeeping
+
+* check code style ([1629db0](https://github.com/flex-development/log/commit/1629db0f05d002ea78f9b765b13f10a1f778eb48))
+* **scripts:** add check:ci script ([2c86c10](https://github.com/flex-development/log/commit/2c86c10c0b930b3ac96b1df7db62bd49551d7b75))
+* **scripts:** remove `*.tgz` files in `clean:build` script ([ab53a48](https://github.com/flex-development/log/commit/ab53a48b488c43e754c1fb6f224e3314b080b3ce))
+* **tools:** cleanup esm loader ([2f09329](https://github.com/flex-development/log/commit/2f0932922e2c62a7e3dedeb2f24c11bcab7b4cc9))
+* **tools:** reorganize build workflow ([6699370](https://github.com/flex-development/log/commit/6699370bc7efb08aebdceb8d97a3654be2f6ac1d))
+* **tools:** use explicit environment variables in testing workflow ([02457e9](https://github.com/flex-development/log/commit/02457e9da91ada33232411ecfe42bd7491c074d9))
+* **typescript:** add typings for `@vercel/ncc` ([b5a9424](https://github.com/flex-development/log/commit/b5a94248dbdbfe5ff6dc77fbf9b07f0c8ec31378))
+* **typescript:** add typings for `tsc-prog/dist/utils/log` ([13ee632](https://github.com/flex-development/log/commit/13ee632de016dba987773244d22f97da303436c1))
+* **typescript:** run type check ([e59e47a](https://github.com/flex-development/log/commit/e59e47a23c1bfefcd5c60d785162fff78ee030c0))
+* update eslint config to handle dotfiles ([8dd39c8](https://github.com/flex-development/log/commit/8dd39c82ef59785a16f556d3b2868b4ff012c4ae))
+
+
+### :hammer: Build
+
+* **deps-dev:** cleanup + interactive upgrades ([902e0cd](https://github.com/flex-development/log/commit/902e0cdbbe5f6b04af55df1b119c5849efbd5eca))
+* **deps-peer:** add `@types/node@>=14.0.0` (optional) ([3fd378c](https://github.com/flex-development/log/commit/3fd378c207345d6d764d69302cb1c10cccae6fe8))
+* **deps:** use `@flex-development/tutils@4.0.3` ([e8ccdf7](https://github.com/flex-development/log/commit/e8ccdf7d6f23ce4718f23f34a3534619ddfbea38))
+* **deps:** use `@flex-development/tutils@4.2.1` ([3f669cb](https://github.com/flex-development/log/commit/3f669cbc5068278d7185d457a1977d52c46dcda0))
+
 ### [4.0.1-dev.0](https://github.com/flex-development/log/compare/log@4.0.0-dev.0...log@4.0.1-dev.0) (2021-10-14)
 
 
