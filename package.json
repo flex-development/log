@@ -95,10 +95,10 @@
     "fix:format": "prettier --write .",
     "fix:style": "yarn check:style --fix --cache",
     "test": "bash ./tools/scripts/jest.sh",
-    "build": "node ./tools/cli/build-pkg.ts",
+    "build": "ts-node ./tools/cli/build-pkg",
     "prepack": "toggle-scripts -postinstall && NODE_ENV=production yarn build",
     "postpack": "toggle-scripts +postinstall",
-    "release": "NODE_ENV=production node ./tools/cli/release.ts",
+    "release": "NODE_ENV=production ts-node ./tools/cli/release",
     "prepublishOnly": "toggle-scripts -prepack",
     "postpublish": "toggle-scripts +prepack"
   },
@@ -107,8 +107,7 @@
     "@types/chalk": "2.2.0",
     "chalk": "4.1.2",
     "figures": "3.2.0",
-    "lodash.merge": "4.6.2",
-    "tslib": "2.3.1"
+    "lodash.merge": "4.6.2"
   },
   "devDependencies": {
     "@babel/core": "7.15.8",
