@@ -1,16 +1,16 @@
-#!/usr/bin/env node
+#!/usr/bin/env ts-node
 
 import grease from '@flex-development/grease'
 import type { IGreaseOptions } from '@flex-development/grease/interfaces'
-import logger from '@flex-development/grease/utils/logger.util'
 import LogLevel from '@flex-development/log/enums/log-level.enum'
 import ch from 'chalk'
 import merge from 'lodash.merge'
+import { inspect } from 'node:util'
 import sh from 'shelljs'
-import { inspect } from 'util'
 import type { Argv } from 'yargs'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
+import logger from '../helpers/logger'
 import { $WNS, $WORKSPACE } from '../helpers/pkg'
 
 /**
@@ -26,18 +26,12 @@ export type ReleaseOptions = {
    */
   commitAll?: IGreaseOptions['commitAll']
 
-  /** @see ReleaseOptions.commitAll */
-  a?: ReleaseOptions['commitAll']
-
   /**
    * See the commands that running release would run.
    *
    * @default false
    */
   dryRun?: IGreaseOptions['dryRun']
-
-  /** @see ReleaseOptions.dryRun */
-  d?: ReleaseOptions['dryRun']
 
   /**
    * Is this the first release?
@@ -46,18 +40,12 @@ export type ReleaseOptions = {
    */
   firstRelease?: IGreaseOptions['firstRelease']
 
-  /** @see ReleaseOptions.firstRelease */
-  f?: ReleaseOptions['firstRelease']
-
   /**
    * Only populate commits made under this path.
    *
    * @default process.cwd()
    */
   path?: IGreaseOptions['path']
-
-  /** @see ReleaseOptions.path */
-  p?: ReleaseOptions['path']
 
   /**
    * Create prerelease with optional tag id (e.g: `alpha`,`beta`, `dev`).
@@ -68,9 +56,6 @@ export type ReleaseOptions = {
    * Specify release type (like `npm version <major|minor|patch>`).
    */
   releaseAs?: IGreaseOptions['releaseAs']
-
-  /** @see ReleaseOptions.releaseAs */
-  r?: ReleaseOptions['releaseAs']
 
   /**
    * Save GitHub release as a draft instead of publishing it.
@@ -87,8 +72,10 @@ export type ReleaseOptions = {
   skip?: IGreaseOptions['skip']
 }
 
-/** @property {Argv<IGreaseOptions>} args - CLI arguments parser */
-const args = yargs(hideBin(process.argv))
+export type ReleaseArgs = Argv<ReleaseOptions>
+export type ReleaseArgv = ReleaseArgs['argv']
+
+const args = yargs(hideBin(process.argv), process.env['INIT_CWD'])
   .usage('$0 [options]')
   .option('commitAll', {
     alias: 'a',
@@ -136,25 +123,23 @@ const args = yargs(hideBin(process.argv))
   })
   .alias('help', 'h')
   .pkgConf('release')
-  .wrap(98) as Argv<IGreaseOptions>
+  .wrap(98) as ReleaseArgs
 
-/** @property {ReleaseOptions} argv - CLI arguments object */
-const argv = args.argv as ReleaseOptions
+const argv: ReleaseArgv = await args.argv
 
-/** @property {IGreaseOptions} options - `grease` options */
 const options: IGreaseOptions = {
   commitAll: true,
   gitTagFallback: false,
-  gitdir: process.env.PROJECT_CWD,
+  gitdir: process.env['PROJECT_CWD'],
   lernaPackage: $WNS,
   releaseAssets: ['./*.tgz'],
   releaseBranchWhitelist: ['release/*'],
   releaseCommitMessageFormat: `release: ${$WORKSPACE}@{{currentTag}}`,
   scripts: {
-    postchangelog: `yarn pack -o %s-%v.tgz ${(argv.d && '-n') || ''}`.trim(),
+    postchangelog: `yarn pack -o %s-%v.tgz ${(argv['d'] && '-n') || ''}`.trim(),
     postcommit: 'git pnv',
-    postgreaser: 'yarn clean:build && rimraf ./*.tgz',
-    prerelease: 'yarn test'
+    postgreaser: 'yarn clean:build',
+    prerelease: 'yarn test --no-cache'
   },
   // `continuous-deployment` workflow will create new tag
   skip: { tag: true },
@@ -188,7 +173,7 @@ logger(
 )
 
 // Run release workflow
-grease(merge({}, options, argv)).catch(error => {
+grease(merge({}, options, argv)).catch((error: any) => {
   if (error.stderr) return
   else sh.echo(ch.bold.red(inspect(error, false, null)))
 })

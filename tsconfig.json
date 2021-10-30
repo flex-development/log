@@ -7,7 +7,6 @@
     "baseUrl": "./",
     "checkJs": false,
     "esModuleInterop": true,
-    "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
     "lib": ["esnext"],
     "module": "es2022",
@@ -47,10 +46,7 @@
     "target": "es2020"
   },
   "exclude": ["**/node_modules", "./build", "./cjs", "./esm", "./types"],
-  "files": [
-    "typings/jest.d.ts",
-    "typings/tools/helpers/use-dual-exports.d.mts"
-  ],
+  "files": ["typings/global/esm-loader.d.ts", "typings/global/jest.d.ts"],
   "include": [
     "**/*.cjs",
     "**/*.cts",

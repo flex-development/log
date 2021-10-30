@@ -228,19 +228,10 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['**/*.cjs', '**/*.cts', '**/*.md/*.js'],
-      parser: `${__dirname}/node_modules/@babel/eslint-parser/lib/index.cjs`,
-      parserOptions: {
-        requireConfigFile: false
-      },
-      rules: {
-        '@typescript-eslint/explicit-module-boundary-types': 0,
-        '@typescript-eslint/no-var-requires': 0
-      }
-    },
-    {
       files: ['**/*.cjs', '**/*.cts'],
       rules: {
+        '@typescript-eslint/explicit-module-boundary-types': 0,
+        '@typescript-eslint/no-var-requires': 0,
         'unicorn/prefer-module': 0
       }
     },
@@ -301,7 +292,7 @@ module.exports = {
       }
     },
     {
-      files: ['tools/loaders/env.cjs'],
+      files: ['tools/cli/loadenv.cjs'],
       rules: {
         'unicorn/no-array-reduce': 0
       }
@@ -311,20 +302,23 @@ module.exports = {
   settings: {
     'import/parsers': {
       [require.resolve('@typescript-eslint/parser')]: [
+        '.cjs',
         '.cts',
         '.d.cts',
         '.d.mts',
         '.d.ts',
+        '.mjs',
         '.mts',
         '.ts'
       ]
     },
     'import/resolver': {
       [require.resolve('eslint-import-resolver-node')]: {
-        extensions: ['.cts', '.mts', '.ts']
+        extensions: ['.cjs', '.cts', '.mjs', '.mts', '.ts']
       },
       [require.resolve('eslint-import-resolver-typescript')]: {
-        alwaysTryTypes: true
+        alwaysTryTypes: true,
+        project: ['./tsconfig.json']
       }
     },
     jsdoc: {
