@@ -1,4 +1,4 @@
-import type { Color } from 'chalk'
+import type ch from 'chalk'
 
 /**
  * @file Interfaces - LogOptionsColor
@@ -14,17 +14,17 @@ export interface LogOptionsColor {
    *
    * @default 'white'
    */
-  args?: typeof Color
+  args?: typeof ch.Color
 
   /**
    * Set log data color.
    *
    * @default 'white'
    */
-  data?: typeof Color
+  data?: typeof ch.Color
 
   /**
    * Override the log figure color set by `LogOptions.level`/
    */
-  figure?: typeof Color
+  figure?: typeof ch.Color
 }

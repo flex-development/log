@@ -90,7 +90,7 @@
     "check:format": "prettier --check .",
     "check:install": "yarn dlx @yarnpkg/doctor .",
     "check:style": "eslint . --ext cjs,cts,md,mjs,mts,ts --max-warnings 0",
-    "check:types": "tsc -p tsconfig.prod.json --noEmit",
+    "check:types": "tsc -p tsconfig.spec.json",
     "check:upgrades": "yarn upgrade-interactive",
     "fix:format": "prettier --write .",
     "fix:style": "yarn check:style --fix --cache",

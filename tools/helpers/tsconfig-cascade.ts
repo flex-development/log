@@ -24,7 +24,7 @@ const tsconfigCascade = (
   const tsconfig = merge(...($.map(arg => load(...arg).config) as [TsConfig]))
 
   if (root_paths && tsconfig.compilerOptions?.paths) {
-    const root = process.env.PROJECT_CWD
+    const root = process.env['PROJECT_CWD']
     const { paths } = tsconfig.compilerOptions
 
     for (const alias of Object.keys(paths)) {

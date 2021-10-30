@@ -3,6 +3,7 @@ import LogColor from '@log/enums/log-color.enum'
 import LogFigure from '@log/enums/log-figure.enum'
 import LogLevel from '@log/enums/log-level.enum'
 import type { LogOptions } from '@log/interfaces'
+import type { Level } from '@log/types'
 import normalizeOptions from '@log/utils/normalize-options.util'
 import type { Testcase } from '@tests/utils/types'
 import ch from 'chalk'
@@ -108,7 +109,8 @@ describe('unit:utils/figure', () => {
   it.each<Case>(cases)(name, ({ expected, options }) => {
     // Arrange
     options = normalizeOptions(options)
-    const { color = defaults.color, figure, level = 'DEBUG' } = options
+    const { color = defaults.color, figure } = options
+    const level = (options.level || 'DEBUG') as Uppercase<Level>
     const spy_ch_bold_method = color.figure ?? LogColor[level]
     const spy_ch_bold = jest.spyOn(mockCH.bold, spy_ch_bold_method)
 

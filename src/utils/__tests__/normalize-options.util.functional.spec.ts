@@ -24,8 +24,8 @@ describe('functional:utils/normalizeOptions', () => {
     // Expect
     expect(mockMerge).toBeCalledTimes(1)
     expect(mockMerge.mock.calls[0]).toMatchObject({})
-    expect(mockMerge.mock.calls[0][1]).toMatchObject(defaults)
-    expect(mockMerge.mock.calls[0][2]).toMatchObject(options)
+    expect(mockMerge.mock.calls[0]?.[1]).toMatchObject(defaults)
+    expect(mockMerge.mock.calls[0]?.[2]).toMatchObject(options)
   })
 
   describe('options.level', () => {

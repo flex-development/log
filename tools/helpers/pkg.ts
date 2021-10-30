@@ -24,13 +24,13 @@ export const $PACKAGE: PackageJson = pkg()
 export const $VERSION: string = pkg().version as string
 
 /** @property {string} $WORKSPACE - Name of NPM package */
-export const $WORKSPACE: string = process.env.npm_package_name as string
+export const $WORKSPACE: string = process.env['npm_package_name'] as string
 
 /** @property {string} name_no_scope - Package name without scope */
-export const $WNS: string = $WORKSPACE.split('/')[1]
+export const $WNS: string = $WORKSPACE.split('/')[1] as string
 
 /** @property {string} $ORG - Organization name (without `@` symbol) */
-export const $ORG: string = $WORKSPACE.split('/')[0].slice(1)
+export const $ORG: string = ($WORKSPACE.split('/')[0] as string).slice(1)
 
 /** @property {string} $WID - Normalized package name */
 export const $WID: string = `${$ORG}-${$WNS}`

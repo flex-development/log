@@ -35,7 +35,7 @@ describe('functional:main', () => {
     testSubject('', options)
 
     // Expect
-    expect(mockNormalizeOptions.mock.calls[0][0]).toMatchObject(options)
+    expect(mockNormalizeOptions.mock.calls[0]?.[0]).toMatchObject(options)
   })
 
   it('should format log entry', () => {

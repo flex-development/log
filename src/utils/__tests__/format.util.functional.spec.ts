@@ -5,7 +5,6 @@ import type { Level } from '@log/types'
 import figure from '@log/utils/figure.util'
 import normalizeOptions from '@log/utils/normalize-options.util'
 import type { TestcaseCalled } from '@tests/utils/types'
-import type { Color } from 'chalk'
 import ch from 'chalk'
 import util from 'util'
 import testSubject from '../format.util'
@@ -101,7 +100,7 @@ describe('functional:utils/format', () => {
       testSubject(`${options.level} message`, options)
 
       // Expect
-      expect(mockNormalizeOptions.mock.calls[0][0]).toMatchObject(options)
+      expect(mockNormalizeOptions.mock.calls[0]?.[0]).toMatchObject(options)
     })
 
     describe('options.bold', () => {
@@ -137,7 +136,7 @@ describe('functional:utils/format', () => {
     })
 
     describe('options.color', () => {
-      type Case = CaseCalled & { color: typeof Color }
+      type Case = CaseCalled & { color: typeof ch.Color }
 
       const cases: Case[] = [
         {

@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true
+  },
+  "exclude": [
+    "./build",
+    "./cjs",
+    "./esm",
+    "./node_modules",
+    "./types",
+    "./tools/loaders/esm.mjs",
+    "./tools/loaders/package-resolver.cjs",
+    ".lintstagedrc.cjs"
+  ],
+  "extends": "./tsconfig.json"
+}

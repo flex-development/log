@@ -1,7 +1,6 @@
 import path from 'node:path'
 import { createMatchPath, loadConfig } from 'tsconfig-paths'
-/** @type {import('ts-node/dist/esm').registerAndCreateEsmHooks} */
-const hooks = await import('ts-node/esm')
+/** @type {EsmLoader.hooks} */ const hooks = await import('ts-node/esm')
 
 /**
  * @file Helpers - Custom ESM Loader Hooks
@@ -10,20 +9,16 @@ const hooks = await import('ts-node/esm')
  * @see https://nodejs.org/docs/latest-v12.x/api/all.html#esm_hooks
  */
 
-/** @typedef {'builtin'|'commonjs'|'dynamic'|'json'|'module'|'wasm'} Format */
-/** @typedef {{ parentURL: string }} ResolveContext */
-/** @typedef {{ url: string }} ResolvedFile */
-
 /**
  * Determines if `url` should be interpreted as a CommonJS or ES module.
  *
  * @async
  * @param {string} url - File URL
- * @param {Record<string, never>} ctx - Resolver context
- * @param {typeof hooks.getFormat} defaultGetFormat - Default format function
- * @return {Promise<{ format: Format }>} Promise containing module format
+ * @param {EsmLoader.HookContext.GetFormat} ctx - Resolver context
+ * @param {EsmLoader.Hooks.GetFormat} fn - Default format fn
+ * @return {Promise<EsmLoader.HookResult.GetFormat>} Module format
  */
-export const getFormat = async (url, ctx, defaultGetFormat) => {
+export const getFormat = async (url, ctx, fn) => {
   // Get file extension
   const ext = path.extname(url)
 
@@ -39,7 +34,7 @@ export const getFormat = async (url, ctx, defaultGetFormat) => {
   if (ext === '.ts') return { format: 'module' }
 
   // Defer to ts-node for all other URLs
-  return await hooks.getFormat(url, ctx, defaultGetFormat)
+  return await hooks.getFormat(url, ctx, fn)
 }
 
 /**
@@ -50,13 +45,13 @@ export const getFormat = async (url, ctx, defaultGetFormat) => {
  *
  * @async
  * @param {string} specifier - Module specifier
- * @param {ResolveContext} ctx - Function context
+ * @param {EsmLoader.HookContext.Resolve} ctx - Function context
  * @param {string} [ctx.parentURL] - URL of module that imported `specifier`
- * @param {typeof hooks.resolve} defaultResolve - Default resolve fn
- * @return {Promise<ResolvedFile>} Resolved file URL
+ * @param {EsmLoader.Hooks.Resolve} fn - Default fn
+ * @return {Promise<EsmLoader.HookResult.Resolve>} Resolved file URL
  * @throws {Error}
  */
-export const resolve = async (specifier, ctx, defaultResolve) => {
+export const resolve = async (specifier, ctx, fn) => {
   // Load TypeScript config to get path mappings
   const result = loadConfig(process.cwd())
 
@@ -73,18 +68,18 @@ export const resolve = async (specifier, ctx, defaultResolve) => {
   if (match) specifier = match
 
   // Defer to ts-node
-  return await hooks.resolve(specifier, ctx, defaultResolve)
+  return await hooks.resolve(specifier, ctx, fn)
 }
 
 /**
  * Applies transformations to `source`.
  *
  * @async
- * @param {Buffer | string} source - Source code to transform
- * @param {{ format: Format; url: string }} ctx - Function context
- * @param {Format} [ctx.format] - Module format of source code
+ * @param {EsmLoader.Source} source - Source code to transform: ;
+ * @param {EsmLoader.HookContext.TransformSource} ctx - Function context
+ * @param {EsmLoader.Format} [ctx.format] - Module format of source code
  * @param {string} [ctx.url] - Source code file URL
- * @param {typeof transformSource} defaultTransformSource - Default transform fn
- * @return {Promise<{ source: string }>} Promise containing source code
+ * @param {EsmLoader.Hooks.TransformSource} fn - Default transform fn
+ * @return {Promise<EsmLoader.HookResult.TransformSource>} Source code
  */
 export const transformSource = hooks.transformSource

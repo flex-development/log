@@ -11,7 +11,7 @@ import { pathsToModuleNameMapper } from 'ts-jest/utils'
 
 const { compilerOptions } = parse(fs.readFileSync('./tsconfig.json').toString())
 
-const NODE_MODULES = process.env.NODE_MODULES as string
+const NODE_MODULES = process.env['NODE_MODULES'] as string
 const TYPE = 'e2e|functional|integration'
 const prefix = '<rootDir>'
 
