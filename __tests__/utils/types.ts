@@ -36,7 +36,7 @@
  *    })
  *  })
  */
-export interface Testcase<Expected extends any = any> {
+export interface Testcase<Expected = any> {
   expected: Expected
 }
 
