@@ -34,29 +34,26 @@
       "import": "./esm/log.mjs",
       "require": "./cjs/log.cjs"
     },
-    "./*": {
-      "import": "./esm/*.mjs",
-      "require": "./cjs/*.cjs"
+    "./": "./",
+    "./config/": {
+      "import": "./esm/config/",
+      "require": "./cjs/config/"
     },
-    "./cjs": "./cjs/index.cjs",
-    "./cjs/*": "./cjs/*.cjs",
-    "./config/*": {
-      "import": "./esm/config/*.mjs",
-      "require": "./cjs/config/*.cjs"
+    "./enums": {
+      "import": "./esm/enums/index.mjs",
+      "require": "./cjs/enums/index.cjs"
     },
-    "./esm": "./esm/index.mjs",
-    "./esm/*": "./esm/*.mjs",
+    "./enums/": {
+      "import": "./esm/enums/",
+      "require": "./cjs/enums/"
+    },
     "./interfaces": {
       "import": "./esm/interfaces/index.mjs",
       "require": "./cjs/interfaces/index.cjs"
     },
-    "./interfaces/*": {
-      "import": "./esm/interfaces/*.mjs",
-      "require": "./cjs/interfaces/*.cjs"
-    },
-    "./log": {
-      "import": "./esm/log.mjs",
-      "require": "./cjs/log.cjs"
+    "./interfaces/": {
+      "import": "./esm/interfaces/",
+      "require": "./cjs/interfaces/"
     },
     "./main": {
       "import": "./esm/main.mjs",
@@ -67,13 +64,17 @@
       "import": "./esm/types/index.mjs",
       "require": "./cjs/types/index.cjs"
     },
-    "./types/*": {
-      "import": "./esm/types/*.mjs",
-      "require": "./cjs/types/*.cjs"
+    "./types/": {
+      "import": "./esm/types/",
+      "require": "./cjs/types/"
     },
-    "./utils/*": {
-      "import": "./esm/utils/*.mjs",
-      "require": "./cjs/utils/*.cjs"
+    "./utils": {
+      "import": "./esm/utils/index.mjs",
+      "require": "./cjs/utils/index.cjs"
+    },
+    "./utils/": {
+      "import": "./esm/utils/",
+      "require": "./cjs/utils/"
     }
   },
   "main": "./cjs/log.min.cjs",
