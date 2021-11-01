@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.1-dev.3](https://github.com/flex-development/log/compare/log@4.0.1-dev.2...log@4.0.1-dev.3) (2021-11-01)
+
+
+### :bug: Fixes
+
+* package exports (actually) ([a6858e4](https://github.com/flex-development/log/commit/a6858e4b73907956ecaabb64c47105918d119bbd))
+
+
+### :hammer: Build
+
+* **deps:** use `@flex-development/tutils@4.2.3` ([c857652](https://github.com/flex-development/log/commit/c85765293cb7cb83088b3c87357001b0a6af94d5))
+
 ### [4.0.1-dev.2](https://github.com/flex-development/log/compare/log@4.0.1-dev.1...log@4.0.1-dev.2) (2021-10-31)
 
 
