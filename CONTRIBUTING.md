@@ -1,114 +1,130 @@
 # Contributing Guide
 
-This document aims to describe the workflows and rules used for developing this
-project. This includes, but is not limited to:
+This document aims to describe the workflows and rules used for developing this project.
+
+This includes, but is not limited to:
 
 - how to contribute code (coding standards, testing, documenting source code)
 - how pull requests are handled
 - how to file bug reports
 
-## Overview
-
-[Getting Started](#getting-started)  
-[Contributing Code](#contributing-code)  
-[Labels](#labels)  
-[Opening Issues](#opening-issues)  
-[Pull Requests & Code Reviews](#pull-requests-&-code-reviews)  
-[Merge Strategies](#merge-strategies)  
-[Releasing](#releasing)
-
 ## Getting Started
 
-### Terminology
+Follow the steps below to setup your local development environment:
 
-People interacting with the `log` project are grouped into 4 categories:
+1. Clone repository
 
-- **owner**: `flex-development` organization owners with full admin rights
-- **maintainer**: owners and people added to the organization who actively
-  contribute to projects and have direct push access
-- **contributor**: someone who has helped improve any projects, but does not
-  have direct push access
-- **user**: developers who use any `flex-development` projects and may or may
-  not participate in discussions regarding a given project
+   ```sh
+   git clone https://github.com/flex-development/log
+   cd log
+   ```
 
-#### Additional Terminology
+2. Install binaries with [Homebrew][]
 
-- **contribution**:
-  - new features
-  - fixing documentation
-  - filing bug reports with reproducible steps
-  - engaging in discussions for new feature requests
-  - answering questions
-- **ticket**: [JIRA][1] issue
+   ```sh
+   brew bundle --file ./Brewfile
+   ```
 
-### Environment
+3. Set node version
 
-#### Environment Variables
+   ```sh
+   nvm use
+   ```
 
-Project environment variables are listed below.
+4. [Configure commit signing][gpg-commit-signature-verification]
 
-| name                  | required | development        | test               | production | build, release, and deployment (local & ci) |
-| --------------------- | -------- | ------------------ | ------------------ | ---------- | ------------------------------------------- |
-| `NODE_ENV`            | `false`  | :x:                | :x:                | :x:        | :white_check_mark:                          |
-| `NODE_OPTIONS`        | `true`   | :white_check_mark: | :x:                | :x:        | :white_check_mark:                          |
-| `NODE_MODULES`        | `true`   | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
-| `NPM_TOKEN`           | `true`   | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
-| `NPM_TOKEN_FLDV`      | `true`   | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
-| `PAT_GPR`             | `true`   | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
-| `PAT_GPR_FLDV`        | `true`   | :white_check_mark: | :white_check_mark: | :x:        | :white_check_mark:                          |
-| `PROJECT_CWD`**\*\*** | `true`   | :x:                | :x:                | :x:        | :white_check_mark:                          |
+5. Update `~/.gitconfig`
 
-**\*** Environment variable set by package user  
-**\*\*** Environment variable [specific to Yarn 2][2]
+   ```sh
+   git config --global commit.gpgsign true
+   git config --global tag.gpgsign true
+   git config --global user.email <email>
+   git config --global user.name <name>
+   git config --global user.username <username>
+   ```
 
-If you're using [ZSH][3], you can use the [`dotenv`][4] plugin to autosource the
-project [`.env`](.env) file. Otherwise, following the instructions in the
-[Clone & Install](#clone--install) section to setup your environment.
+   See [`.gitconfig`](.github/.gitconfig) for a global Git config example.
 
-### Git Configuration
+6. Install dependencies
+
+   ```sh
+   yarn
+   ```
+
+   **Note**: This project uses [Yarn 2][yarn]. Consult [`.yarnrc.yml`](.yarnrc.yml) for an overview of configuration
+   options and required environment variables. Furthermore, if you already have a global Yarn configuration, or any
+   `YARN_*` environment variables set, an error will be thrown if any settings conflict with the project's Yarn
+   configuration, or the Yarn 2 API. Missing environment variables will also yield an error.
+
+7. [ZSH][ohmyzsh] setup
+
+8. Update `$ZDOTDIR/.zprofile`:
+
+   ```sh
+   # PATH
+   # 1. local node_modules
+   [ -d $PWD/node_modules/.bin ] && export PATH=$PWD/node_modules/.bin:$PATH
+
+   # DOTENV ZSH PLUGIN
+   # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/dotenv
+   export ZSH_DOTENV_FILE=.env.zsh
+
+   # GIT
+   # https://gist.github.com/troyfontaine/18c9146295168ee9ca2b30c00bd1b41e
+   export GIT_EMAIL=$(git config user.email)
+   export GIT_NAME=$(git config user.name)
+   export GIT_USERNAME=$(git config user.username)
+   export GPG_TTY=$(tty)
+
+   # HOMEBREW
+   # https://brew.sh
+   export HOMEBREW_PREFIX=$(brew --prefix)
+
+   # NVM
+   # https://github.com/nvm-sh/nvm
+   export NVM_DIR=$HOME/.nvm
+
+   # YARN
+   export YARN_RC_FILENAME=.yarnrc.yml
+   ```
+
+9. Load `dotenv` plugin via `$ZDOTDIR/.zshrc`:
+
+   ```zsh
+   plugins=(dotenv)
+   ```
+
+10. Reload shell
+
+    ```sh
+    exec $SHELL
+    ```
+
+### Environment Variables
+
+| name                |
+| ------------------- |
+| `CODECOV_TOKEN`     |
+| `GITHUB_TOKEN`      |
+| `HOMEBREW_BREWFILE` |
+| `NODE_NO_WARNINGS`  |
+| `ZSH_DOTENV_FILE`   |
+
+#### GitHub Actions
+
+Variables are prefixed by `secrets.` in [workflow](.github/workflows/) files.
+
+### Git Config
 
 The examples in this guide contain references to custom Git aliases.
 
-Copy the [starter Git global configuration](.github/.gitconfig) to follow along
-fully, as well as begin extending your own workflow.
-
-### Yarn
-
-This project uses Yarn 2. The Yarn configuration for this project can be found
-in [`.yarnrc.yml`](.yarnrc.yml). If you're already using Yarn globally, see the
-[Yarn 2 Migration docs][5].
-
-### GitHub Packages
-
-Some workspaces depend on scoped packages (e.g: `@flex-development`). Some of
-those packages are published to the [GitHub Package Registry][6], but **_not to
-NPM_**. A [Personal Access Token with at least the `read:packages` scope][7]
-attached is required for installation.
-
-Scopes, their registry servers, and required environment variables are defined
-in [`.yarnrc.yml`](.yarnrc.yml) under the `npmScopes` field.
-
-### Clone & Install
-
-```zsh
-git clone https://github.com/flex-development/log
-cd log && source .env
-yarn
-```
-
-Note that if you have a global Yarn configuration (or any `YARN_*` environment
-variables set), an error will be displayed in the terminal if any settings
-conflict with the project's Yarn configuration, or the Yarn 2 API. An error will
-also be displayed if you're missing any environment variables.
+See [`.github/.gitconfig`](.github/.gitconfig) for an exhaustive list.
 
 ## Contributing Code
 
-[Husky][8] is used to run Git hooks that locally enforce coding and commit
-message standards, as well run tests associated with any files changed since the
-last commit.
+[Husky][] is used to locally enforce coding and commit message standards, as well as run tests pre-push.
 
-Any code merged into the [development and production branches](#branching-model)
-must confront the following criteria:
+Any code merged into the [trunk](#branching-model) must confront the following criteria:
 
 - changes should be discussed prior to implementation
 - changes have been tested properly
@@ -117,263 +133,292 @@ must confront the following criteria:
 
 ### Branching Model
 
-- Development: `next`
-- Production: `main`
+This project follows a [Trunk Based Development][tbd] workflow, specifically the [short-lived branch
+style][tbd-short-lived-feature-branches].
 
-### Branch Prefixes
+- Trunk Branch: `main`
+- Short-Lived Branches: `feat/*`, `hotfix/*`, `release/*`
+
+#### Branch Naming Conventions
 
 When creating a new branch, the name should match the following format:
 
 ```zsh
-[prefix]/<TICKET-ID>-<branch_name>
- │           │      │
- │           │      └─⫸ a short, memorable name (possibly the future PR title)
- │           │
- │           └─⫸ check jira issue
+[prefix]/<issue-number>-<branch_name>
+ │        │              │
+ │        │              │
+ │        │              │
+ │        │              └─⫸ a short, memorable name
+ │        │
+ │        └─⫸ check github issue
  │
- └─⫸ bugfix|feat|hotfix|release
+ └─⫸ feat|feat/fix|hotfix|release
 ```
-
-For example:
-
-```zsh
-git chbf PROJ-4-authentication
-```
-
-will create a new branch titled `feat/PROJ-4-authentication`.
 
 ### Commit Messages
 
-This project follows [Conventional Commit][9] standards and uses
-[commitlint][10] to enforce those standards.
+This project follows [Conventional Commit][conventionalcommits] standards and uses [commitlint][] to enforce those
+standards.
 
 This means every commit must conform to the following format:
 
 ```zsh
-<type>[optional scope]: <description>
- │     │                │
- │     │                └─⫸ summary in present tense; lowercase without period at the end
+<type>[scope][!]: <description>
+ │     │      │    │
+ │     │      │    │
+ │     │      │    └─⫸ summary in present tense (lowercase without punctuation)
+ │     │      │
+ │     │      └─⫸ optional breaking change flag
  │     │
- │     └─⫸ see commitlint.config.js
+ │     └─⫸ see .commitlintrc.ts
  │
  └─⫸ build|ci|chore|docs|feat|fix|perf|refactor|revert|style|test|wip
 
-[optional body]
+[body]
 
-[optional footer(s)]
+[BREAKING-CHANGE: <change>]
+
+[footer(s)]
 ```
 
 `<type>` must be one of the following values:
 
 - `build`: Changes that affect the build system or external dependencies
-- `ci`: Changes to our CI configuration files and scripts
-- `chore`: Changes that don't impact external users
-- `docs`: Documentation only changes
+- `ci`: Changes to our CI/CD configuration files and scripts
+- `chore`: Housekeeping tasks / changes that don't impact external users
+- `docs`: Documentation improvements
 - `feat`: New features
 - `fix`: Bug fixes
 - `perf`: Performance improvements
 - `refactor`: Code improvements
 - `revert`: Revert past changes
 - `style`: Changes that do not affect the meaning of the code
-- `test`: Adding missing tests or correcting existing tests
-- `wip`: Working on changes, but you need to go to bed :wink:
+- `test`: Change that impact the test suite
+- `wip`: Working on changes, but you need to go to bed \:wink:
 
 e.g:
 
-- `git docs 'update contributing guide'` -> `docs: update contributing guide`
-- `git ac 'refactor(api)!: user queries'` -> `refactor(api)!: user queries`
+- `build(deps-dev): bump cspell from 6.7.0 to 6.8.0`
+- `perf: lighten initial load`
 
-See [`.commitlintrc.ts`](.commitlintrc.ts) for an exhasutive list of valid
-commit scopes and types.
+See [`.commitlintrc.ts`](.commitlintrc.ts) to view all commit guidelines.
 
 ### Code Style
 
-[Prettier][11] is used to format code, and [ESLint][12] to lint files.
+[dprint][] is used to format code and [ESLint][] to lint files.
 
-**Prettier Configuration**
-
-- [`.prettierrc.js`](.prettierrc.js)
-- [`.prettierignore`](.prettierignore)
-
-**ESLint Configuration**
-
-- [`.eslintrc.js`](.eslintrc.js)
-- [`.eslintignore`](.eslintignore)
+- [`.dprint.jsonc`](.dprint.jsonc)
+- [`eslint.base.config.mjs`](eslint.base.config.mjs)
+- [`eslint.config.mjs`](eslint.config.mjs)
 
 ### Making Changes
 
-All source code can be found in the [`src`](src/) directory.
-
-The purpose of each file should be documented using the `@file` annotation,
-along with an accompanying `@module` annotation.
+Source code is located in [`src`](src) directory.
 
 ### Documentation
 
-- JavaScript & TypeScript: [JSDoc][13], linted with [`eslint-plugin-jsdoc`][14]
+- JavaScript & TypeScript: [JSDoc][]; linted with [`eslint-plugin-jsdoc`][eslint-plugin-jsdoc]
 
-Before making a pull request, be sure your code is well documented, as it will
-be part of your code review.
+Before making a pull request, be sure your code is well documented, as it will be part of your code review.
 
 ### Testing
 
-This project uses [Jest][15] as its test runner. To run _all_ the tests in this
-project, run `yarn test` from the project root.
+This project uses [Vitest][] to run tests.
 
-Husky is configured to run tests before every push. Use [`describe.skip`][16] or
-[`it.skip`][17] if you need to create a new issue regarding the test, or need to
-make a `wip` commit.
+[Husky](#contributing-code) is configured to run tests against changed files.
+
+Be sure to use [`it.skip`][vitest-test-skip] or [`it.todo`][vitest-test-todo] where appropriate.
+
+#### Running Tests
+
+- `yarn test`
+- `yarn test:reports`
+- `yarn test:ui`
+- `yarn test:cov`
+- `yarn test:cov:reports`
+- `yarn test:cov:ui`
+- `yarn typecheck`
+- `yarn typecheck:ui`
+
+#### Code Coverage
+
+Code coverage is reported using [Codecov][].
+
+To manually upload coverage reports:
+
+1. Retrieve `CODECOV_TOKEN` from a maintainer
+
+2. Add `CODECOV_TOKEN` to `.env.repo`
+
+3. Reload shell
+
+   ```sh
+   exec $SHELL
+   ```
+
+4. Install [Codecov Uploader][codecov-uploader]
+
+5. Run `yarn codecov`
 
 ### Getting Help
 
-If you need help, make note of any issues in their respective files. Whenever
-possible, create a test to reproduce the error. Make sure to label your issue as
-`type:question` and `status:help-wanted`.
+If you need help, make note of any issues in their respective files in the form of a [JSDoc comment][jsdoc]. If you need
+help with a test, don't forget to use [`it.skip`][vitest-test-skip] and/or [`it.todo`][vitest-test-todo]. Afterwards,
+[start a discussion in the Q\&A category][qa].
 
 ## Labels
 
-This project uses a well-defined list of labels to organize tickets and pull
-requests. Most labels are grouped into different categories (identified by the
-prefix, eg: `status:`).
+This project uses a well-defined list of labels to organize issues and pull requests. Most labels are scoped (i.e:
+`status:`).
 
-A list of labels can be found in [`.github/labels.yml`](.github/labels.yml).
+A list of labels can be found in [`.github/infrastructure.yml`](.github/infrastructure.yml).
 
 ## Opening Issues
 
-Before opening an issue please make sure, you have:
+Before opening an issue, make sure you have:
 
 - read the documentation
-- searched open issues for an existing issue with the same topic
-- search closed issues for a solution or feedback
+- checked that the issue hasn't already been filed by searching open issues
+- searched closed issues for solution(s) or feedback
 
-If you haven't found a related open issue, or feel that a closed issue should be
-re-visited, please open a new issue. A well-written issue has the following
-traits:
+If you haven't found a related open issue, or feel that a closed issue should be re-visited, open a new issue.
 
-- follows an [issue template](.github/ISSUE_TEMPLATE)
-- is [labeled](#labels) appropriately
-- contains a well-written summary of the feature, bug, or problem statement
-- contains a minimal, inlined code example (if applicable)
-- includes links to prior discussion if you've found any
+A well-written issue
 
-## Pull Requests & Code Reviews
+- contains a well-written summary of the bug, feature, or improvement
+- contains a [minimal, reproducible example][mre] (if applicable)
+- includes links to related articles and documentation (if any)
+- includes an emoji in the title \:wink:
 
-When you're ready to have your changes reviewed, open a pull request against the
-`next` branch.
+## Pull Requests
 
-Every opened PR should:
+When you're ready to submit your changes, open a pull request (PR) against `main`:
 
-- use [**this template**](.github/PULL_REQUEST_TEMPLATE.md)
-- reference it's ticket id
-- be [labeled](#labels) appropriately
-- be assigned to yourself
-- give maintainers push access so quick fixes can be pushed to your branch
-
-### Pull Request URL Format
-
-```zsh
-https://github.com/flex-development/log/compare/next...<branch>
+```sh
+https://github.com/flex-development/log/compare/main...$branch
 ```
 
-where `<branch>` is the name of the branch you'd like to merge into `next`.
+where `$branch` is the name of the branch you'd like to merge into `main`.
 
-### Code Reviews
+All PRs are subject to review before being merged into `main`.
 
-All pull requests are subject to code reviews before being merged into `next`
-and `main`. During code reviews, code-style and documentation will be reviewed.
+Before submitting a PR, be sure you have:
 
-If any changes are requested, those changes will need to be implemented and
-approved before the pull request is merged.
+- performed a self-review of your changes
+- added and/or updated relevant tests
+- added and/or updated relevant documentation
+
+Every PR you open should:
+
+- [follow this template](.github/PULL_REQUEST_TEMPLATE.md)
+- [be titled appropriately](#pull-request-titles)
+
+### Pull Request Titles
+
+To keep in line with [commit message standards](#commit-messages) after PRs are merged, PR titles are expected to adhere
+to the same rules.
 
 ## Merge Strategies
 
-In every repository, the `create a merge commit` and `squash and merge` options
-are enabled.
+In every repository, the `rebase and merge` and `squash and merge` options are enabled.
 
-- if a PR has a single commit, or the changes across commits are logically
-  grouped, use `squash and merge`
-- if a PR has multiple commits, not logically grouped, `create a merge commit`
+- **rebase and merge**: PR has one commit or commits that are not grouped
+- **squash and merge**: PR has one commit or a group of commits
 
-When merging, please make sure to use the following commit message format:
+When squashing, be sure to follow [commit message standards](#commit-messages):
 
-```txt
-<type>[optional scope]: <pull-request-title> (#pull-request-n)
- │     │                │
- │     │                └─⫸ check your pull request
+```zsh
+<type>[scope][!]:<pull-request-title> (#pull-request-n)
+ │     │      │   │                    │
+ │     │      │   │                    │
+ │     │      │   │                    └─⫸ check pull request
+ │     │      │   │
+ │     │      │   └─⫸ lowercase title
+ │     │      │
+ │     │      └─⫸ optional breaking change flag
  │     │
- │     └─⫸ see commitlint.config.js
+ │     └─⫸ see .commitlintrc.ts
  │
- └─⫸ build|ci|chore|docs|feat|fix|merge|perf|refactor|release|revert|style|test
+ └─⫸ build|ci|chore|docs|feat|fix|perf|refactor|release|revert|style|test
 ```
 
 e.g:
 
-- `refactor(api): github oauth flow #52`
-- `merge: update contributing guides and tsconfigs #39`
-- `perf(web): decrease page loading time #26`
-- `release: @flex-development/log@1.0.0 #13`
+- `ci(workflows): simplify release workflow #24`
+- `refactor: project architecture #21`
+- `release: 1.0.0 #13`
 
-## Releasing
+## Deployment
 
-This repository is configured to publish packages and releases when a
-`release/*` branch is merged.
+> Note: Package and release publication is executed via GitHub workflow.\
+> This is so invalid or malicious versions cannot be published without merging those changes into `main` first.
 
-> Note: Publishing is executed via the
-> [Continuous Deployment](./.github/workflows/continous-deployment.yml)
-> workflow. This is so invalid or malicious versions cannot be release without
-> merging those changes into `next` first.
+1. Get a version bump recommendation
+   - `grease bump --recommend`
+2. Create release chore commit
+   - `yarn release <new-version>`
+   - `yarn release major`
+   - `yarn release minor`
+   - `yarn release patch`
+   - `yarn release premajor --preid <dist-tag>`
+   - `yarn release preminor --preid <dist-tag>`
+   - `yarn release prepatch --preid <dist-tag>`
+   - `yarn release prerelease --preid <dist-tag>`
+3. Push release chore commit
+4. Monitor workflows
+   1. [`release-chore`](.github/workflows/release-chore.yml)
+      - create release branch
+      - bump manifest version
+      - add changelog entry for new release
+      - create release pr
+   2. [`release`](.github/workflows/release.yml)
+      - create and push new tag
+      - create and publish github release
+      - ensure all relevant issues are closed
+   3. [`publish`](.github/workflows/publish.yml)
+      - publish package to [github package registry][gpr]
+      - publish package to [npm][]
 
-Before releasing, the following steps must be completed:
+[codecov-uploader]: https://docs.codecov.com/docs/codecov-uploader
 
-1. Schedule a code freeze
-2. Create a new `release/*` branch
-   - where `*` is `<package.json#name-no-scope>@<package.json#version>`
-     - e.g: `log@1.1.0`
-   - branch naming conventions **must be followed exactly**. the branch name is
-     used to create distribution tags, locate drafted releases, and generate the
-     correct workspace publish command
-3. Decide what version bump the release needs (major, minor, patch)
-   - versioning
-     - `yarn release` (determines [bumps based on commits][18])
-     - `yarn release --first-release`
-     - `yarn release --release-as major`
-     - `yarn release --release-as minor`
-     - `yarn release --release-as patch`
-   - a new release will be drafted
-4. Open a new pull request from `release/*` into `next`
-   - title the PR `release: <package.json#name>@<package.json#version>`
-     - e.g: `release: @flex-development/log@1.1.0`
-   - link all issues being released
-   - after review, `squash and merge` the PR:
-     `release: @flex-development/log@1.1.0 (#pull-request-n)`
-     - e.g: `release: @flex-development/log@1.1.0 (#3)`
-   - once the PR is merged, the deployment workflow will be triggered
-   - the maintainer who approved the PR should check to make sure the workflow
-     completes all jobs as expected. if successful, the workflow will:
-     - publish package to the [GitHub Package Registry][19] and
-     - update the production branch (merge branch `next` into `main`)
-     - publish the drafted release
-   - the maintainer who approved the PR should go through the PR's linked issues
-     and:
-     - make sure all issues are closed and have the label `status:merged`
-     - add the `status:released` label to all issues
+[codecov]: https://codecov.io
 
-[1]: https://www.atlassian.com/software/jira
-[2]: https://yarnpkg.com/advanced/lifecycle-scripts#environment-variables
-[3]: https://github.com/ohmyzsh/ohmyzsh
-[4]: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/dotenv
-[5]: https://yarnpkg.com/getting-started/migration
-[6]: https://github.com/features/packages
-[7]:
-  https://docs.github.com/en/packages/learn-github-packages/about-permissions-for-github-packages#about-scopes-and-permissions-for-package-registries
-[8]: https://github.com/typicode/husky
-[9]: https://www.conventionalcommits.org
-[10]: https://github.com/conventional-changelog/commitlint
-[11]: https://prettier.io
-[12]: https://eslint.org
-[13]: https://jsdoc.app
-[14]: https://github.com/gajus/eslint-plugin-jsdoc
-[15]: https://jestjs.io
-[16]: https://jestjs.io/docs/api#describeskipname-fn
-[17]: https://jestjs.io/docs/api#testskipname-fn
-[18]: https://www.conventionalcommits.org/en/v1.0.0
-[19]: https://github.com/features/packages
+[commitlint]: https://github.com/conventional-changelog/commitlint
+
+[conventionalcommits]: https://conventionalcommits.org
+
+[dprint]: https://dprint.dev
+
+[eslint-plugin-jsdoc]: https://github.com/gajus/eslint-plugin-jsdoc
+
+[eslint]: https://eslint.org
+
+[gpg-commit-signature-verification]: https://docs.github.com/authentication/managing-commit-signature-verification/about-commit-signature-verification#gpg-commit-signature-verification
+
+[gpr]: https://github.com/features/packages
+
+[homebrew]: https://brew.sh
+
+[husky]: https://github.com/typicode/husky
+
+[jsdoc]: https://jsdoc.app
+
+[mre]: https://stackoverflow.com/help/minimal-reproducible-example
+
+[npm]: https://npmjs.com
+
+[ohmyzsh]: https://github.com/ohmyzsh/ohmyzsh
+
+[qa]: https://github.com/flex-development/log/discussions/new?category=q-a
+
+[tbd-short-lived-feature-branches]: https://trunkbaseddevelopment.com/styles/#short-lived-feature-branches
+
+[tbd]: https://trunkbaseddevelopment.com
+
+[vitest-test-skip]: https://vitest.dev/api/#test-skip
+
+[vitest-test-todo]: https://vitest.dev/api/#test-todo
+
+[vitest]: https://vitest.dev
+
+[yarn]: https://yarnpkg.com/getting-started
