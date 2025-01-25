@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "allowImportingTsExtensions": false,
+    "allowJs": false,
+    "checkJs": false,
+    "customConditions": ["log"],
+    "declarationMap": false,
+    "noEmitOnError": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "sourceMap": false,
+    "target": "es2020"
+  },
+  "exclude": ["**/__tests__/**"],
+  "extends": "./tsconfig.json",
+  "include": ["dist/**/*", "src/**/**.mts"]
+}

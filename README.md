@@ -1,180 +1,84 @@
-# :keyboard: log
+# log
 
-Simple logging utility
+[![github release](https://img.shields.io/github/v/release/flex-development/log.svg?include_prereleases\&sort=semver)](https://github.com/flex-development/log/releases/latest)
+[![npm](https://img.shields.io/npm/v/@flex-development/log.svg)](https://npmjs.com/package/@flex-development/log)
+[![codecov](https://codecov.io/gh/flex-development/log/graph/badge.svg?token=WUMNLAPIDX)](https://codecov.io/gh/flex-development/log)
+[![module type: esm](https://img.shields.io/badge/module%20type-esm-brightgreen)](https://github.com/voxpelli/badges-cjs-esm)
+[![license](https://img.shields.io/github/license/flex-development/log.svg)](LICENSE.md)
+[![conventional commits](https://img.shields.io/badge/-conventional%20commits-fe5196?logo=conventional-commits\&logoColor=ffffff)](https://conventionalcommits.org)
+[![typescript](https://img.shields.io/badge/-typescript-3178c6?logo=typescript\&logoColor=ffffff)](https://typescriptlang.org)
+[![vitest](https://img.shields.io/badge/-vitest-6e9f18?style=flat\&logo=vitest\&logoColor=ffffff)](https://vitest.dev)
+[![yarn](https://img.shields.io/badge/-yarn-2c8ebb?style=flat\&logo=yarn\&logoColor=ffffff)](https://yarnpkg.com)
 
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
-[![TypeScript](https://badgen.net/badge/-/typescript?icon=typescript&label)](https://www.typescriptlang.org/)
-[![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
+Logging utilities
 
-## Overview
+## Contents
 
-[Getting Started](#getting-started)  
-[Usage](#usage)  
-[Built With](#built-with)  
-[Contributing](CONTRIBUTING.md)
+- [What is this?](#what-is-this)
+- [Install](#install)
+- [Use](#use)
+- [API](#api)
+- [Types](#types)
+- [Contribute](#contribute)
 
-## Getting Started
+## What is this?
 
-Style logs for the console or [terminal][3].
+**TODO**: what is this?
 
-## Installation
+## Install
 
-```zsh
-yarn add @flex-development/log # or npm i @flex-development/log
+This package is [ESM only][esm].
+
+In Node.js (version 18+) with [yarn][]:
+
+```sh
+yarn add @flex-development/log
 ```
 
-## Usage
+<blockquote>
+  <small>
+    See <a href='https://yarnpkg.com/protocol/git'>Git - Protocols | Yarn</a>
+    &nbsp;for details regarding installing from Git.
+  </small>
+</blockquote>
 
-Customize log entries and create entries based on log `Level` presets.
+In Deno with [`esm.sh`][esmsh]:
 
-### Levels
-
-Create a log entry using a `Level` preset.
-
-![log-levels](docs/log-levels.png)
-
-#### Debug
-
-Create a log entry in gray.
-
-```typescript
-import log from '@flex-development/log'
-
-/**
- * @file Examples - debug log
- * @module log/docs/examples/debug
- */
-
-log('debug log')
+```ts
+import { createLogger } from 'https://esm.sh/@flex-development/log'
 ```
 
-#### Error
+In browsers with [`esm.sh`][esmsh]:
 
-Create a log entry with a red cross.
-
-```typescript
-import log, { LogLevel } from '@flex-development/log'
-
-/**
- * @file Examples - error log
- * @module log/docs/examples/error
- */
-
-log('error log', { level: LogLevel.ERROR })
+```html
+<script type="module">
+  import { createLogger } from 'https://esm.sh/@flex-development/log'
+</script>
 ```
 
-#### Info
+## Use
 
-Create a log entry with a blue info symbol.
+**TODO**: use
 
-```typescript
-import log, { LogLevel } from '@flex-development/log'
+## API
 
-/**
- * @file Examples - info log
- * @module log/docs/examples/info
- */
+**TODO**: api
 
-log('info log', { level: LogLevel.INFO })
-```
+## Types
 
-#### Success
+This package is fully typed with [TypeScript][].
 
-Create a log entry with a green tick mark.
+## Contribute
 
-```typescript
-import log, { LogLevel } from '@flex-development/log'
+See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-/**
- * @file Examples - success log
- * @module log/docs/examples/success
- */
+This project has a [code of conduct](./CODE_OF_CONDUCT.md). By interacting with this repository, organization, or
+community you agree to abide by its terms.
 
-log('success log', { level: LogLevel.SUCCESS })
-```
+[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 
-#### Warning
+[esmsh]: https://esm.sh
 
-Create a log entry with a yellow exclamation point.
+[typescript]: https://www.typescriptlang.org
 
-```typescript
-import log, { LogLevel } from '@flex-development/log'
-
-/**
- * @file Examples - warning log
- * @module log/docs/examples/warning
- */
-
-log('warning log', { level: LogLevel.WARN })
-```
-
-### Options
-
-```typescript
-interface LogOptions {
-  /**
-   * Log arguments.
-   *
-   * @default []
-   */
-  args?: any[]
-
-  /**
-   * Bold log arguments **and/or** log data.
-   *
-   * @default {args:true}
-   */
-  bold?: LogOptionsBold
-
-  /**
-   * Set log color, and/or override the log figure color set by `level`.
-   *
-   * @default {args:'white',data:'white'}
-   */
-  color?: LogOptionsColor
-
-  /**
-   * Override the log figure set by `level`, or omit it altogether.
-   */
-  figure?: keyof typeof figures | NullishString
-
-  /**
-   * Log level.
-   *
-   * @default 'DEBUG'
-   */
-  level?: Level
-
-  /**
-   * Use [`echo`][1] instead of `console.log`. Requires [`shelljs`][2].
-   *
-   * [1]: https://github.com/shelljs/shelljs#echooptions-string--string-
-   * [2]: https://github.com/shelljs/shelljs
-   */
-  shell?: boolean
-
-  /**
-   * If `true`, do not log any output.
-   */
-  silent?: boolean
-}
-
-enum LogLevel {
-  DEBUG = 'debug',
-  ERROR = 'error',
-  INFO = 'info',
-  SUCCESS = 'success',
-  WARN = 'warn'
-}
-
-export type Level = keyof typeof LogLevel | LogLevel
-```
-
-## Built With
-
-- [`chalk`][1] - Terminal string styling
-- [`shelljs`][2] - Unix shell commands implementation for Node.js
-
-[1]: https://github.com/chalk/chalk
-[2]: https://github.com/shelljs/shelljs
-[3]: https://github.com/shelljs/shelljs#echooptions-string--string-
+[yarn]: https://yarnpkg.com

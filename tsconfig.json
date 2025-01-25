@@ -1,67 +1,32 @@
 {
-  // See: https://github.com/tsconfig/bases/blob/main/bases/node14.json
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "allowJs": true,
-    "allowUnreachableCode": false,
     "alwaysStrict": true,
-    "baseUrl": "./",
-    "checkJs": false,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "lib": ["esnext"],
-    "module": "es2022",
-    "moduleResolution": "node",
+    "customConditions": ["log", "development"],
+    "declaration": true,
+    "declarationMap": true,
+    "lib": ["es2020"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "newLine": "lf",
     "noEmit": true,
     "noErrorTruncation": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noUncheckedIndexedAccess": true,
-    // Must be disabled to use type-only imports
-    "noUnusedLocals": false,
-    "noUnusedParameters": true,
-    "paths": {
-      "@flex-development/grease": [
-        "node_modules/@flex-development/grease/cjs/index"
-      ],
-      "@flex-development/grease/*": [
-        "node_modules/@flex-development/grease/cjs/*"
-      ],
-      "@flex-development/log": ["src/index"],
-      "@flex-development/log/*": ["src/*"],
-      "@log": ["src/index"],
-      "@log/*": ["src/*"],
-      "@tests/fixtures/*": ["__tests__/__fixtures__/*"],
-      "@tests/*": ["__tests__/*"]
-    },
-    "preserveConstEnums": true,
-    "pretty": true,
-    // Should work with NODE_OPTIONS='--experimental-json-modules' flag
-    // See: https://nodejs.org/api/esm.html#esm_json_modules
+    "noUncheckedSideEffectImports": true,
+    "noUnusedParameters": false,
     "resolveJsonModule": true,
-    "rootDir": "./",
-    "strict": true,
-    // Node.js 14
-    "target": "es2020"
+    "sourceMap": true,
+    "target": "esnext",
+    "verbatimModuleSyntax": true
   },
-  "exclude": ["**/node_modules", "./build", "./cjs", "./esm", "./types"],
-  "files": ["typings/global/esm-loader.d.ts", "typings/global/jest.d.ts"],
-  "include": [
-    "**/*.cjs",
-    "**/*.cts",
-    "**/*.mjs",
-    "**/*.mts",
-    "**/*.ts",
-    "**/.*.cjs",
-    "**/.*.ts"
-  ],
-  "ts-node": {
-    "moduleTypes": {
-      ".commitlintrc.ts": "cjs",
-      "jest.config.base.ts": "cjs",
-      "jest.config.ts": "cjs"
-    },
-    "transpileOnly": true
+  "exclude": ["coverage", "dist", "node_modules"],
+  "extends": "@tsconfig/strictest/tsconfig.json",
+  "include": ["**/**.json", "**/**.mjs", "**/**.mts", "**/**.ts"],
+  "mdx": {
+    "plugins": [
+      "remark-directive",
+      "remark-frontmatter",
+      "remark-gfm"
+    ]
   }
 }

@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "noImplicitAny": false,
-    "noUncheckedIndexedAccess": false
+    "customConditions": ["log", "development"]
   },
   "extends": "./tsconfig.json"
 }

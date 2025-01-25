@@ -1,6 +1,0 @@
-{
-  "compilerOptions": {
-    "outDir": "./esm"
-  },
-  "extends": "./tsconfig.prod.json"
-}
