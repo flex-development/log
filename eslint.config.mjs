@@ -28,5 +28,17 @@ export default [
       '**/dist/',
       '**/tsconfig*temp.json'
     ]
+  },
+  {
+    files: ['src/enums/log-levels.mts'],
+    rules: {
+      'sort-keys': 0
+    }
+  },
+  {
+    files: ['src/interfaces/log-function.mts'],
+    rules: {
+      '@typescript-eslint/unified-signatures': 0
+    }
   }
 ]

@@ -3,12 +3,10 @@
  * @module log/internal/process/browser
  */
 
-import pathe from '@flex-development/pathe'
-
 export default {
   browser: true,
-  cwd: pathe.cwd,
+  cwd: '/',
   env: {},
-  stderr: { columns: 80, isTTY: true, write: console.error },
-  stdout: { columns: 80, isTTY: true, write: console.log }
+  stderr: { columns: 80, isTTY: false, write: console.error },
+  stdout: { columns: 80, isTTY: false, write: console.log }
 }

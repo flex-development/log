@@ -1,0 +1,70 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`unit:internal/mergeTypes > should return log type to configuration map 1`] = `
+{
+  "debug": {
+    "color": "gray",
+    "icon": "⚙",
+    "level": 4,
+    "type": "debug",
+  },
+  "error": {
+    "color": "red",
+    "icon": "✖",
+    "level": 0,
+    "type": "error",
+  },
+  "fail": {
+    "color": "red",
+    "icon": "✖",
+    "level": 0,
+    "type": "fail",
+  },
+  "info": {
+    "color": "cyan",
+    "icon": "ℹ",
+    "level": 3,
+    "type": "info",
+  },
+  "inspect": {
+    "level": 2,
+    "type": "inspect",
+  },
+  "log": {
+    "level": 2,
+  },
+  "ready": {
+    "color": "green",
+    "icon": "✔",
+    "level": 3,
+    "type": "ready",
+  },
+  "start": {
+    "color": "magenta",
+    "icon": "◐",
+    "level": 3,
+    "type": "start",
+  },
+  "success": {
+    "color": "green",
+    "icon": "✔",
+    "level": 3,
+    "type": "success",
+  },
+  "trace": {
+    "icon": "→",
+    "level": 5,
+    "type": "trace",
+  },
+  "verbose": {
+    "level": 999,
+    "type": "verbose",
+  },
+  "warn": {
+    "color": "yellow",
+    "icon": "▲",
+    "level": 1,
+    "type": "warn",
+  },
+}
+`;

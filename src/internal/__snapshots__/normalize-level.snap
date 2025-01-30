@@ -1,0 +1,47 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`unit:internal/normalizeLevel > should return normalized log level ("debug") 1`] = `4`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level ("error") 1`] = `0`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level ("fail") 1`] = `0`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level ("info") 1`] = `3`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level ("inspect") 1`] = `2`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level ("log") 1`] = `2`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level ("ready") 1`] = `3`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level ("start") 1`] = `3`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level ("success") 1`] = `3`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level ("trace") 1`] = `5`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level ("verbose") 1`] = `999`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level ("warn") 1`] = `1`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level (-1) 1`] = `-1`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level (-13) 1`] = `-1`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level (0) 1`] = `0`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level (1) 1`] = `1`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level (2) 1`] = `2`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level (3) 1`] = `3`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level (4) 1`] = `4`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level (5) 1`] = `5`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level (999) 1`] = `999`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level (1000) 1`] = `999`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level (null) 1`] = `3`;

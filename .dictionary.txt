@@ -13,12 +13,13 @@ gpgsign
 hmarr
 jchen
 kaisugi
+ksort
+mkbuild
 nvmrc
 pkgs
 remarkrc
 sarif
 shfmt
-smob
 unstub
 vates
 vitest

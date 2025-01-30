@@ -1,4 +1,4 @@
-# log
+# \:knot: log
 
 [![github release](https://img.shields.io/github/v/release/flex-development/log.svg?include_prereleases\&sort=semver)](https://github.com/flex-development/log/releases/latest)
 [![npm](https://img.shields.io/npm/v/@flex-development/log.svg)](https://npmjs.com/package/@flex-development/log)
@@ -10,7 +10,7 @@
 [![vitest](https://img.shields.io/badge/-vitest-6e9f18?style=flat\&logo=vitest\&logoColor=ffffff)](https://vitest.dev)
 [![yarn](https://img.shields.io/badge/-yarn-2c8ebb?style=flat\&logo=yarn\&logoColor=ffffff)](https://yarnpkg.com)
 
-Logging utilities
+Log messages in the terminal and browser
 
 ## Contents
 
@@ -23,13 +23,15 @@ Logging utilities
 
 ## What is this?
 
-**TODO**: what is this?
+This is a small, but useful, library for logging messages in the terminal and browser consoles.
+
+Colorful messages can be logged in the terminal and browser consoles that support ANSI colors.
 
 ## Install
 
 This package is [ESM only][esm].
 
-In Node.js (version 18+) with [yarn][]:
+In Node.js with [yarn][]:
 
 ```sh
 yarn add @flex-development/log
@@ -52,7 +54,7 @@ In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import { createLogger } from 'https://esm.sh/@flex-development/log'
+  import { logger } from 'https://esm.sh/@flex-development/log'
 </script>
 ```
 

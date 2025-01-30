@@ -1,0 +1,23 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`unit:internal/normalizeOptions > should return logger options object (0) 1`] = `{}`;
+
+exports[`unit:internal/normalizeOptions > should return logger options object (1) 1`] = `
+{
+  "level": 3,
+}
+`;
+
+exports[`unit:internal/normalizeOptions > should return logger options object (2) 1`] = `
+{
+  "level": "info",
+}
+`;
+
+exports[`unit:internal/normalizeOptions > should return logger options object (3) 1`] = `
+{
+  "format": {
+    "date": false,
+  },
+}
+`;

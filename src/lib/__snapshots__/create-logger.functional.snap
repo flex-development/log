@@ -1,0 +1,49 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`functional:lib/createLogger > <type> > should send info to reporters (0) 1`] = `
+{
+  "additional": [],
+  "args": [
+    "hello",
+    "world",
+  ],
+  "color": undefined,
+  "format": {},
+  "icon": undefined,
+  "level": 2,
+  "type": "log",
+}
+`;
+
+exports[`functional:lib/createLogger > <type> > should send info to reporters (1) 1`] = `
+{
+  "additional": [],
+  "args": [
+    "Building %s",
+    "@flex-development/log",
+  ],
+  "color": "magenta",
+  "format": {},
+  "icon": "◐",
+  "level": 3,
+  "type": "start",
+}
+`;
+
+exports[`functional:lib/createLogger > <type> > should send info to reporters (2) 1`] = `
+{
+  "additional": [
+    "",
+    "  tsconfig.build.json",
+  ],
+  "args": [
+    "%s Compiler option 'sourceMap' requires a value of type boolean",
+    "[mkbuild:dts]",
+  ],
+  "color": "yellow",
+  "format": {},
+  "icon": "▲",
+  "level": 999,
+  "type": "warn",
+}
+`;

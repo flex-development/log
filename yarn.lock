@@ -1361,6 +1361,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@flex-development/colors@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@flex-development/colors@npm:1.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fcolors%2F1.0.0%2F73a45327aa2e38fac75d5d3d0e1954238dae0fa9"
+  checksum: 10/58ecf4c54ac18ae4d930562b85dbb9420a97087b393a30cead7d9ad9cbedcd10564904a47c71450aed3bb64622860d617c6fbcfbd3f08cb814f93c71eb47180f
+  languageName: node
+  linkType: hard
+
 "@flex-development/commitlint-config@npm:1.0.1":
   version: 1.0.1
   resolution: "@flex-development/commitlint-config@npm:1.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fcommitlint-config%2F1.0.1%2F802e285802fe8188c2f02f68114ca31a20b6eb6d"
@@ -1533,6 +1540,7 @@ __metadata:
     "@commitlint/cli": "npm:19.6.1"
     "@commitlint/types": "npm:19.5.0"
     "@eslint/js": "npm:9.19.0"
+    "@flex-development/colors": "npm:1.0.0"
     "@flex-development/commitlint-config": "npm:1.0.1"
     "@flex-development/grease": "npm:3.0.0-alpha.9"
     "@flex-development/pathe": "npm:4.0.1"
@@ -1646,8 +1654,6 @@ __metadata:
     remark-lint-unordered-list-marker-style: "npm:4.0.0"
     remark-validate-links: "npm:13.0.2"
     sh-syntax: "npm:0.4.2"
-    smob: "npm:1.5.0"
-    tinyrainbow: "npm:2.0.0"
     trash-cli: "npm:6.0.0"
     ts-dedent: "npm:2.2.0"
     typescript: "npm:5.7.3"
@@ -10415,13 +10421,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"smob@npm:1.5.0":
-  version: 1.5.0
-  resolution: "smob@npm:1.5.0"
-  checksum: 10/a1ea453bcea89989062626ea30a1fcb42c62e96255619c8641ffa1d7ab42baf415975c67c718127036901b9e487d8bf4c46219e50cec54295412c1227700b8fe
-  languageName: node
-  linkType: hard
-
 "socks-proxy-agent@npm:^5.0.0":
   version: 5.0.1
   resolution: "socks-proxy-agent@npm:5.0.1"
@@ -10910,7 +10909,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinyrainbow@npm:2.0.0, tinyrainbow@npm:^2.0.0":
+"tinyrainbow@npm:^2.0.0":
   version: 2.0.0
   resolution: "tinyrainbow@npm:2.0.0"
   checksum: 10/94d4e16246972614a5601eeb169ba94f1d49752426312d3cf8cc4f2cc663a2e354ffc653aa4de4eebccbf9eeebdd0caef52d1150271fdfde65d7ae7f3dcb9eb5
