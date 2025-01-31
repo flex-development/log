@@ -145,7 +145,7 @@
     "@flex-development/commitlint-config": "1.0.1",
     "@flex-development/grease": "3.0.0-alpha.9",
     "@flex-development/pathe": "4.0.1",
-    "@stylistic/eslint-plugin": "2.13.0",
+    "@stylistic/eslint-plugin": "3.0.1",
     "@tsconfig/strictest": "2.0.5",
     "@types/eslint": "9.6.1",
     "@types/eslint__js": "8.42.3",
