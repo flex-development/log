@@ -1361,10 +1361,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flex-development/colors@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@flex-development/colors@npm:1.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fcolors%2F1.0.0%2F73a45327aa2e38fac75d5d3d0e1954238dae0fa9"
-  checksum: 10/58ecf4c54ac18ae4d930562b85dbb9420a97087b393a30cead7d9ad9cbedcd10564904a47c71450aed3bb64622860d617c6fbcfbd3f08cb814f93c71eb47180f
+"@flex-development/colors@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@flex-development/colors@npm:1.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fcolors%2F1.0.1%2F4a1f3a213c775f6b655ab29a7d92998efb13306b"
+  checksum: 10/6afba34c3cb099e1e8ccd046ad170ad1be0b5be6461978fde6b13e107663ac7b2d4c754ca80a2df948dd3f8e564cdbcc4606d863f401340860e1b161b9c9a130
   languageName: node
   linkType: hard
 
@@ -1540,7 +1540,7 @@ __metadata:
     "@commitlint/cli": "npm:19.6.1"
     "@commitlint/types": "npm:19.5.0"
     "@eslint/js": "npm:9.19.0"
-    "@flex-development/colors": "npm:1.0.0"
+    "@flex-development/colors": "npm:1.0.1"
     "@flex-development/commitlint-config": "npm:1.0.1"
     "@flex-development/grease": "npm:3.0.0-alpha.9"
     "@flex-development/pathe": "npm:4.0.1"
