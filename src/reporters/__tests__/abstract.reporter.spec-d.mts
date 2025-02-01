@@ -11,8 +11,24 @@ describe('unit-d:reporters/Reporter', () => {
     expectTypeOf<TestSubject>().toHaveProperty('logger').toEqualTypeOf<Logger>()
   })
 
-  describe('write', () => {
-    type Subject = TestSubject['write']
+  describe('init', () => {
+    type Subject = TestSubject['init']
+
+    describe('parameters', () => {
+      it('should be callable with [Logger]', () => {
+        expectTypeOf<Subject>().parameters.toEqualTypeOf<[Logger]>()
+      })
+    })
+
+    describe('returns', () => {
+      it('should return undefined', () => {
+        expectTypeOf<Subject>().returns.toEqualTypeOf<undefined>()
+      })
+    })
+  })
+
+  describe('report', () => {
+    type Subject = TestSubject['report']
 
     describe('parameters', () => {
       it('should be callable with [LogObject]', () => {

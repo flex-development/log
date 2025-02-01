@@ -28,7 +28,7 @@ describe('functional:lib/createLogger', () => {
          *
          * @return {undefined}
          */
-        public write(): undefined {
+        public report(): undefined {
           return void expect(this).to.have.property('logger', subject)
         }
       }
@@ -55,14 +55,14 @@ describe('functional:lib/createLogger', () => {
       logTypes.warn
     ])('should not send info above maximum log level (%#)', type => {
       // Arrange
-      vi.spyOn(reporter, 'write')
+      vi.spyOn(reporter, 'report')
 
       // Act
       subject.level = subject.levels.silent
       subject[type](type)
 
       // Expect
-      expect(reporter.write).not.toHaveBeenCalled()
+      expect(reporter.report).not.toHaveBeenCalled()
     })
 
     it.each<[type: LogType, message: unknown, ...args: unknown[]]>([
@@ -77,16 +77,16 @@ describe('functional:lib/createLogger', () => {
       }]
     ])('should send info to reporters (%#)', (type, message, ...args) => {
       // Arrange
-      const write: MockInstance<Reporter['write']> = vi.spyOn(reporter, 'write')
+      const spy: MockInstance<Reporter['report']> = vi.spyOn(reporter, 'report')
 
       // Act
       subject.level = subject.levels.verbose
       subject[type](message, ...args)
 
       // Expect
-      expect(write).toHaveBeenCalledOnce()
-      expect(write.mock.lastCall?.[0]).to.have.property('date').instanceof(Date)
-      expect(omit(write.mock.lastCall![0], ['date'])).toMatchSnapshot()
+      expect(spy).toHaveBeenCalledOnce()
+      expect(spy.mock.lastCall?.[0]).to.have.property('date').instanceof(Date)
+      expect(omit(spy.mock.lastCall![0], ['date'])).toMatchSnapshot()
     })
   })
 })

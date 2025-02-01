@@ -21,7 +21,7 @@ import type {
   LogObject,
   LogType
 } from '@flex-development/log'
-import { keys } from '@flex-development/tutils'
+import { keys, type Fn } from '@flex-development/tutils'
 import { ok } from 'devlop'
 import isUnicodeSupported from 'is-unicode-supported'
 
@@ -178,8 +178,7 @@ function createLogger(
   logger.level = logger.normalizeLevel(options.level)
 
   for (const type of keys(logger.types)) {
-    Object.defineProperties(value, { name: { value: type } })
-    Object.defineProperties(logger, { [type]: { enumerable: true, value } })
+    bind(logger, type, send)
 
     /**
      * @this {Logger}
@@ -190,18 +189,51 @@ function createLogger(
      *  Message arguments
      * @return {undefined}
      */
-    function value(
+    function send(
       this: Logger,
       message: unknown,
       ...args: unknown[]
     ): undefined {
-      return void write.call(this, this.types[type], [message, ...args])
+      return void report.call(this, this.types[type], [message, ...args])
     }
   }
 
   for (const reporter of logger.reporters) void reporter.init(logger)
 
   return logger
+}
+
+/**
+ * Bind a function to `logger`.
+ *
+ * @internal
+ *
+ * @this {void}
+ *
+ * @param {Partial<Logger>} logger
+ *  Logger object
+ * @param {keyof Logger} name
+ *  Function name
+ * @param {Fn} fn
+ *  The function to bind
+ * @return {undefined}
+ */
+function bind(
+  this: void,
+  logger: Partial<Logger>,
+  name: keyof Logger,
+  fn: Fn
+): undefined {
+  Object.defineProperties(logger, {
+    [name]: {
+      enumerable: true,
+      value: fn.bind(logger)
+    }
+  })
+
+  Object.defineProperties(logger[name], { name: { value: name } })
+
+  return void logger
 }
 
 /**
@@ -217,7 +249,7 @@ function createLogger(
  *  Message arguments
  * @return {undefined}
  */
-function write(
+function report(
   this: Logger,
   defaults: InputLogObject,
   args: unknown[]
@@ -257,7 +289,7 @@ function write(
     if (info.color === undefined) info.color = this.types[info.type].color
     if (info.icon === undefined) info.icon = this.types[info.type].icon
 
-    for (const reporter of this.reporters) void reporter.write(info)
+    for (const reporter of this.reporters) void reporter.report(info)
   }
 
   return void info

@@ -56,7 +56,7 @@ abstract class Reporter {
    *  The log information to process
    * @return {undefined | void}
    */
-  public abstract write(info: LogObject): undefined | void
+  public abstract report(info: LogObject): undefined | void
 }
 
 export default Reporter
