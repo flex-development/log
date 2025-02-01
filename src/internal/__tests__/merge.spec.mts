@@ -9,20 +9,12 @@ import testSubject from '#internal/merge'
 
 describe('unit:internal/merge', () => {
   it.each<Parameters<typeof testSubject>>([
-    [
-      {
-        level: logLevels.debug,
-        type: logTypes.debug
-      },
-      null,
-      {
-        color: 'gray'
-      }
-    ],
+    [{ color: 'gray' }, null, { level: logLevels.debug, type: logTypes.debug }],
     [
       {
         [logTypes.debug]: {
           color: 'gray',
+          icon: '⚙',
           level: logLevels.debug,
           type: logTypes.debug
         },
@@ -30,41 +22,34 @@ describe('unit:internal/merge', () => {
           color: 'red',
           level: logLevels.error,
           type: logTypes.error
-        },
-        [logTypes.fail]: {
-          color: 'red',
-          level: logLevels.error,
-          type: logTypes.fail
-        },
-        [logTypes.info]: {
-          color: 'cyan',
-          level: logLevels.info,
-          type: logTypes.info
-        },
-        [logTypes.log]: {
-          level: logLevels.log
-        },
-        [logTypes.start]: {
-          color: 'magenta',
-          level: logLevels.info,
-          type: logTypes.start
-        },
-        [logTypes.success]: {
-          color: 'green',
-          level: logLevels.info,
-          type: logTypes.success
-        },
-        [logTypes.warn]: {
-          color: 'yellow',
-          level: logLevels.warn,
-          type: logTypes.warn
         }
       },
       {
+        [logTypes.debug]: { icon: '→' },
         [logTypes.error]: { badge: true, format: { date: false } }
       }
     ]
-  ])('should return merged object (%#)', (target, ...sources) => {
-    expect(testSubject(target, ...sources)).toMatchSnapshot()
+  ])('should return merged and mutated object (%#)', (target, ...sources) => {
+    // Act
+    const result = testSubject(target, ...sources)
+
+    // Expect
+    expect(result).to.eq(target)
+    expect(result).toMatchSnapshot()
+  })
+
+  it.each<Parameters<typeof testSubject>>([
+    [
+      null,
+      { format: { colors: true, columns: 270, date: true, icon: true } },
+      { format: { columns: undefined, date: null } }
+    ]
+  ])('should return new merged object (%#)', (target, ...sources) => {
+    // Act
+    const result = testSubject(target, ...sources)
+
+    // Expect
+    expect(result).not.to.eq(target).and.not.to.eql(target)
+    expect(result).toMatchSnapshot()
   })
 })

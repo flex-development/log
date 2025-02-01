@@ -268,7 +268,7 @@ function inspect(
 }
 
 /**
- * Send a message each log reporter.
+ * Send a message all reporters.
  *
  * @internal
  *
@@ -290,24 +290,18 @@ function report(
    *
    * @const {LogObject} info
    */
-  const info: LogObject = {
-    ...defaults,
-    additional: defaults.additional ?? [],
-    args: defaults.args ?? [],
-    date: defaults.date ?? new Date(),
-    format: defaults.format ?? {},
-    level: this.normalizeLevel(defaults.level),
-    type: defaults.type as unknown as LogType
-  } as LogObject
+  const info: LogObject = merge({}, defaults)
 
-  ok(info.type as string !== logTypes.inspect, 'expected no inspect `info`')
+  if (args.length === 1 && isLogObject(args[0])) {
+    merge(info, args[0])
+  } else {
+    info.args = [...args]
+  }
 
-  if (!(info.level > this.level)) {
-    if (args.length === 1 && isLogObject(args[0])) {
-      merge(info, args[0])
-    } else {
-      info.args = [...args]
-    }
+  if (!((info.level = this.normalizeLevel(info.level)) > this.level)) {
+    if (!Array.isArray(info.args)) info.args = []
+    if (!(info.date instanceof Date)) info.date = new Date()
+    info.format = merge({}, this.format, info.format)
 
     if (typeof info.message === 'string' && info.message as string) {
       info.args.unshift(info.message)
@@ -316,6 +310,8 @@ function report(
 
     if (typeof info.additional === 'string' && info.additional as string) {
       info.additional = (info.additional as string).split(this.eol)
+    } else if (!Array.isArray(info.additional)) {
+      info.additional = []
     }
 
     if (typeof info.type !== 'string') info.type = logTypes.log

@@ -4,14 +4,15 @@ exports[`functional:lib/createLogger > <type> > should send info to reporters (0
 {
   "additional": [],
   "args": [
-    "hello",
-    "world",
+    "Building...",
   ],
-  "color": undefined,
-  "format": {},
-  "icon": undefined,
-  "level": 2,
-  "type": "log",
+  "color": "cyan",
+  "format": {
+    "colors": true,
+  },
+  "icon": "ℹ",
+  "level": 3,
+  "type": "info",
 }
 `;
 
@@ -19,18 +20,37 @@ exports[`functional:lib/createLogger > <type> > should send info to reporters (1
 {
   "additional": [],
   "args": [
+    "hello",
+    "world",
+  ],
+  "color": undefined,
+  "format": {
+    "colors": true,
+  },
+  "icon": undefined,
+  "level": 2,
+  "type": "log",
+}
+`;
+
+exports[`functional:lib/createLogger > <type> > should send info to reporters (2) 1`] = `
+{
+  "additional": [],
+  "args": [
     "Building %s",
     "@flex-development/log",
   ],
   "color": "magenta",
-  "format": {},
+  "format": {
+    "colors": true,
+  },
   "icon": "◐",
   "level": 3,
   "type": "start",
 }
 `;
 
-exports[`functional:lib/createLogger > <type> > should send info to reporters (2) 1`] = `
+exports[`functional:lib/createLogger > <type> > should send info to reporters (3) 1`] = `
 {
   "additional": [
     "",
@@ -41,7 +61,9 @@ exports[`functional:lib/createLogger > <type> > should send info to reporters (2
     "[mkbuild:dts]",
   ],
   "color": "yellow",
-  "format": {},
+  "format": {
+    "colors": true,
+  },
   "icon": "▲",
   "level": 999,
   "type": "warn",

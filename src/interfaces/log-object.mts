@@ -3,7 +3,12 @@
  * @module log/interfaces/LogObject
  */
 
-import type { InputLogObject, LogLevel, LogType } from '@flex-development/log'
+import type {
+  InputLogObject,
+  LogFormatOptions,
+  LogLevel,
+  LogType
+} from '@flex-development/log'
 
 /**
  * Log data object.
@@ -33,6 +38,15 @@ interface LogObject extends InputLogObject {
    * @override
    */
   date: Date
+
+  /**
+   * Formatting options.
+   *
+   * @see {@linkcode LogFormatOptions}
+   *
+   * @override
+   */
+  format: LogFormatOptions
 
   /**
    * Log level.

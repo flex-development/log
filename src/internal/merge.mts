@@ -13,20 +13,23 @@ import { ksort, isObjectPlain as pojo, sift } from '@flex-development/tutils'
  *
  * @internal
  *
+ * @template {Record<PropertyKey, any>} M
+ *  Merged object type
+ *
  * @this {void}
  *
- * @param {Record<PropertyKey, any>} target
+ * @param {Record<PropertyKey, any> | null | undefined} target
  *  Target object
  * @param {(Record<PropertyKey, any> | null | undefined)[]} sources
  *  Source object(s)
- * @return {Record<PropertyKey, any>}
+ * @return {M}
  *  Merged object
  */
-function merge(
+function merge<M extends Record<PropertyKey, any>>(
   this: void,
-  target: Record<PropertyKey, any>,
+  target: Record<PropertyKey, any> | null | undefined,
   ...sources: (Record<PropertyKey, any> | null | undefined)[]
-): Record<PropertyKey, any> {
+): M {
   return ksort(sift(sources).reduce((acc, source) => {
     return [
       ...Object.getOwnPropertySymbols(source),
@@ -47,14 +50,16 @@ function merge(
          */
         const targetValue: any = target[property]
 
-        if (pojo(targetValue) && pojo(value)) {
+        if (value === undefined) {
+          value = targetValue
+        } else if (pojo(targetValue) && pojo(value)) {
           value = merge(targetValue, value)
         }
       }
 
       return target[property] = value, target
     }, acc)
-  }, target))
+  }, target ?? {}))
 }
 
 export default merge

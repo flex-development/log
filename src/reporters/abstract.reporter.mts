@@ -47,7 +47,6 @@ abstract class Reporter {
    * Define how a log message is processed and displayed by `this` reporter.
    *
    * @see {@linkcode LogObject}
-   * @see {@linkcode Logger}
    *
    * @public
    * @abstract

@@ -66,6 +66,7 @@ describe('functional:lib/createLogger', () => {
     })
 
     it.each<[type: LogType, message: unknown, ...args: unknown[]]>([
+      [logTypes.info, { args: null, message: 'Building...' }],
       [logTypes.log, 'hello', 'world'],
       [logTypes.start, { args: [pkg.name], message: 'Building %s' }],
       [logTypes.warn, {
