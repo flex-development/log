@@ -4,6 +4,7 @@
  */
 
 export type { default as InputLogObject } from '#interfaces/input-log-object'
+export type { default as InspectOptions } from '#interfaces/inspect-options'
 export type {
   default as LogFormatOptions
 } from '#interfaces/log-format-options'

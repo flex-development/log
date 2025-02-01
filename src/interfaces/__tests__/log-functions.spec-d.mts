@@ -4,8 +4,7 @@
  */
 
 import type TestSubject from '#interfaces/log-functions'
-import type { LogTypeFunctions } from '@flex-development/log'
-import type { InspectOptions } from 'node-inspect-extracted'
+import type { InspectOptions, LogTypeFunctions } from '@flex-development/log'
 
 describe('unit-d:interfaces/LogFunctions', () => {
   it('should extend LogTypeFunctions', () => {

@@ -238,7 +238,7 @@ function bind(
 }
 
 /**
- * Use {@linkcode util.inspect} on `value` and print a string representation.
+ * Use {@linkcode util.inspect} on `value` and print its string representation.
  *
  * @internal
  *

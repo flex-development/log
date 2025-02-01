@@ -3,8 +3,8 @@
  * @module log/interfaces/LogFunctions
  */
 
-import type { LogTypeFunctions } from '@flex-development/log'
-import type { InspectOptions, inspect } from 'node-inspect-extracted'
+import type { InspectOptions, LogTypeFunctions } from '@flex-development/log'
+import type * as util from 'node-inspect-extracted'
 
 /**
  * Registry of log functions.
@@ -15,7 +15,8 @@ import type { InspectOptions, inspect } from 'node-inspect-extracted'
  */
 interface LogFunctions extends LogTypeFunctions {
   /**
-   * Use {@linkcode inspect} on `value` and print a string representation.
+   * Use {@linkcode util.inspect} on `value` and print its string
+   * representation.
    *
    * @see {@linkcode InspectOptions}
    *
