@@ -173,10 +173,6 @@ function createLogger(
     }
   })
 
-  logger.format.columns ??= process.stdout.columns
-  logger.format.date ??= true
-  logger.format.icon ??= true
-
   logger.color = logger.format.colors
   logger.level = logger.normalizeLevel(options.level)
 
