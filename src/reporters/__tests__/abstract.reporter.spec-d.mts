@@ -21,8 +21,8 @@ describe('unit-d:reporters/Reporter', () => {
     })
 
     describe('returns', () => {
-      it('should return undefined', () => {
-        expectTypeOf<Subject>().returns.toEqualTypeOf<undefined>()
+      it('should return this', () => {
+        expectTypeOf<Subject>().returns.toEqualTypeOf<TestSubject>()
       })
     })
   })

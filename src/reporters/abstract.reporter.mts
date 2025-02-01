@@ -36,10 +36,11 @@ abstract class Reporter {
    *
    * @param {Logger} logger
    *  The logger `this` reporter writes to
-   * @return {undefined}
+   * @return {this}
+   *  `this` reporter
    */
-  public init(logger: Logger): undefined {
-    return void (this.logger = logger)
+  public init(logger: Logger): this {
+    return this.logger = logger, this
   }
 
   /**
