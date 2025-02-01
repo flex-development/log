@@ -73,7 +73,7 @@ interface Logger extends LogFunctions {
   format: LogFormatOptions
 
   /**
-   * Get the minimum log level to output.
+   * Get the current log level.
    *
    * @see {@linkcode LogLevel}
    *
@@ -83,12 +83,12 @@ interface Logger extends LogFunctions {
   get level(): LogLevel
 
   /**
-   * Set the minimum log level to output.
+   * Set the maximum log level to output.
    *
    * @see {@linkcode LogLevelOption}
    *
    * @param {LogLevelOption | null | undefined} level
-   *  New log level
+   *  Maximum log level (inclusive)
    */
   set level(level: LogLevelOption | null | undefined)
 
@@ -105,8 +105,10 @@ interface Logger extends LogFunctions {
    * List of reporter instances used to handle and output log messages.
    *
    * @see {@linkcode Reporter}
+   *
+   * @readonly
    */
-  reporters: Reporter[]
+  readonly reporters: Set<Reporter>
 
   /**
    * The writeable stream for standard error output.

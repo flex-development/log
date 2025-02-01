@@ -7,8 +7,8 @@ import type TestSubject from '#interfaces/log-function'
 import type { InputLogObject } from '@flex-development/log'
 
 describe('unit-d:interfaces/LogFunction', () => {
-  it('should match [this: void]', () => {
-    expectTypeOf<TestSubject>().thisParameter.toEqualTypeOf<void>()
+  it('should match [this: unknown]', () => {
+    expectTypeOf<TestSubject>().thisParameter.toEqualTypeOf<unknown>()
   })
 
   describe('parameters', () => {

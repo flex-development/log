@@ -8,9 +8,9 @@ import type {
   LogFormatOptions,
   LogLevelOption,
   LogType,
+  ReportersOption,
   WriteStream
 } from '@flex-development/log'
-import type { Reporter } from '@flex-development/log/reporters'
 
 /**
  * Logger configuration options.
@@ -50,13 +50,13 @@ interface LoggerOptions {
   level?: LogLevelOption | null | undefined
 
   /**
-   * List of reporter instances used to handle and output log messages.
+   * Reporter instances used to handle and output log messages.
    *
-   * @see {@linkcode Reporter}
+   * @see {@linkcode ReportersOption}
    *
    * @default []
    */
-  reporters?: Set<Reporter> | readonly Reporter[] | null | undefined
+  reporters?: ReportersOption | null | undefined
 
   /**
    * The writeable stream for standard error output.

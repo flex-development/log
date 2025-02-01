@@ -14,8 +14,8 @@ describe('unit-d:interfaces/LogFunctions', () => {
   describe('inspect', () => {
     type Subject = TestSubject['inspect']
 
-    it('should match [this: void]', () => {
-      expectTypeOf<Subject>().thisParameter.toEqualTypeOf<void>()
+    it('should match [this: unknown]', () => {
+      expectTypeOf<Subject>().thisParameter.toEqualTypeOf<unknown>()
     })
 
     describe('parameters', () => {

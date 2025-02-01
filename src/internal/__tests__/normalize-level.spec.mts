@@ -9,10 +9,10 @@ import testSubject from '#internal/normalize-level'
 import type { Logger } from '@flex-development/log'
 
 describe('unit:internal/normalizeLevel', () => {
-  let self: Pick<Logger, 'levels' | 'types'>
+  let logger: Pick<Logger, 'levels' | 'types'>
 
   beforeAll(() => {
-    self = {
+    logger = {
       levels: logLevels,
       types: {
         [logTypes.debug]: { level: logLevels.debug },
@@ -30,7 +30,7 @@ describe('unit:internal/normalizeLevel', () => {
     }
   })
 
-  it.each<Parameters<typeof testSubject>>([
+  it.each<[number | string | null | undefined]>([
     [-13],
     [logLevels.silent],
     [logLevels.error],
@@ -54,6 +54,6 @@ describe('unit:internal/normalizeLevel', () => {
     [logTypes.warn],
     [null]
   ])('should return normalized log level (%j)', level => {
-    expect(testSubject.call(self, level)).toMatchSnapshot()
+    expect(testSubject(logger, level)).toMatchSnapshot()
   })
 })

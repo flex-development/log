@@ -26,7 +26,7 @@ describe('unit:logger', () => {
     expect(subject).to.have.property('format').satisfy(isObjectPlain)
     expect(subject).to.have.property('level', logLevels.info)
     expect(subject).to.have.property('levels', logLevels)
-    expect(subject).to.have.property('reporters').be.an('array').that.is.empty
+    expect(subject).to.have.property('reporters').be.instanceof(Set).and.empty
     expect(subject).to.have.property('stderr', process.stderr)
     expect(subject).to.have.property('stdout', process.stdout)
     expect(subject).to.have.property('types').with.keys(types)

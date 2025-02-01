@@ -9,9 +9,9 @@ import type {
   LogFormatOptions,
   LogLevelOption,
   LogType,
+  ReportersOption,
   WriteStream
 } from '@flex-development/log'
-import type { Reporter } from '@flex-development/log/reporters'
 import type { Nilable } from '@flex-development/tutils'
 
 describe('unit-d:interfaces/LoggerOptions', () => {
@@ -33,10 +33,10 @@ describe('unit-d:interfaces/LoggerOptions', () => {
       .toEqualTypeOf<Nilable<LogLevelOption>>()
   })
 
-  it('should match [reporters?: Set<Reporter> | readonly Reporter[] | null | undefined]', () => {
+  it('should match [reporters?: ReportersOption | null | undefined]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('reporters')
-      .toEqualTypeOf<Nilable<Set<Reporter> | readonly Reporter[]>>()
+      .toEqualTypeOf<Nilable<ReportersOption>>()
   })
 
   it('should match [stderr?: WriteStream | null | undefined]', () => {

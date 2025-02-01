@@ -20,8 +20,6 @@ interface LogFunctions extends LogTypeFunctions {
    *
    * @see {@linkcode InspectOptions}
    *
-   * @this {void}
-   *
    * @param {unknown} value
    *  The thing to inspect
    * @param {InspectOptions | null | undefined} [options]
@@ -29,7 +27,6 @@ interface LogFunctions extends LogTypeFunctions {
    * @return {undefined}
    */
   inspect(
-    this: void,
     value: unknown,
     options?: InspectOptions | null | undefined
   ): undefined

@@ -66,10 +66,14 @@ describe('unit-d:interfaces/Logger', () => {
     expectTypeOf<TestSubject>().toHaveProperty('levels').toEqualTypeOf<T>()
   })
 
-  it('should match [reporters: Reporter[]]', () => {
-    expectTypeOf<TestSubject>()
-      .toHaveProperty('reporters')
-      .toEqualTypeOf<Reporter[]>()
+  it('should match [readonly reporters: Set<Reporter>]', () => {
+    // Arrange
+    type K = ReadonlyKeys<TestSubject>
+    type T = Set<Reporter>
+
+    // Expect
+    expectTypeOf<K>().extract<'reporters'>().not.toBeNever()
+    expectTypeOf<TestSubject>().toHaveProperty('reporters').toEqualTypeOf<T>()
   })
 
   it('should match [stderr: WriteStream]', () => {

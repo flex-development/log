@@ -20,8 +20,10 @@ import type {
   LogLevel,
   LogLevelOption,
   LogObject,
-  LogType
+  LogType,
+  ReportersOption
 } from '@flex-development/log'
+import type { Reporter } from '@flex-development/log/reporters'
 import { keys, type Fn } from '@flex-development/tutils'
 import { ok } from 'devlop'
 import isUnicodeSupported from 'is-unicode-supported'
@@ -59,33 +61,37 @@ function createLogger(
   let level!: LogLevel
 
   /**
+   * Logger base.
+   *
+   * @const {Omit<Logger, LogType>} base
+   */
+  const base: Omit<Logger, LogType> = {
+    browser: !!process.browser,
+    color: COLOR_SUPPORTED,
+    colors: {} as Colors,
+    eol: options.eol ?? '\n',
+    format: { ...options.format },
+    inspect,
+    level,
+    levels: Object.freeze(logLevels),
+    reporters: reporters(options.reporters),
+    stderr: options.stderr ?? process.stderr,
+    stdout: options.stdout ?? process.stdout,
+    types: {} as Record<LogType, InputLogObject>,
+    unicode: isUnicodeSupported()
+  }
+
+  /**
    * Logger object.
    *
    * @const {Logger} logger
    */
-  const logger: Logger = Object.defineProperties({
-    browser: false,
-    color: true,
-    colors: {},
-    eol: options.eol ?? '\n',
-    format: { ...options.format },
-    level,
-    levels: {},
-    reporters: options.reporters ? [...options.reporters] : [],
-    stderr: options.stderr ?? process.stderr,
-    stdout: options.stdout ?? process.stdout,
-    types: {},
-    unicode: isUnicodeSupported()
-  } as Logger, {
+  const logger: Logger = Object.defineProperties(base as Logger, {
     browser: {
-      enumerable: true,
-      value: !!process.browser,
       writable: false
     },
     color: {
       /**
-       * Color logs enabled?
-       *
        * @this {Logger}
        *
        * @return {boolean}
@@ -96,8 +102,6 @@ function createLogger(
         return this.format.colors
       },
       /**
-       * Enable or disable color logs.
-       *
        * @this {Logger}
        *
        * @param {boolean | null | undefined} color
@@ -111,12 +115,10 @@ function createLogger(
     },
     colors: {
       /**
-       * Get a colorizer.
-       *
        * @this {Logger}
        *
        * @return {Colors}
-       *  Color functions map
+       *  Colorizer object
        */
       get(this: Logger): Colors {
         return createColors(this.color)
@@ -124,8 +126,6 @@ function createLogger(
     },
     level: {
       /**
-       * Get the current log level.
-       *
        * @this {Logger}
        *
        * @return {LogLevel}
@@ -135,33 +135,30 @@ function createLogger(
         return level
       },
       /**
-       * Set the current log level.
-       *
        * @this {Logger}
        *
        * @param {LogLevelOption | null | undefined} lvl
-       *  New log level
+       *  Maximum log level (inclusive)
        * @return {undefined}
        */
-      set(
-        this: Logger,
-        lvl: LogLevelOption | null | undefined
-      ): undefined {
-        return void (level = this.normalizeLevel(lvl))
+      set(this: Logger, lvl: LogLevelOption | null | undefined): undefined {
+        return void (level = normalizeLevel(this, lvl))
       }
     },
     levels: {
-      enumerable: true,
-      value: Object.freeze(logLevels),
       writable: false
     },
-    normalizeLevel: {
-      value: normalizeLevel
+    reporters: {
+      writable: false
+    },
+    stderr: {
+      enumerable: false
+    },
+    stdout: {
+      enumerable: false
     },
     types: {
       /**
-       * Get a map defining the log configuration for each log type.
-       *
        * @this {Logger}
        *
        * @return {Record<LogType, InputLogObject>}
@@ -174,33 +171,26 @@ function createLogger(
   })
 
   logger.color = logger.format.colors
-  logger.level = logger.normalizeLevel(options.level)
+  logger.level = options.level
 
   for (const type of keys(logger.types)) {
-    bind(logger, type, send)
+    bind(logger, send, type)
 
     /**
      * @this {Logger}
      *
-     * @param {unknown} message
+     * @param {any} message
      *  The message to write
-     * @param {unknown[]} args
+     * @param {any[]} args
      *  Message arguments
      * @return {undefined}
      */
-    function send(
-      this: Logger,
-      message: unknown,
-      ...args: unknown[]
-    ): undefined {
+    function send(this: Logger, message: any, ...args: any[]): undefined {
       return void report.call(this, this.types[type], [message, ...args])
     }
   }
 
-  bind(logger, logTypes.inspect, inspect)
-
   for (const reporter of logger.reporters) void reporter.init(logger)
-
   return logger
 }
 
@@ -213,27 +203,20 @@ function createLogger(
  *
  * @param {Partial<Logger>} logger
  *  Logger object
- * @param {keyof Logger} name
- *  Function name
  * @param {Fn} fn
  *  The function to bind
+ * @param {keyof Logger} name
+ *  Function name
  * @return {undefined}
  */
 function bind(
   this: void,
   logger: Partial<Logger>,
-  name: keyof Logger,
-  fn: Fn
+  fn: Fn,
+  name: keyof Logger
 ): undefined {
-  Object.defineProperties(logger, {
-    [name]: {
-      enumerable: true,
-      value: fn.bind(logger)
-    }
-  })
-
+  Object.defineProperties(logger, { [name]: { enumerable: true, value: fn } })
   Object.defineProperties(logger[name], { name: { value: name } })
-
   return void logger
 }
 
@@ -268,7 +251,7 @@ function inspect(
 }
 
 /**
- * Send a message all reporters.
+ * Send a message to all reporters.
  *
  * @internal
  *
@@ -298,7 +281,7 @@ function report(
     info.args = [...args]
   }
 
-  if (!((info.level = this.normalizeLevel(info.level)) > this.level)) {
+  if (!((info.level = normalizeLevel(this, info.level)) > this.level)) {
     if (!Array.isArray(info.args)) info.args = []
     if (!(info.date instanceof Date)) info.date = new Date()
     info.format = merge({}, this.format, info.format)
@@ -322,4 +305,40 @@ function report(
   }
 
   return void info
+}
+
+/**
+ * Get a reporter instance list.
+ *
+ * @internal
+ *
+ * @this {void}
+ *
+ * @param {ReportersOption | false | null | undefined} option
+ *  User `reporters`
+ * @return {Set<Reporter>}
+ *  List of reporter instances
+ */
+function reporters(
+  this: void,
+  option: ReportersOption | false | null | undefined
+): Set<Reporter> {
+  /**
+   * List of reporter instances.
+   *
+   * @const {Set<Reporter>} list
+   */
+  const list: Set<Reporter> = new Set<Reporter>()
+
+  if (option) {
+    if (!Array.isArray(option) && !(option instanceof Set)) {
+      option = [option]
+    }
+
+    for (const reporter of option) {
+      reporter && list.add(reporter)
+    }
+  }
+
+  return list
 }

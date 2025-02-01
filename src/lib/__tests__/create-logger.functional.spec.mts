@@ -37,7 +37,7 @@ describe('functional:lib/createLogger', () => {
 
     beforeEach(() => {
       reporter = new MockReporter()
-      subject = testSubject({ reporters: [reporter] })
+      subject = testSubject({ reporters: reporter })
       subject.unicode = true
     })
 
