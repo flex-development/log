@@ -7,6 +7,7 @@ import logLevels from '#enums/log-levels'
 import logTypes from '#enums/log-types'
 import COLOR_SUPPORTED from '#internal/color-supported'
 import isLogObject from '#internal/is-log-object'
+import merge from '#internal/merge'
 import mergeTypes from '#internal/merge-types'
 import normalizeLevel from '#internal/normalize-level'
 import normalizeOptions from '#internal/normalize-options'
@@ -24,6 +25,7 @@ import type {
 import { keys, type Fn } from '@flex-development/tutils'
 import { ok } from 'devlop'
 import isUnicodeSupported from 'is-unicode-supported'
+import * as util from 'node-inspect-extracted'
 
 export default createLogger
 
@@ -76,6 +78,7 @@ function createLogger(
     unicode: isUnicodeSupported()
   } as Logger, {
     browser: {
+      enumerable: true,
       value: !!process.browser,
       writable: false
     },
@@ -148,11 +151,11 @@ function createLogger(
       }
     },
     levels: {
+      enumerable: true,
       value: Object.freeze(logLevels),
       writable: false
     },
     normalizeLevel: {
-      enumerable: false,
       value: normalizeLevel
     },
     types: {
@@ -198,6 +201,8 @@ function createLogger(
     }
   }
 
+  bind(logger, logTypes.inspect, inspect)
+
   for (const reporter of logger.reporters) void reporter.init(logger)
 
   return logger
@@ -237,6 +242,36 @@ function bind(
 }
 
 /**
+ * Use {@linkcode util.inspect} on `value` and print a string representation.
+ *
+ * @internal
+ *
+ * @this {Logger}
+ *
+ * @param {unknown} value
+ *  The thing to inspect
+ * @param {util.InspectOptions | null | undefined} [options]
+ *  Inspect options
+ * @return {undefined}
+ */
+function inspect(
+  this: Logger,
+  value: unknown,
+  options?: util.InspectOptions | null | undefined
+): undefined {
+  /**
+   * String representation of {@linkcode value}.
+   *
+   * @var {string} str
+   */
+  let str: string = util.inspect(value, merge({ colors: this.color }, options))
+
+  if (!this.browser) str += this.eol
+
+  return void this.stdout.write(str)
+}
+
+/**
  * Send a message each log reporter.
  *
  * @internal
@@ -269,9 +304,11 @@ function report(
     type: defaults.type as unknown as LogType
   } as LogObject
 
+  ok(info.type as string !== logTypes.inspect, 'expected no inspect `info`')
+
   if (!(info.level > this.level)) {
     if (args.length === 1 && isLogObject(args[0])) {
-      Object.assign(info, args[0])
+      merge(info, args[0])
     } else {
       info.args = [...args]
     }

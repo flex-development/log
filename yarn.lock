@@ -1582,6 +1582,7 @@ __metadata:
     is-ci: "npm:4.1.0"
     is-unicode-supported: "npm:2.1.0"
     jsonc-eslint-parser: "npm:2.4.0"
+    node-inspect-extracted: "npm:3.0.2"
     node-notifier: "npm:10.0.1"
     prettier: "npm:3.4.2"
     remark: "npm:15.0.1"

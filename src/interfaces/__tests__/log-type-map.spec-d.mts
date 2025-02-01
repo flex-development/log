@@ -22,12 +22,6 @@ describe('unit-d:interfaces/LogTypeMap', () => {
     expectTypeOf<TestSubject>().toHaveProperty('info').toEqualTypeOf<'info'>()
   })
 
-  it('should match [inspect: "inspect"]', () => {
-    expectTypeOf<TestSubject>()
-      .toHaveProperty('inspect')
-      .toEqualTypeOf<'inspect'>()
-  })
-
   it('should match [log: "log"]', () => {
     expectTypeOf<TestSubject>().toHaveProperty('log').toEqualTypeOf<'log'>()
   })

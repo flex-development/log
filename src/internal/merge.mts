@@ -3,7 +3,7 @@
  * @module log/internal/merge
  */
 
-import { ksort, isObjectPlain as pojo } from '@flex-development/tutils'
+import { ksort, isObjectPlain as pojo, sift } from '@flex-development/tutils'
 
 /**
  * Merge one or more objects into a single object.
@@ -17,7 +17,7 @@ import { ksort, isObjectPlain as pojo } from '@flex-development/tutils'
  *
  * @param {Record<PropertyKey, any>} target
  *  Target object
- * @param {Record<PropertyKey, any>[]} sources
+ * @param {(Record<PropertyKey, any> | null | undefined)[]} sources
  *  Source object(s)
  * @return {Record<PropertyKey, any>}
  *  Merged object
@@ -25,9 +25,9 @@ import { ksort, isObjectPlain as pojo } from '@flex-development/tutils'
 function merge(
   this: void,
   target: Record<PropertyKey, any>,
-  ...sources: Record<PropertyKey, any>[]
+  ...sources: (Record<PropertyKey, any> | null | undefined)[]
 ): Record<PropertyKey, any> {
-  return ksort(sources.reduce<Record<PropertyKey, any>>((acc, source) => {
+  return ksort(sift(sources).reduce((acc, source) => {
     return [
       ...Object.getOwnPropertySymbols(source),
       ...Object.getOwnPropertyNames(source)

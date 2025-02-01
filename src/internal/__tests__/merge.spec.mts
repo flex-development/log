@@ -14,6 +14,7 @@ describe('unit:internal/merge', () => {
         level: logLevels.debug,
         type: logTypes.debug
       },
+      null,
       {
         color: 'gray'
       }
@@ -40,10 +41,6 @@ describe('unit:internal/merge', () => {
           level: logLevels.info,
           type: logTypes.info
         },
-        [logTypes.inspect]: {
-          level: logLevels.log,
-          type: logTypes.inspect
-        },
         [logTypes.log]: {
           level: logLevels.log
         },
@@ -64,8 +61,7 @@ describe('unit:internal/merge', () => {
         }
       },
       {
-        [logTypes.error]: { badge: true, format: { date: false } },
-        [logTypes.inspect]: { level: logLevels.debug }
+        [logTypes.error]: { badge: true, format: { date: false } }
       }
     ]
   ])('should return merged object (%#)', (target, ...sources) => {

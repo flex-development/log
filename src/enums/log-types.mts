@@ -6,11 +6,11 @@
 import type { LogType } from '@flex-development/log'
 
 /**
- * Log types.
+ * Log function names.
  *
  * @internal
  *
- * @enum {LogType}
+ * @enum {LogType | 'inspect'}
  */
 enum logTypes {
   debug = 'debug',

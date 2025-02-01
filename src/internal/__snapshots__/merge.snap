@@ -34,10 +34,6 @@ exports[`unit:internal/merge > should return merged object (1) 1`] = `
     "level": 3,
     "type": "info",
   },
-  "inspect": {
-    "level": 4,
-    "type": "inspect",
-  },
   "log": {
     "level": 2,
   },

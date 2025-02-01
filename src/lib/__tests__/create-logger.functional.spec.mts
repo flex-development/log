@@ -7,10 +7,11 @@ import logLevels from '#enums/log-levels'
 import logTypes from '#enums/log-types'
 import testSubject from '#lib/create-logger'
 import Reporter from '#reporters/abstract.reporter'
-import type { Logger, LogType } from '@flex-development/log'
+import type { Logger, LogType, WriteStream } from '@flex-development/log'
 import pkg from '@flex-development/log/package.json' with { type: 'json' }
 import { omit, type Constructor } from '@flex-development/tutils'
-import type { MockInstance } from 'vitest'
+import * as util from 'node-inspect-extracted'
+import type { Mock, MockInstance } from 'vitest'
 
 describe('functional:lib/createLogger', () => {
   describe('<type>', () => {
@@ -45,7 +46,6 @@ describe('functional:lib/createLogger', () => {
       logTypes.error,
       logTypes.fail,
       logTypes.info,
-      logTypes.inspect,
       logTypes.log,
       logTypes.ready,
       logTypes.start,
@@ -87,6 +87,38 @@ describe('functional:lib/createLogger', () => {
       expect(spy).toHaveBeenCalledOnce()
       expect(spy.mock.lastCall?.[0]).to.have.property('date').instanceof(Date)
       expect(omit(spy.mock.lastCall![0], ['date'])).toMatchSnapshot()
+    })
+  })
+
+  describe('#inspect', () => {
+    let eol: string
+    let subject: Logger
+    let write: Mock<WriteStream['write']>
+
+    vi.mock('node-inspect-extracted', { spy: true })
+
+    beforeAll(() => {
+      write = vi.fn().mockName('write')
+
+      subject = testSubject({ level: logLevels.silent, stdout: { write } })
+      subject.unicode = true
+
+      eol = subject.eol
+    })
+
+    it('should print string representation of `value`', () => {
+      // Arrange
+      const value: unknown = { id: import.meta.url }
+
+      // Act
+      subject.inspect(value)
+      const { calls, lastCall, results } = vi.mocked(util.inspect).mock
+
+      // Expect
+      expect(calls.length).to.eq(1)
+      expect(lastCall?.[0]).to.eq(value)
+      expect(write).toHaveBeenCalledOnce()
+      expect(write).toHaveBeenCalledWith(results[0]?.value as string + eol)
     })
   })
 })

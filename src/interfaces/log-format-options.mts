@@ -16,16 +16,22 @@ interface LogFormatOptions {
 
   /**
    * Maximum number of columns to output.
+   *
+   * @default process.stdout.columns
    */
   columns?: number | null | undefined
 
   /**
    * Whether to include timestamp information in log messages.
+   *
+   * @default true
    */
   date?: boolean | undefined
 
   /**
    * Display icon?
+   *
+   * @default true
    */
   icon?: boolean | null | undefined
 }

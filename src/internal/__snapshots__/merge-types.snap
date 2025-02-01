@@ -26,10 +26,6 @@ exports[`unit:internal/mergeTypes > should return log type to configuration map 
     "level": 3,
     "type": "info",
   },
-  "inspect": {
-    "level": 2,
-    "type": "inspect",
-  },
   "log": {
     "level": 2,
   },

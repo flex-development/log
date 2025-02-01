@@ -20,7 +20,6 @@ interface LogTypeMap {
   error: 'error'
   fail: 'fail'
   info: 'info'
-  inspect: 'inspect'
   log: 'log'
   ready: 'ready'
   start: 'start'

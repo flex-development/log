@@ -8,8 +8,6 @@ exports[`unit:internal/normalizeLevel > should return normalized log level ("fai
 
 exports[`unit:internal/normalizeLevel > should return normalized log level ("info") 1`] = `3`;
 
-exports[`unit:internal/normalizeLevel > should return normalized log level ("inspect") 1`] = `2`;
-
 exports[`unit:internal/normalizeLevel > should return normalized log level ("log") 1`] = `2`;
 
 exports[`unit:internal/normalizeLevel > should return normalized log level ("ready") 1`] = `3`;

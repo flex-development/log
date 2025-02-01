@@ -12,6 +12,12 @@ import { isObjectPlain } from '@flex-development/tutils'
 import isUnicodeSupported from 'is-unicode-supported'
 
 describe('unit:logger', () => {
+  let types: string[]
+
+  beforeAll(() => {
+    types = Object.keys(logTypes).filter(k => k !== logTypes.inspect)
+  })
+
   it('should be logger object', () => {
     expect(subject).to.have.property('browser', false)
     expect(subject).to.have.property('color', COLOR_SUPPORTED)
@@ -23,7 +29,7 @@ describe('unit:logger', () => {
     expect(subject).to.have.property('reporters').be.an('array').that.is.empty
     expect(subject).to.have.property('stderr', process.stderr)
     expect(subject).to.have.property('stdout', process.stdout)
-    expect(subject).to.have.property('types').with.keys(Object.keys(logTypes))
+    expect(subject).to.have.property('types').with.keys(types)
     expect(subject).to.have.property('unicode', isUnicodeSupported())
     expect(subject.format).to.have.keys(['colors', 'columns', 'date', 'icon'])
     expect(subject.format).to.have.property('colors', COLOR_SUPPORTED)

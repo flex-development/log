@@ -72,10 +72,6 @@ function mergeTypes(
       level: logLevels.info,
       type: logTypes.info
     },
-    [logTypes.inspect]: {
-      level: logLevels.log,
-      type: logTypes.inspect
-    },
     [logTypes.log]: {
       level: logLevels.log
     },
