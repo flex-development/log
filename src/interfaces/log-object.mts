@@ -5,7 +5,6 @@
 
 import type {
   InputLogObject,
-  LogFormatOptions,
   LogLevel,
   LogType
 } from '@flex-development/log'
@@ -23,10 +22,10 @@ interface LogObject extends InputLogObject {
    *
    * @override
    */
-  additional: string[]
+  additional?: string[] | null | undefined
 
   /**
-   * Message arguments.
+   * Format arguments.
    *
    * @override
    */
@@ -38,15 +37,6 @@ interface LogObject extends InputLogObject {
    * @override
    */
   date: Date
-
-  /**
-   * Formatting options.
-   *
-   * @see {@linkcode LogFormatOptions}
-   *
-   * @override
-   */
-  format: LogFormatOptions
 
   /**
    * Log level.

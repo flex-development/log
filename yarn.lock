@@ -1550,7 +1550,7 @@ __metadata:
     "@types/eslint": "npm:9.6.1"
     "@types/eslint__js": "npm:8.42.3"
     "@types/is-ci": "npm:3.0.4"
-    "@types/node": "npm:22.10.10"
+    "@types/node": "npm:22.13.1"
     "@types/node-notifier": "npm:8.0.5"
     "@types/unist": "npm:3.0.3"
     "@typescript-eslint/eslint-plugin": "npm:8.23.0"
@@ -1558,6 +1558,7 @@ __metadata:
     "@vates/toggle-scripts": "npm:1.0.0"
     "@vitest/coverage-v8": "npm:3.0.5"
     "@vitest/ui": "npm:3.0.5"
+    consola: "npm:3.4.0"
     cross-env: "npm:7.0.3"
     cspell: "npm:8.17.3"
     devlop: "npm:1.1.0"
@@ -1655,12 +1656,12 @@ __metadata:
     remark-lint-unordered-list-marker-style: "npm:4.0.1"
     remark-validate-links: "npm:13.0.2"
     sh-syntax: "npm:0.4.2"
+    string-width: "npm:7.2.0"
     trash-cli: "npm:6.0.0"
     ts-dedent: "npm:2.2.0"
     typescript: "npm:5.7.3"
     typescript-eslint: "npm:8.23.0"
     unified: "npm:11.0.5"
-    unist-util-size: "npm:4.0.0"
     vfile: "npm:6.0.3"
     vitest: "npm:3.0.5"
     yaml-eslint-parser: "npm:1.2.3"
@@ -2603,12 +2604,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:22.10.10, @types/node@npm:^22.0.0":
-  version: 22.10.10
-  resolution: "@types/node@npm:22.10.10"
+"@types/node@npm:*, @types/node@npm:22.13.1, @types/node@npm:^22.0.0":
+  version: 22.13.1
+  resolution: "@types/node@npm:22.13.1"
   dependencies:
     undici-types: "npm:~6.20.0"
-  checksum: 10/61559b62bc7e62b947876e097c99472dd01317dd3b5916b538e2c40db8d68a1fc23c8de48149ef04cd2790a97bf2c005ea60cbb067e55ddbefd013d73da7a147
+  checksum: 10/d8ba7068b0445643c0fa6e4917cdb7a90e8756a9daff8c8a332689cd5b2eaa01e4cd07de42e3cd7e6a6f465eeda803d5a1363d00b5ab3f6cea7950350a159497
   languageName: node
   linkType: hard
 
@@ -3758,6 +3759,13 @@ __metadata:
   version: 3.2.3
   resolution: "consola@npm:3.2.3"
   checksum: 10/02972dcb048c337357a3628438e5976b8e45bcec22fdcfbe9cd17622992953c4d695d5152f141464a02deac769b1d23028e8ac87f56483838df7a6bbf8e0f5a2
+  languageName: node
+  linkType: hard
+
+"consola@npm:3.4.0":
+  version: 3.4.0
+  resolution: "consola@npm:3.4.0"
+  checksum: 10/99d4a8131f4cc42ff6bb8e4fd8c9dbd428d6b949f3ec25d9d24892a7b0603b0aabeee8213e13ad74439b5078fdb204f9377bcdd401949c33fff672d91f05c4ec
   languageName: node
   linkType: hard
 
@@ -10507,6 +10515,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"string-width@npm:7.2.0":
+  version: 7.2.0
+  resolution: "string-width@npm:7.2.0"
+  dependencies:
+    emoji-regex: "npm:^10.3.0"
+    get-east-asian-width: "npm:^1.0.0"
+    strip-ansi: "npm:^7.1.0"
+  checksum: 10/42f9e82f61314904a81393f6ef75b832c39f39761797250de68c041d8ba4df2ef80db49ab6cd3a292923a6f0f409b8c9980d120f7d32c820b4a8a84a2598a295
+  languageName: node
+  linkType: hard
+
 "string-width@npm:^1.0.1":
   version: 1.0.2
   resolution: "string-width@npm:1.0.2"
@@ -11313,16 +11332,6 @@ __metadata:
     "@types/unist": "npm:^3.0.0"
     unist-util-visit: "npm:^5.0.0"
   checksum: 10/4d89dc25e2091f9d47d92552145a26bf0e4a32d6b453e9cacac7742d730ada186ee1b820579fee3eeaa31e119850c2cb82f8b5898f977a636d7220e998626967
-  languageName: node
-  linkType: hard
-
-"unist-util-size@npm:4.0.0":
-  version: 4.0.0
-  resolution: "unist-util-size@npm:4.0.0"
-  dependencies:
-    "@types/unist": "npm:^3.0.0"
-    unist-util-is: "npm:^6.0.0"
-  checksum: 10/5084502e61062b5bd74fc487f4a989c4420f447a38ec333f767cfc7f3836abc612b6c7a6c5ff6942f7b801dd3af85712acce31ca2fde12a4f08e6f2850ccf42a
   languageName: node
   linkType: hard
 

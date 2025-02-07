@@ -30,10 +30,15 @@
     "patches/",
     "yarn.lock"
   ],
-  "ignoreRegExpList": [],
+  "ignoreRegExpList": ["ansi"],
   "ignoreWords": [],
   "language": "en-US",
-  "patterns": [],
+  "patterns": [
+    {
+      "name": "ansi",
+      "pattern": "/(\\\\u001b)(8|7|H|>|\\[(\\?\\d+(h|l)|[0-2]?(K|J)|\\d*(A|B|C|D\\D|E|F|G|g|i|m|n|S|s|T|u)|1000D\\d+|\\d*;\\d*(f|H|r|m)|\\d+;\\d+;\\d+m))/gi"
+    }
+  ],
   "readonly": true,
   "useGitignore": true,
   "usePnP": false,

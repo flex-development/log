@@ -7,7 +7,7 @@ import type TestSubject from '#interfaces/input-log-object'
 import type { Color } from '@flex-development/colors'
 import type {
   LogFormatOptions,
-  LogLevel,
+  LogLevelOption,
   LogType
 } from '@flex-development/log'
 import type { Nilable } from '@flex-development/tutils'
@@ -49,21 +49,27 @@ describe('unit-d:interfaces/InputLogObject', () => {
       .toEqualTypeOf<Nilable<string>>()
   })
 
-  it('should match [level?: LogLevel | null | undefined]', () => {
+  it('should match [level?: LogLevelOption | null | undefined]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('level')
-      .toEqualTypeOf<Nilable<LogLevel>>()
+      .toEqualTypeOf<Nilable<LogLevelOption>>()
   })
 
-  it('should match [message?: string | null | undefined]', () => {
+  it('should match [message?: unknown]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('message')
-      .toEqualTypeOf<Nilable<string>>()
+      .toEqualTypeOf<unknown>()
   })
 
   it('should match [stack?: string | null | undefined]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('stack')
+      .toEqualTypeOf<Nilable<string>>()
+  })
+
+  it('should match [tag?: string | null | undefined]', () => {
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('tag')
       .toEqualTypeOf<Nilable<string>>()
   })
 

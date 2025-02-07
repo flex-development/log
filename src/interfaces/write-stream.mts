@@ -8,6 +8,11 @@
  */
 interface WriteStream {
   /**
+   * Number of columns the TTY currently has.
+   */
+  columns?: number | null | undefined
+
+  /**
    * Write data to the stream.
    *
    * @this {void}

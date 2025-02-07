@@ -4,8 +4,15 @@
  */
 
 import type TestSubject from '#interfaces/write-stream'
+import type { Nilable } from '@flex-development/tutils'
 
 describe('unit-d:interfaces/WriteStream', () => {
+  it('should match [columns: number | null | undefined]', () => {
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('columns')
+      .toEqualTypeOf<Nilable<number>>()
+  })
+
   describe('write', () => {
     type Subject = TestSubject['write']
 

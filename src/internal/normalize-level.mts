@@ -3,14 +3,15 @@
  * @module log/internal/normalizeLevel
  */
 
+import clamp from '#internal/clamp'
 import type {
   InputLogObject,
   LogLevel,
   LogLevelMap,
+  LogLevelOption,
   LogType,
   Logger
 } from '@flex-development/log'
-import { clamp } from '@flex-development/tutils'
 
 /**
  * Format a log level.
@@ -36,7 +37,9 @@ function normalizeLevel(
   const levels: LogLevelMap = logger.levels
 
   if (typeof level === 'number') {
-    return clamp(level, levels.silent, levels.verbose) as LogLevel
+    return clamp(level, levels.silent, levels.verbose)
+  } else if (level === 'silent') {
+    return levels.silent
   } else if (typeof level === 'string') {
     /**
      * Map defining the log configuration for each log type.
@@ -46,7 +49,16 @@ function normalizeLevel(
     const types: Record<LogType, InputLogObject> = logger.types
 
     // `level` is a known log type
-    if (level in types) return types[level as LogType].level ?? levels.info
+    if (level in types) {
+      /**
+       * Normalized log level.
+       *
+       * @const {LogLevelOption} n
+       */
+      const n: LogLevelOption = types[level as LogType].level ?? levels.info
+
+      if (typeof n === 'number') return n
+    }
   }
 
   // `level` is `null`, `undefined`, or an unknown log type

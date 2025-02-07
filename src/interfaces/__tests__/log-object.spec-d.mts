@@ -6,7 +6,6 @@
 import type TestSubject from '#interfaces/log-object'
 import type {
   InputLogObject,
-  LogFormatOptions,
   LogLevel,
   LogType
 } from '@flex-development/log'
@@ -17,10 +16,10 @@ describe('unit-d:interfaces/LogObject', () => {
     expectTypeOf<TestSubject>().toMatchTypeOf<InputLogObject>()
   })
 
-  it('should match [additional: string[]]', () => {
+  it('should match [additional?: string[] | null | undefined]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('additional')
-      .toEqualTypeOf<string[]>()
+      .toEqualTypeOf<Nilable<string[]>>()
   })
 
   it('should match [args: unknown[]]', () => {
@@ -31,12 +30,6 @@ describe('unit-d:interfaces/LogObject', () => {
 
   it('should match [date: Date]', () => {
     expectTypeOf<TestSubject>().toHaveProperty('date').toEqualTypeOf<Date>()
-  })
-
-  it('should match [format: LogFormatOptions]', () => {
-    expectTypeOf<TestSubject>()
-      .toHaveProperty('format')
-      .toEqualTypeOf<LogFormatOptions>()
   })
 
   it('should match [level: LogLevel]', () => {

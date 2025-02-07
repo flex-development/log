@@ -7,6 +7,6 @@ export default {
   browser: true,
   cwd: '/',
   env: {},
-  stderr: { columns: 80, isTTY: false, write: console.error },
-  stdout: { columns: 80, isTTY: false, write: console.log }
+  stderr: { isTTY: false, write: console.error },
+  stdout: { isTTY: false, write: console.log }
 }

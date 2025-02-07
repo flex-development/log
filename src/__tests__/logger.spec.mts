@@ -15,7 +15,9 @@ describe('unit:logger', () => {
   let types: string[]
 
   beforeAll(() => {
-    types = Object.keys(logTypes).filter(k => k !== logTypes.inspect)
+    types = Object.keys(logTypes).filter(k => {
+      return k !== logTypes.inspect && k !== logTypes.silent
+    })
   })
 
   it('should be logger object', () => {
@@ -26,7 +28,8 @@ describe('unit:logger', () => {
     expect(subject).to.have.property('format').satisfy(isObjectPlain)
     expect(subject).to.have.property('level', logLevels.info)
     expect(subject).to.have.property('levels', logLevels)
-    expect(subject).to.have.property('reporters').be.instanceof(Set).and.empty
+    expect(subject).to.have.property('reporters').be.instanceof(Set)
+    expect(subject).to.have.nested.property('reporters.size', 1)
     expect(subject).to.have.property('stderr', process.stderr)
     expect(subject).to.have.property('stdout', process.stdout)
     expect(subject).to.have.property('types').with.keys(types)

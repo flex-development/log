@@ -4,12 +4,17 @@
  */
 
 import type TestSubject from '#interfaces/log-format-options'
-import type { Nilable, Optional } from '@flex-development/tutils'
+import type { InspectOptions } from '@flex-development/log'
+import type { Nilable } from '@flex-development/tutils'
 
 describe('unit-d:interfaces/LogFormatOptions', () => {
-  it('should match [colors?: boolean | null | undefined]', () => {
+  it('should extend InspectOptions', () => {
+    expectTypeOf<TestSubject>().toMatchTypeOf<InspectOptions>()
+  })
+
+  it('should match [badge?: boolean | null | undefined]', () => {
     expectTypeOf<TestSubject>()
-      .toHaveProperty('colors')
+      .toHaveProperty('badge')
       .toEqualTypeOf<Nilable<boolean>>()
   })
 
@@ -19,10 +24,10 @@ describe('unit-d:interfaces/LogFormatOptions', () => {
       .toEqualTypeOf<Nilable<number>>()
   })
 
-  it('should match [date?: boolean | undefined]', () => {
+  it('should match [date?: boolean | null | undefined]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('date')
-      .toEqualTypeOf<Optional<boolean>>()
+      .toEqualTypeOf<Nilable<boolean>>()
   })
 
   it('should match [icon?: boolean | null | undefined]', () => {

@@ -4,13 +4,14 @@
  */
 
 import type TestSubject from '#reporters/abstract.reporter'
-import type { LogObject, Logger } from '@flex-development/log'
+import type {
+  InputLogObject,
+  LogObject,
+  Logger,
+  WriteStream
+} from '@flex-development/log'
 
 describe('unit-d:reporters/Reporter', () => {
-  it('should match [logger: Logger]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('logger').toEqualTypeOf<Logger>()
-  })
-
   describe('init', () => {
     type Subject = TestSubject['init']
 
@@ -39,6 +40,22 @@ describe('unit-d:reporters/Reporter', () => {
     describe('returns', () => {
       it('should return undefined | void', () => {
         expectTypeOf<Subject>().returns.toEqualTypeOf<undefined | void>()
+      })
+    })
+  })
+
+  describe('stream', () => {
+    type Subject = TestSubject['stream']
+
+    describe('parameters', () => {
+      it('should be callable with [InputLogObject]', () => {
+        expectTypeOf<Subject>().parameters.toEqualTypeOf<[InputLogObject]>()
+      })
+    })
+
+    describe('returns', () => {
+      it('should return WriteStream', () => {
+        expectTypeOf<Subject>().returns.toEqualTypeOf<WriteStream>()
       })
     })
   })

@@ -18,6 +18,10 @@ describe('unit-d:interfaces/LogTypeMap', () => {
     expectTypeOf<TestSubject>().toHaveProperty('fail').toEqualTypeOf<'fail'>()
   })
 
+  it('should match [fatal: "fatal"]', () => {
+    expectTypeOf<TestSubject>().toHaveProperty('fatal').toEqualTypeOf<'fatal'>()
+  })
+
   it('should match [info: "info"]', () => {
     expectTypeOf<TestSubject>().toHaveProperty('info').toEqualTypeOf<'info'>()
   })

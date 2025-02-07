@@ -19,6 +19,7 @@ interface LogTypeMap {
   debug: 'debug'
   error: 'error'
   fail: 'fail'
+  fatal: 'fatal'
   info: 'info'
   log: 'log'
   ready: 'ready'

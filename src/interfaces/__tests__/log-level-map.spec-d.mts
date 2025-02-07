@@ -14,6 +14,14 @@ describe('unit-d:interfaces/LogLevelMap', () => {
     expectTypeOf<TestSubject>().toHaveProperty('error').toEqualTypeOf<0>()
   })
 
+  it('should match [fail: 3]', () => {
+    expectTypeOf<TestSubject>().toHaveProperty('fail').toEqualTypeOf<3>()
+  })
+
+  it('should match [fatal: 0]', () => {
+    expectTypeOf<TestSubject>().toHaveProperty('fatal').toEqualTypeOf<0>()
+  })
+
   it('should match [info: 3]', () => {
     expectTypeOf<TestSubject>().toHaveProperty('info').toEqualTypeOf<3>()
   })
@@ -22,8 +30,20 @@ describe('unit-d:interfaces/LogLevelMap', () => {
     expectTypeOf<TestSubject>().toHaveProperty('log').toEqualTypeOf<2>()
   })
 
+  it('should match [ready: 3]', () => {
+    expectTypeOf<TestSubject>().toHaveProperty('ready').toEqualTypeOf<3>()
+  })
+
   it('should match [silent: -1]', () => {
     expectTypeOf<TestSubject>().toHaveProperty('silent').toEqualTypeOf<-1>()
+  })
+
+  it('should match [start: 3]', () => {
+    expectTypeOf<TestSubject>().toHaveProperty('start').toEqualTypeOf<3>()
+  })
+
+  it('should match [success: 3]', () => {
+    expectTypeOf<TestSubject>().toHaveProperty('success').toEqualTypeOf<3>()
   })
 
   it('should match [trace: 5]', () => {

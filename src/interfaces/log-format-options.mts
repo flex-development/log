@@ -3,16 +3,20 @@
  * @module log/interfaces/LogFormatOptions
  */
 
+import type { InspectOptions } from '@flex-development/log'
+
 /**
  * Log formatting options.
+ *
+ * @see {@linkcode InspectOptions}
+ *
+ * @extends {InspectOptions}
  */
-interface LogFormatOptions {
+interface LogFormatOptions extends InspectOptions {
   /**
-   * Use color.
-   *
-   * @default isColorSupported()
+   * Display log type as badge?
    */
-  colors?: boolean | null | undefined
+  badge?: boolean | null | undefined
 
   /**
    * Maximum number of columns to output.
@@ -22,7 +26,7 @@ interface LogFormatOptions {
   /**
    * Whether to include timestamp information in log messages.
    */
-  date?: boolean | undefined
+  date?: boolean | null | undefined
 
   /**
    * Display icon?

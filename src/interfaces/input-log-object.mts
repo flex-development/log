@@ -6,7 +6,7 @@
 import type { Color } from '@flex-development/colors'
 import type {
   LogFormatOptions,
-  LogLevel,
+  LogLevelOption,
   LogType
 } from '@flex-development/log'
 
@@ -15,17 +15,17 @@ import type {
  */
 interface InputLogObject {
   /**
-   * Additional text or texts to be logged with the message.
+   * Additional lines to be logged with the message.
    */
   additional?: string[] | string | null | undefined
 
   /**
-   * Additional arguments to be logged with the message.
+   * Format arguments.
    */
   args?: unknown[] | null | undefined
 
   /**
-   * Color function name.
+   * Color associated with the log.
    *
    * @see {@linkcode Color}
    */
@@ -51,19 +51,27 @@ interface InputLogObject {
   /**
    * Log level.
    *
-   * @see {@linkcode LogLevel}
+   * @see {@linkcode LogLevelOption}
    */
-  level?: LogLevel | null | undefined
+  level?: LogLevelOption | null | undefined
 
   /**
    * Log message.
+   *
+   * > 👉 **Note**: If present, this will be inserted into {@linkcode args} as
+   * > the first format argument.
    */
-  message?: string | null | undefined
+  message?: unknown
 
   /**
    * Stack trace.
    */
   stack?: string | null | undefined
+
+  /**
+   * A string to categorize or identify the log.
+   */
+  tag?: string | null | undefined
 
   /**
    * Log type.

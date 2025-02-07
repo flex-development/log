@@ -4,13 +4,17 @@ exports[`unit:internal/normalizeLevel > should return normalized log level ("deb
 
 exports[`unit:internal/normalizeLevel > should return normalized log level ("error") 1`] = `0`;
 
-exports[`unit:internal/normalizeLevel > should return normalized log level ("fail") 1`] = `0`;
+exports[`unit:internal/normalizeLevel > should return normalized log level ("fail") 1`] = `3`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level ("fatal") 1`] = `0`;
 
 exports[`unit:internal/normalizeLevel > should return normalized log level ("info") 1`] = `3`;
 
 exports[`unit:internal/normalizeLevel > should return normalized log level ("log") 1`] = `2`;
 
 exports[`unit:internal/normalizeLevel > should return normalized log level ("ready") 1`] = `3`;
+
+exports[`unit:internal/normalizeLevel > should return normalized log level ("silent") 1`] = `-1`;
 
 exports[`unit:internal/normalizeLevel > should return normalized log level ("start") 1`] = `3`;
 

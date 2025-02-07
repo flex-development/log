@@ -5,7 +5,6 @@
 
 import logLevels from '#enums/log-levels'
 import logTypes from '#enums/log-types'
-import icon from '#internal/icon'
 import merge from '#internal/merge'
 import type { InputLogObject, LogType } from '@flex-development/log'
 
@@ -18,30 +17,13 @@ import type { InputLogObject, LogType } from '@flex-development/log'
  *
  * @param {Partial<Record<LogType, InputLogObject>> | null | undefined} types
  *  User log type to config map
- * @param {boolean} unicode
- *  Unicode supported?
  * @return {Record<LogType, InputLogObject>}
  *  Log type to configuration map
  */
 function mergeTypes(
   this: void,
-  types: Partial<Record<LogType, InputLogObject>> | null | undefined,
-  unicode: boolean
+  types: Partial<Record<LogType, InputLogObject>> | null | undefined
 ): Record<LogType, InputLogObject> {
-  /**
-   * Checkmark icon.
-   *
-   * @const {string} check
-   */
-  const check: string = icon('✔', '√', unicode)
-
-  /**
-   * Failure icon.
-   *
-   * @const {string} x
-   */
-  const x: string = icon('✖', '×', unicode)
-
   /**
    * Default log type to configuration map.
    *
@@ -49,26 +31,22 @@ function mergeTypes(
    */
   const defaults: Record<LogType, InputLogObject> = {
     [logTypes.debug]: {
-      color: 'gray',
-      icon: icon('⚙', 'D', unicode),
       level: logLevels.debug,
       type: logTypes.debug
     },
     [logTypes.error]: {
-      color: 'red',
-      icon: x,
       level: logLevels.error,
       type: logTypes.error
     },
     [logTypes.fail]: {
-      color: 'red',
-      icon: x,
-      level: logLevels.error,
+      level: logLevels.fail,
       type: logTypes.fail
     },
+    [logTypes.fatal]: {
+      level: logLevels.fatal,
+      type: logTypes.fatal
+    },
     [logTypes.info]: {
-      color: 'cyan',
-      icon: icon('ℹ', 'i', unicode),
       level: logLevels.info,
       type: logTypes.info
     },
@@ -76,31 +54,22 @@ function mergeTypes(
       level: logLevels.log
     },
     [logTypes.ready]: {
-      color: 'green',
-      icon: check,
-      level: logLevels.info,
+      level: logLevels.ready,
       type: logTypes.ready
     },
     [logTypes.start]: {
-      color: 'magenta',
-      icon: icon('◐', 'o', unicode),
-      level: logLevels.info,
+      level: logLevels.start,
       type: logTypes.start
     },
     [logTypes.success]: {
-      color: 'green',
-      icon: check,
-      level: logLevels.info,
+      level: logLevels.success,
       type: logTypes.success
     },
     [logTypes.trace]: {
-      icon: icon('→', '→', unicode),
       level: logLevels.trace,
       type: logTypes.trace
     },
     [logTypes.warn]: {
-      color: 'yellow',
-      icon: icon('▲', '‼', unicode),
       level: logLevels.warn,
       type: logTypes.warn
     },

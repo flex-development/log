@@ -24,7 +24,7 @@ import type {
   ReportersOption
 } from '@flex-development/log'
 import type { Reporter } from '@flex-development/log/reporters'
-import { keys, type Fn } from '@flex-development/tutils'
+import { keys, ksort, type Fn } from '@flex-development/tutils'
 import { ok } from 'devlop'
 import isUnicodeSupported from 'is-unicode-supported'
 import * as util from 'node-inspect-extracted'
@@ -77,7 +77,7 @@ function createLogger(
     reporters: reporters(options.reporters),
     stderr: options.stderr ?? process.stderr,
     stdout: options.stdout ?? process.stdout,
-    types: {} as Record<LogType, InputLogObject>,
+    types: mergeTypes(options.types),
     unicode: isUnicodeSupported()
   }
 
@@ -156,17 +156,6 @@ function createLogger(
     },
     stdout: {
       enumerable: false
-    },
-    types: {
-      /**
-       * @this {Logger}
-       *
-       * @return {Record<LogType, InputLogObject>}
-       *  Log type to configuration map
-       */
-      get(this: Logger): Record<LogType, InputLogObject> {
-        return mergeTypes(options.types, this.unicode)
-      }
     }
   })
 
@@ -215,8 +204,16 @@ function bind(
   fn: Fn,
   name: keyof Logger
 ): undefined {
-  Object.defineProperties(logger, { [name]: { enumerable: true, value: fn } })
+  Object.defineProperties(logger, {
+    [name]: {
+      enumerable: true,
+      value: fn,
+      writable: true
+    }
+  })
+
   Object.defineProperties(logger[name], { name: { value: name } })
+
   return void logger
 }
 
@@ -281,25 +278,22 @@ function report(
     info.args = [...args]
   }
 
-  if (!((info.level = normalizeLevel(this, info.level)) > this.level)) {
+  if (!(normalizeLevel(this, info.level) > this.level)) {
+    if ((info.message as unknown) instanceof Error) merge(info, info.message)
     if (!Array.isArray(info.args)) info.args = []
-    if (!(info.date instanceof Date)) info.date = new Date()
-    info.format = merge({}, this.format, info.format)
 
-    if (typeof info.message === 'string' && info.message as string) {
-      info.args.unshift(info.message)
-      delete info.message
-    }
+    if ('message' in info) info.args.unshift(info.message)
+    delete info.message
 
     if (typeof info.additional === 'string' && info.additional as string) {
       info.additional = (info.additional as string).split(this.eol)
-    } else if (!Array.isArray(info.additional)) {
-      info.additional = []
     }
 
     if (typeof info.type !== 'string') info.type = logTypes.log
-    if (info.color === undefined) info.color = this.types[info.type].color
-    if (info.icon === undefined) info.icon = this.types[info.type].icon
+    if (!(info.date instanceof Date)) info.date = new Date()
+
+    info.level = normalizeLevel(this, info.level)
+    ksort(info)
 
     for (const reporter of this.reporters) void reporter.report(info)
   }

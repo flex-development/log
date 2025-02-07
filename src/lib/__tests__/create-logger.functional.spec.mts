@@ -5,6 +5,7 @@
 
 import logLevels from '#enums/log-levels'
 import logTypes from '#enums/log-types'
+import error from '#fixtures/error'
 import testSubject from '#lib/create-logger'
 import Reporter from '#reporters/abstract.reporter'
 import type { Logger, LogType, WriteStream } from '@flex-development/log'
@@ -66,6 +67,7 @@ describe('functional:lib/createLogger', () => {
     })
 
     it.each<[type: LogType, message: unknown, ...args: unknown[]]>([
+      [logTypes.fail, { message: Object.assign(error, { stack: '' }) }],
       [logTypes.info, { args: null, message: 'Building...' }],
       [logTypes.log, 'hello', 'world'],
       [logTypes.start, { args: [pkg.name], message: 'Building %s' }],

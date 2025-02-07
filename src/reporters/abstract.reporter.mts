@@ -3,7 +3,14 @@
  * @module log/reporters/Reporter
  */
 
-import type { LogObject, Logger } from '@flex-development/log'
+import normalizeLevel from '#internal/normalize-level'
+import type {
+  InputLogObject,
+  LogLevel,
+  LogObject,
+  Logger,
+  WriteStream
+} from '@flex-development/log'
 
 /**
  * Log reporter API.
@@ -16,7 +23,7 @@ import type { LogObject, Logger } from '@flex-development/log'
  */
 abstract class Reporter {
   /**
-   * The logger this reporter writes to.
+   * The logger `this` reporter writes to.
    *
    * @see {@linkcode Logger}
    *
@@ -57,6 +64,33 @@ abstract class Reporter {
    * @return {undefined | void}
    */
   public abstract report(info: LogObject): undefined | void
+
+  /**
+   * Get a write stream for `info`.
+   *
+   * @see {@linkcode InputLogObject}
+   * @see {@linkcode WriteStream}
+   *
+   * @protected
+   * @instance
+   *
+   * @param {InputLogObject} info
+   *  The log information to process
+   * @return {WriteStream}
+   *  Writable stream for `info` based on log level
+   */
+  protected stream(info: InputLogObject): WriteStream {
+    /**
+     * Normalized log level.
+     *
+     * @const {LogLevel} level
+     */
+    const level: LogLevel = normalizeLevel(this.logger, info.level)
+
+    return level < this.logger.levels.log
+      ? this.logger.stderr
+      : this.logger.stdout
+  }
 }
 
 export default Reporter

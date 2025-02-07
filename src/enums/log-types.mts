@@ -10,16 +10,18 @@ import type { LogType } from '@flex-development/log'
  *
  * @internal
  *
- * @enum {LogType | 'inspect'}
+ * @enum {LogType | 'inspect' | 'silent'}
  */
 enum logTypes {
   debug = 'debug',
   error = 'error',
   fail = 'fail',
+  fatal = 'fatal',
   info = 'info',
   inspect = 'inspect',
   log = 'log',
   ready = 'ready',
+  silent = 'silent',
   start = 'start',
   success = 'success',
   trace = 'trace',

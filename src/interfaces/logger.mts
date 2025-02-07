@@ -125,15 +125,12 @@ interface Logger extends LogFunctions {
   stdout: WriteStream
 
   /**
-   * Get a map defining the log configuration for each log type.
+   * Map defining the log configuration for each log type.
    *
    * @see {@linkcode InputLogObject}
    * @see {@linkcode LogType}
-   *
-   * @return {Record<LogType, InputLogObject>}
-   *  Log type to configuration map
    */
-  get types(): Record<LogType, InputLogObject>
+  types: Record<LogType, InputLogObject>
 
   /**
    * Unicode supported?

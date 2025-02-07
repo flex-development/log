@@ -5,6 +5,7 @@
 
 import createLogger from '#lib/create-logger'
 import type { Logger } from '@flex-development/log'
+import { FancyReporter } from '@flex-development/log/reporters'
 
 /**
  * Default logger.
@@ -13,6 +14,6 @@ import type { Logger } from '@flex-development/log'
  *
  * @const {Logger} logger
  */
-const logger: Logger = createLogger()
+const logger: Logger = createLogger({ reporters: new FancyReporter() })
 
 export default logger

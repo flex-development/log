@@ -16,9 +16,14 @@
 interface LogLevelMap {
   debug: 4
   error: 0
+  fail: 3
+  fatal: 0
   info: 3
   log: 2
+  ready: 3
   silent: -1
+  start: 3
+  success: 3
   trace: 5
   verbose: 999
   warn: 1

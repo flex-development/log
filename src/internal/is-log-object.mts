@@ -21,12 +21,9 @@ import type { InputLogObject } from '@flex-development/log'
  */
 function isLogObject(this: void, value: unknown): value is InputLogObject {
   return (
-    typeof value === 'object' &&
     value !== null &&
-    (
-      'args' in value && Array.isArray(value.args) ||
-      'message' in value && typeof value.message === 'string'
-    )
+    typeof value === 'object' &&
+    ('args' in value && Array.isArray(value.args) || 'message' in value)
   )
 }
 
