@@ -1574,7 +1574,7 @@ __metadata:
     dprint: "npm:0.49.0"
     editorconfig: "npm:2.0.1"
     eslint: "npm:9.20.1"
-    eslint-import-resolver-typescript: "npm:3.8.0"
+    eslint-import-resolver-typescript: "npm:3.8.1"
     eslint-mdx: "npm:3.1.5"
     eslint-plugin-chai-expect: "npm:3.1.0"
     eslint-plugin-import: "npm:2.31.0"
@@ -4760,9 +4760,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-import-resolver-typescript@npm:3.8.0":
-  version: 3.8.0
-  resolution: "eslint-import-resolver-typescript@npm:3.8.0"
+"eslint-import-resolver-typescript@npm:3.8.1":
+  version: 3.8.1
+  resolution: "eslint-import-resolver-typescript@npm:3.8.1"
   dependencies:
     "@nolyfill/is-core-module": "npm:1.0.39"
     debug: "npm:^4.3.7"
@@ -4780,7 +4780,7 @@ __metadata:
       optional: true
     eslint-plugin-import-x:
       optional: true
-  checksum: 10/62d9b3dda939cf9abc56701a9ccba2f74e8bb1a203009118d57dd2fcc03603ad737078925b27eda56cf69ec0b1900a91aee8954cbdb8940ad726d395eb4fe8d6
+  checksum: 10/a35e65f4920aa09ca3b0cb3cb98d7870253998798cc648564014a6aaa01622b2f51182a531bfef49bce53c28ed4c7523b0469686388b380ce27819701d6a5837
   languageName: node
   linkType: hard
 
