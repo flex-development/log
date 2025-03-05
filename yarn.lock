@@ -1590,7 +1590,7 @@ __metadata:
     eslint-plugin-jsdoc: "npm:50.6.3"
     eslint-plugin-jsonc: "npm:2.19.1"
     eslint-plugin-mdx: "npm:3.1.5"
-    eslint-plugin-n: "npm:17.16.1"
+    eslint-plugin-n: "npm:17.16.2"
     eslint-plugin-promise: "npm:7.2.1"
     eslint-plugin-unicorn: "npm:56.0.1"
     eslint-plugin-yml: "npm:1.17.0"
@@ -2784,7 +2784,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:8.26.0, @typescript-eslint/utils@npm:^8.21.0, @typescript-eslint/utils@npm:^8.23.0":
+"@typescript-eslint/utils@npm:8.26.0, @typescript-eslint/utils@npm:^8.23.0":
   version: 8.26.0
   resolution: "@typescript-eslint/utils@npm:8.26.0"
   dependencies:
@@ -4980,12 +4980,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-n@npm:17.16.1":
-  version: 17.16.1
-  resolution: "eslint-plugin-n@npm:17.16.1"
+"eslint-plugin-n@npm:17.16.2":
+  version: 17.16.2
+  resolution: "eslint-plugin-n@npm:17.16.2"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.4.1"
-    "@typescript-eslint/utils": "npm:^8.21.0"
     enhanced-resolve: "npm:^5.17.1"
     eslint-plugin-es-x: "npm:^7.8.0"
     get-tsconfig: "npm:^4.8.1"
@@ -4993,10 +4992,9 @@ __metadata:
     ignore: "npm:^5.3.2"
     minimatch: "npm:^9.0.5"
     semver: "npm:^7.6.3"
-    ts-declaration-location: "npm:^1.0.5"
   peerDependencies:
     eslint: ">=8.23.0"
-  checksum: 10/ad3ea3a5fdc830c8a3cf063c511b465adb8ebbe4a47ad5a8de1f3e9679dd5915b87f7084a66421562baf75bc8d0f9dba4e144757d2d89b87f1276eee0aa428b5
+  checksum: 10/84bc5957f50ac7f867fc44d6b37659a705f0e19c25f656023254b33bdd5db8a2c382e2a161d8443494d04f228f2b73f54ae7fe581005e59cfec51a3b0d4a7b20
   languageName: node
   linkType: hard
 
@@ -7856,7 +7854,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:10.0.1, minimatch@npm:^10.0.1":
+"minimatch@npm:10.0.1":
   version: 10.0.1
   resolution: "minimatch@npm:10.0.1"
   dependencies:
@@ -10980,17 +10978,6 @@ __metadata:
   peerDependencies:
     typescript: ">=4.8.4"
   checksum: 10/2e68938cd5acad6b5157744215ce10cd097f9f667fd36b5fdd5efdd4b0c51063e855459d835f94f6777bb8a0f334916b6eb5c1eedab8c325feb34baa39238898
-  languageName: node
-  linkType: hard
-
-"ts-declaration-location@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "ts-declaration-location@npm:1.0.5"
-  dependencies:
-    minimatch: "npm:^10.0.1"
-  peerDependencies:
-    typescript: ">=4.0.0"
-  checksum: 10/168f975fad868bdbfea38a81cbcbf20b3b097a040adf9d151f0ba5a299c7604bbba643eff52c85798ffd1e429e3abb769c04367cd9b10e28c5a767886937eaab
   languageName: node
   linkType: hard
 
