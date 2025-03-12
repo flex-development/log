@@ -1583,7 +1583,7 @@ __metadata:
     editorconfig: "npm:2.0.1"
     eslint: "npm:9.20.1"
     eslint-import-resolver-typescript: "npm:3.8.6"
-    eslint-mdx: "npm:3.1.5"
+    eslint-mdx: "npm:3.2.0"
     eslint-plugin-chai-expect: "npm:3.1.0"
     eslint-plugin-import: "npm:2.31.0"
     eslint-plugin-jest-formatting: "npm:3.1.0"
@@ -2975,7 +2975,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.0.0, acorn@npm:^8.11.3, acorn@npm:^8.14.0, acorn@npm:^8.14.1, acorn@npm:^8.5.0, acorn@npm:^8.9.0":
+"acorn@npm:^8.0.0, acorn@npm:^8.14.0, acorn@npm:^8.14.1, acorn@npm:^8.5.0, acorn@npm:^8.9.0":
   version: 8.14.1
   resolution: "acorn@npm:8.14.1"
   bin:
@@ -4786,31 +4786,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-mdx@npm:3.1.5":
-  version: 3.1.5
-  resolution: "eslint-mdx@npm:3.1.5"
-  dependencies:
-    acorn: "npm:^8.11.3"
-    acorn-jsx: "npm:^5.3.2"
-    espree: "npm:^9.6.1"
-    estree-util-visit: "npm:^2.0.0"
-    remark-mdx: "npm:^3.0.0"
-    remark-parse: "npm:^11.0.0"
-    remark-stringify: "npm:^11.0.0"
-    synckit: "npm:^0.9.0"
-    tslib: "npm:^2.6.2"
-    unified: "npm:^11.0.4"
-    unified-engine: "npm:^11.2.0"
-    unist-util-visit: "npm:^5.0.0"
-    uvu: "npm:^0.5.6"
-    vfile: "npm:^6.0.1"
-  peerDependencies:
-    eslint: ">=8.0.0"
-  checksum: 10/8218476bf4dde702d7d0bd846163f407fef2c44de5315e08206cb025734f73a29baae7588f32e0c6745ea56bf10fe495ee6efc240083b79b47565b0bcb3096cb
-  languageName: node
-  linkType: hard
-
-"eslint-mdx@npm:^3.2.0":
+"eslint-mdx@npm:3.2.0, eslint-mdx@npm:^3.2.0":
   version: 3.2.0
   resolution: "eslint-mdx@npm:3.2.0"
   dependencies:
@@ -9764,7 +9740,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"remark-mdx@npm:^3.0.0, remark-mdx@npm:^3.1.0":
+"remark-mdx@npm:^3.1.0":
   version: 3.1.0
   resolution: "remark-mdx@npm:3.1.0"
   dependencies:
@@ -10691,7 +10667,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"synckit@npm:^0.9.0, synckit@npm:^0.9.1, synckit@npm:^0.9.2":
+"synckit@npm:^0.9.1, synckit@npm:^0.9.2":
   version: 0.9.2
   resolution: "synckit@npm:0.9.2"
   dependencies:
@@ -11133,7 +11109,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unified-engine@npm:^11.0.0, unified-engine@npm:^11.2.0, unified-engine@npm:^11.2.2":
+"unified-engine@npm:^11.0.0, unified-engine@npm:^11.2.2":
   version: 11.2.2
   resolution: "unified-engine@npm:11.2.2"
   dependencies:
@@ -11190,7 +11166,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unified@npm:11.0.5, unified@npm:^11.0.0, unified@npm:^11.0.4, unified@npm:^11.0.5":
+"unified@npm:11.0.5, unified@npm:^11.0.0, unified@npm:^11.0.5":
   version: 11.0.5
   resolution: "unified@npm:11.0.5"
   dependencies:
@@ -11450,7 +11426,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vfile@npm:6.0.3, vfile@npm:^6.0.0, vfile@npm:^6.0.1, vfile@npm:^6.0.3":
+"vfile@npm:6.0.3, vfile@npm:^6.0.0, vfile@npm:^6.0.3":
   version: 6.0.3
   resolution: "vfile@npm:6.0.3"
   dependencies:
