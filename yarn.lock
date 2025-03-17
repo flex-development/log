@@ -1603,7 +1603,7 @@ __metadata:
     "@vates/toggle-scripts": "npm:1.0.0"
     "@vitest/coverage-v8": "npm:3.0.9"
     "@vitest/ui": "npm:3.0.9"
-    consola: "npm:3.4.0"
+    consola: "npm:3.4.1"
     cross-env: "npm:7.0.3"
     cspell: "npm:8.17.5"
     devlop: "npm:1.1.0"
@@ -3871,10 +3871,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"consola@npm:3.4.0":
-  version: 3.4.0
-  resolution: "consola@npm:3.4.0"
-  checksum: 10/99d4a8131f4cc42ff6bb8e4fd8c9dbd428d6b949f3ec25d9d24892a7b0603b0aabeee8213e13ad74439b5078fdb204f9377bcdd401949c33fff672d91f05c4ec
+"consola@npm:3.4.1":
+  version: 3.4.1
+  resolution: "consola@npm:3.4.1"
+  checksum: 10/800e29e9497c16f0528ad64e784dc62cd0a415ff9df55dcd49baef1560b7b9f1e7b2cc1f5ca62defa04105e28e30493a9d5a4d3ad21823c8b7b655b458e45516
   languageName: node
   linkType: hard
 
