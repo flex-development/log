@@ -8,8 +8,6 @@ import type { LogLevel } from '@flex-development/log'
 /**
  * Log levels.
  *
- * @internal
- *
  * @enum {LogLevel}
  */
 const logLevels = Object.freeze({

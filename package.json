@@ -41,6 +41,10 @@
       "log": "./src/index.mts",
       "default": "./dist/index.mjs"
     },
+    "./core": {
+      "log": "./src/core.mts",
+      "default": "./dist/core.mjs"
+    },
     "./package.json": "./package.json",
     "./reporters": {
       "log": "./src/reporters/index.mts",

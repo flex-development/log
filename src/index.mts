@@ -4,6 +4,7 @@
  */
 
 export type * from '#interfaces/index'
-export * from '#lib/index'
 export { default, default as logger } from '#logger'
 export type * from '#types/index'
+export * from '@flex-development/log/core'
+export * from '@flex-development/log/reporters'
