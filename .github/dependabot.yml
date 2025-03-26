@@ -34,8 +34,6 @@ updates:
       eslint:
         patterns:
           - '@eslint/js'
-          - '@types/eslint'
-          - '@types/eslint__js'
           - eslint
       flex-development:
         patterns:
