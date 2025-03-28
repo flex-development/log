@@ -15,6 +15,7 @@ Log messages in the terminal and browser
 ## Contents
 
 - [What is this?](#what-is-this)
+- [Why this package?](#why-this-package)
 - [Install](#install)
 - [Use](#use)
 - [API](#api)
@@ -26,6 +27,14 @@ Log messages in the terminal and browser
 This is a small, but useful, library for logging messages in the terminal and browser consoles.
 
 Colorful messages can be logged in the terminal and browser consoles that support ANSI colors.
+
+## Why this package?
+
+\:ok\_hand: Easy to use\
+\:electric\_plug: Pluggable reporters\
+\:computer: Consistent terminal experience\
+\:bookmark: Tag support\
+\:globe\_with\_meridians: Browser support
 
 ## Install
 
