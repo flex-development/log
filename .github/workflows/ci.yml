@@ -368,7 +368,7 @@ jobs:
         if: steps.test.outputs.coverage != '400'
         name: Coverage threshold failure (${{ steps.test.outputs.coverage }})
         run: yarn test:cov:reports
-  build:
+  artifacts:
     needs:
       - commitlint
       - gitguardian
@@ -417,7 +417,7 @@ jobs:
           path: ${{ env.TARFILE }}
   changelog:
     needs:
-      - build
+      - artifacts
       - commitlint
       - format
       - gitguardian

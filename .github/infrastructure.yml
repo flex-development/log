@@ -22,9 +22,9 @@ branches:
       required_status_checks:
         checks:
           - context: add-to-project
+          - context: artifacts
           - context: auto-merge
           - context: auto-review
-          - context: build
           - context: changelog
           - context: commitlint
           - context: dependabot-dedupe
@@ -185,5 +185,4 @@ repository:
     - logging
   visibility: public
   vulnerability_alerts: true
-  web_commit_signoff_required: true
 teams: []
