@@ -49,10 +49,8 @@ concurrency:
 jobs:
   preflight:
     if: |
-      github.event.head_commit.author.name != 'dependabot[bot]'
-      && github.event.head_commit.author.username != 'flexdevelopment[bot]'
-      && !startsWith(github.event.head_commit.message, 'release:')
-      && !startsWith(github.event.head_commit.message, 'release(chore):')
+      github.event_name == 'pull_request' ||
+      github.event.head_commit.committer.username != 'web-flow'
     runs-on: ubuntu-latest
     outputs:
       cache-key: ${{ steps.cache-key.outputs.result }}
