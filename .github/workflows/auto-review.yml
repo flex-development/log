@@ -46,7 +46,8 @@ jobs:
         run: |
           GITHUB_TOKEN=
 
-          if [[ $GITHUB_ACTOR == 'flex-development[bot]' ]]; then
+          if [[ $GITHUB_ACTOR == '${{ vars.BOT_NAME }}' ]]; then
+            # bots cannot approve their own pull request.
             GITHUB_TOKEN=${{ secrets.GH_REPO_TOKEN }}
           else
             GITHUB_TOKEN=${{ steps.bot-token.outputs.token }}
