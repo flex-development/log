@@ -37,10 +37,8 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
-  packages: read
 env:
   CACHE_PATH: node_modules
-  GITHUB_TOKEN: ${{ secrets.GH_REGISTRY_TOKEN }}
   HUSKY: 0
   REF: ${{ github.head_ref || github.ref }}
   REF_NAME: ${{ github.head_ref || github.ref_name }}
@@ -82,7 +80,7 @@ jobs:
       - id: yarn
         name: Install dependencies
         env:
-          YARN_ENABLE_IMMUTABLE_INSTALLS: ${{ github.actor != 'dependabot[bot]' }}
+          YARN_ENABLE_IMMUTABLE_INSTALLS: ${{ github.actor != vars.DEPENDABOT }}
         run: yarn
       - id: cache-key
         name: Get cache key

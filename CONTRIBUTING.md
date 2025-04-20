@@ -105,14 +105,13 @@ Follow the steps below to setup your local development environment:
 | name                |
 | ------------------- |
 | `CODECOV_TOKEN`     |
-| `GITHUB_TOKEN`      |
 | `HOMEBREW_BREWFILE` |
 | `NODE_NO_WARNINGS`  |
 | `ZSH_DOTENV_FILE`   |
 
 #### GitHub Actions
 
-Variables are prefixed by `secrets.` in [workflow](.github/workflows/) files.
+Variables are prefixed by `secrets.` and `vars.` in [workflow](.github/workflows/) files.
 
 ### Git Config
 
