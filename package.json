@@ -157,7 +157,7 @@
     "@stylistic/eslint-plugin": "4.2.0",
     "@tsconfig/strictest": "2.0.5",
     "@types/is-ci": "3.0.4",
-    "@types/node": "22.13.1",
+    "@types/node": "22.14.1",
     "@types/node-notifier": "8.0.5",
     "@types/unist": "3.0.3",
     "@typescript-eslint/eslint-plugin": "8.30.1",
