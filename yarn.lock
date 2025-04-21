@@ -1622,7 +1622,7 @@ __metadata:
     dprint: "npm:0.49.1"
     editorconfig: "npm:2.0.1"
     eslint: "npm:9.25.0"
-    eslint-import-resolver-typescript: "npm:4.3.2"
+    eslint-import-resolver-typescript: "npm:4.3.3"
     eslint-mdx: "npm:3.4.0"
     eslint-plugin-chai-expect: "npm:3.1.0"
     eslint-plugin-import: "npm:2.31.0"
@@ -4867,16 +4867,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-import-resolver-typescript@npm:4.3.2":
-  version: 4.3.2
-  resolution: "eslint-import-resolver-typescript@npm:4.3.2"
+"eslint-import-resolver-typescript@npm:4.3.3":
+  version: 4.3.3
+  resolution: "eslint-import-resolver-typescript@npm:4.3.3"
   dependencies:
     debug: "npm:^4.4.0"
     get-tsconfig: "npm:^4.10.0"
     is-bun-module: "npm:^2.0.0"
     stable-hash: "npm:^0.0.5"
-    tinyglobby: "npm:^0.2.12"
-    unrs-resolver: "npm:^1.4.1"
+    tinyglobby: "npm:^0.2.13"
+    unrs-resolver: "npm:^1.6.0"
   peerDependencies:
     eslint: "*"
     eslint-plugin-import: "*"
@@ -4886,7 +4886,7 @@ __metadata:
       optional: true
     eslint-plugin-import-x:
       optional: true
-  checksum: 10/40f4d4a888b2e139943338e064ec080d6b1bb85426bcd7197e0a0d505bd34b08dfb4e0fc10620d773063325039212549c7913edbb6beed28e7ea1de62ad271d1
+  checksum: 10/ee9a9e9ce8debe0896ed38bfec003fae575a10190daeb026561ce0b88133ba1811ca1fc992053791bacc041fb30e95127563dd1039e5dca7ed3530155ba62e38
   languageName: node
   linkType: hard
 
@@ -10702,7 +10702,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinyglobby@npm:^0.2.12":
+"tinyglobby@npm:^0.2.12, tinyglobby@npm:^0.2.13":
   version: 0.2.13
   resolution: "tinyglobby@npm:0.2.13"
   dependencies:
@@ -11217,7 +11217,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unrs-resolver@npm:^1.4.1":
+"unrs-resolver@npm:^1.6.0":
   version: 1.6.1
   resolution: "unrs-resolver@npm:1.6.1"
   dependencies:
