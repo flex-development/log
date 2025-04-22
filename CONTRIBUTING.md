@@ -207,7 +207,6 @@ See [`.commitlintrc.ts`](.commitlintrc.ts) to view all commit guidelines.
 [dprint][] is used to format code and [ESLint][] to lint files.
 
 - [`.dprint.jsonc`](.dprint.jsonc)
-- [`eslint.base.config.mjs`](eslint.base.config.mjs)
 - [`eslint.config.mjs`](eslint.config.mjs)
 
 ### Making Changes

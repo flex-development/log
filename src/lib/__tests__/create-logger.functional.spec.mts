@@ -21,6 +21,10 @@ describe('functional:lib/createLogger', () => {
     let subject: Logger
 
     beforeAll(() => {
+      /**
+       * @class
+       * @extends {Reporter}
+       */
       MockReporter = class MockReporter extends Reporter {
         /**
          * Define how a log message is processed and displayed.

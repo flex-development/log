@@ -8,6 +8,7 @@ docast
 dohm
 dprint
 fbca
+fldv
 ggshield
 gpgsign
 hmarr
