@@ -1,5 +1,5 @@
 /**
- * @file ESLint Configuration - Root
+ * @file eslint
  * @module config/eslint
  * @see https://eslint.org/docs/user-guide/configuring
  */
@@ -7,17 +7,12 @@
 import fldv from '@flex-development/eslint-config'
 
 /**
- * Root eslint configuration object.
+ * eslint configuration.
  *
  * @type {import('eslint').Linter.Config[]}
  */
 export default [
   ...fldv.configs.node,
-  {
-    ignores: [
-      '**/.vitest-reports/'
-    ]
-  },
   {
     files: ['src/enums/log-levels.mts'],
     rules: {
