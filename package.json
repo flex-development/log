@@ -151,7 +151,7 @@
     "@commitlint/cli": "19.8.0",
     "@commitlint/types": "19.8.0",
     "@flex-development/commitlint-config": "1.0.1",
-    "@flex-development/eslint-config": "1.1.0",
+    "@flex-development/eslint-config": "1.1.1",
     "@flex-development/grease": "3.0.0-alpha.9",
     "@flex-development/remark-preset": "1.0.0",
     "@tsconfig/strictest": "2.0.5",
