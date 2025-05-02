@@ -167,7 +167,7 @@
     "cspell": "8.19.3",
     "dprint": "0.49.1",
     "editorconfig": "2.0.1",
-    "eslint": "9.25.1",
+    "eslint": "9.26.0",
     "growl": "1.10.5",
     "husky": "9.1.7",
     "is-ci": "4.1.0",
