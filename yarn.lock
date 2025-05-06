@@ -1659,7 +1659,7 @@ __metadata:
     husky: "npm:9.1.7"
     is-ci: "npm:4.1.0"
     is-unicode-supported: "npm:2.1.0"
-    node-inspect-extracted: "npm:3.0.2"
+    node-inspect-extracted: "npm:3.1.0"
     node-notifier: "npm:10.0.1"
     prettier: "npm:3.5.3"
     remark: "npm:15.0.1"
@@ -8340,6 +8340,13 @@ __metadata:
   version: 3.0.2
   resolution: "node-inspect-extracted@npm:3.0.2"
   checksum: 10/d3bdbd73ac73e38968c596f10abbb4de2dee835d406394e6eb60d74019ec4085d8b9ce286fd21f1b52de39c88185499d8a8ed77e220d175d90a142fa78551f3b
+  languageName: node
+  linkType: hard
+
+"node-inspect-extracted@npm:3.1.0":
+  version: 3.1.0
+  resolution: "node-inspect-extracted@npm:3.1.0"
+  checksum: 10/ffe9a0285f3f65d787dba2c44676c585e76881765fc9b49b39255dab045188fc7f827c97860a44ce96ad1b9d8c560c5170740938a66fe8d26150f0951c4effba
   languageName: node
   linkType: hard
 
