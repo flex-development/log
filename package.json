@@ -147,7 +147,7 @@
     "string-width": "7.2.0"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "0.18.0",
+    "@arethetypeswrong/cli": "0.18.1",
     "@commitlint/cli": "19.8.1",
     "@commitlint/types": "19.8.1",
     "@flex-development/commitlint-config": "1.0.1",
