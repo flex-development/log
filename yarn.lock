@@ -1642,7 +1642,7 @@ __metadata:
     "@flex-development/tutils": "npm:6.0.0-alpha.25"
     "@tsconfig/strictest": "npm:2.0.5"
     "@types/is-ci": "npm:3.0.4"
-    "@types/node": "npm:22.15.17"
+    "@types/node": "npm:22.15.18"
     "@types/node-notifier": "npm:8.0.5"
     "@types/unist": "npm:3.0.3"
     "@vates/toggle-scripts": "npm:1.0.0"
@@ -2730,7 +2730,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:22.15.17, @types/node@npm:^22.0.0":
+"@types/node@npm:*, @types/node@npm:^22.0.0":
   version: 22.15.17
   resolution: "@types/node@npm:22.15.17"
   dependencies:
@@ -2745,6 +2745,15 @@ __metadata:
   dependencies:
     undici-types: "npm:~5.25.1"
   checksum: 10/cdfe0a2d90005323bbaf8fa4002607af98d49016c81898cd7f574d9ec6fc980580ea1b97f7b6ecaa8614be8004cd03898766e99e1869428ba6ed3bcd66a15354
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:22.15.18":
+  version: 22.15.18
+  resolution: "@types/node@npm:22.15.18"
+  dependencies:
+    undici-types: "npm:~6.21.0"
+  checksum: 10/89c8c638beade806753b6fb2f25ed45b0e06f9f7375422137da5752be5c29fa9c75932b942fd55ae7de2b4288e8496912af3e029df45cc93735ac5eb49ece01e
   languageName: node
   linkType: hard
 
