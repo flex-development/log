@@ -1683,7 +1683,7 @@ __metadata:
     prettier: "npm:3.5.3"
     remark: "npm:15.0.1"
     remark-cli: "npm:12.0.1"
-    sh-syntax: "npm:0.5.7"
+    sh-syntax: "npm:0.5.8"
     string-width: "npm:7.2.0"
     trash-cli: "npm:6.0.0"
     ts-dedent: "npm:2.2.0"
@@ -10155,12 +10155,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sh-syntax@npm:0.5.7":
-  version: 0.5.7
-  resolution: "sh-syntax@npm:0.5.7"
+"sh-syntax@npm:0.5.8":
+  version: 0.5.8
+  resolution: "sh-syntax@npm:0.5.8"
   dependencies:
     tslib: "npm:^2.8.1"
-  checksum: 10/063a1844e77adeab3df16f913ae90db282d1e4fddfb44c0d34c2421f97ec666253d00522072493d4dad9d024bd3d09fa1255e1e9da6554338fa396b8594f92ee
+  checksum: 10/cbc046244b81a997f988f7f2244f953756332720c82054c22d4680d4eee5dc3c5058c9bd84c13b3e9c320ba25970a99e24be465cf265f41ef7cb4c4030cab6d1
   languageName: node
   linkType: hard
 
