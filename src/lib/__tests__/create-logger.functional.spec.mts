@@ -110,7 +110,7 @@ describe('functional:lib/createLogger', () => {
       subject = testSubject({ level: logLevels.silent, stdout: { write } })
       subject.unicode = true
 
-      eol = subject.eol
+      eol = process.env.VITEST_ENVIRONMENT !== 'node' ? '' : subject.eol
     })
 
     it('should print string representation of `value`', () => {

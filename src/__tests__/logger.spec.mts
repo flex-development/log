@@ -12,16 +12,19 @@ import isUnicodeSupported from '@flex-development/is-unicode-supported'
 import { isObjectPlain } from '@flex-development/tutils'
 
 describe('unit:logger', () => {
+  let browser: boolean
   let types: string[]
 
   beforeAll(() => {
+    browser = process.env.VITEST_ENVIRONMENT !== 'node'
+
     types = Object.keys(logTypes).filter(k => {
       return k !== logTypes.inspect && k !== logTypes.silent
     })
   })
 
   it('should be logger object', () => {
-    expect(subject).to.have.property('browser', false)
+    expect(subject).to.have.property('browser', browser)
     expect(subject).to.have.property('color', COLOR_SUPPORTED)
     expect(subject).to.have.property('colors').satisfy(isObjectPlain)
     expect(subject).to.have.property('eol', '\n')

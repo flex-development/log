@@ -1,0 +1,121 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`unit:internal/mergeTypes > should return custom log type to configuration map 1`] = `
+{
+  "debug": {
+    "icon": "⚙",
+    "level": 4,
+    "type": "debug",
+  },
+  "error": {
+    "color": "red",
+    "icon": "✖",
+    "level": 0,
+    "type": "error",
+  },
+  "fail": {
+    "color": "red",
+    "icon": "✖",
+    "level": 3,
+    "type": "fail",
+  },
+  "fatal": {
+    "level": 0,
+    "type": "fatal",
+  },
+  "info": {
+    "color": "cyan",
+    "icon": "ℹ",
+    "level": 3,
+    "type": "info",
+  },
+  "log": {
+    "level": 2,
+  },
+  "ready": {
+    "color": "green",
+    "icon": "✔",
+    "level": 3,
+    "type": "ready",
+  },
+  "start": {
+    "color": "magenta",
+    "icon": "◐",
+    "level": 3,
+    "type": "start",
+  },
+  "success": {
+    "color": "green",
+    "icon": "✔",
+    "level": 3,
+    "type": "success",
+  },
+  "trace": {
+    "icon": "→",
+    "level": 4,
+    "type": "trace",
+  },
+  "verbose": {
+    "level": 999,
+    "type": "verbose",
+  },
+  "warn": {
+    "color": "yellow",
+    "icon": "▲",
+    "level": 1,
+    "type": "warn",
+  },
+}
+`;
+
+exports[`unit:internal/mergeTypes > should return default log type to configuration map 1`] = `
+{
+  "debug": {
+    "level": 4,
+    "type": "debug",
+  },
+  "error": {
+    "level": 0,
+    "type": "error",
+  },
+  "fail": {
+    "level": 3,
+    "type": "fail",
+  },
+  "fatal": {
+    "level": 0,
+    "type": "fatal",
+  },
+  "info": {
+    "level": 3,
+    "type": "info",
+  },
+  "log": {
+    "level": 2,
+  },
+  "ready": {
+    "level": 3,
+    "type": "ready",
+  },
+  "start": {
+    "level": 3,
+    "type": "start",
+  },
+  "success": {
+    "level": 3,
+    "type": "success",
+  },
+  "trace": {
+    "level": 5,
+    "type": "trace",
+  },
+  "verbose": {
+    "level": 999,
+    "type": "verbose",
+  },
+  "warn": {
+    "level": 1,
+    "type": "warn",
+  },
+}
+`;

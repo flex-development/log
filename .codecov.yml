@@ -65,7 +65,7 @@ coverage:
         threshold: 0%
 
 flags:
-  node23:
+  node24:
     carryforward: false
     paths:
       - src/
@@ -81,7 +81,6 @@ ignore:
   - '**/interfaces/**'
   - '**/types/**'
   - '!src/index.mts'
-  - src/internal/*.browser.mts
 
 profiling:
   critical_files_paths:

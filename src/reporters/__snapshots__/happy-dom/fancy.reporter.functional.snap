@@ -1,0 +1,107 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`functional:reporters/FancyReporter > should write to \`logger.stderr\` (0) 1`] = `
+"[41m[30m ERROR [39m[49m This is an example error. Everything is fine!            [90m[12:00:00 AM][39m
+
+  [90mat[39m [36m__fixtures__/error.mts:21:22[39m
+  [90mat[39m VitestExecutor.runModule ([36mnode_modules/vite-node/dist/client.mjs:399:5[39m)
+  [90mat[39m VitestExecutor.directRequest ([36mnode_modules/vite-node/dist/client.mjs:381:5[39m)
+  [90mat[39m VitestExecutor.cachedRequest ([36mnode_modules/vite-node/dist/client.mjs:206:14[39m)
+  [90mat[39m VitestExecutor.dependencyRequest ([36mnode_modules/vite-node/dist/client.mjs:259:12[39m)
+  [90mat[39m [36msrc/reporters/__tests__/fancy.reporter.functional.spec.mts:9:1[39m
+  [90mat[39m VitestExecutor.runModule ([36mnode_modules/vite-node/dist/client.mjs:399:5[39m)
+  [90mat[39m VitestExecutor.directRequest ([36mnode_modules/vite-node/dist/client.mjs:381:5[39m)
+  [90mat[39m VitestExecutor.cachedRequest ([36mnode_modules/vite-node/dist/client.mjs:206:14[39m)
+  [90mat[39m VitestExecutor.executeId ([36mnode_modules/vite-node/dist/client.mjs:173:12[39m)
+
+"
+`;
+
+exports[`functional:reporters/FancyReporter > should write to \`logger.stderr\` (1) 1`] = `
+"[41m[30m FATAL [39m[49m This is an example error. Everything is fine!
+
+  [90mat[39m [36m__fixtures__/error.mts:21:22[39m
+  [90mat[39m VitestExecutor.runModule ([36mnode_modules/vite-node/dist/client.mjs:399:5[39m)
+  [90mat[39m VitestExecutor.directRequest ([36mnode_modules/vite-node/dist/client.mjs:381:5[39m)
+  [90mat[39m VitestExecutor.cachedRequest ([36mnode_modules/vite-node/dist/client.mjs:206:14[39m)
+  [90mat[39m VitestExecutor.dependencyRequest ([36mnode_modules/vite-node/dist/client.mjs:259:12[39m)
+  [90mat[39m [36msrc/reporters/__tests__/fancy.reporter.functional.spec.mts:9:1[39m
+  [90mat[39m VitestExecutor.runModule ([36mnode_modules/vite-node/dist/client.mjs:399:5[39m)
+  [90mat[39m VitestExecutor.directRequest ([36mnode_modules/vite-node/dist/client.mjs:381:5[39m)
+  [90mat[39m VitestExecutor.cachedRequest ([36mnode_modules/vite-node/dist/client.mjs:206:14[39m)
+  [90mat[39m VitestExecutor.executeId ([36mnode_modules/vite-node/dist/client.mjs:173:12[39m)
+
+"
+`;
+
+exports[`functional:reporters/FancyReporter > should write to \`logger.stderr\` (2) 1`] = `
+"[31m✖[39m This is an example error. Everything is fine!
+
+   [90mat[39m [36m__fixtures__/error.mts:21:22[39m
+   [90mat[39m VitestExecutor.runModule ([36mnode_modules/vite-node/dist/client.mjs:399:5[39m)
+   [90mat[39m VitestExecutor.directRequest ([36mnode_modules/vite-node/dist/client.mjs:381:5[39m)
+   [90mat[39m VitestExecutor.cachedRequest ([36mnode_modules/vite-node/dist/client.mjs:206:14[39m)
+   [90mat[39m VitestExecutor.dependencyRequest ([36mnode_modules/vite-node/dist/client.mjs:259:12[39m)
+   [90mat[39m [36msrc/reporters/__tests__/fancy.reporter.functional.spec.mts:9:1[39m
+   [90mat[39m VitestExecutor.runModule ([36mnode_modules/vite-node/dist/client.mjs:399:5[39m)
+   [90mat[39m VitestExecutor.directRequest ([36mnode_modules/vite-node/dist/client.mjs:381:5[39m)
+   [90mat[39m VitestExecutor.cachedRequest ([36mnode_modules/vite-node/dist/client.mjs:206:14[39m)
+   [90mat[39m VitestExecutor.executeId ([36mnode_modules/vite-node/dist/client.mjs:173:12[39m)
+
+"
+`;
+
+exports[`functional:reporters/FancyReporter > should write to \`logger.stderr\` (3) 1`] = `
+"[33m▲[39m [1m[33m[mkbuild:esbuild][39m[22m This "import" expression will not be bundled because the argument is not a string literal
+    [90msrc/utils/load-build-config.mts[39m[90m:96:18:[39m
+      [90m96 |[39m    [2m[33m: (await import(url.href) as { default?: Config | null }).default[39m[22m
+"
+`;
+
+exports[`functional:reporters/FancyReporter > should write to \`logger.stdout\` (0) 1`] = `"[90m⚙[39m [mkbuild:dts] [36mpaths[39m option is specified, looking for a pattern to match module name '#interfaces/index'."`;
+
+exports[`functional:reporters/FancyReporter > should write to \`logger.stdout\` (1) 1`] = `
+"[31m❌[39m This is an example error. Everything is fine!
+
+   [90mat[39m [36m__fixtures__/error.mts:21:22[39m
+   [90mat[39m VitestExecutor.runModule ([36mnode_modules/vite-node/dist/client.mjs:399:5[39m)
+   [90mat[39m VitestExecutor.directRequest ([36mnode_modules/vite-node/dist/client.mjs:381:5[39m)
+   [90mat[39m VitestExecutor.cachedRequest ([36mnode_modules/vite-node/dist/client.mjs:206:14[39m)
+   [90mat[39m VitestExecutor.dependencyRequest ([36mnode_modules/vite-node/dist/client.mjs:259:12[39m)
+   [90mat[39m [36msrc/reporters/__tests__/fancy.reporter.functional.spec.mts:9:1[39m
+   [90mat[39m VitestExecutor.runModule ([36mnode_modules/vite-node/dist/client.mjs:399:5[39m)
+   [90mat[39m VitestExecutor.directRequest ([36mnode_modules/vite-node/dist/client.mjs:381:5[39m)
+   [90mat[39m VitestExecutor.cachedRequest ([36mnode_modules/vite-node/dist/client.mjs:206:14[39m)
+   [90mat[39m VitestExecutor.executeId ([36mnode_modules/vite-node/dist/client.mjs:173:12[39m)
+
+"
+`;
+
+exports[`functional:reporters/FancyReporter > should write to \`logger.stdout\` (2) 1`] = `"[36mℹ[39m Using @flex-development/mkbuild@1.0.0-alpha.24"`;
+
+exports[`functional:reporters/FancyReporter > should write to \`logger.stdout\` (3) 1`] = `"[90minspect[39m 🥸"`;
+
+exports[`functional:reporters/FancyReporter > should write to \`logger.stdout\` (4) 1`] = `"[47m[30m INSPECT [39m[49m 🤓"`;
+
+exports[`functional:reporters/FancyReporter > should write to \`logger.stdout\` (5) 1`] = `"hello world! 🌎"`;
+
+exports[`functional:reporters/FancyReporter > should write to \`logger.stdout\` (6) 1`] = `"[90m[grease:bump][39m premajor"`;
+
+exports[`functional:reporters/FancyReporter > should write to \`logger.stdout\` (7) 1`] = `
+"[33m▲[39m [1m[33m[mkbuild:esbuild][39m[22m This "import" expression will not be bundled because the argument is not a string literal
+    [90msrc/utils/load-build-config.mts[39m[90m:96:18:[39m
+      [90m96 |[39m    [2m[33m: (await import(url.href) as { default?: Config | null }).default[39m[22m
+"
+`;
+
+exports[`functional:reporters/FancyReporter > should write to \`logger.stdout\` (8) 1`] = `"[32m✔[39m Ready to build project 👍🏾"`;
+
+exports[`functional:reporters/FancyReporter > should write to \`logger.stdout\` (9) 1`] = `"[35m◐[39m Building project..."`;
+
+exports[`functional:reporters/FancyReporter > should write to \`logger.stdout\` (10) 1`] = `"[32m✔[39m Deployed project to [36mproduction[39m environment 🚀"`;
+
+exports[`functional:reporters/FancyReporter > should write to \`logger.stdout\` (11) 1`] = `"[90m→[39m [mkbuild:dts] Exiting conditional exports."`;
+
+exports[`functional:reporters/FancyReporter > should write to \`logger.stdout\` (12) 1`] = `"[90mverbose[39m [mkbuild:dts] Matched [36mimports[39m condition 'log'."`;
+
+exports[`functional:reporters/FancyReporter > should write to \`logger.stdout\` (13) 1`] = `"[100m[30m VERBOSE [39m[49m [mkbuild:dts] Using [36mimports[39m subpath '#types/*' with target './src/types/index.mts'."`;

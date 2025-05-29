@@ -2,12 +2,12 @@
 
 exports[`e2e:log > should expose public api 1`] = `
 [
+  "BaseReporter",
+  "createLogger",
   "default",
+  "FancyReporter",
   "logger",
   "logLevels",
-  "createLogger",
   "Reporter",
-  "BaseReporter",
-  "FancyReporter",
 ]
 `;

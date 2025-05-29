@@ -75,10 +75,10 @@ jobs:
           cache: yarn
           cache-dependency-path: yarn.lock
           node-version-file: .nvmrc
-      - id: yarn
+      - id: dependencies
         name: Install dependencies
         env:
-          YARN_ENABLE_IMMUTABLE_INSTALLS: ${{ github.actor != vars.DEPENDABOT }}
+          YARN_ENABLE_IMMUTABLE_INSTALLS: ${{ github.actor != 'dependabot[bot]' }}
         run: yarn
       - id: cache-key
         name: Get cache key
@@ -247,7 +247,6 @@ jobs:
       - preflight
     runs-on: ubuntu-latest
     env:
-      TYPESCRIPT_VERSION: ${{ needs.preflight.outputs.version-typescript }}
       VITEST_REPORT: ./.vitest-reports/typecheck.blob.json
     if: ${{ fromJson(needs.preflight.outputs.typecheck-files) }}
     steps:
@@ -270,10 +269,7 @@ jobs:
         with:
           key: ${{ needs.preflight.outputs.cache-key }}
           path: ${{ env.CACHE_PATH }}
-      - id: typescript
-        name: Install typescript@${{ env.TYPESCRIPT_VERSION }}
-        run: yarn add -D typescript@${{ env.TYPESCRIPT_VERSION }}
-      - id: print-typescript-version
+      - id: print-version
         name: Print TypeScript version
         run: jq .devDependencies.typescript package.json -r
       - id: typecheck
@@ -284,7 +280,7 @@ jobs:
         uses: actions/upload-artifact@v4.6.2
         with:
           name: |
-            ${{ format('typecheck-{0}-{1}-{2}.blob.json', env.TYPESCRIPT_VERSION, github.event.repository.name, env.SHA) }}
+            ${{ format('typecheck-{0}-{1}-{2}.blob.json', needs.preflight.outputs.version-typescript, github.event.repository.name, env.SHA) }}
           path: ${{ env.VITEST_REPORT }}
   test:
     needs:
@@ -296,7 +292,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version:
-          - 23
+          - 24
     env:
       COVERAGE_SUMMARY: ./coverage/coverage-summary.json
       NODE_NO_WARNINGS: 1
@@ -369,8 +365,13 @@ jobs:
   artifacts:
     needs:
       - commitlint
+      - format
       - gitguardian
+      - lint
       - preflight
+      - spelling
+      - test
+      - typescript
     runs-on: ubuntu-latest
     env:
       TARFILE: |

@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`e2e:log > should expose public api 1`] = `
+[
+  "BaseReporter",
+  "createLogger",
+  "default",
+  "FancyReporter",
+  "logger",
+  "logLevels",
+  "Reporter",
+]
+`;

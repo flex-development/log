@@ -1,0 +1,40 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`unit:internal/merge > should return merged and mutated object (0) 1`] = `
+{
+  "color": "gray",
+  "level": 4,
+  "type": "debug",
+}
+`;
+
+exports[`unit:internal/merge > should return merged and mutated object (1) 1`] = `
+{
+  "debug": {
+    "color": "gray",
+    "icon": "→",
+    "level": 4,
+    "type": "debug",
+  },
+  "error": {
+    "badge": true,
+    "color": "red",
+    "format": {
+      "date": false,
+    },
+    "level": 0,
+    "type": "error",
+  },
+}
+`;
+
+exports[`unit:internal/merge > should return new merged object (0) 1`] = `
+{
+  "format": {
+    "colors": true,
+    "columns": 270,
+    "date": null,
+    "icon": true,
+  },
+}
+`;

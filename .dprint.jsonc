@@ -32,17 +32,13 @@
           ".env",
           ".env.local",
           ".env.repo",
-          ".eslintcache",
-          ".eslintignore",
           ".gitattributes",
           ".gitconfig",
           ".gitignore",
           ".npmrc",
           ".nvmrc",
           "Brewfile",
-          "commit-msg",
-          "pre-commit",
-          "pre-push"
+          "commit-msg"
         ],
         "stdin": true
       }

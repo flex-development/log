@@ -1,6 +1,0 @@
-{
-  "compilerOptions": {
-    "customConditions": ["log", "development"]
-  },
-  "extends": "./tsconfig.json"
-}

@@ -7,10 +7,17 @@
 import Notifier from '#tests/reporters/notifier'
 import VerboseReporter from '#tests/reporters/verbose'
 import pathe from '@flex-development/pathe'
+import { ok } from 'devlop'
 import ci from 'is-ci'
-import type { ConfigEnv, ViteUserConfig } from 'vitest/config'
-import { BaseSequencer, type TestSpecification } from 'vitest/node'
-import tsconfig from './tsconfig.test.json' with { type: 'json' }
+import {
+  defineConfig,
+  type ConfigEnv,
+  type ViteUserConfig
+} from 'vitest/config'
+import type { ResolveSnapshotPathHandlerContext } from 'vitest/node'
+import tsconfig from './tsconfig.json' with { type: 'json' }
+
+export default defineConfig(config)
 
 /**
  * Create a vitest configuration.
@@ -18,16 +25,22 @@ import tsconfig from './tsconfig.test.json' with { type: 'json' }
  * @see {@linkcode ConfigEnv}
  * @see {@linkcode ViteUserConfig}
  *
+ * @this {void}
+ *
  * @param {ConfigEnv} env
  *  Configuration environment
  * @return {ViteUserConfig}
- *  Vitest configuration object
+ *  Root vitest configuration object
  */
-function config(env: ConfigEnv): ViteUserConfig {
+function config(this: void, env: ConfigEnv): ViteUserConfig {
+  /**
+   * Whether typechecking is enabled.
+   *
+   * @const {boolean} typecheck
+   */
+  const typecheck: boolean = env.mode === 'typecheck'
+
   return {
-    ssr: {
-      resolve: { conditions: tsconfig.compilerOptions.customConditions }
-    },
     test: {
       allowOnly: !ci,
       chaiConfig: {
@@ -47,8 +60,7 @@ function config(env: ConfigEnv): ViteUserConfig {
           '**/interfaces/',
           '**/types/',
           '**/index.mts',
-          '!src/index.mts',
-          'src/internal/*.browser.mts'
+          '!src/index.mts'
         ],
         extension: ['.mts'],
         include: ['src'],
@@ -61,76 +73,58 @@ function config(env: ConfigEnv): ViteUserConfig {
         skipFull: false,
         thresholds: { 100: true, perFile: true }
       },
-      environment: 'node',
-      environmentOptions: {},
       globalSetup: [],
       globals: true,
       include: ['src/**/__tests__/*.spec.mts'],
       mockReset: true,
+      name: typecheck ? 'types' : undefined as never,
       outputFile: {
         blob: `.vitest-reports/${env.mode}.blob.json`,
-        json: pathe.join('__tests__', 'reports', env.mode + '.json')
+        json: pathe.join('__tests__/reports', env.mode + '.json')
       },
       passWithNoTests: true,
       reporters: JSON.parse(process.env['VITEST_UI'] ?? '0')
-        ? [new Notifier(), new VerboseReporter(env)]
+        ? [new Notifier(), new VerboseReporter()]
         : env.mode === 'reports'
-        ? [new VerboseReporter(env)]
+        ? [new VerboseReporter()]
         : [
           ci ? 'github-actions' : new Notifier(),
           'blob',
           'json',
-          new VerboseReporter(env)
+          new VerboseReporter()
         ],
       /**
-       * Stores snapshots next to `file`'s directory.
+       * Store snapshots next to the directory of `file`.
+       *
+       * @this {void}
        *
        * @param {string} file
        *  Path to test file
        * @param {string} extension
        *  Snapshot extension
+       * @param {ResolveSnapshotPathHandlerContext} context
+       *  Snapshot path handler context
        * @return {string}
        *  Custom snapshot path
        */
-      resolveSnapshotPath(file: string, extension: string): string {
+      resolveSnapshotPath(
+        this: void,
+        file: string,
+        extension: string,
+        context: ResolveSnapshotPathHandlerContext
+      ): string {
+        const { VITEST_ENVIRONMENT: environment } = context.config.env
+
+        ok(typeof environment === 'string', 'expected `VITEST_ENVIRONMENT`')
+        ok(environment, 'expected `VITEST_ENVIRONMENT`')
+
         return pathe.resolve(
-          pathe.resolve(pathe.dirname(pathe.dirname(file)), '__snapshots__'),
+          pathe.dirname(pathe.dirname(file)),
+          pathe.join('__snapshots__', environment),
           pathe.basename(file).replace(/\.spec.mts/, '') + extension
         )
       },
       restoreMocks: true,
-      sequence: {
-        /**
-         * Sorting and sharding algorithm provider.
-         *
-         * @see {@linkcode BaseSequencer}
-         *
-         * @extends {BaseSequencer}
-         */
-        sequencer: class Sequencer extends BaseSequencer {
-          /**
-           * Determine test file execution order.
-           *
-           * @public
-           * @override
-           * @async
-           *
-           * @param {TestSpecification[]} specs
-           *  List of test file specifications
-           * @return {Promise<TestSpecification[]>}
-           *  Sorted test files
-           */
-          public override async sort(
-            specs: TestSpecification[]
-          ): Promise<TestSpecification[]> {
-            return new Promise(resolve => {
-              return void resolve(specs.sort((a, b) => {
-                return a.moduleId.localeCompare(b.moduleId)
-              }))
-            })
-          }
-        }
-      },
       setupFiles: [],
       snapshotFormat: {
         callToJSON: true,
@@ -138,18 +132,51 @@ function config(env: ConfigEnv): ViteUserConfig {
         printBasicPrototype: false,
         printFunctionName: true
       },
+      snapshotSerializers: [],
       typecheck: {
         allowJs: false,
         checker: 'tsc',
+        enabled: typecheck,
         ignoreSourceErrors: false,
         include: ['**/__tests__/*.spec-d.mts'],
         only: true,
-        tsconfig: 'tsconfig.typecheck.json'
+        tsconfig: './tsconfig.typecheck.json'
       },
       unstubEnvs: true,
-      unstubGlobals: true
+      unstubGlobals: true,
+      workspace: typecheck ? undefined as never : [
+        {
+          extends: true,
+          resolve: {
+            conditions: [
+              'browser',
+              ...tsconfig.compilerOptions.customConditions
+            ]
+          },
+          test: {
+            env: { VITEST_ENVIRONMENT: 'happy-dom' },
+            environment: 'happy-dom',
+            environmentOptions: {},
+            name: 'browser',
+            setupFiles: [],
+            typecheck: { enabled: false }
+          }
+        },
+        {
+          extends: true,
+          ssr: {
+            resolve: { conditions: tsconfig.compilerOptions.customConditions }
+          },
+          test: {
+            env: { VITEST_ENVIRONMENT: 'node' },
+            environment: 'node',
+            environmentOptions: {},
+            name: 'node',
+            setupFiles: [],
+            typecheck: { enabled: false }
+          }
+        }
+      ]
     }
   }
 }
-
-export default config
