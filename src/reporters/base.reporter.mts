@@ -12,7 +12,10 @@ import type {
   Logger,
   LogObject
 } from '@flex-development/log'
-import pathe from '@flex-development/pathe'
+import cwd from '@flex-development/pathe/cwd'
+import pathToFileURL from '@flex-development/pathe/path-to-file-url'
+import sep from '@flex-development/pathe/sep'
+import toPosix from '@flex-development/pathe/to-posix'
 import {
   formatWithOptions as format,
   type InspectOptions
@@ -336,17 +339,18 @@ abstract class BaseReporter extends Reporter {
       /**
        * URL of current working directory.
        *
-       * @const {URL} cwd
+       * @const {URL} cwdUrl
        */
-      const cwd: URL = pathe.pathToFileURL(pathe.cwd() + pathe.sep)
+      const cwdUrl: URL = pathToFileURL(cwd() + sep)
 
       lines.push(
         '',
         ...stack
           .split(this.logger.eol)
-          .map(line => pathe.toPosix(line.trim()))
+          .map(line => toPosix(line.trim()))
           .filter(line => /^at\s+/.test(line))
-          .map(line => line.replace(cwd.href, '').replace(cwd.pathname, ''))
+          .map(line => line.replace(cwdUrl.href, ''))
+          .map(line => line.replace(cwdUrl.pathname, ''))
       )
 
       if (lines[lines.length - 1] !== lines[0]) lines.push(lines[0]!)

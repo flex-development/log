@@ -15,6 +15,7 @@
   "ignorePaths": [
     "**/*.patch",
     "**/*.snap",
+    "**/*.svg",
     "**/*.wasm",
     "**/.*ignore",
     "**/.gitconfig",
