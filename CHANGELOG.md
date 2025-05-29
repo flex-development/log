@@ -1,3 +1,98 @@
+## [5.0.0-alpha.2](https://github.com/flex-development/log/compare/5.0.0-alpha.1...5.0.0-alpha.2) (2025-05-29)
+
+### :package: Build
+
+- [[`5e00797`](https://github.com/flex-development/log/commit/5e007978478905ba99755f23af2a8646803afcb9)] **deps-dev:** Bump @arethetypeswrong/cli from 0.17.4 to 0.18.0 ([#164](https://github.com/flex-development/log/issues/164))
+- [[`c6211e2`](https://github.com/flex-development/log/commit/c6211e2f124a6b6ed61851104a4aea1690913aa9)] **deps-dev:** Bump @arethetypeswrong/cli from 0.18.0 to 0.18.1 ([#169](https://github.com/flex-development/log/issues/169))
+- [[`5761ba4`](https://github.com/flex-development/log/commit/5761ba40f8d6cd686eafb4e1be02c0ef0295b74f)] **deps-dev:** bump @flex-development/eslint-config from 1.0.0 to 1.1.0
+- [[`0384fc1`](https://github.com/flex-development/log/commit/0384fc187b3f26ec0a3f578b283d419c63b9039e)] **deps-dev:** Bump @flex-development/eslint-config from 1.1.0 to 1.1.1 in the flex-development group ([#150](https://github.com/flex-development/log/issues/150))
+- [[`08fae98`](https://github.com/flex-development/log/commit/08fae98be22e0c60080101f777efec9037fd2b5a)] **deps-dev:** Bump @types/node from 22.13.1 to 22.14.1 ([#144](https://github.com/flex-development/log/issues/144))
+- [[`97793fe`](https://github.com/flex-development/log/commit/97793fe849012cbcc77c4af0d7e35eaed4c3dce3)] **deps-dev:** Bump @types/node from 22.14.1 to 22.15.0 ([#149](https://github.com/flex-development/log/issues/149))
+- [[`9c04358`](https://github.com/flex-development/log/commit/9c04358d7e6c2c5fafe78a2be58c62e0ffb3c979)] **deps-dev:** Bump @types/node from 22.15.0 to 22.15.2 ([#151](https://github.com/flex-development/log/issues/151))
+- [[`c047d5c`](https://github.com/flex-development/log/commit/c047d5c5b05442d2afea6f6da5d1b14b70d6a922)] **deps-dev:** Bump @types/node from 22.15.14 to 22.15.15 ([#165](https://github.com/flex-development/log/issues/165))
+- [[`733c45b`](https://github.com/flex-development/log/commit/733c45b7c27aa72328ab37e64c69439a681adb28)] **deps-dev:** Bump @types/node from 22.15.15 to 22.15.17 ([#168](https://github.com/flex-development/log/issues/168))
+- [[`417d121`](https://github.com/flex-development/log/commit/417d12187c970de376f3f7602394aeed350fb171)] **deps-dev:** Bump @types/node from 22.15.17 to 22.15.18 ([#170](https://github.com/flex-development/log/issues/170))
+- [[`a22bfb8`](https://github.com/flex-development/log/commit/a22bfb829e74376170c1e9b60f7c780f680846b2)] **deps-dev:** Bump @types/node from 22.15.18 to 22.15.19 ([#173](https://github.com/flex-development/log/issues/173))
+- [[`3f37346`](https://github.com/flex-development/log/commit/3f37346cbc8adb5a5d4ade1fa2e692777d8d5e83)] **deps-dev:** Bump @types/node from 22.15.19 to 22.15.21 ([#177](https://github.com/flex-development/log/issues/177))
+- [[`0645150`](https://github.com/flex-development/log/commit/064515078262469631c08a46b807fb2c5857aced)] **deps-dev:** Bump @types/node from 22.15.2 to 22.15.3 ([#152](https://github.com/flex-development/log/issues/152))
+- [[`c711b52`](https://github.com/flex-development/log/commit/c711b52de9eb6824fd7b85d7327e27d25201ab06)] **deps-dev:** Bump @types/node from 22.15.21 to 22.15.24 ([#181](https://github.com/flex-development/log/issues/181))
+- [[`2219c02`](https://github.com/flex-development/log/commit/2219c021aae9bcacced87d4ff60666535d699f55)] **deps-dev:** Bump @types/node from 22.15.24 to 22.15.26 ([#182](https://github.com/flex-development/log/issues/182))
+- [[`7d864b0`](https://github.com/flex-development/log/commit/7d864b0ae97f015592feb0b9fceda593bbdd5999)] **deps-dev:** Bump @types/node from 22.15.3 to 22.15.9 ([#160](https://github.com/flex-development/log/issues/160))
+- [[`1e2f614`](https://github.com/flex-development/log/commit/1e2f614bb0dcf2e7559fbe95596fb1a9289faef7)] **deps-dev:** Bump @types/node from 22.15.9 to 22.15.14 ([#163](https://github.com/flex-development/log/issues/163))
+- [[`d010e53`](https://github.com/flex-development/log/commit/d010e53da59836e77c59014ad48805ca3c0b06f7)] **deps-dev:** Bump cspell from 8.18.0 to 8.18.1 ([#118](https://github.com/flex-development/log/issues/118))
+- [[`e42cb10`](https://github.com/flex-development/log/commit/e42cb10270d1940860263ef2275c5a67c6b22e50)] **deps-dev:** Bump cspell from 8.18.1 to 8.19.0 ([#140](https://github.com/flex-development/log/issues/140))
+- [[`31b62e4`](https://github.com/flex-development/log/commit/31b62e45762c6b84cbd9c9d59e46c859cbee385b)] **deps-dev:** Bump cspell from 8.19.0 to 8.19.1 ([#142](https://github.com/flex-development/log/issues/142))
+- [[`5eb23d7`](https://github.com/flex-development/log/commit/5eb23d725c9727f9f69680c1ed0a0205f0243b8a)] **deps-dev:** Bump cspell from 8.19.1 to 8.19.2 ([#145](https://github.com/flex-development/log/issues/145))
+- [[`b6ac70f`](https://github.com/flex-development/log/commit/b6ac70f007be4610d060b1bf1c6eccd26d187270)] **deps-dev:** Bump cspell from 8.19.2 to 8.19.3 ([#153](https://github.com/flex-development/log/issues/153))
+- [[`917dc34`](https://github.com/flex-development/log/commit/917dc3425d79985ff0e8783a3c8264f0631d5c7c)] **deps-dev:** Bump cspell from 8.19.3 to 9.0.0 ([#159](https://github.com/flex-development/log/issues/159))
+- [[`f231343`](https://github.com/flex-development/log/commit/f2313432581dde2b80ad6803c6beb7c26c83e3e7)] **deps-dev:** Bump cspell from 9.0.0 to 9.0.1 ([#167](https://github.com/flex-development/log/issues/167))
+- [[`94fa4fa`](https://github.com/flex-development/log/commit/94fa4fa19081410038c20b07cfcb9570d5449a40)] **deps-dev:** Bump cspell from 9.0.1 to 9.0.2 ([#176](https://github.com/flex-development/log/issues/176))
+- [[`783938f`](https://github.com/flex-development/log/commit/783938f7bcfb68af8f81ae09c628dbd5fba52a9b)] **deps-dev:** Bump dprint from 0.49.1 to 0.50.0 ([#174](https://github.com/flex-development/log/issues/174))
+- [[`d89df8c`](https://github.com/flex-development/log/commit/d89df8c25247bf6a18aaaac2c83c830545b22cea)] **deps-dev:** Bump eslint from 9.25.1 to 9.26.0 ([#157](https://github.com/flex-development/log/issues/157))
+- [[`9e200d0`](https://github.com/flex-development/log/commit/9e200d07f61aa1eb07224321a466aa9b66df0262)] **deps-dev:** Bump eslint from 9.26.0 to 9.27.0 ([#172](https://github.com/flex-development/log/issues/172))
+- [[`f734335`](https://github.com/flex-development/log/commit/f7343358d6b0b6f0584678e06e03f232abf53886)] **deps-dev:** Bump eslint-import-resolver-typescript from 4.2.5 to 4.2.7 ([#115](https://github.com/flex-development/log/issues/115))
+- [[`f695e2b`](https://github.com/flex-development/log/commit/f695e2be6f00312e3a2759699d95318b71922fd5)] **deps-dev:** Bump eslint-import-resolver-typescript from 4.2.7 to 4.3.1 ([#121](https://github.com/flex-development/log/issues/121))
+- [[`7e3b4f8`](https://github.com/flex-development/log/commit/7e3b4f8cb378535e34e179af760ce18970738e48)] **deps-dev:** Bump eslint-import-resolver-typescript from 4.3.1 to 4.3.2 ([#135](https://github.com/flex-development/log/issues/135))
+- [[`e3832ff`](https://github.com/flex-development/log/commit/e3832ffa28be0c63fa4766821339e961924486e6)] **deps-dev:** Bump eslint-import-resolver-typescript from 4.3.2 to 4.3.3 ([#143](https://github.com/flex-development/log/issues/143))
+- [[`5bc8028`](https://github.com/flex-development/log/commit/5bc802887f992c3f4168f12ce9d41acb69f646af)] **deps-dev:** Bump eslint-mdx from 3.3.1 to 3.3.2 ([#126](https://github.com/flex-development/log/issues/126))
+- [[`84a743c`](https://github.com/flex-development/log/commit/84a743c84bb737df9f46405d84c69e8fe8052739)] **deps-dev:** Bump eslint-mdx from 3.3.2 to 3.4.0 ([#130](https://github.com/flex-development/log/issues/130))
+- [[`87172a2`](https://github.com/flex-development/log/commit/87172a255fcf9f75772fc5cdec03208788e43947)] **deps-dev:** Bump eslint-plugin-mdx from 3.3.1 to 3.3.2 ([#125](https://github.com/flex-development/log/issues/125))
+- [[`bce4d47`](https://github.com/flex-development/log/commit/bce4d477e0d72eed867c050482c98f19aab04809)] **deps-dev:** Bump eslint-plugin-mdx from 3.3.2 to 3.4.0 ([#133](https://github.com/flex-development/log/issues/133))
+- [[`8a84f6c`](https://github.com/flex-development/log/commit/8a84f6c5fdd21faf5490f2b499fd5f018c075b05)] **deps-dev:** Bump remark-lint-no-unused-definitions from 4.0.1 to 4.0.2 in the remark group ([#134](https://github.com/flex-development/log/issues/134))
+- [[`667ae14`](https://github.com/flex-development/log/commit/667ae14dc1bb5437955cad7b51de4e443ba7e82e)] **deps-dev:** Bump sh-syntax from 0.4.2 to 0.5.6 ([#131](https://github.com/flex-development/log/issues/131))
+- [[`997bd6c`](https://github.com/flex-development/log/commit/997bd6cbda74a76d0e4ef2c6ffbb2f004827bce0)] **deps-dev:** Bump sh-syntax from 0.5.6 to 0.5.7 ([#148](https://github.com/flex-development/log/issues/148))
+- [[`8a63d39`](https://github.com/flex-development/log/commit/8a63d393e9d6b9d7bfe1e601d4e26213c62b92d7)] **deps-dev:** Bump sh-syntax from 0.5.7 to 0.5.8 ([#175](https://github.com/flex-development/log/issues/175))
+- [[`8c1e29f`](https://github.com/flex-development/log/commit/8c1e29f33330aa35b00e0b27718e402ccf9a25a3)] **deps-dev:** Bump the commitlint group with 2 updates ([#166](https://github.com/flex-development/log/issues/166))
+- [[`5ae658b`](https://github.com/flex-development/log/commit/5ae658b0be336e2ffdcf36704bed2cb38c042af0)] **deps-dev:** Bump the eslint group with 2 updates ([#124](https://github.com/flex-development/log/issues/124))
+- [[`5b5e9ee`](https://github.com/flex-development/log/commit/5b5e9ee146e787b028550806ab11a3332f4d7cd4)] **deps-dev:** Bump the eslint group with 2 updates ([#141](https://github.com/flex-development/log/issues/141))
+- [[`03547dd`](https://github.com/flex-development/log/commit/03547ddb070b8746ecd304ab5fa1632f44558913)] **deps-dev:** Bump the eslint group with 2 updates ([#146](https://github.com/flex-development/log/issues/146))
+- [[`04bf15a`](https://github.com/flex-development/log/commit/04bf15a575de67107d8f00a80dd31f3961d79d65)] **deps-dev:** Bump the remark group with 2 updates ([#132](https://github.com/flex-development/log/issues/132))
+- [[`3462613`](https://github.com/flex-development/log/commit/3462613fe41b84de61f58e983b00bff47df0cb3e)] **deps-dev:** Bump the typescript-eslint group with 3 updates ([#119](https://github.com/flex-development/log/issues/119))
+- [[`901f972`](https://github.com/flex-development/log/commit/901f972cd85129a73bc355779ce8d0df53f58330)] **deps-dev:** Bump the typescript-eslint group with 3 updates ([#127](https://github.com/flex-development/log/issues/127))
+- [[`411404d`](https://github.com/flex-development/log/commit/411404d997b93959a88b2c409d94f9143c0217b4)] **deps-dev:** Bump the typescript-eslint group with 3 updates ([#137](https://github.com/flex-development/log/issues/137))
+- [[`e9610d0`](https://github.com/flex-development/log/commit/e9610d04e84ae8ef68e8a6704af72942c1435988)] **deps-dev:** Bump the typescript-eslint group with 3 updates ([#147](https://github.com/flex-development/log/issues/147))
+- [[`8731f73`](https://github.com/flex-development/log/commit/8731f739ffd2ac3bd865652aae00fcd3837c3389)] **deps-dev:** Bump typescript from 5.8.2 to 5.8.3 ([#129](https://github.com/flex-development/log/issues/129))
+- [[`7f20e85`](https://github.com/flex-development/log/commit/7f20e85c893344c3115917ae0f332a6794a5e784)] **deps:** add @flex-development/is-unicode-supported
+- [[`57073a4`](https://github.com/flex-development/log/commit/57073a4f991a4aedf6c1828279cfc6285911ee55)] **deps:** Bump @flex-development/colors from 1.0.1 to 1.0.2 in the flex-development group ([#180](https://github.com/flex-development/log/issues/180))
+- [[`4cc5af4`](https://github.com/flex-development/log/commit/4cc5af4cbf5b7e7bba41fc874eb72c951f2603bb)] **deps:** bump @flex-development/pathe from 4.0.1 to 4.0.2
+- [[`06b309f`](https://github.com/flex-development/log/commit/06b309fc5b512ea8e1aa6799e324ff5a1bd549ca)] **deps:** Bump node-inspect-extracted from 3.0.2 to 3.1.0 ([#162](https://github.com/flex-development/log/issues/162))
+- [[`3825598`](https://github.com/flex-development/log/commit/3825598a53f153e80a478bdf69197abc4500b936)] **deps:** Bump vite from 6.2.3 to 6.2.4 ([#116](https://github.com/flex-development/log/issues/116))
+- [[`8ca2332`](https://github.com/flex-development/log/commit/8ca2332bc047e5a653aaa558247e115103e3425a)] **deps:** Bump vite from 6.2.4 to 6.2.5 ([#123](https://github.com/flex-development/log/issues/123))
+- [[`a150c88`](https://github.com/flex-development/log/commit/a150c8878a419ac18418d708d04a62e538b9676a)] **deps:** Bump vite from 6.2.5 to 6.2.6 ([#136](https://github.com/flex-development/log/issues/136))
+- [[`62a318b`](https://github.com/flex-development/log/commit/62a318b5a226abb4bcadca568740148cbf71d519)] **deps:** Bump vite from 6.3.2 to 6.3.4 ([#155](https://github.com/flex-development/log/issues/155))
+- [[`ad4ba03`](https://github.com/flex-development/log/commit/ad4ba0396f2927b5ff1746cfe38c523089db75ed)] **yarn:** bump yarn from 4.6.0 to 4.8.1
+- [[`b5d1db1`](https://github.com/flex-development/log/commit/b5d1db13ba372a2944c465258fc842f7c7cfe71f)] **yarn:** bump yarn from 4.8.1 to 4.9.1
+
+### :robot: Continuous Integration
+
+- [[`ec8b9ee`](https://github.com/flex-development/log/commit/ec8b9ee49a045297490505bd62f1f99b84182c08)] **deps:** Bump actions/create-github-app-token from 1.12.0 to 2.0.2 ([#122](https://github.com/flex-development/log/issues/122))
+- [[`54554ff`](https://github.com/flex-development/log/commit/54554ff540dc3f98efc79d353c859ffab510ebd4)] **deps:** Bump actions/create-github-app-token from 2.0.2 to 2.0.3 ([#156](https://github.com/flex-development/log/issues/156))
+- [[`97251e5`](https://github.com/flex-development/log/commit/97251e5597e225c2e47b76d42ee1dd3c78739ffc)] **deps:** Bump actions/create-github-app-token from 2.0.3 to 2.0.5 ([#158](https://github.com/flex-development/log/issues/158))
+- [[`f132b87`](https://github.com/flex-development/log/commit/f132b87f43db95a92ccdbadb2b15576370786b6f)] **deps:** Bump actions/create-github-app-token from 2.0.5 to 2.0.6 ([#161](https://github.com/flex-development/log/issues/161))
+- [[`d1709bd`](https://github.com/flex-development/log/commit/d1709bd082bdbfef1a06f12f90b92082990f0ed3)] **deps:** Bump actions/setup-node from 4.3.0 to 4.4.0 ([#139](https://github.com/flex-development/log/issues/139))
+- [[`4fcb2cf`](https://github.com/flex-development/log/commit/4fcb2cf258998904ba1c612e1bcd8f3c8b4a1515)] **deps:** Bump codecov/codecov-action from 5.4.0 to 5.4.2 ([#138](https://github.com/flex-development/log/issues/138))
+- [[`b2f357c`](https://github.com/flex-development/log/commit/b2f357c1dc0024fa55207672a0b014a5f36179e8)] **deps:** Bump codecov/codecov-action from 5.4.2 to 5.4.3 ([#171](https://github.com/flex-development/log/issues/171))
+- [[`d170441`](https://github.com/flex-development/log/commit/d170441ef80302286fb096c9f642d062a82338c6)] **deps:** Bump crazy-max/ghaction-import-gpg from 6.2.0 to 6.3.0 ([#120](https://github.com/flex-development/log/issues/120))
+- [[`df98097`](https://github.com/flex-development/log/commit/df98097441701cb36826729cd556b3ab3903c8aa)] **deps:** Bump GitGuardian/ggshield-action from 1.38.0 to 1.39.0 ([#154](https://github.com/flex-development/log/issues/154))
+- [[`55f9eaf`](https://github.com/flex-development/log/commit/55f9eafa101b631dd66604cd48cb81a74b893197)] **deps:** Bump GitGuardian/ggshield-action from 1.39.0 to 1.40.0 ([#179](https://github.com/flex-development/log/issues/179))
+- [[`867a228`](https://github.com/flex-development/log/commit/867a2281591b2b1177d0d21b0a7c0abc3407afaa)] **workflows:** [`auto-review`] use `vars.BOT_NAME`
+- [[`99e9393`](https://github.com/flex-development/log/commit/99e93938de7afce94fa1e0e462113e59ab261473)] **workflows:** [`ci`] `jobs.build` -> `jobs.artifacts`
+- [[`f92d0a8`](https://github.com/flex-development/log/commit/f92d0a868eaaeda22e37b5ece0b863860b6db5ca)] **workflows:** [`ci`] cleanup `jobs.preflight.if`
+- [[`6ac596c`](https://github.com/flex-development/log/commit/6ac596cc3f82a3b8bcad12b752678e8b9e0eecda)] **workflows:** [`label-linked-issues`] trigger on `workflow_dispatch` only
+- [[`9b308e0`](https://github.com/flex-development/log/commit/9b308e0c163ae0cb25832debcfaaf14a0cd3309a)] **workflows:** [`publish`] cleanup
+
+### :house_with_garden: Housekeeping
+
+- [[`6dff842`](https://github.com/flex-development/log/commit/6dff842fabe3c6b0625ff1c1e128affd37a2835e)] cleanup eslint config
+- [[`066916e`](https://github.com/flex-development/log/commit/066916e79dbcf99036b81d833063ffe4ad4d49e9)] cleanup remark config
+- [[`3873431`](https://github.com/flex-development/log/commit/387343180aa721ede18c4fbee710ac085b688c2e)] **github:** fix required status check name for `ci.jobs.test`
+- [[`eac3234`](https://github.com/flex-development/log/commit/eac3234a991d936c4b7252cb27fab8d45bb7397a)] **ts:** cleanup vitest environment
+- [[`19cf1a3`](https://github.com/flex-development/log/commit/19cf1a36a495a4ba2f3af77199a73a873ed0e3e7)] **yarn:** remove `npmScopes`
+
+### :white_check_mark: Testing
+
+- [[`d8e4091`](https://github.com/flex-development/log/commit/d8e409144a699b7dd561088529e3ed26c1b08e4f)] add browser environment tests
+
 ## [5.0.0-alpha.1](https://github.com/flex-development/log/compare/log@4.0.1-dev.3...5.0.0-alpha.1) (2025-03-28)
 
 ### ⚠ BREAKING CHANGES
@@ -403,5 +498,6 @@
 - [[`dca1a84`](https://github.com/flex-development/log/commit/dca1a841b524fb56568d7454886d0c656b970a5f)] change project name
 - [[`020dee5`](https://github.com/flex-development/log/commit/020dee5fdcd6af4f371fc8dd4a9bdb73a5aaff65)] **release:** update workflow
 - [[`5dcee7f`](https://github.com/flex-development/log/commit/5dcee7fd74df2b20241b088d98040fa1f67f95cf)] **scripts:** update `release` script
+
 
 
