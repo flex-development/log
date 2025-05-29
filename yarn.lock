@@ -1645,6 +1645,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@flex-development/is-unicode-supported@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@flex-development/is-unicode-supported@npm:1.0.1"
+  checksum: 10/f8723a59c6e5180cfb4637d067a163094f6dcf4ff9c18a53dd2fab70c0a19504cf099f599d2356da921ff1c9f1a008b5cbc9b96c0821548886f859237fef000e
+  languageName: node
+  linkType: hard
+
 "@flex-development/log@workspace:.":
   version: 0.0.0-use.local
   resolution: "@flex-development/log@workspace:."
@@ -1656,6 +1663,7 @@ __metadata:
     "@flex-development/commitlint-config": "npm:1.0.1"
     "@flex-development/eslint-config": "npm:1.1.1"
     "@flex-development/grease": "npm:3.0.0-alpha.9"
+    "@flex-development/is-unicode-supported": "npm:1.0.1"
     "@flex-development/pathe": "npm:4.0.1"
     "@flex-development/remark-preset": "npm:1.0.0"
     "@flex-development/tutils": "npm:6.0.0-alpha.25"
@@ -1677,7 +1685,6 @@ __metadata:
     growl: "npm:1.10.5"
     husky: "npm:9.1.7"
     is-ci: "npm:4.1.0"
-    is-unicode-supported: "npm:2.1.0"
     node-inspect-extracted: "npm:3.1.0"
     node-notifier: "npm:10.0.1"
     prettier: "npm:3.5.3"
@@ -6479,13 +6486,6 @@ __metadata:
   version: 2.0.0
   resolution: "is-unicode-supported@npm:2.0.0"
   checksum: 10/000b80639dedaf59a385f1c0a57f97a4d1435e0723716f24cc19ad94253a7a0a9f838bdc9ac49b10a29ac93b01f52ae9b2ed358a8876caf1eb74d73b4ede92b2
-  languageName: node
-  linkType: hard
-
-"is-unicode-supported@npm:2.1.0":
-  version: 2.1.0
-  resolution: "is-unicode-supported@npm:2.1.0"
-  checksum: 10/f254e3da6b0ab1a57a94f7273a7798dd35d1d45b227759f600d0fa9d5649f9c07fa8d3c8a6360b0e376adf916d151ec24fc9a50c5295c58bae7ca54a76a063f9
   languageName: node
   linkType: hard
 

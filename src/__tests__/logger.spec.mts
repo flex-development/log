@@ -8,8 +8,8 @@ import logTypes from '#enums/log-types'
 import COLOR_SUPPORTED from '#internal/color-supported'
 import process from '#internal/process'
 import subject from '#logger'
+import isUnicodeSupported from '@flex-development/is-unicode-supported'
 import { isObjectPlain } from '@flex-development/tutils'
-import isUnicodeSupported from 'is-unicode-supported'
 
 describe('unit:logger', () => {
   let types: string[]

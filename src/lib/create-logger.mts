@@ -13,6 +13,7 @@ import normalizeLevel from '#internal/normalize-level'
 import normalizeOptions from '#internal/normalize-options'
 import process from '#internal/process'
 import { createColors, type Colors } from '@flex-development/colors'
+import isUnicodeSupported from '@flex-development/is-unicode-supported'
 import type {
   InputLogObject,
   Logger,
@@ -26,7 +27,6 @@ import type {
 import type { Reporter } from '@flex-development/log/reporters'
 import { keys, ksort, type Fn } from '@flex-development/tutils'
 import { ok } from 'devlop'
-import isUnicodeSupported from 'is-unicode-supported'
 import * as util from 'node-inspect-extracted'
 
 export default createLogger
