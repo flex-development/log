@@ -183,6 +183,6 @@
     "vfile": "6.0.3",
     "vitest": "3.0.9"
   },
-  "packageManager": "yarn@4.8.1",
+  "packageManager": "yarn@4.9.1",
   "sideEffects": false
 }
