@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`unit:lib/createLogger > #withTag > should return new logger with \`tag\` applied ("" -> "grease") 1`] = `"grease"`;
+
+exports[`unit:lib/createLogger > #withTag > should return new logger with \`tag\` applied ("grease" -> "bump") 1`] = `"grease:bump"`;
+
+exports[`unit:lib/createLogger > #withTag > should return new logger with \`tag\` applied ("grease" -> "changelog") 1`] = `"grease/changelog"`;
+
+exports[`unit:lib/createLogger > #withTag > should return new logger with \`tag\` applied (null -> "grease") 1`] = `"grease"`;

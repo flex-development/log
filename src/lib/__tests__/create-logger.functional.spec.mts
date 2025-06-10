@@ -8,7 +8,12 @@ import logTypes from '#enums/log-types'
 import error from '#fixtures/error'
 import testSubject from '#lib/create-logger'
 import Reporter from '#reporters/abstract.reporter'
-import type { Logger, LogType, WriteStream } from '@flex-development/log'
+import type {
+  InputLogObject,
+  Logger,
+  LogType,
+  WriteStream
+} from '@flex-development/log'
 import pkg from '@flex-development/log/package.json' with { type: 'json' }
 import { omit, type Constructor } from '@flex-development/tutils'
 import * as util from 'node-inspect-extracted'
@@ -126,6 +131,56 @@ describe('functional:lib/createLogger', () => {
       expect(lastCall?.[0]).to.eq(value)
       expect(write).toHaveBeenCalledOnce()
       expect(write).toHaveBeenCalledWith(results[0]?.value as string + eol)
+    })
+  })
+
+  describe('#withDefaults', () => {
+    let spy: MockInstance<Logger['create']>
+    let subject: Logger
+
+    beforeAll(() => {
+      subject = testSubject()
+    })
+
+    beforeEach(() => {
+      spy = vi.spyOn(subject, 'create').mockName('Logger#create')
+    })
+
+    it('should create new logger with `defaults` applied', () => {
+      // Arrange
+      const defaults: InputLogObject = {}
+
+      // Act
+      subject.withDefaults(defaults)
+
+      // Expect
+      expect(spy).toHaveBeenCalledOnce()
+      expect(spy.mock.lastCall).to.eql([{ defaults }])
+    })
+  })
+
+  describe('#withTag', () => {
+    let spy: MockInstance<Logger['withDefaults']>
+    let subject: Logger
+
+    beforeAll(() => {
+      subject = testSubject()
+    })
+
+    beforeEach(() => {
+      spy = vi.spyOn(subject, 'withDefaults').mockName('Logger#withDefaults')
+    })
+
+    it('should create new logger with `tag` applied', () => {
+      // Arrange
+      const tag: string = 'create-logger.functional.spec.mts'
+
+      // Act
+      subject.withTag(tag)
+
+      // Expect
+      expect(spy).toHaveBeenCalledOnce()
+      expect(spy.mock.lastCall).to.eql([{ tag }])
     })
   })
 })

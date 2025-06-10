@@ -9,7 +9,11 @@ import COLOR_SUPPORTED from '#internal/color-supported'
 import process from '#internal/process'
 import testSubject from '#lib/create-logger'
 import isUnicodeSupported from '@flex-development/is-unicode-supported'
-import type { Logger, LoggerOptions } from '@flex-development/log'
+import type {
+  InputLogObject,
+  Logger,
+  LoggerOptions
+} from '@flex-development/log'
 import { isObjectPlain as pojo } from '@flex-development/tutils'
 
 describe('unit:lib/createLogger', () => {
@@ -33,6 +37,7 @@ describe('unit:lib/createLogger', () => {
     expect(result).to.have.property('color', COLOR_SUPPORTED)
     expect(result).to.have.property('colors').satisfy(pojo)
     expect(result).to.have.property('create').be.a('function')
+    expect(result).to.have.property('defaults').satisfy(pojo).and.eql({})
     expect(result).to.have.property('eol', '\n')
     expect(result).to.have.property('format').satisfy(pojo)
     expect(result).to.have.property('level', logLevels.info)
@@ -65,11 +70,54 @@ describe('unit:lib/createLogger', () => {
       // Expect
       expect(result).to.not.eq(subject)
       expect(result.colors).to.not.eq(subject.colors)
+      expect(result.defaults).to.not.eq(subject.defaults)
       expect(result.format).to.not.eq(subject.format)
       expect(result.level).to.be.a('number').and.eq(options.level)
       expect(result.options).to.eql(options)
       expect(result.reporters).to.not.eq(subject.reporters)
       expect(result.types).to.not.eq(subject.types)
+    })
+  })
+
+  describe('#withDefaults', () => {
+    let subject: Logger
+
+    beforeAll(() => {
+      subject = testSubject()
+    })
+
+    it('should return new logger with `defaults` applied', () => {
+      // Arrange
+      const defaults: InputLogObject = { level: logLevels.log }
+
+      // Act + Expect
+      expect(subject.withDefaults(defaults).defaults).to.eq(defaults)
+    })
+  })
+
+  describe('#withTag', () => {
+    it.each<[
+      parent: string | null | undefined,
+      ...Parameters<Logger['withTag']>
+    ]>([
+      ['', 'grease'],
+      ['grease', 'bump'],
+      ['grease', 'changelog', '/'],
+      [null, 'grease']
+    ])('should return new logger with `tag` applied (%j -> %j)', (
+      parent,
+      tag,
+      separator
+    ) => {
+      // Arrange
+      const defaults: InputLogObject = { tag: parent }
+
+      // Act
+      const result = testSubject({ defaults }).withTag(tag, separator)
+
+      // Expect
+      expect(result.defaults.tag).to.be.a('string').and.not.empty
+      expect(result.defaults.tag).toMatchSnapshot()
     })
   })
 })

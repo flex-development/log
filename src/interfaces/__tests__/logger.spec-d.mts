@@ -120,4 +120,44 @@ describe('unit-d:interfaces/Logger', () => {
       })
     })
   })
+
+  describe('withDefaults', () => {
+    type Subject = TestSubject['withDefaults']
+
+    describe('parameters', () => {
+      it('should be callable with [(InputLogObject | null | undefined)?]', () => {
+        // Arrange
+        type Expect = [(InputLogObject | null | undefined)?]
+
+        // Expect
+        expectTypeOf<Subject>().parameters.toEqualTypeOf<Expect>()
+      })
+    })
+
+    describe('returns', () => {
+      it('should return Logger', () => {
+        expectTypeOf<Subject>().returns.toEqualTypeOf<TestSubject>()
+      })
+    })
+  })
+
+  describe('withTag', () => {
+    type Subject = TestSubject['withTag']
+
+    describe('parameters', () => {
+      it('should be callable with [string, [string | null | undefined]?]', () => {
+        // Arrange
+        type Expect = [string, (string | null | undefined)?]
+
+        // Expect
+        expectTypeOf<Subject>().parameters.toEqualTypeOf<Expect>()
+      })
+    })
+
+    describe('returns', () => {
+      it('should return Logger', () => {
+        expectTypeOf<Subject>().returns.toEqualTypeOf<TestSubject>()
+      })
+    })
+  })
 })

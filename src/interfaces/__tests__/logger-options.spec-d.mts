@@ -15,6 +15,12 @@ import type {
 import type { Nilable } from '@flex-development/tutils'
 
 describe('unit-d:interfaces/LoggerOptions', () => {
+  it('should match [defaults?: InputLogObject | null | undefined]', () => {
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('defaults')
+      .toEqualTypeOf<Nilable<InputLogObject>>()
+  })
+
   it('should match [eol?: string | null | undefined]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('eol')

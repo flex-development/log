@@ -70,6 +70,7 @@ function createLogger(
     color: COLOR_SUPPORTED,
     colors: {} as Colors,
     create,
+    defaults: options.defaults ?? {},
     eol: options.eol ?? '\n',
     format: options.format ?? {},
     inspect,
@@ -80,7 +81,9 @@ function createLogger(
     stderr: options.stderr ?? process.stderr,
     stdout: options.stdout ?? process.stdout,
     types: mergeTypes(options.types),
-    unicode: isUnicodeSupported()
+    unicode: isUnicodeSupported(),
+    withDefaults,
+    withTag
   }
 
   /**
@@ -180,7 +183,14 @@ function createLogger(
      * @return {undefined}
      */
     function send(this: Logger, message: any, ...args: any[]): undefined {
-      return void report.call(this, this.types[type], [message, ...args])
+      return void report.call(
+        this,
+        {
+          ...this.defaults,
+          ...this.types[type]
+        },
+        [message, ...args]
+      )
     }
   }
 
@@ -360,4 +370,49 @@ function reporters(
   }
 
   return list
+}
+
+/**
+ * Create a new logger with the specified default log object properties.
+ *
+ * @internal
+ *
+ * @this {Logger}
+ *
+ * @param {InputLogObject | null | undefined} [defaults]
+ *  Default properties to include in any log reported from the new logger
+ * @return {Logger}
+ *  The new logger
+ */
+function withDefaults(
+  this: Logger,
+  defaults?: InputLogObject | null | undefined
+): Logger {
+  return this.create({ defaults })
+}
+
+/**
+ * Create a new logger with the specified `tag`.
+ *
+ * The tag will be included in any logs sent from the new logger.
+ *
+ * @internal
+ *
+ * @this {Logger}
+ *
+ * @param {string} tag
+ *  The tag to include in each log reported from the new logger
+ * @param {string | null | undefined} [separator]
+ *  The string to used separate tags
+ * @return {Logger}
+ *  The new logger
+ */
+function withTag(
+  this: Logger,
+  tag: string,
+  separator?: string | null | undefined
+): Logger {
+  separator ||= ':'
+  if (this.defaults.tag) tag = this.defaults.tag + separator + tag
+  return this.withDefaults({ tag })
 }

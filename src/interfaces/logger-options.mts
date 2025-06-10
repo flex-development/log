@@ -17,6 +17,15 @@ import type {
  */
 interface LoggerOptions {
   /**
+   * Properties to apply to all logs, regardless of log type or level.
+   *
+   * Defaults can be overridden per log type using {@linkcode types}.
+   *
+   * @see {@linkcode InputLogObject}
+   */
+  defaults?: InputLogObject | null | undefined
+
+  /**
    * New line character(s).
    *
    * @default '\n'

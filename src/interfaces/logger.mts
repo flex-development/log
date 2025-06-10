@@ -78,6 +78,15 @@ interface Logger extends LogFunctions {
   create(options?: LoggerOptions | null | undefined): Logger
 
   /**
+   * Properties to apply to all logs, regardless of log type or level.
+   *
+   * Defaults are overridden per log type using {@linkcode types}.
+   *
+   * @see {@linkcode InputLogObject}
+   */
+  defaults: InputLogObject
+
+  /**
    * New line character(s).
    */
   eol: string
@@ -153,6 +162,35 @@ interface Logger extends LogFunctions {
    * Whether unicode is supported.
    */
   unicode: boolean
+
+  /**
+   * Create a new logger with the specified default log object properties.
+   *
+   * @see {@linkcode InputLogObject}
+   *
+   * @param {InputLogObject | null | undefined} [defaults]
+   *  Default properties to include in any log reported from the new logger
+   * @return {Logger}
+   *  The new logger
+   */
+  withDefaults(defaults?: InputLogObject | null | undefined): Logger
+
+  /**
+   * Create a new logger with the specified `tag`.
+   *
+   * The tag will be included in any logs sent from the new logger.
+   *
+   * > 👉 **Note**: Other options (i.e. `format`, `level`) are inherited from
+   * > the current logger.
+   *
+   * @param {string} tag
+   *  The tag to include in each log reported from the new logger
+   * @param {string | null | undefined} [separator=':']
+   *  The string to used separate tags
+   * @return {Logger}
+   *  The new logger
+   */
+  withTag(tag: string, separator?: string | null | undefined): Logger
 }
 
 export type { Logger as default }
