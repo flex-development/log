@@ -115,7 +115,7 @@ jobs:
           node-version-file: .nvmrc
       - id: yarn
         name: Install dependencies
-        run: yarn && echo "$GITHUB_WORKSPACE/node_modules/.bin" >>$GITHUB_PATH
+        run: yarn --no-immutable && echo "$GITHUB_WORKSPACE/node_modules/.bin" >>$GITHUB_PATH
       - id: pack
         name: Pack project
         run: yarn pack -o %s-%v.tgz

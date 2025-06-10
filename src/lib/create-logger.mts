@@ -69,11 +69,13 @@ function createLogger(
     browser: !!process.browser,
     color: COLOR_SUPPORTED,
     colors: {} as Colors,
+    create,
     eol: options.eol ?? '\n',
-    format: { ...options.format },
+    format: options.format ?? {},
     inspect,
     level,
     levels: Object.freeze(logLevels),
+    options,
     reporters: reporters(options.reporters),
     stderr: options.stderr ?? process.stderr,
     stdout: options.stdout ?? process.stdout,
@@ -148,6 +150,9 @@ function createLogger(
     levels: {
       writable: false
     },
+    options: {
+      enumerable: false
+    },
     reporters: {
       writable: false
     },
@@ -181,6 +186,26 @@ function createLogger(
 
   for (const reporter of logger.reporters) void reporter.init(logger)
   return logger
+}
+
+/**
+ * Create a new logger, inheriting options from the current instance, with
+ * possible overrides.
+ *
+ * @internal
+ *
+ * @this {Logger}
+ *
+ * @param {LoggerOptions | null | undefined} [options]
+ *  Overrides for the new logger
+ * @return {Logger}
+ *  New logger
+ */
+function create(
+  this: Logger,
+  options?: LoggerOptions | null | undefined
+): Logger {
+  return createLogger(merge(null, this.options, options))
 }
 
 /**

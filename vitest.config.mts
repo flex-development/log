@@ -14,7 +14,10 @@ import {
   type ConfigEnv,
   type ViteUserConfig
 } from 'vitest/config'
-import type { ResolveSnapshotPathHandlerContext } from 'vitest/node'
+import type {
+  ResolveSnapshotPathHandlerContext,
+  TypecheckConfig
+} from 'vitest/node'
 import tsconfig from './tsconfig.json' with { type: 'json' }
 
 export default defineConfig(config)
@@ -34,11 +37,19 @@ export default defineConfig(config)
  */
 function config(this: void, env: ConfigEnv): ViteUserConfig {
   /**
-   * Whether typechecking is enabled.
+   * Options used to configure typechecks.
    *
-   * @const {boolean} typecheck
+   * @const {Partial<TypecheckConfig>} typecheck
    */
-  const typecheck: boolean = env.mode === 'typecheck'
+  const typecheck: Partial<TypecheckConfig> = {
+    allowJs: false,
+    checker: 'tsc',
+    enabled: env.mode === 'typecheck',
+    ignoreSourceErrors: false,
+    include: ['**/__tests__/*.spec-d.mts'],
+    only: true,
+    tsconfig: 'tsconfig.json'
+  }
 
   return {
     test: {
@@ -77,12 +88,44 @@ function config(this: void, env: ConfigEnv): ViteUserConfig {
       globals: true,
       include: ['src/**/__tests__/*.spec.mts'],
       mockReset: true,
-      name: typecheck ? 'types' : undefined as never,
       outputFile: {
-        blob: `.vitest-reports/${env.mode}.blob.json`,
-        json: pathe.join('__tests__/reports', env.mode + '.json')
+        blob: pathe.join('.vitest-reports', env.mode + '.blob.json'),
+        json: pathe.join('__tests__', 'reports', env.mode + '.json')
       },
       passWithNoTests: true,
+      projects: [
+        {
+          extends: true,
+          resolve: {
+            conditions: [
+              'browser',
+              ...tsconfig.compilerOptions.customConditions
+            ]
+          },
+          test: {
+            env: { VITEST_ENVIRONMENT: 'happy-dom' },
+            environment: 'happy-dom',
+            environmentOptions: {},
+            name: 'browser',
+            setupFiles: [],
+            typecheck
+          }
+        },
+        {
+          extends: true,
+          ssr: {
+            resolve: { conditions: tsconfig.compilerOptions.customConditions }
+          },
+          test: {
+            env: { VITEST_ENVIRONMENT: 'node' },
+            environment: 'node',
+            environmentOptions: {},
+            name: 'node',
+            setupFiles: [],
+            typecheck
+          }
+        }
+      ],
       reporters: JSON.parse(process.env['VITEST_UI'] ?? '0')
         ? [new Notifier(), new VerboseReporter()]
         : env.mode === 'reports'
@@ -133,50 +176,8 @@ function config(this: void, env: ConfigEnv): ViteUserConfig {
         printFunctionName: true
       },
       snapshotSerializers: [],
-      typecheck: {
-        allowJs: false,
-        checker: 'tsc',
-        enabled: typecheck,
-        ignoreSourceErrors: false,
-        include: ['**/__tests__/*.spec-d.mts'],
-        only: true,
-        tsconfig: './tsconfig.typecheck.json'
-      },
       unstubEnvs: true,
-      unstubGlobals: true,
-      workspace: typecheck ? undefined as never : [
-        {
-          extends: true,
-          resolve: {
-            conditions: [
-              'browser',
-              ...tsconfig.compilerOptions.customConditions
-            ]
-          },
-          test: {
-            env: { VITEST_ENVIRONMENT: 'happy-dom' },
-            environment: 'happy-dom',
-            environmentOptions: {},
-            name: 'browser',
-            setupFiles: [],
-            typecheck: { enabled: false }
-          }
-        },
-        {
-          extends: true,
-          ssr: {
-            resolve: { conditions: tsconfig.compilerOptions.customConditions }
-          },
-          test: {
-            env: { VITEST_ENVIRONMENT: 'node' },
-            environment: 'node',
-            environmentOptions: {},
-            name: 'node',
-            setupFiles: [],
-            typecheck: { enabled: false }
-          }
-        }
-      ]
+      unstubGlobals: true
     }
   }
 }

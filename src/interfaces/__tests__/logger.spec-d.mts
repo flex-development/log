@@ -9,6 +9,7 @@ import type {
   InputLogObject,
   LogFormatOptions,
   LogFunctions,
+  LoggerOptions,
   LogLevel,
   LogLevelMap,
   LogType,
@@ -98,5 +99,25 @@ describe('unit-d:interfaces/Logger', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('unicode')
       .toEqualTypeOf<boolean>()
+  })
+
+  describe('create', () => {
+    type Subject = TestSubject['create']
+
+    describe('parameters', () => {
+      it('should be callable with [(LoggerOptions | null | undefined)?]', () => {
+        // Arrange
+        type Expect = [(LoggerOptions | null | undefined)?]
+
+        // Expect
+        expectTypeOf<Subject>().parameters.toEqualTypeOf<Expect>()
+      })
+    })
+
+    describe('returns', () => {
+      it('should return Logger', () => {
+        expectTypeOf<Subject>().returns.toEqualTypeOf<TestSubject>()
+      })
+    })
   })
 })

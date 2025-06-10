@@ -8,6 +8,7 @@ import type {
   InputLogObject,
   LogFormatOptions,
   LogFunctions,
+  LoggerOptions,
   LogLevel,
   LogLevelMap,
   LogLevelOption,
@@ -25,14 +26,14 @@ import type { Reporter } from '@flex-development/log/reporters'
  */
 interface Logger extends LogFunctions {
   /**
-   * Browser logger?
+   * Whether the logger is operating in a browser environment.
    *
    * @readonly
    */
   readonly browser: boolean
 
   /**
-   * Color logs enabled?
+   * Whether color logs are enabled.
    *
    * @return {boolean}
    *  `true` if color is enabled, `false` otherwise
@@ -59,6 +60,22 @@ interface Logger extends LogFunctions {
    *  Colorizer object
    */
   get colors(): Colors
+
+  /**
+   * Create a new logger, inheriting options from the current instance, with
+   * possible overrides.
+   *
+   * > 👉 **Note**: Plain objects (i.e. `options.format`, `options.types`) are
+   * > merged recursively.
+   *
+   * @see {@linkcode LoggerOptions}
+   *
+   * @param {LoggerOptions | null | undefined} [options]
+   *  Overrides for the new logger
+   * @return {Logger}
+   *  The new logger
+   */
+  create(options?: LoggerOptions | null | undefined): Logger
 
   /**
    * New line character(s).
@@ -133,7 +150,7 @@ interface Logger extends LogFunctions {
   types: Record<LogType, InputLogObject>
 
   /**
-   * Unicode supported?
+   * Whether unicode is supported.
    */
   unicode: boolean
 }
