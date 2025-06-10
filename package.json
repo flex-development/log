@@ -184,6 +184,6 @@
     "vfile": "6.0.3",
     "vitest": "3.2.3"
   },
-  "packageManager": "yarn@4.9.1",
+  "packageManager": "yarn@4.9.2",
   "sideEffects": false
 }
