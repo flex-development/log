@@ -1,3 +1,30 @@
+## [5.0.0-alpha.3](https://github.com/flex-development/log/compare/5.0.0-alpha.2...5.0.0-alpha.3) (2025-06-10)
+
+### :package: Build
+
+- [[`1f487ce`](https://github.com/flex-development/log/commit/1f487ce884b47f85f4e46d0d75c63144046a5d20)] **deps-dev:** Bump @arethetypeswrong/cli from 0.18.1 to 0.18.2 ([#194](https://github.com/flex-development/log/issues/194))
+- [[`454a97e`](https://github.com/flex-development/log/commit/454a97e326a5b54ac6cd07865a85ad0569f13b67)] **deps-dev:** Bump @types/node from 22.15.26 to 22.15.29 ([#185](https://github.com/flex-development/log/issues/185))
+- [[`26449c1`](https://github.com/flex-development/log/commit/26449c151fb0ed289b9140edb4746b41c4ea0842)] **deps-dev:** Bump @types/node from 22.15.29 to 22.15.30 ([#192](https://github.com/flex-development/log/issues/192))
+- [[`ae40ae3`](https://github.com/flex-development/log/commit/ae40ae30e7c2b8cd5eadf5e01208ed995f1df7e1)] **deps-dev:** Bump @types/node from 22.15.30 to 24.0.0 ([#195](https://github.com/flex-development/log/issues/195))
+- [[`fa99797`](https://github.com/flex-development/log/commit/fa9979795944f9731fe2b5e9831b5bd0b966934e)] **deps-dev:** Bump eslint from 9.27.0 to 9.28.0 ([#186](https://github.com/flex-development/log/issues/186))
+- [[`af05ba0`](https://github.com/flex-development/log/commit/af05ba0820af77ea8562d25fce2d38398b82cb98)] **deps-dev:** Bump happy-dom from 17.5.6 to 17.6.1 ([#188](https://github.com/flex-development/log/issues/188))
+- [[`81068ad`](https://github.com/flex-development/log/commit/81068adba39a1471616f1b80d370dfc01999c524)] **deps-dev:** Bump happy-dom from 17.6.1 to 17.6.3 ([#190](https://github.com/flex-development/log/issues/190))
+- [[`6d019ff`](https://github.com/flex-development/log/commit/6d019ff566dcc28809952efb9d8a319024c570a5)] **deps-dev:** Bump happy-dom from 17.6.3 to 18.0.0 ([#196](https://github.com/flex-development/log/issues/196))
+- [[`1bcd690`](https://github.com/flex-development/log/commit/1bcd6906d9cd47697fe60e9c1ea277d968dd7583)] **deps-dev:** Bump the vitest group with 3 updates ([#187](https://github.com/flex-development/log/issues/187))
+- [[`32aec03`](https://github.com/flex-development/log/commit/32aec0370150da8f2a5d67ede98016882ce21e93)] **deps-dev:** Bump the vitest group with 3 updates ([#189](https://github.com/flex-development/log/issues/189))
+- [[`2ed27c9`](https://github.com/flex-development/log/commit/2ed27c9b593e460a0539271bac5e5a6edf1aedb6)] **deps-dev:** Bump the vitest group with 3 updates ([#191](https://github.com/flex-development/log/issues/191))
+- [[`827fa4d`](https://github.com/flex-development/log/commit/827fa4d7de192a6d274d63394d9421447c82e54d)] **deps-dev:** Bump the vitest group with 3 updates ([#193](https://github.com/flex-development/log/issues/193))
+- [[`73cd614`](https://github.com/flex-development/log/commit/73cd6143894d4f35ebdded38c888174123b4fa22)] **yarn:** bump yarn from 4.9.1 to 4.9.2
+
+### :pencil: Documentation
+
+- [[`68fc733`](https://github.com/flex-development/log/commit/68fc733c6452e2becbffae601cfbea62f88145ac)] outline
+
+### :sparkles: Features
+
+- [[`c570732`](https://github.com/flex-development/log/commit/c5707323a0b593e917363634502a37b2524a7714)] `Logger#create`
+- [[`be6d637`](https://github.com/flex-development/log/commit/be6d63771a5db73d56b39e3d3905cb362fe33140)] `Logger#withDefaults`, `Logger#withTag`
+
 ## [5.0.0-alpha.2](https://github.com/flex-development/log/compare/5.0.0-alpha.1...5.0.0-alpha.2) (2025-05-29)
 
 ### :package: Build
@@ -498,6 +525,7 @@
 - [[`dca1a84`](https://github.com/flex-development/log/commit/dca1a841b524fb56568d7454886d0c656b970a5f)] change project name
 - [[`020dee5`](https://github.com/flex-development/log/commit/020dee5fdcd6af4f371fc8dd4a9bdb73a5aaff65)] **release:** update workflow
 - [[`5dcee7f`](https://github.com/flex-development/log/commit/5dcee7fd74df2b20241b088d98040fa1f67f95cf)] **scripts:** update `release` script
+
 
 
 
