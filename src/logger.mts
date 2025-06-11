@@ -8,7 +8,9 @@ import type { Logger } from '@flex-development/log'
 import { FancyReporter } from '@flex-development/log/reporters'
 
 /**
- * Default logger.
+ * The default, pre-configured logger.
+ *
+ * Logs are written using the {@linkcode FancyReporter}.
  *
  * @see {@linkcode Logger}
  *

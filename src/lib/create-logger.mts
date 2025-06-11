@@ -32,7 +32,7 @@ import * as util from 'node-inspect-extracted'
 export default createLogger
 
 /**
- * Create a logger.
+ * Create a new logger.
  *
  * @see {@linkcode LoggerOptions}
  * @see {@linkcode Logger}

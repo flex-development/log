@@ -3,10 +3,11 @@
  * @module log/enums/logLevels
  */
 
-import type { LogLevel } from '@flex-development/log'
+import type { LogLevel, LogType } from '@flex-development/log'
 
 /**
- * Log levels.
+ * Map where each key is a log type ({@linkcode LogType}) and each value is a
+ * log level ({@linkcode LogLevel}).
  *
  * @enum {LogLevel}
  */

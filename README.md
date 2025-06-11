@@ -19,7 +19,30 @@ Log messages in the terminal and browser
 - [Install](#install)
 - [Use](#use)
 - [API](#api)
+  - [`logger`](#logger)
+  - [`createLogger`](#createloggeroptions)
+  - [`logLevels`](#loglevels)
+  - [`BaseReporter`](#basereporter)
+  - [`FancyReporter`](#fancyreporter)
+  - [`Reporter`](#reporter)
 - [Types](#types)
+  - [`Logger`](#logger-1)
+  - [`InputLogObject`](#inputlogobject)
+  - [`InspectOptions`](#inspectoptions)
+  - [`LogFormatOptions`](#logformatoptions)
+  - [`LogFunction`](#logfunction)
+  - [`LogFunctions`](#logfunctions)
+  - [`LogLevel`](#loglevel)
+  - [`LogLevelMap`](#loglevelmap)
+  - [`LogLevelOption`](#logleveloption)
+  - [`LogLevelType`](#logleveltype)
+  - [`LogObject`](#logobject)
+  - [`LogType`](#logtype)
+  - [`LogTypeFunctions`](#logtypefunctions)
+  - [`LogTypeMap`](#logtypemap)
+  - [`LoggerOptions`](#loggeroptions)
+  - [`ReportersOption`](#reportersoption)
+  - [`WriteStream`](#writestream)
 - [Contribute](#contribute)
 
 ## What is this?
@@ -73,11 +96,125 @@ In browsers with [`esm.sh`][esmsh]:
 
 ## API
 
-**TODO**: api
+This package exports the following identifiers:
+
+- [`logger`](#logger)
+- [`createLogger`](#createloggeroptions)
+- [`logLevels`](#loglevels)
+- [`BaseReporter`](#basereporter)
+- [`FancyReporter`](#fancyreporter)
+- [`Reporter`](#reporter)
+
+The default export is `logger`.
+
+> 👉 **Note**: See the source code for the most up-to-date documentation.
+
+### `logger`
+
+([`Logger`](#logger-1)) The default, pre-configured logger.
+Logs are written using the [`FancyReporter`](#fancyreporter).
+
+### `createLogger([options])`
+
+Create a new logger.
+
+#### Parameters
+
+- `options` ([`LogLevelOption`](#logleveloption) | [`LoggerOptions`](#loggeroptions), optional) —
+  Log level or configuration options
+
+#### Returns
+
+([`Logger`](#logger-1)) Logger object
+
+### `logLevels`
+
+(`Readonly<Record<LogType, LogLevel>>`) Map where each key is a [log type](#logtype)
+and each value is a [log level](#loglevel).
+
+### `Reporter`
+
+**TODO**: `Reporter`
+
+### `BaseReporter`
+
+**TODO**: `BaseReporter`
+
+### `FancyReporter`
+
+**TODO**: `FancyReporter`
 
 ## Types
 
 This package is fully typed with [TypeScript][].
+
+### `Logger`
+
+**TODO**: `Logger`
+
+### `InputLogObject`
+
+**TODO**: `InputLogObject`
+
+### `InspectOptions`
+
+**TODO**: `InspectOptions`
+
+### `LogFormatOptions`
+
+**TODO**: `LogFormatOptions`
+
+### `LogFunction`
+
+**TODO**: `LogFunction`
+
+### `LogFunctions`
+
+**TODO**: `LogFunctions`
+
+### `LogLevel`
+
+**TODO**: `LogLevel`
+
+### `LogLevelMap`
+
+**TODO**: `LogLevelMap`
+
+### `LogLevelOption`
+
+**TODO**: `LogLevelOption`
+
+### `LogLevelType`
+
+**TODO**: `LogLevelType`
+
+### `LogObject`
+
+**TODO**: `LogObject`
+
+### `LogType`
+
+**TODO**: `LogType`
+
+### `LogTypeFunctions`
+
+**TODO**: `LogTypeFunctions`
+
+### `LogTypeMap`
+
+**TODO**: `LogTypeMap`
+
+### `LoggerOptions`
+
+**TODO**: `LoggerOptions`
+
+### `ReportersOption`
+
+**TODO**: `ReportersOption`
+
+### `WriteStream`
+
+**TODO**: `WriteStream`
 
 ## Contribute
 
