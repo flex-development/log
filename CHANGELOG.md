@@ -1,3 +1,46 @@
+## [5.0.0-alpha.4](https://github.com/flex-development/log/compare/5.0.0-alpha.3...5.0.0-alpha.4) (2025-08-13)
+
+### :package: Build
+
+- [[`8b9b39a`](https://github.com/flex-development/log/commit/8b9b39a0fd16b8086bcf0735d2595c23f1900085)] **deps-dev:** Bump @types/node from 24.0.0 to 24.0.1 ([#200](https://github.com/flex-development/log/issues/200))
+- [[`46838a1`](https://github.com/flex-development/log/commit/46838a144501b2d843714aef29ca2349a1acd2b9)] **deps-dev:** Bump @types/node from 24.0.1 to 24.0.3 ([#203](https://github.com/flex-development/log/issues/203))
+- [[`ad74d77`](https://github.com/flex-development/log/commit/ad74d775434e85ea6c43317e5ddfb1d116ea1cdd)] **deps-dev:** Bump @types/node from 24.0.10 to 24.0.11 ([#219](https://github.com/flex-development/log/issues/219))
+- [[`7a9065b`](https://github.com/flex-development/log/commit/7a9065b8a6205af38e724fb8df3319cb88de004e)] **deps-dev:** Bump @types/node from 24.0.11 to 24.0.12 ([#220](https://github.com/flex-development/log/issues/220))
+- [[`3df4d8b`](https://github.com/flex-development/log/commit/3df4d8b7d06faa4428693b73f1d053b32bd7b440)] **deps-dev:** Bump @types/node from 24.0.12 to 24.0.13 ([#221](https://github.com/flex-development/log/issues/221))
+- [[`4065f53`](https://github.com/flex-development/log/commit/4065f53ca446d3067399ff72989cf50e49e96c70)] **deps-dev:** Bump @types/node from 24.0.13 to 24.0.14 ([#224](https://github.com/flex-development/log/issues/224))
+- [[`6559ecb`](https://github.com/flex-development/log/commit/6559ecbb5d21b0cf30d97cae8e23cd18c3ab9ef9)] **deps-dev:** Bump @types/node from 24.0.14 to 24.2.1 ([#234](https://github.com/flex-development/log/issues/234))
+- [[`b10c676`](https://github.com/flex-development/log/commit/b10c67642b2be0e2202652ef0d4f909fb79cec76)] **deps-dev:** Bump @types/node from 24.0.3 to 24.0.4 ([#207](https://github.com/flex-development/log/issues/207))
+- [[`4b6c387`](https://github.com/flex-development/log/commit/4b6c387851ced414dab53596a141ce6d6a082038)] **deps-dev:** Bump @types/node from 24.0.4 to 24.0.6 ([#212](https://github.com/flex-development/log/issues/212))
+- [[`2ffc437`](https://github.com/flex-development/log/commit/2ffc4378f8b4afd10e645aa4d6fc5c254ad7b9a5)] **deps-dev:** Bump @types/node from 24.0.6 to 24.0.10 ([#215](https://github.com/flex-development/log/issues/215))
+- [[`bbef258`](https://github.com/flex-development/log/commit/bbef258ec14154b594f342c6aee7f94d4587b0f3)] **deps-dev:** Bump cross-env from 7.0.3 to 10.0.0 ([#228](https://github.com/flex-development/log/issues/228))
+- [[`5ea4f4a`](https://github.com/flex-development/log/commit/5ea4f4a69d346724651ea1a209bc777600c44a7c)] **deps-dev:** Bump cspell from 9.0.2 to 9.1.1 ([#202](https://github.com/flex-development/log/issues/202))
+- [[`8f91b23`](https://github.com/flex-development/log/commit/8f91b23308d6f5417158cfb998de1822b46d353a)] **deps-dev:** Bump cspell from 9.1.1 to 9.1.2 ([#206](https://github.com/flex-development/log/issues/206))
+- [[`c15dbf4`](https://github.com/flex-development/log/commit/c15dbf44f48bb4a6c225ee8c19257ccce03f7fb0)] **deps-dev:** Bump cspell from 9.1.2 to 9.1.3 ([#217](https://github.com/flex-development/log/issues/217))
+- [[`3d2686a`](https://github.com/flex-development/log/commit/3d2686a5ab1aa80fb10b564bacf8732cdf9c6934)] **deps-dev:** Bump cspell from 9.1.3 to 9.1.5 ([#223](https://github.com/flex-development/log/issues/223))
+- [[`7e96dd1`](https://github.com/flex-development/log/commit/7e96dd1ae96aa1f02a66322b7b22ad32b7dd7175)] **deps-dev:** Bump cspell from 9.1.5 to 9.2.0 ([#225](https://github.com/flex-development/log/issues/225))
+- [[`403aa29`](https://github.com/flex-development/log/commit/403aa292a89345cffda40ee453c87c732798e69e)] **deps-dev:** Bump dprint from 0.50.0 to 0.50.1 ([#213](https://github.com/flex-development/log/issues/213))
+- [[`9bd58d5`](https://github.com/flex-development/log/commit/9bd58d51a9d25e9781737ba50b13c4849a6abcd0)] **deps-dev:** bump editorconfig from 2.0.1 to 3.0.1
+- [[`fdb3746`](https://github.com/flex-development/log/commit/fdb3746dd52c456c9755440749bc326f77717f8f)] **deps-dev:** Bump eslint from 9.28.0 to 9.29.0 ([#201](https://github.com/flex-development/log/issues/201))
+- [[`e6940c0`](https://github.com/flex-development/log/commit/e6940c0e912f235539d4971e90ddc3303395d25f)] **deps-dev:** Bump eslint from 9.29.0 to 9.30.0 ([#211](https://github.com/flex-development/log/issues/211))
+- [[`5562250`](https://github.com/flex-development/log/commit/556225098de5eb015da61b28594caaeaba6d5075)] **deps-dev:** Bump eslint from 9.30.0 to 9.30.1 ([#216](https://github.com/flex-development/log/issues/216))
+- [[`9b985e8`](https://github.com/flex-development/log/commit/9b985e818b0396f37fd00972ef579ccbb1b23bdc)] **deps-dev:** Bump eslint from 9.30.1 to 9.31.0 ([#222](https://github.com/flex-development/log/issues/222))
+- [[`211a4ff`](https://github.com/flex-development/log/commit/211a4ff0b8acf768235776a119003779e2867f1b)] **deps-dev:** Bump eslint from 9.31.0 to 9.33.0 ([#233](https://github.com/flex-development/log/issues/233))
+- [[`680f26c`](https://github.com/flex-development/log/commit/680f26c851a09b76dc621604ba0ecda686c8f26c)] **deps-dev:** Bump prettier from 3.5.3 to 3.6.0 ([#205](https://github.com/flex-development/log/issues/205))
+- [[`4023670`](https://github.com/flex-development/log/commit/4023670674e3bebd4951903ada3d0e1bcc7ac314)] **deps-dev:** Bump prettier from 3.6.0 to 3.6.1 ([#209](https://github.com/flex-development/log/issues/209))
+- [[`f4b39f0`](https://github.com/flex-development/log/commit/f4b39f0c823b9892f4d57bcd7785c1884d146777)] **deps-dev:** Bump prettier from 3.6.1 to 3.6.2 ([#210](https://github.com/flex-development/log/issues/210))
+- [[`1e414cb`](https://github.com/flex-development/log/commit/1e414cbd06418bab94eb9cb8399dbe5dcba4f3f7)] **deps-dev:** Bump the vitest group with 3 updates ([#204](https://github.com/flex-development/log/issues/204))
+- [[`4b2e43f`](https://github.com/flex-development/log/commit/4b2e43f3e689ac8debbb310d70a8cfce1b276627)] **deps-dev:** bump typescript from 5.8.3 to 5.9.2
+- [[`dbf5669`](https://github.com/flex-development/log/commit/dbf5669bff1b43f85114b03a2721183945e75487)] **deps:** Bump node-inspect-extracted from 3.1.0 to 3.2.0 ([#237](https://github.com/flex-development/log/issues/237))
+
+### :robot: Continuous Integration
+
+- [[`d3a551e`](https://github.com/flex-development/log/commit/d3a551e69235127cdc7eed67108fe2cc08f5b754)] fix environment url formatting
+- [[`07d978a`](https://github.com/flex-development/log/commit/07d978abc3787b9dd9e2fc1edbd6403f77451932)] **deps:** Bump actions/cache from 4.2.3 to 4.2.4 ([#231](https://github.com/flex-development/log/issues/231))
+- [[`1ee2bd5`](https://github.com/flex-development/log/commit/1ee2bd588168ffddc3952b435a6f7c4ad01f2e7e)] **deps:** Bump actions/checkout from 4.2.2 to 5.0.0 ([#236](https://github.com/flex-development/log/issues/236))
+- [[`688c5fa`](https://github.com/flex-development/log/commit/688c5fa6cc8d34a7baab891daaafe61eca8241b2)] **deps:** Bump actions/create-github-app-token from 2.0.6 to 2.1.1 ([#235](https://github.com/flex-development/log/issues/235))
+- [[`c005157`](https://github.com/flex-development/log/commit/c005157e705b63ada98439019e1966e37d464c9e)] **deps:** Bump GitGuardian/ggshield-action from 1.40.0 to 1.41.0 ([#208](https://github.com/flex-development/log/issues/208))
+- [[`9b0fb27`](https://github.com/flex-development/log/commit/9b0fb276f9b2c24144b61ceebe1668dc815cfc41)] **deps:** Bump GitGuardian/ggshield-action from 1.41.0 to 1.42.0 ([#229](https://github.com/flex-development/log/issues/229))
+
 ## [5.0.0-alpha.3](https://github.com/flex-development/log/compare/5.0.0-alpha.2...5.0.0-alpha.3) (2025-06-10)
 
 ### :package: Build
@@ -525,6 +568,7 @@
 - [[`dca1a84`](https://github.com/flex-development/log/commit/dca1a841b524fb56568d7454886d0c656b970a5f)] change project name
 - [[`020dee5`](https://github.com/flex-development/log/commit/020dee5fdcd6af4f371fc8dd4a9bdb73a5aaff65)] **release:** update workflow
 - [[`5dcee7f`](https://github.com/flex-development/log/commit/5dcee7fd74df2b20241b088d98040fa1f67f95cf)] **scripts:** update `release` script
+
 
 
 

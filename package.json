@@ -1,7 +1,7 @@
 {
   "name": "@flex-development/log",
   "description": "Log messages in the terminal and browser",
-  "version": "5.0.0-alpha.3",
+  "version": "5.0.0-alpha.4",
   "keywords": [
     "log",
     "log-util",
