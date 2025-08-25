@@ -5,14 +5,16 @@
 
 import type { Colors } from '@flex-development/colors'
 import type {
+  Create,
   InputLogObject,
   LogFormatOptions,
   LogFunctions,
-  LoggerOptions,
   LogLevel,
   LogLevelMap,
   LogLevelOption,
   LogType,
+  WithDefaults,
+  WithTag,
   WriteStream
 } from '@flex-development/log'
 import type { Reporter } from '@flex-development/log/reporters'
@@ -65,17 +67,9 @@ interface Logger extends LogFunctions {
    * Create a new logger, inheriting options from the current instance, with
    * possible overrides.
    *
-   * > 👉 **Note**: Plain objects (i.e. `options.format`, `options.types`) are
-   * > merged recursively.
-   *
-   * @see {@linkcode LoggerOptions}
-   *
-   * @param {LoggerOptions | null | undefined} [options]
-   *  Overrides for the new logger
-   * @return {Logger}
-   *  The new logger
+   * @see {@linkcode Create}
    */
-  create(options?: LoggerOptions | null | undefined): Logger
+  create: Create
 
   /**
    * Properties to apply to all logs, regardless of log type or level.
@@ -166,31 +160,18 @@ interface Logger extends LogFunctions {
   /**
    * Create a new logger with the specified default log object properties.
    *
-   * @see {@linkcode InputLogObject}
-   *
-   * @param {InputLogObject | null | undefined} [defaults]
-   *  Default properties to include in any log reported from the new logger
-   * @return {Logger}
-   *  The new logger
+   * @see {@linkcode WithDefaults}
    */
-  withDefaults(defaults?: InputLogObject | null | undefined): Logger
+  withDefaults: WithDefaults
 
   /**
-   * Create a new logger with the specified `tag`.
+   * Create a new logger with the specified tag.
    *
    * The tag will be included in any logs sent from the new logger.
    *
-   * > 👉 **Note**: Other options (i.e. `format`, `level`) are inherited from
-   * > the current logger.
-   *
-   * @param {string} tag
-   *  The tag to include in each log reported from the new logger
-   * @param {string | null | undefined} [separator=':']
-   *  The string to used separate tags
-   * @return {Logger}
-   *  The new logger
+   * @see {@linkcode WithTag}
    */
-  withTag(tag: string, separator?: string | null | undefined): Logger
+  withTag: WithTag
 }
 
 export type { Logger as default }

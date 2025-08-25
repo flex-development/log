@@ -27,6 +27,7 @@ Log messages in the terminal and browser
   - [`Reporter`](#reporter)
 - [Types](#types)
   - [`Logger`](#logger-1)
+  - [`Create`](#create)
   - [`InputLogObject`](#inputlogobject)
   - [`Inspect`](#inspect)
   - [`InspectOptions`](#inspectoptions)
@@ -43,6 +44,8 @@ Log messages in the terminal and browser
   - [`LogTypeMap`](#logtypemap)
   - [`LoggerOptions`](#loggeroptions)
   - [`ReportersOption`](#reportersoption)
+  - [`WithDefaults`](#withdefaults)
+  - [`WithTag`](#withtag)
   - [`Write`](#write)
   - [`WriteStream`](#writestream)
 - [Contribute](#contribute)
@@ -167,6 +170,21 @@ This package is fully typed with [TypeScript][].
 
 **TODO**: `Logger`
 
+### `Create`
+
+Create a new logger, inheriting options from the current instance, with possible overrides (TypeScript interface).
+
+Plain objects (i.e. `options.format`, `options.types`) are merged recursively.
+
+#### Parameters
+
+- `options` ([`LoggerOptions`](#loggeroptions), optional)
+  — overrides for the new logger
+
+#### Returns
+
+([`Logger`](#logger-1)) The new logger.
+
 ### `InputLogObject`
 
 **TODO**: `InputLogObject`
@@ -264,6 +282,35 @@ Write data to the stream (TypeScript type).
 
 (`boolean | undefined | void`) `true` if all data was flushed successfully, `false` if all or part of the data was
 queued in user memory, or nothing.
+
+### `WithDefaults`
+
+Create a new logger with the specified default log object properties (TypeScript interface).
+
+#### Parameters
+
+- `defaults` ([`InputLogObject`](#inputlogobject), optional)
+  — default properties to apply to any log reported from the new logger
+
+#### Returns
+
+([`Logger`](#logger-1)) The new logger.
+
+### `WithTag`
+
+Create a new logger with the specified `tag` (TypeScript interface).
+
+#### Parameters
+
+- `tag` (`string`)
+  — the tag to include in each log reported from the new logger
+- `separator` (`string`, optional)
+  — the string to used separate tags
+  - default: `':'`
+
+#### Returns
+
+([`Logger`](#logger-1)) The new logger.
 
 ### `WriteStream`
 

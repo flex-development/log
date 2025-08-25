@@ -3,6 +3,7 @@
  * @module log/interfaces
  */
 
+export type { default as Create } from '#interfaces/create'
 export type { default as InputLogObject } from '#interfaces/input-log-object'
 export type { default as InspectOptions } from '#interfaces/inspect-options'
 export type {
@@ -15,4 +16,6 @@ export type { default as LogObject } from '#interfaces/log-object'
 export type { default as LogTypeMap } from '#interfaces/log-type-map'
 export type { default as Logger } from '#interfaces/logger'
 export type { default as LoggerOptions } from '#interfaces/logger-options'
+export type { default as WithDefaults } from '#interfaces/with-defaults'
+export type { default as WithTag } from '#interfaces/with-tag'
 export type { default as WriteStream } from '#interfaces/write-stream'
