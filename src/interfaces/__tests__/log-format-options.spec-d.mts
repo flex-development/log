@@ -9,7 +9,7 @@ import type { Nilable } from '@flex-development/tutils'
 
 describe('unit-d:interfaces/LogFormatOptions', () => {
   it('should extend InspectOptions', () => {
-    expectTypeOf<TestSubject>().toMatchTypeOf<InspectOptions>()
+    expectTypeOf<TestSubject>().toExtend<InspectOptions>()
   })
 
   it('should match [badge?: boolean | null | undefined]', () => {

@@ -20,7 +20,7 @@ import type { ReadonlyKeys } from '@flex-development/tutils'
 
 describe('unit-d:interfaces/Logger', () => {
   it('should extend LogFunctions', () => {
-    expectTypeOf<TestSubject>().toMatchTypeOf<LogFunctions>()
+    expectTypeOf<TestSubject>().toExtend<LogFunctions>()
   })
 
   it('should match [readonly browser: boolean]', () => {

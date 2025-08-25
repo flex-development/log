@@ -16,6 +16,7 @@ import { createColors, type Colors } from '@flex-development/colors'
 import isUnicodeSupported from '@flex-development/is-unicode-supported'
 import type {
   InputLogObject,
+  Inspect,
   Logger,
   LoggerOptions,
   LogLevel,
@@ -73,7 +74,7 @@ function createLogger(
     defaults: options.defaults ?? {},
     eol: options.eol ?? '\n',
     format: options.format ?? {},
-    inspect,
+    inspect: inspect as Inspect,
     level,
     levels: Object.freeze(logLevels),
     options,

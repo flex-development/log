@@ -13,7 +13,7 @@ import type { Nilable } from '@flex-development/tutils'
 
 describe('unit-d:interfaces/LogObject', () => {
   it('should extend InputLogObject', () => {
-    expectTypeOf<TestSubject>().toMatchTypeOf<InputLogObject>()
+    expectTypeOf<TestSubject>().toExtend<InputLogObject>()
   })
 
   it('should match [additional?: string[] | null | undefined]', () => {

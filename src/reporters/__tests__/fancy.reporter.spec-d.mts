@@ -15,7 +15,7 @@ import type {
 
 describe('unit-d:reporters/FancyReporter', () => {
   it('should extend BaseReporter', () => {
-    expectTypeOf<TestSubject>().toMatchTypeOf<BaseReporter>()
+    expectTypeOf<TestSubject>().toExtend<BaseReporter>()
   })
 
   it('should match [icons: Partial<Record<LogType, string>>]', () => {

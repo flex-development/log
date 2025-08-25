@@ -9,7 +9,7 @@ import type { InspectOptions } from 'node-inspect-extracted'
 
 describe('unit-d:interfaces/InspectOptions', () => {
   it('should extend Omit<BaseInspectOptions, "colors">', () => {
-    expectTypeOf<TestSubject>().toMatchTypeOf<Omit<InspectOptions, 'colors'>>()
+    expectTypeOf<TestSubject>().toExtend<Omit<InspectOptions, 'colors'>>()
   })
 
   it('should match [colors?: boolean | null | undefined]', () => {

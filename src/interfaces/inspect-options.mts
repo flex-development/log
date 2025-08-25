@@ -6,7 +6,7 @@
 import type * as util from 'node-inspect-extracted'
 
 /**
- * Options for using {@linkcode util.inspect} on a value.
+ * Options for inspecting a value.
  *
  * @see {@linkcode util.InspectOptions}
  *
@@ -14,7 +14,7 @@ import type * as util from 'node-inspect-extracted'
  */
 interface InspectOptions extends Omit<util.InspectOptions, 'colors'> {
   /**
-   * Use color.
+   * Whether to use color.
    *
    * @default isColorSupported()
    */

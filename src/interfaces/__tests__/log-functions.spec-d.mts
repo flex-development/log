@@ -4,34 +4,16 @@
  */
 
 import type TestSubject from '#interfaces/log-functions'
-import type { InspectOptions, LogTypeFunctions } from '@flex-development/log'
+import type { Inspect, LogTypeFunctions } from '@flex-development/log'
 
 describe('unit-d:interfaces/LogFunctions', () => {
   it('should extend LogTypeFunctions', () => {
-    expectTypeOf<TestSubject>().toMatchTypeOf<LogTypeFunctions>()
+    expectTypeOf<TestSubject>().toExtend<LogTypeFunctions>()
   })
 
-  describe('inspect', () => {
-    type Subject = TestSubject['inspect']
-
-    it('should match [this: unknown]', () => {
-      expectTypeOf<Subject>().thisParameter.toEqualTypeOf<unknown>()
-    })
-
-    describe('parameters', () => {
-      it('should be callable with [unknown, (InspectOptions | null | undefined)?]', () => {
-        // Arrange
-        type Expect = [unknown, (InspectOptions | null | undefined)?]
-
-        // Expect
-        expectTypeOf<Subject>().parameters.toEqualTypeOf<Expect>()
-      })
-    })
-
-    describe('returns', () => {
-      it('should return undefined', () => {
-        expectTypeOf<Subject>().returns.toEqualTypeOf<undefined>()
-      })
-    })
+  it('should match [inspect: Inspect]', () => {
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('inspect')
+      .toEqualTypeOf<Inspect>()
   })
 })

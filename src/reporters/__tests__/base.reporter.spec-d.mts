@@ -16,7 +16,7 @@ import type { Options as StringWidthOptions } from 'string-width'
 
 describe('unit-d:reporters/BaseReporter', () => {
   it('should extend Reporter', () => {
-    expectTypeOf<TestSubject>().toMatchTypeOf<Reporter>()
+    expectTypeOf<TestSubject>().toExtend<Reporter>()
   })
 
   describe('args', () => {

@@ -28,6 +28,7 @@ Log messages in the terminal and browser
 - [Types](#types)
   - [`Logger`](#logger-1)
   - [`InputLogObject`](#inputlogobject)
+  - [`Inspect`](#inspect)
   - [`InspectOptions`](#inspectoptions)
   - [`LogFormatOptions`](#logformatoptions)
   - [`LogFunction`](#logfunction)
@@ -42,6 +43,7 @@ Log messages in the terminal and browser
   - [`LogTypeMap`](#logtypemap)
   - [`LoggerOptions`](#loggeroptions)
   - [`ReportersOption`](#reportersoption)
+  - [`Write`](#write)
   - [`WriteStream`](#writestream)
 - [Contribute](#contribute)
 
@@ -156,9 +158,33 @@ This package is fully typed with [TypeScript][].
 
 **TODO**: `InputLogObject`
 
+### `Inspect`
+
+Use [`util.inspect`][util] on `value` and print its string representation (TypeScript type).
+
+#### Parameters
+
+- `value` (`unknown`)
+  — the thing to inspect
+- `options` ([`InspectOptions`](#inspectoptions), optional)
+  — inspection options
+
+#### Returns
+
+(`undefined`) Nothing.
+
 ### `InspectOptions`
 
-**TODO**: `InspectOptions`
+Options for inspecting a value (TypeScript interface).
+
+#### Extends
+
+- [`Omit<util.InspectOptions, 'colors'>`][util]
+
+#### Properties
+
+- `colors` (`boolean`, optional)
+  — whether to use color
 
 ### `LogFormatOptions`
 
@@ -212,6 +238,20 @@ This package is fully typed with [TypeScript][].
 
 **TODO**: `ReportersOption`
 
+### `Write`
+
+Write data to the stream (TypeScript type).
+
+#### Parameters
+
+- `buffer` (`string`)
+  — the data to write
+
+#### Returns
+
+(`boolean | undefined | void`) `true` if all data was flushed successfully, `false` if all or part of the data was
+queued in user memory, or nothing.
+
 ### `WriteStream`
 
 **TODO**: `WriteStream`
@@ -228,5 +268,7 @@ community you agree to abide by its terms.
 [esmsh]: https://esm.sh
 
 [typescript]: https://www.typescriptlang.org
+
+[util]: https://github.com/hildjj/node-inspect-extracted
 
 [yarn]: https://yarnpkg.com

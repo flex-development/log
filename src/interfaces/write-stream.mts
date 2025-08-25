@@ -3,6 +3,8 @@
  * @module log/interfaces/WriteStream
  */
 
+import type { Write } from '@flex-development/log'
+
 /**
  * Write stream API.
  */
@@ -15,15 +17,9 @@ interface WriteStream {
   /**
    * Write data to the stream.
    *
-   * @this {void}
-   *
-   * @param {string} buffer
-   *  The data to write
-   * @return {boolean | undefined | void}
-   *  `true` if all data was flushed successfully, `false` if all or part of
-   *  the data was queued in user memory, or nothing
+   * @see {@linkcode Write}
    */
-  write(this: void, buffer: string): boolean | undefined | void
+  write: Write
 }
 
 export type { WriteStream as default }
