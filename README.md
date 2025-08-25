@@ -92,6 +92,19 @@ In browsers with [`esm.sh`][esmsh]:
 </script>
 ```
 
+With [bun][]:
+
+```sh
+bun add @flex-development/log
+```
+
+<blockquote>
+  <small>
+    See <a href='https://bun.com/docs/cli/add'><code>bun add</code></a>
+    &nbsp;for more details.
+  </small>
+</blockquote>
+
 ## Use
 
 **TODO**: use
@@ -262,6 +275,8 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 This project has a [code of conduct](./CODE_OF_CONDUCT.md). By interacting with this repository, organization, or
 community you agree to abide by its terms.
+
+[bun]: https://bun.sh
 
 [esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 
