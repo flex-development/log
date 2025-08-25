@@ -6,10 +6,10 @@
 import type { LogFunction, LogType, LogTypeMap } from '@flex-development/log'
 
 /**
- * Registry of log type functions.
+ * Dictionary of log type functions.
  *
- * To register custom log functions, augment {@linkcode LogTypeMap}. They will
- * be added to this union automatically.
+ * To register custom log type functions, augment {@linkcode LogTypeMap}. They
+ * will be added to this union automatically.
  *
  * @see {@linkcode LogFunction}
  * @see {@linkcode LogType}

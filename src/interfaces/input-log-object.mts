@@ -15,9 +15,9 @@ import type {
  */
 interface InputLogObject {
   /**
-   * Additional lines to be logged with the message.
+   * An additional line, or list of lines, to be logged with the message.
    */
-  additional?: string[] | string | null | undefined
+  additional?: string | string[] | null | undefined
 
   /**
    * Format arguments.
@@ -58,8 +58,8 @@ interface InputLogObject {
   /**
    * Log message.
    *
-   * > 👉 **Note**: If present, this will be inserted into {@linkcode args} as
-   * > the first format argument.
+   * > 👉 **Note**: Inserted into {@linkcode args} as the first format argument
+   * > if defined.
    */
   message?: unknown
 

@@ -14,12 +14,12 @@ import type { InspectOptions } from '@flex-development/log'
  */
 interface LogFormatOptions extends InspectOptions {
   /**
-   * Display log type as badge?
+   * Whether to display the log type as a badge.
    */
   badge?: boolean | null | undefined
 
   /**
-   * Maximum number of columns to output.
+   * The maximum number of columns to output.
    */
   columns?: number | null | undefined
 
@@ -29,7 +29,7 @@ interface LogFormatOptions extends InspectOptions {
   date?: boolean | null | undefined
 
   /**
-   * Display icon?
+   * Whether to display the icon associated with the log.
    */
   icon?: boolean | null | undefined
 }

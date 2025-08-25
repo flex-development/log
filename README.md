@@ -168,7 +168,55 @@ This package is fully typed with [TypeScript][].
 
 ### `Logger`
 
-**TODO**: `Logger`
+Logger API (TypeScript interface).
+
+#### Extends
+
+- [`LogFunctions`](#logfunctions)
+
+#### Properties
+
+- `browser` (`boolean`, `readonly`)
+  — whether the logger is operating in a browser environment
+- `get color(): boolean`
+  — whether color logs are enabled
+- `set color(color: boolean | null | undefined)`
+  — enable or disable color log. color will be disabled if not supported
+  - `color` (`boolean | null | undefined`)
+    — color logs enabled?
+- `get colors():` [`Colors`][colors-color]
+  — get a colorizer based on the current `color` configuration
+- `create` ([`Create`](#create))
+  — create a new logger, inheriting options from the current instance, with possible overrides
+- `defaults` ([`InputLogObject`](#inputlogobject))
+  — properties to apply to all logs, regardless of log type or level
+- `eol` (`string`)
+  — the character, or characters, used to signify the end of a line
+- `format` ([`LogFormatOptions`](#logformatoptions))
+  — formatting options
+- `get level():` [`LogLevel`](#loglevel)
+  — get the current log level
+- `set level(level: LogLevelOption | null | undefined)`
+  — set the maximum log level to output
+  - `level` ([`LogLevelOption`](#logleveloption) | `null` | `undefined`)
+    — maximum log level (inclusive)
+- `levels` ([`Readonly<LogLevelMap>`](#loglevelmap), `readonly`)
+  — log level map
+- `reporters` ([`Set<Reporter>`](#reporter), `readonly`)
+  — list of reporter instances used to handle and output log messages
+- `stderr` ([`WriteStream`](#writestream))
+  — the writeable stream for standard error output
+- `stdout` ([`WriteStream`](#writestream))
+  — the writeable stream for standard output
+- `types` (`Record<LogType, InputLogObject>`)
+  — record, where each key is a [`LogType`](#logtype) and each value is an [`InputLogObject`](#inputlogobject) defining
+  the configuration for the log type
+- `unicode` (`boolean`)
+  — whether unicode is supported
+- `withDefaults` ([`WithDefaults`](#withdefaults))
+  — create a new logger with the specified default log object properties
+- `withTag` ([`WithTag`](#withtag))
+  — create a new logger with the specified tag. the tag will be included in any logs sent from the new logger
 
 ### `Create`
 
@@ -187,7 +235,32 @@ Plain objects (i.e. `options.format`, `options.types`) are merged recursively.
 
 ### `InputLogObject`
 
-**TODO**: `InputLogObject`
+Input log data object (TypeScript interface).
+
+#### Properties
+
+- `additional?` (`string | string[]`, optional)
+  — an additional line, or list of lines, to be logged with the message
+- `args?` (`unknown[]`, optional)
+  — format arguments
+- `color?` ([`Color`][colors-color], optional)
+  — color associated with the log
+- `date?` (`Date`, optional)
+  — timestamp
+- `format?` ([`LogFormatOptions`](#logformatoptions), optional)
+  — format options
+- `icon?` (`string`, optional)
+  — icon to display
+- `level?` ([`LogLevelOption`](#logleveloption), optional)
+  — log level
+- `message?` (`unknown`, optional)
+  — log message; inserted into `args` as the first format argument if defined
+- `stack?` (`string`, optional)
+  — stack trace
+- `tag?` (`string`, optional)
+  — a string to categorize or identify the log
+- `type?` ([`LogType`](#logtype), optional)
+  — log type
 
 ### `Inspect`
 
@@ -219,55 +292,204 @@ Options for inspecting a value (TypeScript interface).
 
 ### `LogFormatOptions`
 
-**TODO**: `LogFormatOptions`
+Log formatting options (TypeScript interface).
+
+#### Extends
+
+- [`InspectOptions`](#inspectoptions)
+
+#### Properties
+
+- `badge` (`boolean`, optional)
+  — whether to display the log type as a badge
+- `columns` (`number`, optional)
+  — the maximum number of columns to output
+- `date` (`boolean`, optional)
+  — whether to include timestamp information in log messages
+- `icon` (`boolean`, optional)
+  — whether to display the icon associated with the log
 
 ### `LogFunction`
 
-**TODO**: `LogFunction`
+Send a message to all reporter instances (TypeScript interface).
+
+#### Overloads
+
+- `(message: InputLogObject | string, ...args: unknown[]) => undefined | void`
+- `(message: unknown, ...args: unknown[]) => undefined | void`
+
+#### Parameters
+
+- `message` ([`InputLogObject`](#inputlogobject) | `unknown`)
+  — the message to write
+- `...args` (`unknown[]`, optional)
+  — message arguments
+
+#### Returns
+
+(`undefined | void`) Nothing.
 
 ### `LogFunctions`
 
-**TODO**: `LogFunctions`
+Log formatting options (TypeScript interface).
+
+#### Extends
+
+- [`LogTypeFunctions`](#logtypefunctions)
+
+#### Properties
+
+- `inspect` ([`Inspect`](#inspect))
+  — use [`util.inspect`][util] on a value and print its string representation
 
 ### `LogLevel`
 
-**TODO**: `LogLevel`
+Union of log levels (TypeScript type).
+
+To register custom log levels, augment [`LogLevelMap`](#loglevelmap).
+They will be added to the union automatically.
+
+```ts
+type LogLevel = LogLevelMap[keyof LogLevelMap]
+```
 
 ### `LogLevelMap`
 
-**TODO**: `LogLevelMap`
+Registry of log levels (TypeScript interface).
+
+```ts
+interface LogLevelMap {/* see code */}
+```
+
+When developing extensions that use additional levels, augment `LogLevelMap` to register custom log levels:
+
+```ts
+declare module '@flex-development/log' {
+  interface LogLevelMap {
+    box: 3
+  }
+}
+```
 
 ### `LogLevelOption`
 
-**TODO**: `LogLevelOption`
+Union of log level options (TypeScript type).
+
+```ts
+type LogLevelOption = LogLevel | LogLevelType
+```
 
 ### `LogLevelType`
 
-**TODO**: `LogLevelType`
+Union of log level types (TypeScript type).
+
+To register custom log level types, augment [`LogLevelMap`](#loglevelmap).
+They will be added to the union automatically.
+
+```ts
+type LogLevelType = Extract<keyof LogLevelMap, string>
+```
 
 ### `LogObject`
 
-**TODO**: `LogObject`
+Log data object (TypeScript interface).
+
+#### Extends
+
+- [`InputLogObject`](#inputlogobject)
+
+#### Properties
+
+- `additional?` (`string[]`, optional)
+  — additional lines to be logged with the message
+- `args` (`unknown[]`)
+  — format arguments
+- `date` (`Date`)
+  — timestamp
+- `level` ([`LogLevel`](#loglevel))
+  — log level
+- `message` (`null | undefined`, optional)
+  — log message
+- `type` ([`LogType`](#logtype))
+  — log type
 
 ### `LogType`
 
-**TODO**: `LogType`
+Union of log types (TypeScript type).
+
+To register custom log types, augment [`LogTypeMap`](#logtypemap).
+They will be added to the union automatically.
+
+```ts
+type LogType = LogTypeMap[keyof LogTypeMap]
+```
 
 ### `LogTypeFunctions`
 
-**TODO**: `LogTypeFunctions`
+Dictionary of log type functions (TypeScript type).
+
+To register custom log type functions, augment [`LogTypeMap`](#logtypemap).
+They will be added to the union automatically.
+
+```ts
+type LogTypeFunctions = { [T in LogType]: LogFunction }
+```
 
 ### `LogTypeMap`
 
-**TODO**: `LogTypeMap`
+Registry of log types (TypeScript interface).
+
+```ts
+interface LogTypeMap {/* see code */}
+```
+
+When developing extensions that use additional types, augment `LogTypeMap` to register custom log types:
+
+```ts
+declare module '@flex-development/log' {
+  interface LogTypeMap {
+    box: 'box'
+  }
+}
+```
 
 ### `LoggerOptions`
 
-**TODO**: `LoggerOptions`
+Logger configuration options (TypeScript interface).
+
+#### Properties
+
+- `defaults?` ([`InputLogObject`](#inputlogobject), optional)
+  — properties to apply to all logs, regardless of log type or level.
+  defaults can be overridden per log type using `types`
+- `eol?` (`string`, optional)
+  — the character, or characters, used to signify the end of a line
+- `color?` ([`Color`][colors-color])
+  — color associated with the log
+- `format?` ([`LogFormatOptions`](#logformatoptions), optional)
+  — formatting options
+- `level?` ([`LogLevelOption`](#logleveloption), optional)
+  — the maximum log level to output
+- `reporters?` ([`ReportersOption`](#reportersoption), optional)
+  — reporter instances used to handle and output log messages
+- `stderr?` ([`WriteStream`](#writestream), optional)
+  — the writeable stream for standard error output
+- `stdout?` ([`WriteStream`](#writestream), optional)
+  — the writeable stream for standard output
+- `types?` (`Partial<Record<LogType, InputLogObject>>`, optional)
+  — record, where each key is a [`LogType`](#logtype) and each value is an [`InputLogObject`](#inputlogobject) defining
+  the configuration for the log type
 
 ### `ReportersOption`
 
-**TODO**: `ReportersOption`
+Union of values used to configure reporters (TypeScript type).
+
+```ts
+type ReportersOption =
+  | Reporter
+  | Set<Reporter | false | null | undefined>
+  | readonly (Reporter | false | null | undefined)[]
+```
 
 ### `Write`
 
@@ -314,7 +536,14 @@ Create a new logger with the specified `tag` (TypeScript interface).
 
 ### `WriteStream`
 
-**TODO**: `WriteStream`
+Write stream API (TypeScript interface).
+
+#### Properties
+
+- `columns` (`number`, optional)
+  — number of columns the tty currently has
+- `write` ([`Write`](#write))
+  — write data to the stream
 
 ## Contribute
 
@@ -324,6 +553,8 @@ This project has a [code of conduct](./CODE_OF_CONDUCT.md). By interacting with 
 community you agree to abide by its terms.
 
 [bun]: https://bun.sh
+
+[colors-color]: https://github.com/flex-development/colors#color
 
 [esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 

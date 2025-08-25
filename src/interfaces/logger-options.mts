@@ -26,7 +26,7 @@ interface LoggerOptions {
   defaults?: InputLogObject | null | undefined
 
   /**
-   * New line character(s).
+   * The character, or characters, used to signify the end of a line.
    *
    * @default '\n'
    */
@@ -48,7 +48,7 @@ interface LoggerOptions {
   format?: LogFormatOptions | null | undefined
 
   /**
-   * The minimum log level to output.
+   * The maximum log level to output.
    *
    * > 👉 **Note**: Log types will be converted to log levels.
    *

@@ -43,10 +43,8 @@ interface Logger extends LogFunctions {
   get color(): boolean
 
   /**
-   * Enable or disable color logs.
-   *
-   * > 👉 **Note**: Even if color logs are enabled, they will be disabled if
-   * > color is not supported.
+   * Enable or disable color logs (color will be disabled if not supported, even
+   * if enabled).
    *
    * @param {boolean | null | undefined} color
    *  Color logs enabled?
@@ -81,7 +79,7 @@ interface Logger extends LogFunctions {
   defaults: InputLogObject
 
   /**
-   * New line character(s).
+   * The character, or characters, used to signify the end of a line.
    */
   eol: string
 
@@ -145,7 +143,8 @@ interface Logger extends LogFunctions {
   stdout: WriteStream
 
   /**
-   * Map defining the log configuration for each log type.
+   * Record, where each key is a log type and each value is an input log object
+   * defining the log configuration for the log type.
    *
    * @see {@linkcode InputLogObject}
    * @see {@linkcode LogType}
