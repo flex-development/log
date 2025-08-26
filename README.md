@@ -22,9 +22,9 @@ Log messages in the terminal and browser
   - [`logger`](#logger)
   - [`createLogger`](#createloggeroptions)
   - [`logLevels`](#loglevels)
+  - [`Reporter`](#reporter)
   - [`BaseReporter`](#basereporter)
   - [`FancyReporter`](#fancyreporter)
-  - [`Reporter`](#reporter)
 - [Types](#types)
   - [`Logger`](#logger-1)
   - [`Create`](#create)
@@ -103,8 +103,7 @@ bun add @flex-development/log
 
 <blockquote>
   <small>
-    See <a href='https://bun.com/docs/cli/add'><code>bun add</code></a>
-    &nbsp;for more details.
+    See <a href='https://bun.com/docs/cli/add'><code>bun add</code></a> for more details.
   </small>
 </blockquote>
 
@@ -119,13 +118,11 @@ This package exports the following identifiers:
 - [`logger`](#logger)
 - [`createLogger`](#createloggeroptions)
 - [`logLevels`](#loglevels)
+- [`Reporter`](#reporter)
 - [`BaseReporter`](#basereporter)
 - [`FancyReporter`](#fancyreporter)
-- [`Reporter`](#reporter)
 
 The default export is `logger`.
-
-> 👉 **Note**: See the source code for the most up-to-date documentation.
 
 ### `logger`
 
@@ -138,8 +135,8 @@ Create a new logger.
 
 #### Parameters
 
-- `options` ([`LogLevelOption`](#logleveloption) | [`LoggerOptions`](#loggeroptions), optional) —
-  Log level or configuration options
+- `options` ([`LogLevelOption`](#logleveloption) | [`LoggerOptions`](#loggeroptions), optional)
+  — Log level or configuration options
 
 #### Returns
 
@@ -152,15 +149,56 @@ and each value is a [log level](#loglevel).
 
 ### `Reporter`
 
-**TODO**: `Reporter`
+Log reporter (`abstract class`).
+
+#### Properties
+
+- `logger` ([`Logger`](#logger-1))
+  — the logger `this` reporter writes to
+
+#### Methods
+
+##### `init(logger)`
+
+Initialize the reporter.
+
+###### Parameters
+
+- `logger` ([`Logger`](#logger-1))
+  — the logger `this` reporter writes to
+
+###### Returns
+
+(`this`) `this` reporter
+
+##### `abstract report(info)`
+
+Define how a log message is processed and displayed by `this` reporter.
+
+###### Parameters
+
+- `info` ([`LogObject`](#logobject))
+  — the log information to process
+
+###### Returns
+
+(`undefined | void`) Nothing.
 
 ### `BaseReporter`
 
-**TODO**: `BaseReporter`
+Log reporter with basic utilities (`abstract class`).
+
+#### Extends
+
+- [`Reporter`](#reporter)
 
 ### `FancyReporter`
 
-**TODO**: `FancyReporter`
+Fancy log reporter (`class`).
+
+#### Extends
+
+- [`BaseReporter`](#basereporter)
 
 ## Types
 
@@ -300,13 +338,13 @@ Log formatting options (TypeScript interface).
 
 #### Properties
 
-- `badge` (`boolean`, optional)
+- `badge?` (`boolean`, optional)
   — whether to display the log type as a badge
-- `columns` (`number`, optional)
+- `columns?` (`number`, optional)
   — the maximum number of columns to output
-- `date` (`boolean`, optional)
+- `date?` (`boolean`, optional)
   — whether to include timestamp information in log messages
-- `icon` (`boolean`, optional)
+- `icon?` (`boolean`, optional)
   — whether to display the icon associated with the log
 
 ### `LogFunction`
@@ -408,7 +446,7 @@ Log data object (TypeScript interface).
   — timestamp
 - `level` ([`LogLevel`](#loglevel))
   — log level
-- `message` (`null | undefined`, optional)
+- `message?` (`null | undefined`, optional)
   — log message
 - `type` ([`LogType`](#logtype))
   — log type
@@ -540,7 +578,7 @@ Write stream API (TypeScript interface).
 
 #### Properties
 
-- `columns` (`number`, optional)
+- `columns?` (`number`, optional)
   — number of columns the tty currently has
 - `write` ([`Write`](#write))
   — write data to the stream

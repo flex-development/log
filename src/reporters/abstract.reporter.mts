@@ -13,7 +13,7 @@ import type {
 } from '@flex-development/log'
 
 /**
- * Log reporter API.
+ * Abstract log reporter.
  *
  * @category
  *  reporters

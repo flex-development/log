@@ -23,7 +23,7 @@ import {
 import stringWidth, { type Options as StringWidthOptions } from 'string-width'
 
 /**
- * Log reporter API with basic utilities.
+ * Abstract log reporter with basic utilities.
  *
  * @category
  *  reporters
