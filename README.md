@@ -109,7 +109,19 @@ bun add @flex-development/log
 
 ## Use
 
-**TODO**: use
+```js
+import { logger } from '@flex-development/log'
+
+logger.info('Using @flex-development/log 5.0.0')
+logger.start('Building project...')
+logger.warn('A new version of @flex-development/log is available: 5.0.1')
+logger.success('Project built!')
+logger.fail(new Error('This is an example error. Everything is fine!'))
+```
+
+Will display in the terminal:
+
+![preview](./preview.png)
 
 ## API
 
