@@ -21,6 +21,7 @@
 # - https://github.com/actions/upload-artifact
 # - https://github.com/andstor/file-existence-action
 # - https://github.com/codecov/codecov-action
+# - https://github.com/codecov/test-results-action
 # - https://github.com/flex-development/grease
 # - https://github.com/hmarr/debug-action
 # - https://yarnpkg.com/cli/pack
@@ -327,13 +328,29 @@ jobs:
         with:
           name: ${{ format('coverage-node{0}-{1}.json', matrix.node-version, env.SHA) }}
           path: ${{ env.COVERAGE_SUMMARY }}
-      - id: codecov
+      - id: codecov-coverage
         name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v5.5.0
         with:
           env_vars: GITHUB_JOB,GITHUB_REF_TYPE
           fail_ci_if_error: true
           files: ./coverage/lcov.info
+          flags: ${{ format('node{0}', matrix.node-version) }}
+          name: ${{ format('node{0}-{1}', matrix.node-version, env.SHA) }}
+          override_branch: ${{ env.REF }}
+          override_build: ${{ github.run_id }}
+          override_commit: ${{ env.SHA }}
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
+          working-directory: ${{ github.workspace }}
+      - id: codecov-results
+        if: ${{ !cancelled() }}
+        name: Upload test results to Codecov
+        uses: codecov/test-results-action@v1.1.1
+        with:
+          env_vars: GITHUB_JOB,GITHUB_REF_TYPE
+          fail_ci_if_error: true
+          files: ./__tests__/reports/junit.xml
           flags: ${{ format('node{0}', matrix.node-version) }}
           name: ${{ format('node{0}-{1}', matrix.node-version, env.SHA) }}
           override_branch: ${{ env.REF }}
