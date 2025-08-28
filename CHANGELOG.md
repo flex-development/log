@@ -1,3 +1,37 @@
+## [5.0.0-alpha.5](https://github.com/flex-development/log/compare/5.0.0-alpha.4...5.0.0-alpha.5) (2025-08-28)
+
+### :package: Build
+
+- [[`5e6f412`](https://github.com/flex-development/log/commit/5e6f412e8685015e38b44b3299ed74da170acd1a)] **deps-dev:** Bump @types/node from 24.2.1 to 24.3.0 ([#240](https://github.com/flex-development/log/issues/240))
+- [[`ab116cf`](https://github.com/flex-development/log/commit/ab116cf5da114dd7ecf498d68e7f9563e067982d)] **deps-dev:** Bump eslint from 9.33.0 to 9.34.0 ([#243](https://github.com/flex-development/log/issues/243))
+- [[`1a76d90`](https://github.com/flex-development/log/commit/1a76d9019a11e973a875deb2366724da162ec731)] **deps:** bump string-width from 7.2.0 to 8.0.0
+
+### :robot: Continuous Integration
+
+- [[`1f3c60d`](https://github.com/flex-development/log/commit/1f3c60df50b6c5f5ede643ff32bda1cc1311b930)] **deps:** Bump codecov/codecov-action from 5.4.3 to 5.5.0 ([#241](https://github.com/flex-development/log/issues/241))
+- [[`c447c77`](https://github.com/flex-development/log/commit/c447c77018e3241001942d41074b1302ea633e21)] **deps:** Bump GitGuardian/ggshield-action from 1.42.0 to 1.43.0 ([#244](https://github.com/flex-development/log/issues/244))
+- [[`68027e1`](https://github.com/flex-development/log/commit/68027e1165738bff9ae19c47d0fc3db9d3122bcf)] **workflows:** [`ci`] run gitguardian scan immediately after preflight
+- [[`0e555a9`](https://github.com/flex-development/log/commit/0e555a9ab42f92399780533ac7106802186dfae3)] **workflows:** [`publish`] fix environment urls
+- [[`9ff4c46`](https://github.com/flex-development/log/commit/9ff4c465777bf394c74beff90f041914454e12d2)] **workflows:** [`release`] fix environment url
+- [[`ae118fc`](https://github.com/flex-development/log/commit/ae118fc6d34586e790b37e5e0f06122b2d22f27e)] **workflows:** remove `label-linked-issues`
+
+### :pencil: Documentation
+
+- [[`f84d3f1`](https://github.com/flex-development/log/commit/f84d3f1fef309b373e59600e5b10d0eecc683f83)] `bun add`
+- [[`25306cd`](https://github.com/flex-development/log/commit/25306cd8ad5370b49248fa12df8b36d9febefd07)] reporters
+- [[`7068bc4`](https://github.com/flex-development/log/commit/7068bc4f821bba037e92f0e38967372003425f7a)] types api
+- [[`e1dd3be`](https://github.com/flex-development/log/commit/e1dd3be6258c0ac18e236fb7d859dfc77c186dec)] use
+
+### :sparkles: Features
+
+- [[`aa7fe45`](https://github.com/flex-development/log/commit/aa7fe4592b8344c589eaa862f39359d65b7de898)] **types:** `Create`, `WithDefaults`, `WithTag`
+- [[`db549f9`](https://github.com/flex-development/log/commit/db549f99a1b4f69602464ffa6002964ee9ee5bdc)] **types:** `Inspect`, `Write`
+
+### :house_with_garden: Housekeeping
+
+- [[`68c1655`](https://github.com/flex-development/log/commit/68c1655b0a2f82c92fc16309bf8fb6e608ad697c)] **tests:** fix codecov config
+- [[`606e66b`](https://github.com/flex-development/log/commit/606e66ba769cfba4beafa3204be4189008d18072)] **tests:** upload test results to codecov
+
 ## [5.0.0-alpha.4](https://github.com/flex-development/log/compare/5.0.0-alpha.3...5.0.0-alpha.4) (2025-08-13)
 
 ### :package: Build
@@ -568,6 +602,7 @@
 - [[`dca1a84`](https://github.com/flex-development/log/commit/dca1a841b524fb56568d7454886d0c656b970a5f)] change project name
 - [[`020dee5`](https://github.com/flex-development/log/commit/020dee5fdcd6af4f371fc8dd4a9bdb73a5aaff65)] **release:** update workflow
 - [[`5dcee7f`](https://github.com/flex-development/log/commit/5dcee7fd74df2b20241b088d98040fa1f67f95cf)] **scripts:** update `release` script
+
 
 
 
