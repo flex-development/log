@@ -37,16 +37,16 @@ exports[`functional:reporters/FancyReporter > should write to \`logger.stderr\` 
 exports[`functional:reporters/FancyReporter > should write to \`logger.stderr\` (2) 1`] = `
 "[31m✖[39m This is an example error. Everything is fine!
 
-   [90mat[39m [36m__fixtures__/error.mts:21:22[39m
-   [90mat[39m VitestExecutor.runModule ([36mnode_modules/vite-node/dist/client.mjs:399:5[39m)
-   [90mat[39m VitestExecutor.directRequest ([36mnode_modules/vite-node/dist/client.mjs:381:5[39m)
-   [90mat[39m VitestExecutor.cachedRequest ([36mnode_modules/vite-node/dist/client.mjs:206:14[39m)
-   [90mat[39m VitestExecutor.dependencyRequest ([36mnode_modules/vite-node/dist/client.mjs:259:12[39m)
-   [90mat[39m [36msrc/reporters/__tests__/fancy.reporter.functional.spec.mts:9:1[39m
-   [90mat[39m VitestExecutor.runModule ([36mnode_modules/vite-node/dist/client.mjs:399:5[39m)
-   [90mat[39m VitestExecutor.directRequest ([36mnode_modules/vite-node/dist/client.mjs:381:5[39m)
-   [90mat[39m VitestExecutor.cachedRequest ([36mnode_modules/vite-node/dist/client.mjs:206:14[39m)
-   [90mat[39m VitestExecutor.executeId ([36mnode_modules/vite-node/dist/client.mjs:173:12[39m)
+  [90mat[39m [36m__fixtures__/error.mts:21:22[39m
+  [90mat[39m VitestExecutor.runModule ([36mnode_modules/vite-node/dist/client.mjs:399:5[39m)
+  [90mat[39m VitestExecutor.directRequest ([36mnode_modules/vite-node/dist/client.mjs:381:5[39m)
+  [90mat[39m VitestExecutor.cachedRequest ([36mnode_modules/vite-node/dist/client.mjs:206:14[39m)
+  [90mat[39m VitestExecutor.dependencyRequest ([36mnode_modules/vite-node/dist/client.mjs:259:12[39m)
+  [90mat[39m [36msrc/reporters/__tests__/fancy.reporter.functional.spec.mts:9:1[39m
+  [90mat[39m VitestExecutor.runModule ([36mnode_modules/vite-node/dist/client.mjs:399:5[39m)
+  [90mat[39m VitestExecutor.directRequest ([36mnode_modules/vite-node/dist/client.mjs:381:5[39m)
+  [90mat[39m VitestExecutor.cachedRequest ([36mnode_modules/vite-node/dist/client.mjs:206:14[39m)
+  [90mat[39m VitestExecutor.executeId ([36mnode_modules/vite-node/dist/client.mjs:173:12[39m)
 
 "
 `;
