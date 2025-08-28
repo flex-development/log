@@ -54,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       cache-key: ${{ steps.cache-key.outputs.result }}
-      version: ${{ steps.version.outputs.result }}
+      version: ${{ steps.build-version.outputs.result }}
     steps:
       - id: debug
         name: Print environment variables and event payload
@@ -86,15 +86,37 @@ jobs:
         with:
           key: ${{ steps.cache-key.outputs.result }}
           path: ${{ env.CACHE_PATH }}
-      - id: version-manifest
+      - id: manifest-version
         name: Get manifest version
         run: echo "result=$(jq .version package.json -r)" >>$GITHUB_OUTPUT
-      - id: version
+      - id: build-version
         name: Get build version
         run: |
-          echo "result=${{ startsWith(github.head_ref || github.ref_name, 'release/') && steps.version-manifest.outputs.result || format('{0}+{1}', steps.version-manifest.outputs.result, github.event.pull_request.head.sha || github.sha) }}" >>$GITHUB_OUTPUT
-  commitlint:
+          echo "result=${{ startsWith(github.head_ref || github.ref_name, 'release/') && steps.manifest-version.outputs.result || format('{0}+{1}', steps.manifest-version.outputs.result, github.event.pull_request.head.sha || github.sha) }}" >>$GITHUB_OUTPUT
+  gitguardian:
     needs: preflight
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v5.0.0
+        with:
+          fetch-depth: 0
+      - id: scan
+        name: Scan commits with ggshield
+        uses: GitGuardian/ggshield-action@v1.42.0
+        env:
+          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+          GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          GITHUB_PULL_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
+          GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
+        with:
+          args: --all-policies --format sarif --show-secrets --with-incident-details --verbose
+  commitlint:
+    needs:
+      - gitguardian
+      - preflight
     runs-on: ubuntu-latest
     steps:
       - id: checkout
@@ -121,26 +143,6 @@ jobs:
         name: Check commitlint status
         if: github.run_number != '1'
         run: yarn commitlint --from $SHA~${{ github.event.pull_request.commits || 1 }} --to $SHA
-  gitguardian:
-    needs: commitlint
-    runs-on: ubuntu-latest
-    steps:
-      - id: checkout
-        name: Checkout
-        uses: actions/checkout@v5.0.0
-        with:
-          fetch-depth: 0
-      - id: scan
-        name: Scan commits with ggshield
-        uses: GitGuardian/ggshield-action@v1.42.0
-        env:
-          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
-          GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-          GITHUB_PULL_BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
-          GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
-        with:
-          args: --all-policies --format sarif --show-secrets --with-incident-details --verbose
   format:
     needs:
       - commitlint
