@@ -1,3 +1,9 @@
+## [5.0.0-alpha.7](https://github.com/flex-development/log/compare/5.0.0-alpha.6...5.0.0-alpha.7) (2025-08-30)
+
+### :robot: Continuous Integration
+
+- [[`53da1b3`](https://github.com/flex-development/log/commit/53da1b34a992cff66ade884ccb3a742254a32c23)] **workflows:** [`publish`] fix environment urls
+
 ## [5.0.0-alpha.6](https://github.com/flex-development/log/compare/5.0.0-alpha.5...5.0.0-alpha.6) (2025-08-30)
 
 ### :robot: Continuous Integration
@@ -608,6 +614,7 @@
 - [[`dca1a84`](https://github.com/flex-development/log/commit/dca1a841b524fb56568d7454886d0c656b970a5f)] change project name
 - [[`020dee5`](https://github.com/flex-development/log/commit/020dee5fdcd6af4f371fc8dd4a9bdb73a5aaff65)] **release:** update workflow
 - [[`5dcee7f`](https://github.com/flex-development/log/commit/5dcee7fd74df2b20241b088d98040fa1f67f95cf)] **scripts:** update `release` script
+
 
 
 
