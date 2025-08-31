@@ -22,6 +22,7 @@
 # - https://github.com/andstor/file-existence-action
 # - https://github.com/codecov/codecov-action
 # - https://github.com/codecov/test-results-action
+# - https://github.com/dprint/check
 # - https://github.com/flex-development/grease
 # - https://github.com/hmarr/debug-action
 # - https://github.com/streetsidesoftware/cspell-action
@@ -171,9 +172,16 @@ jobs:
         with:
           key: ${{ needs.preflight.outputs.cache-key }}
           path: ${{ env.CACHE_PATH }}
-      - id: format
-        name: Check code formatting
-        run: yarn check:format
+      - id: version
+        name: Get dprint version
+        run: echo "result=$(jq .devDependencies.dprint package.json -r)" >>$GITHUB_OUTPUT
+      - id: check
+        name: Check formatting
+        uses: dprint/check@v2.3
+        with:
+          args: --config-discovery=false --incremental=false --log-level=info
+          config-path: .dprint.jsonc
+          dprint-version: ${{ steps.version.outputs.result }}
   lint:
     needs:
       - commitlint
