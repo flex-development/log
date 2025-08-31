@@ -24,6 +24,7 @@
 # - https://github.com/codecov/test-results-action
 # - https://github.com/flex-development/grease
 # - https://github.com/hmarr/debug-action
+# - https://github.com/streetsidesoftware/cspell-action
 # - https://yarnpkg.com/cli/pack
 
 ---
@@ -215,22 +216,14 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ env.REF }}
-      - id: node
-        name: Setup Node.js
-        uses: actions/setup-node@v4.4.0
-        with:
-          cache: yarn
-          cache-dependency-path: yarn.lock
-          node-version-file: .nvmrc
-      - id: cache
-        name: Restore dependencies cache
-        uses: actions/cache@v4.2.4
-        with:
-          key: ${{ needs.preflight.outputs.cache-key }}
-          path: ${{ env.CACHE_PATH }}
       - id: spelling
         name: Check spelling
-        run: yarn check:spelling
+        uses: streetsidesoftware/cspell-action@v7.2.0
+        with:
+          config: .cspell.json
+          inline: error
+          treat_flagged_words_as_errors: true
+          verbose: true
   typescript:
     needs:
       - commitlint
