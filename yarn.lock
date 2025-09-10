@@ -1693,7 +1693,7 @@ __metadata:
     happy-dom: "npm:18.0.1"
     husky: "npm:9.1.7"
     is-ci: "npm:4.1.0"
-    node-inspect-extracted: "npm:3.2.0"
+    node-inspect-extracted: "npm:3.2.1"
     node-notifier: "npm:10.0.1"
     prettier: "npm:3.6.2"
     remark: "npm:15.0.1"
@@ -8163,10 +8163,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-inspect-extracted@npm:3.2.0":
-  version: 3.2.0
-  resolution: "node-inspect-extracted@npm:3.2.0"
-  checksum: 10/7ac450f45805f2ea50c2f1bca6ca0e79b0f06550ebf92ad642886851703687abd00816d90c1f7b8cc4e7c3ad2ffcb96832cb9b23cc0c0fb843a1d983fb4456d1
+"node-inspect-extracted@npm:3.2.1":
+  version: 3.2.1
+  resolution: "node-inspect-extracted@npm:3.2.1"
+  checksum: 10/ea718fceb8edc26e6d81681b46d130ebc2f0f91a9ca3d3ba0a79c577722fd476baa3845266e4155ef860920cddf59ae30afeb10edffe3fa3a51f863b3f043aa5
   languageName: node
   linkType: hard
 
