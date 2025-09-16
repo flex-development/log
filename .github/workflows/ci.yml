@@ -82,7 +82,7 @@ jobs:
         run: yarn
       - id: cache-key
         name: Get cache key
-        run: echo "result=${{ runner.os }}-${{ github.run_id }}" >>$GITHUB_OUTPUT
+        run: echo "result=${{ hashFiles('yarn.lock') }}" >>$GITHUB_OUTPUT
       - id: cache
         name: Cache dependencies
         uses: actions/cache@v4.2.4
