@@ -65,7 +65,7 @@ jobs:
           ref: ${{ env.REF }}
       - id: version
         name: Get release version
-        uses: flex-development/manver-action@329bfb0c23699727a36af1d41aee2abd0d188dda
+        uses: flex-development/manver-action@5d40045601ed3d31a45899ef5b0acd1b4d517434
       - id: tag-prefix
         name: Get release tag prefix
         run: echo "result=$(jq .tagprefix grease.config.json -r)" >>$GITHUB_OUTPUT
