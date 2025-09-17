@@ -17,6 +17,7 @@
 # - https://github.com/actions/setup-node
 # - https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#yarn2-configuration
 # - https://github.com/hmarr/debug-action
+# - https://github.com/flex-development/manver-action
 
 ---
 name: publish
@@ -54,16 +55,16 @@ jobs:
           ref: ${{ github.ref }}
       - id: version
         name: Get package version
-        run: echo "result=$(jq .version package.json -r)" >>$GITHUB_OUTPUT
+        uses: flex-development/manver-action@329bfb0c23699727a36af1d41aee2abd0d188dda
       - id: artifact
         name: Get release artifact download url
         run: |
-          echo "result=${{ github.event_name == 'release' && github.event.release.assets[0].browser_download_url || format('{0}/{1}/releases/download/{2}/%40{3}-{4}-{5}.tgz', github.server_url, github.repository, inputs.tag || github.ref_name, github.repository_owner, github.event.repository.name, steps.version.outputs.result) }}" >>$GITHUB_OUTPUT
+          echo "result=${{ github.event_name == 'release' && github.event.release.assets[0].browser_download_url || format('{0}/{1}/releases/download/{2}/%40{3}-{4}-{5}.tgz', github.server_url, github.repository, inputs.tag || github.ref_name, github.repository_owner, github.event.repository.name, steps.version.outputs.manifest) }}" >>$GITHUB_OUTPUT
       - id: dist-tag
         name: Get dist tag
         uses: flex-development/dist-tag-action@1.1.2
         with:
-          target: ${{ steps.version.outputs.result }}
+          target: ${{ steps.version.outputs.manifest }}
       - id: command
         name: Get publish command
         env:
@@ -77,7 +78,7 @@ jobs:
       - id: npm
         name: Get environment url (npm)
         run: |
-          echo "result=$(echo "https://npmjs.com/package/@${{ github.repository }}/v/${{ steps.version.outputs.result }}" | xargs)" >>$GITHUB_OUTPUT
+          echo "result=$(echo "https://npmjs.com/package/@${{ github.repository }}/v/${{ steps.version.outputs.manifest }}" | xargs)" >>$GITHUB_OUTPUT
   gpr:
     needs: preflight
     permissions:

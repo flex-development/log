@@ -15,6 +15,7 @@ hmarr
 jchen
 kaisugi
 ksort
+manver
 mkbuild
 nvmrc
 pkgs
