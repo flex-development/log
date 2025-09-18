@@ -17,6 +17,7 @@
 # - https://github.com/actions/setup-node
 # - https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#yarn2-configuration
 # - https://github.com/hmarr/debug-action
+# - https://github.com/flex-development/gpr-url-action
 # - https://github.com/flex-development/manver-action
 
 ---
@@ -41,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       command: ${{ steps.command.outputs.result }}
-      gpr: ${{ steps.gpr.outputs.result }}
+      gpr: ${{ steps.gpr.outputs.url }}
       npm: ${{ steps.npm.outputs.result }}
     steps:
       - id: debug
@@ -73,8 +74,7 @@ jobs:
         run: echo "result=npm publish --provenance $FLAGS $ARTIFACT" >>$GITHUB_OUTPUT
       - id: gpr
         name: Get environment url (gpr)
-        run: |
-          echo "result=$(echo "${{ github.server_url }}/${{ github.repository }}/pkgs/npm/${{ github.event.repository.name }}" | xargs)" >>$GITHUB_OUTPUT
+        uses: flex-development/gpr-url-action@1.0.0
       - id: npm
         name: Get environment url (npm)
         run: |
