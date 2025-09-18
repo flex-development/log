@@ -92,7 +92,7 @@ jobs:
           path: ${{ env.CACHE_PATH }}
       - id: version
         name: Extract version metadata
-        uses: flex-development/manver-action@5d40045601ed3d31a45899ef5b0acd1b4d517434
+        uses: flex-development/manver-action@1.0.1
   gitguardian:
     runs-on: ubuntu-latest
     steps:
