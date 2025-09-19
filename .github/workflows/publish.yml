@@ -19,6 +19,7 @@
 # - https://github.com/hmarr/debug-action
 # - https://github.com/flex-development/ghr-url-action
 # - https://github.com/flex-development/manver-action
+# - https://github.com/flex-development/npm-url-action
 
 ---
 name: publish
@@ -43,7 +44,7 @@ jobs:
     outputs:
       command: ${{ steps.command.outputs.result }}
       gpr: ${{ steps.gpr.outputs.url }}
-      npm: ${{ steps.npm.outputs.result }}
+      npm: ${{ steps.npm.outputs.url }}
     steps:
       - id: debug
         name: Print environment variables and event payload
@@ -77,8 +78,10 @@ jobs:
         uses: flex-development/ghr-url-action@1.1.0
       - id: npm
         name: Get environment url (npm)
-        run: |
-          echo "result=$(echo "https://npmjs.com/package/@${{ github.repository }}/v/${{ steps.version.outputs.manifest }}" | xargs)" >>$GITHUB_OUTPUT
+        uses: flex-development/npm-url-action@1.0.0
+        with:
+          scope: ${{ github.repository_owner }}
+          version: ${{ steps.version.outputs.manifest }}
   gpr:
     needs: preflight
     permissions:
