@@ -17,7 +17,7 @@
 # - https://github.com/actions/setup-node
 # - https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#yarn2-configuration
 # - https://github.com/hmarr/debug-action
-# - https://github.com/flex-development/gpr-url-action
+# - https://github.com/flex-development/ghr-url-action
 # - https://github.com/flex-development/manver-action
 
 ---
@@ -74,7 +74,7 @@ jobs:
         run: echo "result=npm publish --provenance $FLAGS $ARTIFACT" >>$GITHUB_OUTPUT
       - id: gpr
         name: Get environment url (gpr)
-        uses: flex-development/gpr-url-action@1.0.0
+        uses: flex-development/ghr-url-action@1.1.0
       - id: npm
         name: Get environment url (npm)
         run: |
