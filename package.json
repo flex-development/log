@@ -154,7 +154,7 @@
     "@flex-development/eslint-config": "1.1.1",
     "@flex-development/grease": "3.0.0-alpha.9",
     "@flex-development/remark-preset": "1.0.0",
-    "@tsconfig/strictest": "2.0.5",
+    "@tsconfig/strictest": "2.0.6",
     "@types/is-ci": "3.0.4",
     "@types/node": "24.5.2",
     "@types/node-notifier": "8.0.5",
