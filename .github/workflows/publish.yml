@@ -57,7 +57,7 @@ jobs:
           ref: ${{ github.ref }}
       - id: version
         name: Get package version
-        uses: flex-development/manver-action@1.0.1
+        uses: flex-development/manver-action@1.1.0
       - id: artifact
         name: Get release artifact download url
         run: |
