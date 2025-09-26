@@ -120,9 +120,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: ${{ needs.preflight.outputs.command }}
   npm:
-    needs:
-      - gpr
-      - preflight
+    needs: preflight
     permissions:
       contents: read
       id-token: write
