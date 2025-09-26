@@ -17,6 +17,7 @@
 # - https://github.com/actions/setup-node
 # - https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#yarn2-configuration
 # - https://github.com/hmarr/debug-action
+# - https://github.com/flex-development/gh-release-url-action
 # - https://github.com/flex-development/ghr-url-action
 # - https://github.com/flex-development/manver-action
 # - https://github.com/flex-development/npm-url-action
@@ -60,9 +61,12 @@ jobs:
         uses: flex-development/manver-action@1.1.0
       - id: artifact
         name: Get release artifact download url
-        run: |
-          echo "result=${{ github.event_name == 'release' && github.event.release.assets[0].browser_download_url || format('{0}/{1}/releases/download/{2}/%40{3}-{4}-{5}.tgz', github.server_url, github.repository, inputs.tag || github.ref_name, github.repository_owner, github.event.repository.name, steps.version.outputs.manifest) }}" >>$GITHUB_OUTPUT
-      - id: dist-tag
+        uses: flex-development/gh-release-url-action@2.1.0
+        with:
+          artifact: |
+            ${{ format('@{0}-{1}-{2}.tgz', github.repository_owner, github.event.repository.name, steps.version.outputs.manifest) }}
+          version: ${{ inputs.tag || github.ref_name }}
+      - id: dist
         name: Get dist tag
         uses: flex-development/dist-tag-action@1.1.2
         with:
@@ -70,8 +74,8 @@ jobs:
       - id: command
         name: Get publish command
         env:
-          ARTIFACT: ${{ steps.artifact.outputs.result }}
-          FLAGS: ${{ steps.dist-tag.outputs.flag }}
+          ARTIFACT: ${{ steps.artifact.outputs.artifact }}
+          FLAGS: ${{ steps.dist.outputs.flag }}
         run: echo "result=npm publish --provenance $FLAGS $ARTIFACT" >>$GITHUB_OUTPUT
       - id: gpr
         name: Get environment url (gpr)
