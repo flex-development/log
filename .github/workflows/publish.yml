@@ -8,10 +8,8 @@
 # - https://docs.github.com/actions/learn-github-actions/contexts
 # - https://docs.github.com/actions/learn-github-actions/expressions
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#release
-# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
 # - https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#release
-# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_dispatch
 # - https://docs.npmjs.com/generating-provenance-statements
 # - https://github.com/actions/checkout
 # - https://github.com/actions/setup-node
@@ -28,15 +26,9 @@ on:
   release:
     types:
       - published
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: release tag
-        required: true
-        type: string
 concurrency:
   cancel-in-progress: true
-  group: ${{ github.workflow }}-${{ inputs.tag || github.ref_name }}
+  group: ${{ github.workflow }}-${{ github.ref_name }}
 jobs:
   preflight:
     permissions:
@@ -65,7 +57,7 @@ jobs:
         with:
           artifact: |
             ${{ format('@{0}-{1}-{2}.tgz', github.repository_owner, github.event.repository.name, steps.version.outputs.manifest) }}
-          version: ${{ inputs.tag || github.ref_name }}
+          version: ${{ github.ref_name }}
       - id: dist
         name: Get dist tag
         uses: flex-development/dist-tag-action@1.1.2
