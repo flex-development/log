@@ -36,8 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       command: ${{ steps.command.outputs.result }}
-      gpr: ${{ steps.gpr.outputs.url }}
-      npm: ${{ steps.npm.outputs.url }}
+      version: ${{ steps.version.outputs.manifest }}
     steps:
       - id: debug
         name: Print environment variables and event payload
@@ -69,15 +68,6 @@ jobs:
           ARTIFACT: ${{ steps.artifact.outputs.artifact }}
           FLAGS: ${{ steps.dist.outputs.flag }}
         run: echo "result=npm publish --provenance $FLAGS $ARTIFACT" >>$GITHUB_OUTPUT
-      - id: gpr
-        name: Get environment url (gpr)
-        uses: flex-development/ghr-url-action@1.1.0
-      - id: npm
-        name: Get environment url (npm)
-        uses: flex-development/npm-url-action@1.0.0
-        with:
-          scope: ${{ github.repository_owner }}
-          version: ${{ steps.version.outputs.manifest }}
   gpr:
     needs: preflight
     permissions:
@@ -87,8 +77,11 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: gpr
-      url: ${{ needs.preflight.outputs.gpr }}
+      url: ${{ steps.environment.outputs.url }}
     steps:
+      - id: environment
+        name: Get environment url
+        uses: flex-development/ghr-url-action@1.1.0
       - id: checkout
         name: Checkout ${{ github.ref_name }}
         uses: actions/checkout@v5.0.0
@@ -120,8 +113,14 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: npm
-      url: ${{ needs.preflight.outputs.npm }}
+      url: ${{ steps.environment.outputs.url }}
     steps:
+      - id: environment
+        name: Get environment url
+        uses: flex-development/npm-url-action@1.0.0
+        with:
+          scope: ${{ github.repository_owner }}
+          version: ${{ needs.preflight.outputs.version }}
       - id: checkout
         name: Checkout ${{ github.ref_name }}
         uses: actions/checkout@v5.0.0
