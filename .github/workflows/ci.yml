@@ -245,10 +245,10 @@ jobs:
         node-version:
           - 24
     env:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       COVERAGE_SUMMARY: ./coverage/coverage-summary.json
       NODE_NO_WARNINGS: 1
       PCT: .total.branches.pct + .total.functions.pct + .total.lines.pct + .total.statements.pct
-      VITEST_REPORT: ./.vitest-reports/test.blob.json
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
@@ -272,58 +272,57 @@ jobs:
           path: ${{ env.CACHE_PATH }}
       - id: test
         name: Run tests
-        run: |
-          yarn test:cov --coverage.thresholds.100=false \
-          && echo "coverage=$(jq '${{ env.PCT }}' ${{ env.COVERAGE_SUMMARY }} -r)" >>$GITHUB_OUTPUT
+        run: yarn test:cov --coverage.thresholds.100=false
+      - id: coverage
+        name: Get coverage points
+        uses: flex-development/jq-action@1.0.0
+        with:
+          data: ${{ env.COVERAGE_SUMMARY }}
+          filter: "'${{ env.PCT }}'"
       - id: pct
         name: Print coverage points
-        run: echo ${{ steps.test.outputs.coverage }}
+        run: echo ${{ steps.coverage.outputs.result }}
       - id: report
         name: Upload report
         uses: actions/upload-artifact@v4.6.2
         with:
-          name: ${{ format('test-node{0}-{1}.blob.json', matrix.node-version, env.SHA) }}
-          path: ${{ env.VITEST_REPORT }}
+          name: ${{ format('{0}.{1}.blob.json', env.SHA, matrix.node-version) }}
+          path: ./.vitest-reports/test.blob.json
       - id: coverage-summary
         name: Upload coverage summary
         uses: actions/upload-artifact@v4.6.2
         with:
-          name: ${{ format('coverage-node{0}-{1}.json', matrix.node-version, env.SHA) }}
+          name: ${{ format('{0}.{1}.coverage.json', env.SHA, matrix.node-version) }}
           path: ${{ env.COVERAGE_SUMMARY }}
-      - id: codecov-coverage
-        name: Upload coverage report to Codecov
-        uses: codecov/codecov-action@v5.5.1
-        with:
-          env_vars: GITHUB_JOB,GITHUB_REF_TYPE
-          fail_ci_if_error: true
-          files: ./coverage/lcov.info
-          flags: ${{ format('node{0}', matrix.node-version) }}
-          name: ${{ format('node{0}-{1}', matrix.node-version, env.SHA) }}
-          override_branch: ${{ env.REF }}
-          override_build: ${{ github.run_id }}
-          override_commit: ${{ env.SHA }}
-          token: ${{ secrets.CODECOV_TOKEN }}
-          verbose: true
-          working-directory: ${{ github.workspace }}
       - id: codecov-results
         if: ${{ !cancelled() }}
         name: Upload test results to Codecov
         uses: codecov/test-results-action@v1.1.1
         with:
+          disable_search: true
           env_vars: GITHUB_JOB,GITHUB_REF_TYPE
           fail_ci_if_error: true
           files: ./__tests__/reports/junit.xml
           flags: ${{ format('node{0}', matrix.node-version) }}
-          name: ${{ format('node{0}-{1}', matrix.node-version, env.SHA) }}
-          override_branch: ${{ env.REF }}
-          override_build: ${{ github.run_id }}
-          override_commit: ${{ env.SHA }}
-          token: ${{ secrets.CODECOV_TOKEN }}
+          name: ${{ format('{0}.node{1}', env.SHA, matrix.node-version) }}
+          override_branch: ${{ env.REF_NAME }}
           verbose: true
-          working-directory: ${{ github.workspace }}
+      - id: codecov-coverage
+        name: Upload coverage report to Codecov
+        uses: codecov/codecov-action@v5.5.1
+        with:
+          disable_file_fixes: true
+          disable_search: true
+          env_vars: GITHUB_JOB,GITHUB_REF_TYPE
+          fail_ci_if_error: true
+          files: ./coverage/lcov.info
+          flags: ${{ format('node{0}', matrix.node-version) }}
+          name: ${{ format('{0}.node{1}', env.SHA, matrix.node-version) }}
+          override_branch: ${{ env.REF_NAME }}
+          verbose: true
       - id: coverage-failure
-        if: steps.test.outputs.coverage != '400'
-        name: Coverage threshold failure (${{ steps.test.outputs.coverage }})
+        if: fromJson(steps.coverage.outputs.result) != 400
+        name: Coverage threshold failure (${{ steps.coverage.outputs.result }})
         run: yarn test:cov:reports
   artifacts:
     needs:
@@ -362,7 +361,7 @@ jobs:
           path: ${{ env.CACHE_PATH }}
       - id: local-binaries
         name: Add local binaries to $PATH
-        run: echo "$GITHUB_WORKSPACE/$CACHE_PATH/.bin" >> $GITHUB_PATH
+        run: echo "$GITHUB_WORKSPACE/node_modules/.bin" >> $GITHUB_PATH
       - id: changelog
         name: Changelog preview
         env:
