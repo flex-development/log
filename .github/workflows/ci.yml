@@ -207,8 +207,6 @@ jobs:
   typescript:
     needs: preflight
     runs-on: ubuntu-latest
-    env:
-      VITEST_REPORT: ./.vitest-reports/typecheck.blob.json
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
@@ -229,9 +227,6 @@ jobs:
         with:
           key: ${{ needs.preflight.outputs.cache-key }}
           path: ${{ env.CACHE_PATH }}
-      - id: print-version
-        name: Print TypeScript version
-        run: jq .devDependencies.typescript package.json -r
       - id: typecheck
         name: Run typecheck
         run: yarn typecheck
@@ -239,8 +234,8 @@ jobs:
         name: Upload report
         uses: actions/upload-artifact@v4.6.2
         with:
-          name: ${{ format('typecheck-{0}.blob.json', env.SHA) }}
-          path: ${{ env.VITEST_REPORT }}
+          name: ${{ format('{0}.typecheck.blob.json', env.SHA) }}
+          path: ./.vitest-reports/typecheck.blob.json
   test:
     needs: preflight
     runs-on: ubuntu-latest
