@@ -1,5 +1,6 @@
 # \:knot: log
 
+[![ci](https://github.com/flex-development/log/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/flex-development/log/actions/workflows/ci.yml)
 [![github release](https://img.shields.io/github/v/release/flex-development/log.svg?include_prereleases\&sort=semver)](https://github.com/flex-development/log/releases/latest)
 [![npm](https://img.shields.io/npm/v/@flex-development/log.svg)](https://npmjs.com/package/@flex-development/log)
 [![codecov](https://codecov.io/gh/flex-development/log/graph/badge.svg?token=WUMNLAPIDX)](https://codecov.io/gh/flex-development/log)
