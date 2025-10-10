@@ -43,7 +43,10 @@ permissions:
   contents: read
 env:
   CACHE_PATH: node_modules
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  COVERAGE_SUMMARY: ./coverage/coverage-summary.json
   HUSKY: 0
+  PCT: .total.branches.pct + .total.functions.pct + .total.lines.pct + .total.statements.pct
   REF: ${{ github.head_ref || github.ref }}
   REF_NAME: ${{ github.head_ref || github.ref_name }}
   SHA: ${{ github.event.pull_request.head.sha || github.sha }}
@@ -244,11 +247,6 @@ jobs:
       matrix:
         node-version:
           - 24
-    env:
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      COVERAGE_SUMMARY: ./coverage/coverage-summary.json
-      NODE_NO_WARNINGS: 1
-      PCT: .total.branches.pct + .total.functions.pct + .total.lines.pct + .total.statements.pct
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
@@ -264,6 +262,9 @@ jobs:
           cache-dependency-path: yarn.lock
           check-latest: true
           node-version: ${{ matrix.node-version }}
+      - id: debug
+        name: Print environment variables and event payload
+        uses: hmarr/debug-action@v3.0.0
       - id: cache
         name: Restore dependencies cache
         uses: actions/cache@v4.3.0
@@ -279,20 +280,17 @@ jobs:
         with:
           data: ${{ env.COVERAGE_SUMMARY }}
           filter: "'${{ env.PCT }}'"
-      - id: pct
-        name: Print coverage points
-        run: echo ${{ steps.coverage.outputs.result }}
       - id: report
         name: Upload report
         uses: actions/upload-artifact@v4.6.2
         with:
-          name: ${{ format('{0}.{1}.blob.json', env.SHA, matrix.node-version) }}
+          name: ${{ format('{0}.node{1}.blob.json', env.SHA, matrix.node-version) }}
           path: ./.vitest-reports/test.blob.json
       - id: coverage-summary
         name: Upload coverage summary
         uses: actions/upload-artifact@v4.6.2
         with:
-          name: ${{ format('{0}.{1}.coverage.json', env.SHA, matrix.node-version) }}
+          name: ${{ format('{0}.node{1}.coverage.json', env.SHA, matrix.node-version) }}
           path: ${{ env.COVERAGE_SUMMARY }}
       - id: codecov-results
         if: ${{ !cancelled() }}
@@ -302,7 +300,7 @@ jobs:
           disable_search: true
           env_vars: GITHUB_JOB,GITHUB_REF_TYPE
           fail_ci_if_error: true
-          files: ./__tests__/reports/junit.xml
+          files: ./__tests__/reports/test.junit.xml
           flags: ${{ format('node{0}', matrix.node-version) }}
           name: ${{ format('{0}.node{1}', env.SHA, matrix.node-version) }}
           override_branch: ${{ env.REF_NAME }}
@@ -324,6 +322,87 @@ jobs:
         if: fromJson(steps.coverage.outputs.result) != 400
         name: Coverage threshold failure (${{ steps.coverage.outputs.result }})
         run: yarn test:cov:reports
+  test-bun:
+    needs: preflight
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        bun-version:
+          - canary
+          - latest
+    steps:
+      - id: checkout
+        name: Checkout ${{ env.REF_NAME }}
+        uses: actions/checkout@v5.0.0
+        with:
+          persist-credentials: false
+          ref: ${{ env.REF }}
+      - id: bun
+        name: Setup Bun (${{ matrix.bun-version }})
+        uses: oven-sh/setup-bun@v2.0.2
+        with:
+          bun-version: ${{ matrix.bun-version }}
+      - id: debug
+        name: Print environment variables and event payload
+        uses: hmarr/debug-action@v3.0.0
+      - id: cache
+        name: Restore dependencies cache
+        uses: actions/cache@v4.3.0
+        with:
+          key: ${{ needs.preflight.outputs.cache-key }}
+          path: ${{ env.CACHE_PATH }}
+      - id: test
+        name: Run tests
+        run: yarn test:cov --coverage.thresholds.100=false
+      - id: coverage
+        name: Get coverage points
+        uses: flex-development/jq-action@1.0.0
+        with:
+          data: ${{ env.COVERAGE_SUMMARY }}
+          filter: "'${{ env.PCT }}'"
+      - id: report
+        name: Upload report
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: ${{ format('{0}.bun-{1}.blob.json', env.SHA, matrix.bun-version) }}
+          path: ./.vitest-reports/test.blob.json
+      - id: coverage-summary
+        name: Upload coverage summary
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: ${{ format('{0}.bun-{1}.coverage.json', env.SHA, matrix.bun-version) }}
+          path: ${{ env.COVERAGE_SUMMARY }}
+      - id: codecov-results
+        if: ${{ !cancelled() }}
+        name: Upload test results to Codecov
+        uses: codecov/test-results-action@v1.1.1
+        with:
+          disable_search: true
+          env_vars: GITHUB_JOB,GITHUB_REF_TYPE
+          fail_ci_if_error: true
+          files: ./__tests__/reports/test.junit.xml
+          flags: ${{ format('bun-{0}', matrix.bun-version) }}
+          name: ${{ format('{0}.bun-{1}', env.SHA, matrix.bun-version) }}
+          override_branch: ${{ env.REF_NAME }}
+          verbose: true
+      - id: codecov-coverage
+        name: Upload coverage report to Codecov
+        uses: codecov/codecov-action@v5.5.1
+        with:
+          disable_file_fixes: true
+          disable_search: true
+          env_vars: GITHUB_JOB,GITHUB_REF_TYPE
+          fail_ci_if_error: true
+          files: ./coverage/lcov.info
+          flags: ${{ format('bun-{0}', matrix.bun-version) }}
+          name: ${{ format('{0}.bun-{1}', env.SHA, matrix.bun-version) }}
+          override_branch: ${{ env.REF_NAME }}
+          verbose: true
+      - id: coverage-failure
+        if: fromJson(steps.coverage.outputs.result) != 400
+        name: Coverage threshold failure (${{ steps.coverage.outputs.result }})
+        run: yarn test:cov:reports
   artifacts:
     needs:
       - commitlint
@@ -332,6 +411,7 @@ jobs:
       - preflight
       - spelling
       - test
+      - test-bun
       - typescript
     runs-on: ubuntu-latest
     steps:

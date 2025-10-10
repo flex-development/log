@@ -31,6 +31,8 @@ branches:
           - context: lint
           - context: spelling
           - context: test (24)
+          - context: test-bun (canary)
+          - context: test-bun (latest)
           - context: typescript
         strict: true
       restrictions: null
@@ -54,14 +56,8 @@ labels:
   - name: flag:needs-refactor
     description: code improvements required before being merged
     color: fbca04
-  - name: scope:cjs
-    description: commonjs
-    color: 74cefc
   - name: scope:dependencies
     description: dependency updates
-    color: 74cefc
-  - name: scope:esm
-    description: es modules
     color: 74cefc
   - name: scope:install
     description: package install
@@ -193,4 +189,5 @@ repository:
     - logging
   visibility: public
   vulnerability_alerts: true
+  web_commit_signoff_required: true
 teams: []
