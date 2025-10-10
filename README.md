@@ -3,6 +3,8 @@
 [![ci](https://github.com/flex-development/log/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/flex-development/log/actions/workflows/ci.yml)
 [![github release](https://img.shields.io/github/v/release/flex-development/log.svg?include_prereleases\&sort=semver)](https://github.com/flex-development/log/releases/latest)
 [![npm](https://img.shields.io/npm/v/@flex-development/log.svg)](https://npmjs.com/package/@flex-development/log)
+[![npm downloads](https://img.shields.io/npm/dm/@flex-development/log.svg)](https://www.npmcharts.com/compare/@flex-development/log?interval=30)
+[![install size](https://packagephobia.now.sh/badge?p=@flex-development/log)](https://packagephobia.now.sh/result?p=@flex-development/log)
 [![codecov](https://codecov.io/gh/flex-development/log/graph/badge.svg?token=WUMNLAPIDX)](https://codecov.io/gh/flex-development/log)
 [![module type: esm](https://img.shields.io/badge/module%20type-esm-brightgreen)](https://github.com/voxpelli/badges-cjs-esm)
 [![license](https://img.shields.io/github/license/flex-development/log.svg)](LICENSE.md)
