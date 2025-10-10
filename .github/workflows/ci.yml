@@ -199,12 +199,15 @@ jobs:
           fetch-depth: ${{ github.event_name == 'pull_request' && 0 || 1 }}
           persist-credentials: false
           ref: ${{ env.REF }}
-      - id: spelling
+      - id: cspell
         name: Check spelling
         uses: streetsidesoftware/cspell-action@v7.2.0
         with:
+          check_dot_files: true
           config: .cspell.json
+          incremental_files_only: ${{ github.event_name != 'pull_request' }}
           inline: error
+          root: ${{ github.workspace }}
           treat_flagged_words_as_errors: true
           verbose: true
   typescript:
