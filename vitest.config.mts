@@ -109,6 +109,17 @@ function config(this: void, env: ConfigEnv): ViteUserConfig {
             environment: 'happy-dom',
             environmentOptions: {},
             name: 'browser',
+            server: {
+              deps: {
+                // required to apply custom conditions to external deps.
+                inline: [
+                  '@flex-development/colors',
+                  '@flex-development/is-unicode-supported',
+                  '@flex-development/pathe',
+                  'devlop'
+                ]
+              }
+            },
             setupFiles: [],
             typecheck
           }
