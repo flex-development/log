@@ -71,7 +71,7 @@ Colorful messages can be logged in the terminal and browser consoles that suppor
 
 This package is [ESM only][esm].
 
-In Node.js with [yarn][]:
+In Node.js (20+) with [yarn][]:
 
 ```sh
 yarn add @flex-development/log
