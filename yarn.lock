@@ -1736,7 +1736,7 @@ __metadata:
     editorconfig: "npm:3.0.1"
     eslint: "npm:9.37.0"
     growl: "npm:1.10.5"
-    happy-dom: "npm:20.6.2"
+    happy-dom: "npm:20.6.5"
     husky: "npm:9.1.7"
     is-ci: "npm:4.1.0"
     node-inspect-extracted: "npm:3.3.0"
@@ -5920,9 +5920,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"happy-dom@npm:20.6.2":
-  version: 20.6.2
-  resolution: "happy-dom@npm:20.6.2"
+"happy-dom@npm:20.6.5":
+  version: 20.6.5
+  resolution: "happy-dom@npm:20.6.5"
   dependencies:
     "@types/node": "npm:>=20.0.0"
     "@types/whatwg-mimetype": "npm:^3.0.2"
@@ -5930,7 +5930,7 @@ __metadata:
     entities: "npm:^7.0.1"
     whatwg-mimetype: "npm:^3.0.0"
     ws: "npm:^8.18.3"
-  checksum: 10/b3800da892a63a1676d654ba273c83dc0e19166193a0815217dda5cfbed268f0046235bb6cbb81d8122fbbf062bcaf68660e604e6b18f12e8e50f9441fdc726d
+  checksum: 10/7939569f6da8b08a2d3a3423ee46ff4e43c54a025474ef4b0b53778c0ba4733c0ede38bf7944b5c8586caf310affc33bb9a5ed8d6c3631e8ad5c65a6e625e313
   languageName: node
   linkType: hard
 
